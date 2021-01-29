@@ -23,13 +23,14 @@ const Overlay = styled.div`
   height: 100%;
 
   color: transparent;
-  font-size: 120%;
-  font-weight: 800;
+  font-weight: normal;
+  font-size: 125%;
 
   animation: flash ${animation.speed} ease-in-out;
   @keyframes flash {
     ${animation.midPt} {
       color: ${colors.sudokuFG};
+      font-weight: ${animation.fontEmphasis};
     }
   }
 `;
@@ -46,17 +47,31 @@ const StyledDiv = styled.div`
   font-size: 55%;
   overflow: hidden;
 
-  .style-1,
-  .style0 {
+  .style-1 {
     color: transparent;
-    animation: fadeOut ${animation.speed} ease-out;
+    animation: fadeOut-1 ${animation.speed} ease-in;
 
-    @keyframes fadeOut {
+    @keyframes fadeOut-1 {
       0% {
         color: ${colors.noteNormal};
       }
       ${animation.midPt} {
-        color: transparent;
+        color: ${colors.noteNormal};
+        font-weight: ${animation.fontEmphasis};
+      }
+    }
+  }
+  .style0 {
+    color: transparent;
+    animation: fadeOut0 ${animation.speed} ease-in;
+
+    @keyframes fadeOut0 {
+      0% {
+        color: ${colors.noteNormal};
+      }
+      ${animation.midPt} {
+        color: ${colors.noteAccent};
+        font-size: ${animation.fontGrow};
       }
     }
   }
@@ -66,5 +81,17 @@ const StyledDiv = styled.div`
   .style2 {
     color: ${colors.noteAccent};
     font-weight: bold;
+
+    animation: fadeIn ${animation.speed} ease-in-out;
+
+    @keyframes fadeIn {
+      0% {
+        color: ${colors.noteNormal};
+      }
+      ${animation.midPt} {
+        color: ${colors.noteAccent};
+        font-size: ${animation.fontGrow};
+      }
+    }
   }
 `;

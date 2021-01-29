@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { colors } from "../params.js";
+import { colors, animation } from "../params.js";
 import { Sudoku } from "./sudoku";
 import {
   nakedSingle,
@@ -124,6 +124,7 @@ export const SudokuController = (props) => {
   };
 
   const startSolveInterval = (ms) => {
+    getNextSolution();
     solveInterval = setInterval(getNextSolution, ms);
   };
 
@@ -143,6 +144,8 @@ export const SudokuController = (props) => {
     } else if (state.unsolved.length === 0) {
       console.log("Nothing left to solve. Sudoku soln is " + verifySolution());
       stopSolveInterval();
+      isSolved = true;
+      pushState();
       return false;
     } else {
       let sudokuCopy = copySudoku(state.sudoku);
@@ -263,18 +266,23 @@ export const SudokuController = (props) => {
     <StyledDiv>
       <Sudoku sudoku={state.sudoku}></Sudoku>
       <Controls>
-        {isLoaded &&
-          (solveInterval ? (
-            <Button onClick={() => stopSolveInterval()}>stop</Button>
-          ) : (
-            <Button onClick={() => startSolveInterval(0)}>solve</Button>
-          ))}
         {!isLoaded ? (
           <Button onClick={() => loadSudoku(input)}>load</Button>
+        ) : isSolved ? (
+          <Button onClick={() => loadSudoku(input)}>reset</Button>
+        ) : solveInterval ? (
+          <Controls>
+            <Button onClick={() => stopSolveInterval()}>stop</Button>
+            <Button onClick={() => getNextSolution()}>next</Button>
+          </Controls>
         ) : (
-          <Button onClick={() => getNextSolution()}>step</Button>
+          <Controls>
+            <Button onClick={() => startSolveInterval(animation.delay)}>
+              solve
+            </Button>
+            <Button onClick={() => getNextSolution()}>next</Button>
+          </Controls>
         )}
-        {isSolved && <Button onClick={() => loadSudoku(input)}>reset</Button>}
       </Controls>
     </StyledDiv>
   );

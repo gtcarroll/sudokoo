@@ -19,11 +19,6 @@ export const nakedSingle = {
 
     // if this cell has only one suspect...
     if (suspects === 1) {
-      // ...set cell value in state,
-      state.sudoku.houses[cell.house][cell.room].val = soln;
-      // ...highlight note value in showcase,
-      showcase.houses[cell.house][cell.room].notes[soln - 1] = 2;
-
       // ...update affected cell notes,
       for (let aff of state.unsolved.values()) {
         if (
@@ -37,6 +32,12 @@ export const nakedSingle = {
           showcase.houses[aff.house][aff.room].notes[soln - 1] = -1;
         }
       }
+
+      // ...set cell value in state,
+      state.sudoku.houses[cell.house][cell.room].val = soln;
+      state.sudoku.houses[cell.house][cell.room].notes[soln - 1] = 1;
+      // ...highlight note value in showcase,
+      showcase.houses[cell.house][cell.room].notes[soln - 1] = 2;
 
       // ...remove from unsolved.
       state.unsolved.splice(state.unsolved.indexOf(cell), 1);

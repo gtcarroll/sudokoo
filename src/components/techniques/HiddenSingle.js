@@ -39,11 +39,6 @@ export const hiddenSingle = {
       if (unseen.length > 0) {
         let soln = unseen[0];
 
-        // ...set cell val to soln in state,
-        state.sudoku.houses[cell.house][cell.room].val = soln;
-        // ...highlight soln value in showcase,
-        showcase.houses[cell.house][cell.room].notes[soln - 1] = 2;
-
         // ...update affected cell notes,
         for (let aff of state.unsolved.values()) {
           if (
@@ -57,6 +52,12 @@ export const hiddenSingle = {
             showcase.houses[aff.house][aff.room].notes[soln - 1] = -1;
           }
         }
+
+        // ...set cell val to soln in state,
+        state.sudoku.houses[cell.house][cell.room].val = soln;
+        state.sudoku.houses[cell.house][cell.room].notes[soln - 1] = 1;
+        // ...highlight soln value in showcase,
+        showcase.houses[cell.house][cell.room].notes[soln - 1] = 2;
 
         // ...remove from unsolved.
         state.unsolved.splice(state.unsolved.indexOf(cell), 1);

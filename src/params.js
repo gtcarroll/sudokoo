@@ -13,6 +13,9 @@ export const colors = {
 };
 
 export const animation = {
-  speed: "1s",
-  midPt: "50%",
+  speed: "0.8s",
+  midPt: "60%",
+  fontGrow: "110%",
+  fontEmphasis: "bold",
+  delay: 1000,
 };
