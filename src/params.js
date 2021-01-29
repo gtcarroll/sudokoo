@@ -1,0 +1,18 @@
+export const colors = {
+  appBG: "#000000",
+  sudokuBG1: "#202020",
+  sudokuBG2: "#000000",
+  sudokuFG: "#61dbfb",
+  sudokuBorder: "#424242",
+  sudokuSet: "#121212",
+  sudokuPreset: "#424242",
+  noteStrike: "#805050",
+  noteNormal: "#605958",
+  //noteNormal: "#555555",
+  noteAccent: "#61dbfb",
+};
+
+export const animation = {
+  speed: "1s",
+  midPt: "50%",
+};
