@@ -63,6 +63,19 @@ export const SudokuController = (props) => {
     [3, 0, 7, 8, 0, 0, 0, 1, 0],
   ];
 
+  // Locked Candidate Test
+  // var input = [
+  //   [1, 2, 0, 0, 9, 0, 0, 6, 0],
+  //   [6, 0, 3, 1, 4, 0, 0, 9, 2],
+  //   [4, 0, 0, 0, 0, 2, 0, 0, 0],
+  //   [0, 3, 0, 0, 1, 4, 2, 0, 0],
+  //   [2, 0, 4, 0, 7, 0, 0, 0, 0],
+  //   [0, 0, 6, 0, 2, 0, 0, 3, 0],
+  //   [0, 0, 1, 2, 0, 0, 0, 4, 8],
+  //   [0, 4, 0, 0, 0, 1, 7, 2, 0],
+  //   [0, 6, 2, 4, 3, 0, 1, 5, 9],
+  // ];
+
   // input is a 2d array of starting values
   const loadSudoku = (input) => {
     console.log("Loading Sudoku...");
@@ -103,7 +116,7 @@ export const SudokuController = (props) => {
           // ...if the cell's value is set...
           if (other.val >= 1 && other.val <= 9) {
             // ...remove it from suspect list.
-            cell.notes[other.val - 1] = 0;
+            cell.notes[other.val - 1] = -2;
           }
         });
       }
@@ -158,7 +171,7 @@ export const SudokuController = (props) => {
           if (showcase) {
             // ...report results.
             console.log(
-              techniques[t].name + "\t@ (" + cell.col + "," + cell.row + ")"
+              techniques[t].name + " @ (" + cell.col + "," + cell.row + ")"
             );
             pushState();
             return true;
@@ -278,7 +291,7 @@ export const SudokuController = (props) => {
         ) : (
           <Controls>
             <Button onClick={() => startSolveInterval(animation.delay)}>
-              solve
+              auto-solve
             </Button>
             <Button onClick={() => getNextSolution()}>next</Button>
           </Controls>

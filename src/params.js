@@ -6,7 +6,7 @@ export const colors = {
   sudokuBorder: "#424242",
   sudokuSet: "#121212",
   sudokuPreset: "#424242",
-  noteStrike: "#805050",
+  noteStrike: "#F7EBEC",
   noteNormal: "#605958",
   //noteNormal: "#555555",
   noteAccent: "#61dbfb",
@@ -14,8 +14,8 @@ export const colors = {
 
 export const animation = {
   speed: "0.8s",
-  midPt: "60%",
-  fontGrow: "110%",
+  midPoint: "60%",
+  fontGrow: "125%",
   fontEmphasis: "bold",
   delay: 1000,
 };

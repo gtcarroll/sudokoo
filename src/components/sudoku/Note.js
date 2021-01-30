@@ -28,8 +28,8 @@ const Overlay = styled.div`
 
   animation: flash ${animation.speed} ease-in-out;
   @keyframes flash {
-    ${animation.midPt} {
-      color: ${colors.sudokuFG};
+    ${animation.midPoint} {
+      color: ${colors.noteAccent};
       font-weight: ${animation.fontEmphasis};
     }
   }
@@ -47,6 +47,20 @@ const StyledDiv = styled.div`
   font-size: 55%;
   overflow: hidden;
 
+  .style-2 {
+    color: transparent;
+    animation: fadeOut-2 ${animation.speed} ease-in;
+
+    @keyframes fadeOut-2 {
+      0% {
+        color: ${colors.noteNormal};
+      }
+      ${animation.midPoint} {
+        color: ${colors.noteNormal};
+      }
+    }
+  }
+
   .style-1 {
     color: transparent;
     animation: fadeOut-1 ${animation.speed} ease-in;
@@ -55,7 +69,7 @@ const StyledDiv = styled.div`
       0% {
         color: ${colors.noteNormal};
       }
-      ${animation.midPt} {
+      ${animation.midPoint} {
         color: ${colors.noteNormal};
         font-weight: ${animation.fontEmphasis};
       }
@@ -69,7 +83,7 @@ const StyledDiv = styled.div`
       0% {
         color: ${colors.noteNormal};
       }
-      ${animation.midPt} {
+      ${animation.midPoint} {
         color: ${colors.noteAccent};
         font-size: ${animation.fontGrow};
       }
@@ -88,7 +102,20 @@ const StyledDiv = styled.div`
       0% {
         color: ${colors.noteNormal};
       }
-      ${animation.midPt} {
+      ${animation.midPoint} {
+        color: ${colors.noteAccent};
+        font-size: ${animation.fontGrow};
+      }
+    }
+  }
+  .style3 {
+    color: ${colors.noteNormal};
+    font-weight: bold;
+
+    animation: fadeIn3 ${animation.speed} ease-in-out;
+
+    @keyframes fadeIn3 {
+      ${animation.midPoint} {
         color: ${colors.noteAccent};
         font-size: ${animation.fontGrow};
       }

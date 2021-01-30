@@ -40,16 +40,18 @@ export const hiddenSingle = {
         let soln = unseen[0];
 
         // ...update affected cell notes,
-        for (let aff of state.unsolved.values()) {
+        for (let aff of state.unsolved) {
           if (
             aff.row === cell.row ||
             aff.col === cell.col ||
             aff.house === cell.house
           ) {
-            // remove in state
-            state.sudoku.houses[aff.house][aff.room].notes[soln - 1] = 0;
-            // cross-out in showcase
-            showcase.houses[aff.house][aff.room].notes[soln - 1] = -1;
+            if (aff.notes[soln - 1] > 0) {
+              // remove in state
+              aff.notes[soln - 1] = 0;
+              // cross-out in showcase
+              showcase.houses[aff.house][aff.room].notes[soln - 1] = -1;
+            }
           }
         }
 

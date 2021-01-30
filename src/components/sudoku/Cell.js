@@ -50,7 +50,7 @@ const StyledDiv = styled.div`
     0% {
       opacity: 0;
     }
-    ${animation.midPt} {
+    ${animation.midPoint} {
       font-size: ${animation.fontGrow};
       background-color: ${colors.sudokuFG};
       color: ${colors.sudokuBG1};
