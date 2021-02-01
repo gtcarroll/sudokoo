@@ -6,6 +6,17 @@
 
 export const lockedCandidate = {
   name: "Locked Candidate",
+  test: [
+    [1, 2, 0, 0, 9, 0, 0, 6, 0],
+    [6, 0, 3, 1, 4, 0, 0, 9, 2],
+    [4, 0, 0, 0, 0, 2, 0, 0, 0],
+    [0, 3, 0, 0, 1, 4, 2, 0, 0],
+    [2, 0, 4, 0, 7, 0, 0, 0, 0],
+    [0, 0, 6, 0, 2, 0, 0, 3, 0],
+    [0, 0, 1, 2, 0, 0, 0, 4, 8],
+    [0, 4, 0, 0, 0, 1, 7, 2, 0],
+    [0, 6, 2, 4, 3, 0, 1, 5, 9],
+  ],
   check: (cell, state, showcase) => {
     let axes = [state.sudoku.rows, state.sudoku.cols];
     let indexes = [cell.row, cell.col];
@@ -61,7 +72,7 @@ export const lockedCandidate = {
                 wasUpdated = true;
 
                 // ...remove the soln from that cell's suspects.
-                aff.notes[soln - 1] = -1;
+                aff.notes[soln - 1] = 0;
                 // ...cross out the soln in the showcase.
                 showcase.houses[aff.house][aff.room].notes[soln - 1] = -1;
               }
@@ -80,7 +91,7 @@ export const lockedCandidate = {
                 affIndexes[a] === indexes[a]
               ) {
                 // ...highlight the soln val in state.
-                // aff.notes[soln - 1] = 3;
+                aff.notes[soln - 1] = 3;
                 // ...highlight the soln val in the showcase.
                 showcase.houses[aff.house][aff.room].notes[soln - 1] = 2;
               }

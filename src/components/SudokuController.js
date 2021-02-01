@@ -24,58 +24,6 @@ export const SudokuController = (props) => {
     pointingTuple,
   ];
 
-  // Naked Single Test
-  // var input = [
-  //   [0, 4, 9, 0, 0, 0, 0, 3, 0],
-  //   [0, 5, 0, 6, 1, 0, 0, 0, 0],
-  //   [0, 0, 8, 0, 2, 9, 5, 0, 6],
-  //   [8, 0, 0, 9, 0, 7, 0, 0, 4],
-  //   [7, 0, 0, 0, 0, 0, 0, 8, 1],
-  //   [0, 2, 5, 0, 4, 1, 3, 0, 0],
-  //   [2, 0, 0, 0, 7, 6, 0, 1, 0],
-  //   [5, 0, 0, 4, 0, 8, 7, 0, 0],
-  //   [0, 8, 7, 0, 0, 0, 0, 9, 5],
-  // ];
-
-  // Hidden Single Test
-  // var input = [
-  //   [0, 7, 2, 3, 0, 0, 9, 0, 0],
-  //   [0, 5, 0, 6, 0, 9, 0, 2, 0],
-  //   [6, 0, 0, 0, 1, 0, 0, 3, 0],
-  //   [0, 0, 0, 0, 0, 0, 2, 0, 0],
-  //   [0, 4, 5, 8, 2, 3, 0, 7, 0],
-  //   [0, 3, 0, 4, 0, 0, 0, 0, 8],
-  //   [7, 0, 0, 0, 0, 0, 0, 0, 4],
-  //   [0, 2, 0, 5, 0, 8, 0, 6, 0],
-  //   [0, 0, 3, 0, 0, 1, 7, 0, 0],
-  // ];
-
-  // Naked Pair Test
-  var input = [
-    [0, 3, 0, 0, 0, 8, 0, 0, 7],
-    [8, 0, 0, 3, 0, 0, 2, 6, 0],
-    [0, 0, 0, 0, 2, 9, 8, 3, 4],
-    [0, 0, 0, 0, 0, 4, 3, 0, 0],
-    [6, 0, 8, 1, 3, 2, 0, 0, 9],
-    [0, 0, 3, 0, 0, 0, 0, 0, 0],
-    [1, 0, 5, 4, 9, 3, 7, 8, 0],
-    [0, 8, 0, 2, 7, 1, 0, 0, 3],
-    [3, 0, 7, 8, 0, 0, 0, 1, 0],
-  ];
-
-  // Locked Candidate Test
-  // var input = [
-  //   [1, 2, 0, 0, 9, 0, 0, 6, 0],
-  //   [6, 0, 3, 1, 4, 0, 0, 9, 2],
-  //   [4, 0, 0, 0, 0, 2, 0, 0, 0],
-  //   [0, 3, 0, 0, 1, 4, 2, 0, 0],
-  //   [2, 0, 4, 0, 7, 0, 0, 0, 0],
-  //   [0, 0, 6, 0, 2, 0, 0, 3, 0],
-  //   [0, 0, 1, 2, 0, 0, 0, 4, 8],
-  //   [0, 4, 0, 0, 0, 1, 7, 2, 0],
-  //   [0, 6, 2, 4, 3, 0, 1, 5, 9],
-  // ];
-
   // input is a 2d array of starting values
   const loadSudoku = (input) => {
     console.log("Loading Sudoku...");
@@ -280,9 +228,9 @@ export const SudokuController = (props) => {
       <Sudoku sudoku={state.sudoku}></Sudoku>
       <Controls>
         {!isLoaded ? (
-          <Button onClick={() => loadSudoku(input)}>load</Button>
+          <Button onClick={() => loadSudoku(pointingTuple.test)}>load</Button>
         ) : isSolved ? (
-          <Button onClick={() => loadSudoku(input)}>reset</Button>
+          <Button onClick={() => loadSudoku(pointingTuple.test)}>reset</Button>
         ) : solveInterval ? (
           <Controls>
             <Button onClick={() => stopSolveInterval()}>stop</Button>

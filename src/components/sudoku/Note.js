@@ -4,7 +4,7 @@ import { colors, animation } from "./../../params.js";
 
 export const Note = (props) => {
   return (
-    <StyledDiv>
+    <StyledDiv className={props.tag === 3 ? "style3" : ""}>
       {props.tag === -1 && <Overlay>X</Overlay>}
       <span className={"style" + props.tag}>{props.num}</span>
     </StyledDiv>
@@ -26,8 +26,15 @@ const Overlay = styled.div`
   font-weight: normal;
   font-size: 125%;
 
-  animation: flash ${animation.speed} ease-in-out;
-  @keyframes flash {
+  animation: flashX ${animation.speed} ease-in-out;
+  @keyframes flashX {
+    ${animation.midPoint} {
+      color: ${colors.noteAccent};
+      font-weight: ${animation.fontEmphasis};
+    }
+  }
+  animation: flashN ${animation.speed} ease-in-out;
+  @keyframes flashN {
     ${animation.midPoint} {
       color: ${colors.noteAccent};
       font-weight: ${animation.fontEmphasis};
@@ -38,6 +45,7 @@ const Overlay = styled.div`
 const StyledDiv = styled.div`
   position: relative;
   display: flex;
+  flex-grow: 1;
   justify-content: center;
   align-items: center;
 
@@ -96,9 +104,9 @@ const StyledDiv = styled.div`
     color: ${colors.noteAccent};
     font-weight: bold;
 
-    animation: fadeIn ${animation.speed} ease-in-out;
+    animation: fadeIn2 ${animation.speed} ease-in-out;
 
-    @keyframes fadeIn {
+    @keyframes fadeIn2 {
       0% {
         color: ${colors.noteNormal};
       }
@@ -110,14 +118,21 @@ const StyledDiv = styled.div`
   }
   .style3 {
     color: ${colors.noteNormal};
-    font-weight: bold;
+    animation: pulse3 ${animation.speed} ease-in-out;
 
-    animation: fadeIn3 ${animation.speed} ease-in-out;
-
-    @keyframes fadeIn3 {
+    @keyframes pulse3 {
       ${animation.midPoint} {
-        color: ${colors.noteAccent};
+        color: ${colors.sudokuSet};
         font-size: ${animation.fontGrow};
+      }
+    }
+  }
+  &.style3 {
+    animation: pulse3overlay ${animation.speed} ease-in-out;
+
+    @keyframes pulse3overlay {
+      ${animation.midPoint} {
+        background-color: ${colors.sudokuFG};
       }
     }
   }

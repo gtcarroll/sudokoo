@@ -6,6 +6,17 @@
 
 export const hiddenSingle = {
   name: "Hidden Single",
+  test: [
+    [0, 3, 0, 0, 0, 8, 0, 0, 7],
+    [8, 0, 0, 3, 0, 0, 2, 6, 0],
+    [0, 0, 0, 0, 2, 9, 8, 3, 4],
+    [0, 0, 0, 0, 0, 4, 3, 0, 0],
+    [6, 0, 8, 1, 3, 2, 0, 0, 9],
+    [0, 0, 3, 0, 0, 0, 0, 0, 0],
+    [1, 0, 5, 4, 9, 3, 7, 8, 0],
+    [0, 8, 0, 2, 7, 1, 0, 0, 3],
+    [3, 0, 7, 8, 0, 0, 0, 1, 0],
+  ],
   check: (cell, state, showcase) => {
     // TODO: simplify this behavior, perhaps w helper fxns
     let axes = [state.sudoku.rows, state.sudoku.cols, state.sudoku.houses];
