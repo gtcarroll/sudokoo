@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { colors, animation } from "./../../params.js";
 
+//TODO: clean this up!
 export const Note = (props) => {
   return (
-    <StyledDiv className={props.tag === 3 ? "style3" : ""}>
-      {props.tag === -1 && <Overlay>X</Overlay>}
+    <StyledDiv className={"style" + props.tag}>
+      {props.tag < 0 && <Overlay>X</Overlay>}
       <span className={"style" + props.tag}>{props.num}</span>
     </StyledDiv>
   );
@@ -26,15 +27,8 @@ const Overlay = styled.div`
   font-weight: normal;
   font-size: 125%;
 
-  animation: flashX ${animation.speed} ease-in-out;
-  @keyframes flashX {
-    ${animation.midPoint} {
-      color: ${colors.noteAccent};
-      font-weight: ${animation.fontEmphasis};
-    }
-  }
-  animation: flashN ${animation.speed} ease-in-out;
-  @keyframes flashN {
+  animation: crossOutOverlay ${animation.speed} ease-in-out;
+  @keyframes crossOutOverlay {
     ${animation.midPoint} {
       color: ${colors.noteAccent};
       font-weight: ${animation.fontEmphasis};
@@ -55,11 +49,12 @@ const StyledDiv = styled.div`
   font-size: 55%;
   overflow: hidden;
 
+  .style-1,
   .style-2 {
     color: transparent;
-    animation: fadeOut-2 ${animation.speed} ease-in;
 
-    @keyframes fadeOut-2 {
+    animation: crossOutNum ${animation.speed} ease-in;
+    @keyframes crossOutNum {
       0% {
         color: ${colors.noteNormal};
       }
@@ -69,68 +64,44 @@ const StyledDiv = styled.div`
     }
   }
 
-  .style-1 {
-    color: transparent;
-    animation: fadeOut-1 ${animation.speed} ease-in;
-
-    @keyframes fadeOut-1 {
-      0% {
-        color: ${colors.noteNormal};
-      }
-      ${animation.midPoint} {
-        color: ${colors.noteNormal};
-        font-weight: ${animation.fontEmphasis};
-      }
-    }
-  }
   .style0 {
     color: transparent;
-    animation: fadeOut0 ${animation.speed} ease-in;
 
-    @keyframes fadeOut0 {
+    animation: fadeOut ${animation.speed} ease-in;
+    @keyframes fadeOut {
       0% {
         color: ${colors.noteNormal};
       }
       ${animation.midPoint} {
-        color: ${colors.noteAccent};
-        font-size: ${animation.fontGrow};
+        color: ${colors.noteNormal};
       }
     }
   }
+
   .style1 {
     font-weight: normal;
   }
-  .style2 {
-    color: ${colors.noteAccent};
-    font-weight: bold;
 
-    animation: fadeIn2 ${animation.speed} ease-in-out;
+  .style2,
+  .style3 {
+    color: ${colors.noteNormal};
 
-    @keyframes fadeIn2 {
+    animation: pulseNum ${animation.speed} ease-in-out;
+    @keyframes pulseNum {
       0% {
         color: ${colors.noteNormal};
       }
       ${animation.midPoint} {
-        color: ${colors.noteAccent};
+        color: ${colors.sudokuBG};
         font-size: ${animation.fontGrow};
       }
     }
   }
-  .style3 {
-    color: ${colors.noteNormal};
-    animation: pulse3 ${animation.speed} ease-in-out;
 
-    @keyframes pulse3 {
-      ${animation.midPoint} {
-        color: ${colors.sudokuSet};
-        font-size: ${animation.fontGrow};
-      }
-    }
-  }
+  &.style2,
   &.style3 {
-    animation: pulse3overlay ${animation.speed} ease-in-out;
-
-    @keyframes pulse3overlay {
+    animation: pulseUnderlay ${animation.speed} ease-in-out;
+    @keyframes pulseUnderlay {
       ${animation.midPoint} {
         background-color: ${colors.sudokuFG};
       }

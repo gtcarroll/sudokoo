@@ -42,7 +42,7 @@ const StyledDiv = styled.div`
   overflow: hidden;
   border: 1px solid ${colors.sudokuBorder};
   color: ${colors.sudokuFG};
-  background-color: ${colors.sudokuBG1};
+  background-color: ${colors.sudokuBG};
   box-sizing: border-box;
   position: relative;
 
@@ -53,7 +53,7 @@ const StyledDiv = styled.div`
     ${animation.midPoint} {
       font-size: ${animation.fontGrow};
       background-color: ${colors.sudokuFG};
-      color: ${colors.sudokuBG1};
+      color: ${colors.sudokuBG};
       opacity: 1;
     }
   }

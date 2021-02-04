@@ -19,7 +19,7 @@ const pushChanges = (aff, i, state, showcase) => {
   let isAffected = aff.notes[i] > 0;
   if (isAffected) {
     // ...remove the pair of values from that cell's suspects.
-    aff.notes[i] = 0;
+    aff.notes[i] = -1;
     // ...mark the pair of values crossed out in showcase.
     showcase.houses[aff.house][aff.room].notes[i] = -1;
   }
@@ -93,10 +93,10 @@ export const nakedPair = {
           // ...if updates to sudoku state were made...
           if (wasUpdated) {
             // ...highlight the naked pair values in state.
-            state.sudoku.houses[cell.house][cell.room].notes[pair[0]] = 3;
-            state.sudoku.houses[cell.house][cell.room].notes[pair[1]] = 3;
-            state.sudoku.houses[other.house][other.room].notes[pair[0]] = 3;
-            state.sudoku.houses[other.house][other.room].notes[pair[1]] = 3;
+            state.sudoku.houses[cell.house][cell.room].notes[pair[0]] = 2;
+            state.sudoku.houses[cell.house][cell.room].notes[pair[1]] = 2;
+            state.sudoku.houses[other.house][other.room].notes[pair[0]] = 2;
+            state.sudoku.houses[other.house][other.room].notes[pair[1]] = 2;
 
             // ...highlight the naked pair values in showcase.
             showcase.houses[cell.house][cell.room].notes[pair[0]] = 2;

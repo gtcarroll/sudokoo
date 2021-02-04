@@ -72,7 +72,7 @@ export const lockedCandidate = {
                 wasUpdated = true;
 
                 // ...remove the soln from that cell's suspects.
-                aff.notes[soln - 1] = 0;
+                aff.notes[soln - 1] = -1;
                 // ...cross out the soln in the showcase.
                 showcase.houses[aff.house][aff.room].notes[soln - 1] = -1;
               }
@@ -91,7 +91,7 @@ export const lockedCandidate = {
                 affIndexes[a] === indexes[a]
               ) {
                 // ...highlight the soln val in state.
-                aff.notes[soln - 1] = 3;
+                aff.notes[soln - 1] = 2;
                 // ...highlight the soln val in the showcase.
                 showcase.houses[aff.house][aff.room].notes[soln - 1] = 2;
               }

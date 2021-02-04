@@ -5,8 +5,8 @@ import { colors } from "./../../params.js";
 
 export const Sudoku = (props) => {
   return (
-    <StyledDiv>
-      <House>
+    <StyledDiv className={props.isSolved ? "solved" : ""}>
+      <House isSolved={props.isSolved}>
         <Cell data={props.sudoku.houses[0][0]} />
         <Cell data={props.sudoku.houses[0][1]} />
         <Cell data={props.sudoku.houses[0][2]} />
@@ -17,7 +17,7 @@ export const Sudoku = (props) => {
         <Cell data={props.sudoku.houses[0][7]} />
         <Cell data={props.sudoku.houses[0][8]} />
       </House>
-      <House>
+      <House isSolved={props.isSolved}>
         <Cell data={props.sudoku.houses[1][0]} />
         <Cell data={props.sudoku.houses[1][1]} />
         <Cell data={props.sudoku.houses[1][2]} />
@@ -28,7 +28,7 @@ export const Sudoku = (props) => {
         <Cell data={props.sudoku.houses[1][7]} />
         <Cell data={props.sudoku.houses[1][8]} />
       </House>
-      <House>
+      <House isSolved={props.isSolved}>
         <Cell data={props.sudoku.houses[2][0]} />
         <Cell data={props.sudoku.houses[2][1]} />
         <Cell data={props.sudoku.houses[2][2]} />
@@ -39,7 +39,7 @@ export const Sudoku = (props) => {
         <Cell data={props.sudoku.houses[2][7]} />
         <Cell data={props.sudoku.houses[2][8]} />
       </House>
-      <House>
+      <House isSolved={props.isSolved}>
         <Cell data={props.sudoku.houses[3][0]} />
         <Cell data={props.sudoku.houses[3][1]} />
         <Cell data={props.sudoku.houses[3][2]} />
@@ -50,7 +50,7 @@ export const Sudoku = (props) => {
         <Cell data={props.sudoku.houses[3][7]} />
         <Cell data={props.sudoku.houses[3][8]} />
       </House>
-      <House>
+      <House isSolved={props.isSolved}>
         <Cell data={props.sudoku.houses[4][0]} />
         <Cell data={props.sudoku.houses[4][1]} />
         <Cell data={props.sudoku.houses[4][2]} />
@@ -61,7 +61,7 @@ export const Sudoku = (props) => {
         <Cell data={props.sudoku.houses[4][7]} />
         <Cell data={props.sudoku.houses[4][8]} />
       </House>
-      <House>
+      <House isSolved={props.isSolved}>
         <Cell data={props.sudoku.houses[5][0]} />
         <Cell data={props.sudoku.houses[5][1]} />
         <Cell data={props.sudoku.houses[5][2]} />
@@ -72,7 +72,7 @@ export const Sudoku = (props) => {
         <Cell data={props.sudoku.houses[5][7]} />
         <Cell data={props.sudoku.houses[5][8]} />
       </House>
-      <House>
+      <House isSolved={props.isSolved}>
         <Cell data={props.sudoku.houses[6][0]} />
         <Cell data={props.sudoku.houses[6][1]} />
         <Cell data={props.sudoku.houses[6][2]} />
@@ -83,7 +83,7 @@ export const Sudoku = (props) => {
         <Cell data={props.sudoku.houses[6][7]} />
         <Cell data={props.sudoku.houses[6][8]} />
       </House>
-      <House>
+      <House isSolved={props.isSolved}>
         <Cell data={props.sudoku.houses[7][0]} />
         <Cell data={props.sudoku.houses[7][1]} />
         <Cell data={props.sudoku.houses[7][2]} />
@@ -94,7 +94,7 @@ export const Sudoku = (props) => {
         <Cell data={props.sudoku.houses[7][7]} />
         <Cell data={props.sudoku.houses[7][8]} />
       </House>
-      <House>
+      <House isSolved={props.isSolved}>
         <Cell data={props.sudoku.houses[8][0]} />
         <Cell data={props.sudoku.houses[8][1]} />
         <Cell data={props.sudoku.houses[8][2]} />
@@ -119,10 +119,15 @@ const StyledDiv = styled.div`
   border: 2px solid ${colors.sudokuBorder};
 
   box-sizing: border-box;
+
+  &.solved {
+    border-color: ${colors.sudokuFG};
+  }
 `;
 
 Sudoku.defaultProps = {
-  isLoad: true,
+  isSolved: false,
+  isLoad: false,
   sudoku: {
     houses: [
       [

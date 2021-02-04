@@ -59,7 +59,7 @@ export const hiddenSingle = {
           ) {
             if (aff.notes[soln - 1] > 0) {
               // remove in state
-              aff.notes[soln - 1] = 0;
+              aff.notes[soln - 1] = -1;
               // cross-out in showcase
               showcase.houses[aff.house][aff.room].notes[soln - 1] = -1;
             }

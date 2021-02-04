@@ -12,7 +12,6 @@ import {
 
 var solveInterval = false;
 var isLoaded = false;
-var isSolved = false;
 
 export const SudokuController = (props) => {
   const [state, setState] = useState([]);
@@ -33,6 +32,7 @@ export const SudokuController = (props) => {
       cols: buildEmpty2DArray(),
       houses: buildEmpty2DArray(),
     };
+    state.isSolved = false;
     state.unsolved = [];
 
     // for every sudoku cell...
@@ -64,13 +64,13 @@ export const SudokuController = (props) => {
           // ...if the cell's value is set...
           if (other.val >= 1 && other.val <= 9) {
             // ...remove it from suspect list.
-            cell.notes[other.val - 1] = -2;
+            cell.notes[other.val - 1] = 0;
           }
         });
       }
     }
     isLoaded = true;
-    isSolved = false;
+    state.isSolved = false;
     pushState();
 
     console.log("...Sudoku Loaded");
@@ -80,6 +80,7 @@ export const SudokuController = (props) => {
     let localState = {
       sudoku: state.sudoku,
       unsolved: state.unsolved,
+      isSolved: state.isSolved,
     };
     setState(localState);
   };
@@ -105,7 +106,6 @@ export const SudokuController = (props) => {
     } else if (state.unsolved.length === 0) {
       console.log("Nothing left to solve. Sudoku soln is " + verifySolution());
       stopSolveInterval();
-      isSolved = true;
       pushState();
       return false;
     } else {
@@ -160,11 +160,14 @@ export const SudokuController = (props) => {
         }
         // ...and check that all 9 values are present.
         seen.forEach((bool) => {
-          if (!bool) return false;
+          if (!bool) {
+            return false;
+          }
         });
       }
     }
-    isSolved = true;
+    state.isSolved = true;
+    pushState();
     return true;
   };
 
@@ -225,11 +228,11 @@ export const SudokuController = (props) => {
 
   return (
     <StyledDiv>
-      <Sudoku sudoku={state.sudoku}></Sudoku>
+      <Sudoku sudoku={state.sudoku} isSolved={state.isSolved}></Sudoku>
       <Controls>
         {!isLoaded ? (
           <Button onClick={() => loadSudoku(pointingTuple.test)}>load</Button>
-        ) : isSolved ? (
+        ) : state.isSolved ? (
           <Button onClick={() => loadSudoku(pointingTuple.test)}>reset</Button>
         ) : solveInterval ? (
           <Controls>
@@ -286,7 +289,7 @@ const Button = styled.button`
   }
   &:active {
     transition: all 0.05 ease-in;
-    background-color: ${colors.sudokuBG1};
+    background-color: ${colors.sudokuBG};
     transform: scale(1.025);
     color: ${colors.sudokuBorder};
   }

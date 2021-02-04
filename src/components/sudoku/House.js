@@ -3,10 +3,16 @@ import styled from "styled-components";
 import { colors } from "./../../params.js";
 
 export const House = (props) => {
-  return <StyledDiv>{props.children}</StyledDiv>;
+  return (
+    <StyledDiv className={props.isSolved ? "solved" : ""}>
+      {props.children}
+    </StyledDiv>
+  );
 };
 
-House.defaultProps = {};
+House.defaultProps = {
+  isSolved: false,
+};
 
 const StyledDiv = styled.div`
   display: grid;
@@ -15,8 +21,12 @@ const StyledDiv = styled.div`
 
   height: 100%;
   width: 100%;
-  background-color: ${colors.sudokuBG1};
+  background-color: ${colors.sudokuBG};
   border: 1px solid ${colors.sudokuBorder};
 
   box-sizing: border-box;
+
+  &.solved {
+    border-color: ${colors.sudokuFG};
+  }
 `;
