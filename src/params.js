@@ -1,15 +1,13 @@
 export const colors = {
-  appBG: "#000000",
-  sudokuBG: "#202020",
-  sudokuBG2: "#000000",
-  sudokuFG: "#61dbfb",
-  sudokuBorder: "#424242",
-  sudokuSet: "#121212",
-  sudokuPreset: "#424242",
-  noteStrike: "#F7EBEC",
-  noteNormal: "#605958",
-  //noteNormal: "#555555",
-  noteAccent: "#61dbfb",
+  neutralLowest: "#000000",
+  neutralLow: "#121212",
+  neutralMid: "#202020",
+  neutralHigh: "#424242",
+  neutralHighest: "#808080",
+
+  accentHighlight: "#61DBFB",
+  accentHighlightAlt: "#B6EEA6",
+  accentRemoval: "#FFE2FE",
 };
 
 export const animation = {

@@ -1,11 +1,13 @@
 import "./css/App.css";
 import styled from "styled-components";
 import { SudokuController } from "./components/SudokuController.js";
+import { PaletteStrip } from "./components/PaletteStrip.js";
 import { colors } from "./params.js";
 
 function App() {
   return (
     <StyledDiv>
+      <PaletteStrip></PaletteStrip>
       <div className="App-header">
         <SudokuController></SudokuController>
       </div>
@@ -16,7 +18,7 @@ function App() {
 const StyledDiv = styled.div`
   text-align: center;
 
-  background-color: ${colors.appBG};
+  background-color: ${colors.neutralLowest};
 
   .App-logo {
     height: 40vmin;

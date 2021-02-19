@@ -21,12 +21,12 @@ const StyledDiv = styled.div`
 
   height: 100%;
   width: 100%;
-  background-color: ${colors.sudokuBG};
-  border: 1px solid ${colors.sudokuBorder};
+  background-color: ${colors.neutralMid};
+  border: 1px solid ${colors.neutralHigh};
 
   box-sizing: border-box;
 
   &.solved {
-    border-color: ${colors.sudokuFG};
+    border-color: ${colors.accentHighlight};
   }
 `;

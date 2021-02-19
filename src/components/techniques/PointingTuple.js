@@ -1,4 +1,5 @@
 //import React from "react";
+import { helper } from "./TechniqueHelper.js";
 
 // const PointingTuple = (props) => {
 //   return <h2>pointing tuple</h2>;
@@ -18,62 +19,50 @@ export const pointingTuple = {
     [2, 0, 7, 0, 0, 0, 0, 0, 0],
   ],
   check: (cell, state, showcase) => {
-    let axes = [state.sudoku.rows, state.sudoku.cols];
-    let cellIndexes = [cell.row, cell.col];
     let wasUpdated = false;
+    let axisKeys = Object.keys(cell.pos);
+    let axes = [state.sudoku.rows, state.sudoku.cols];
+    let cellIndexes = [cell.pos.row, cell.pos.col];
 
-    // for each axis this cell belongs to...
+    // for each [row, col] this cell belongs to...
     for (let a = 0; a < 2; a++) {
-      let unseen = [];
-      for (let i = 0; i < 9; i++) if (cell.notes[i] > 0) unseen.push(i);
       let axis = axes[a][cellIndexes[a]];
-
-      // ...for each other cell in this cell's house...
-      for (let r = 0; r < 9; r++) {
-        let other = state.sudoku.houses[cell.house][r];
-        let otherIndexes = [other.row, other.col];
-
-        // ...if that other cell is not in the same axis...
-        if (otherIndexes[a] !== cellIndexes[a]) {
-          // ...remove its suspects from the unseen list...
-          for (let n = 0; n < 9; n++) {
-            if (other.val <= 0 && other.notes[n] > 0 && unseen.includes(n)) {
-              unseen.splice(unseen.indexOf(n), 1);
-            }
-          }
-        }
-      }
+      let diffAxis = (c1, c2) => {
+        let axisKey = axisKeys[a];
+        return c1.pos[axisKey] !== c2.pos[axisKey];
+      };
+      let unseen = helper.getUnseen(cell, state, axisKeys[2], diffAxis);
 
       // ...if there are any unseen suspects left...
       if (unseen.length > 0) {
-        let soln = unseen[0] + 1;
+        let soln = unseen[0];
         let notOnlyOne = false;
         for (let i = 0; i < 9; i++) {
           let roomie = axis[i];
           notOnlyOne |=
-            roomie.house !== cell.house &&
+            roomie.house !== cell.pos.house &&
             roomie.val <= 0 &&
-            roomie.notes[soln - 1] > 0 &&
-            unseen.includes(soln - 1);
+            roomie.notes[soln] > 0 &&
+            unseen.includes(soln);
         }
         // ...if this cell is not the only one in its axis and house w soln in suspects...
         if (notOnlyOne) {
           for (let i = 0; i < 9; i++) {
             let aff = axis[i];
-            let affIndexes = [aff.row, aff.col];
+            let affIndexes = [aff.pos.row, aff.pos.col];
 
             // ...if aff would be affected and is in the same axis as cell...
             if (
               aff.val <= 0 &&
-              aff.notes[soln - 1] > 0 &&
+              aff.notes[soln] > 0 &&
               affIndexes[a] === cellIndexes[a]
             ) {
-              if (aff.house !== cell.house) {
+              if (aff.pos.house !== cell.pos.house) {
                 wasUpdated = true;
                 // ...remove the soln val in state.
-                aff.notes[soln - 1] = -1;
+                aff.notes[soln] = -1;
                 // ...remove the soln val in the showcase.
-                showcase.houses[aff.house][aff.room].notes[soln - 1] = -1;
+                showcase.houses[aff.pos.house][aff.pos.room].notes[soln] = -1;
               }
             }
           }
@@ -81,20 +70,20 @@ export const pointingTuple = {
           if (wasUpdated) {
             for (let i = 0; i < 9; i++) {
               let aff = axis[i];
-              let affIndexes = [aff.row, aff.col];
+              let affIndexes = [aff.pos.row, aff.pos.col];
 
               // ...if aff would be affected and is in the same axis as cell...
               if (
                 aff.val <= 0 &&
-                aff.notes[soln - 1] > 0 &&
+                aff.notes[soln] > 0 &&
                 affIndexes[a] === cellIndexes[a]
               ) {
-                if (aff.house === cell.house) {
+                if (aff.pos.house === cell.pos.house) {
                   wasUpdated = true;
                   // ...highlight the soln val in state.
-                  aff.notes[soln - 1] = 2;
+                  aff.notes[soln] = 2;
                   // ...highlight the soln val in the showcase.
-                  showcase.houses[aff.house][aff.room].notes[soln - 1] = 2;
+                  showcase.houses[aff.pos.house][aff.pos.room].notes[soln] = 2;
                 }
               }
             }

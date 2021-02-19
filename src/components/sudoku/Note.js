@@ -30,7 +30,7 @@ const Overlay = styled.div`
   animation: crossOutOverlay ${animation.speed} ease-in-out;
   @keyframes crossOutOverlay {
     ${animation.midPoint} {
-      color: ${colors.noteAccent};
+      color: ${colors.accentHighlight};
       font-weight: ${animation.fontEmphasis};
     }
   }
@@ -45,7 +45,7 @@ const StyledDiv = styled.div`
 
   height: 100%;
   width: 100%;
-  color: ${colors.noteNormal};
+  color: ${colors.neutralHighest};
   font-size: 55%;
   overflow: hidden;
 
@@ -56,10 +56,10 @@ const StyledDiv = styled.div`
     animation: crossOutNum ${animation.speed} ease-in;
     @keyframes crossOutNum {
       0% {
-        color: ${colors.noteNormal};
+        color: ${colors.neutralHighest};
       }
       ${animation.midPoint} {
-        color: ${colors.noteNormal};
+        color: ${colors.neutralHighest};
       }
     }
   }
@@ -70,10 +70,10 @@ const StyledDiv = styled.div`
     animation: fadeOut ${animation.speed} ease-in;
     @keyframes fadeOut {
       0% {
-        color: ${colors.noteNormal};
+        color: ${colors.neutralHighest};
       }
       ${animation.midPoint} {
-        color: ${colors.noteNormal};
+        color: ${colors.neutralHighest};
       }
     }
   }
@@ -84,15 +84,15 @@ const StyledDiv = styled.div`
 
   .style2,
   .style3 {
-    color: ${colors.noteNormal};
+    color: ${colors.neutralHighest};
 
     animation: pulseNum ${animation.speed} ease-in-out;
     @keyframes pulseNum {
       0% {
-        color: ${colors.noteNormal};
+        color: ${colors.neutralHighest};
       }
       ${animation.midPoint} {
-        color: ${colors.sudokuBG};
+        color: ${colors.neutralMid};
         font-size: ${animation.fontGrow};
       }
     }
@@ -103,7 +103,7 @@ const StyledDiv = styled.div`
     animation: pulseUnderlay ${animation.speed} ease-in-out;
     @keyframes pulseUnderlay {
       ${animation.midPoint} {
-        background-color: ${colors.sudokuFG};
+        background-color: ${colors.accentHighlight};
       }
     }
   }

@@ -40,9 +40,9 @@ const StyledDiv = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
-  border: 1px solid ${colors.sudokuBorder};
-  color: ${colors.sudokuFG};
-  background-color: ${colors.sudokuBG};
+  border: 1px solid ${colors.neutralHigh};
+  color: ${colors.accentHighlight};
+  background-color: ${colors.neutralMid};
   box-sizing: border-box;
   position: relative;
 
@@ -52,14 +52,14 @@ const StyledDiv = styled.div`
     }
     ${animation.midPoint} {
       font-size: ${animation.fontGrow};
-      background-color: ${colors.sudokuFG};
-      color: ${colors.sudokuBG};
+      background-color: ${colors.accentHighlight};
+      color: ${colors.neutralMid};
       opacity: 1;
     }
   }
 
   &.preset {
-    background-color: ${colors.sudokuSet};
+    background-color: ${colors.neutralLow};
   }
 
   .show {

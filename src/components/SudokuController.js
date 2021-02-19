@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { colors, animation } from "../params.js";
 import { Sudoku } from "./sudoku";
+import { BirdFeed } from "./birdfeed";
 import {
   nakedSingle,
   hiddenSingle,
@@ -34,6 +35,7 @@ export const SudokuController = (props) => {
     };
     state.isSolved = false;
     state.unsolved = [];
+    state.feed = [];
 
     // for every sudoku cell...
     for (let h = 0; h < 9; h++) {
@@ -46,9 +48,9 @@ export const SudokuController = (props) => {
         let isUnsolved = !(val >= 1 && val <= 9);
         var cell = buildNewCell(y, x, h, r, val, !isUnsolved);
         // store cell in each state object
-        state.sudoku.houses[h][r] = cell;
         state.sudoku.rows[y][x] = cell;
         state.sudoku.cols[x][y] = cell;
+        state.sudoku.houses[h][r] = cell;
         if (isUnsolved) state.unsolved.push(cell);
       }
     }
@@ -56,7 +58,7 @@ export const SudokuController = (props) => {
     // for each unsolved cell...
     let axes = [state.sudoku.rows, state.sudoku.cols, state.sudoku.houses];
     for (let cell of state.unsolved.values()) {
-      let indexes = [cell.row, cell.col, cell.house];
+      let indexes = [cell.pos.row, cell.pos.col, cell.pos.house];
       // ...for each axis (row, col, house) this cell belongs to...
       for (let i = 0; i < 3; i++) {
         // ...for each other cell in that axis...
@@ -119,7 +121,12 @@ export const SudokuController = (props) => {
           if (showcase) {
             // ...report results.
             console.log(
-              techniques[t].name + " @ (" + cell.col + "," + cell.row + ")"
+              techniques[t].name +
+                " @ (" +
+                cell.pos.col +
+                "," +
+                cell.pos.row +
+                ")"
             );
             pushState();
             return true;
@@ -181,10 +188,12 @@ export const SudokuController = (props) => {
 
   const buildNewCell = (y, x, h, r, v, p) => {
     return {
-      row: y,
-      col: x,
-      house: h,
-      room: r,
+      pos: {
+        row: y,
+        col: x,
+        house: h,
+        room: r,
+      },
       val: v,
       preset: p,
       notes: [1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -216,10 +225,12 @@ export const SudokuController = (props) => {
 
   const copyCell = (cell) => {
     return {
-      row: cell.row,
-      col: cell.col,
-      house: cell.house,
-      room: cell.room,
+      pos: {
+        row: cell.pos.row,
+        col: cell.pos.col,
+        house: cell.pos.house,
+        room: cell.pos.room,
+      },
       val: cell.val,
       preset: cell.preset,
       notes: [...cell.notes],
@@ -228,26 +239,36 @@ export const SudokuController = (props) => {
 
   return (
     <StyledDiv>
-      <Sudoku sudoku={state.sudoku} isSolved={state.isSolved}></Sudoku>
-      <Controls>
-        {!isLoaded ? (
-          <Button onClick={() => loadSudoku(pointingTuple.test)}>load</Button>
-        ) : state.isSolved ? (
-          <Button onClick={() => loadSudoku(pointingTuple.test)}>reset</Button>
-        ) : solveInterval ? (
-          <Controls>
-            <Button onClick={() => stopSolveInterval()}>stop</Button>
-            <Button onClick={() => getNextSolution()}>next</Button>
-          </Controls>
-        ) : (
-          <Controls>
-            <Button onClick={() => startSolveInterval(animation.delay)}>
-              auto-solve
+      <SudokuContainer>
+        <Sudoku sudoku={state.sudoku} isSolved={state.isSolved}></Sudoku>
+        <Sudoku sudoku={state.showcase} overlay></Sudoku>
+      </SudokuContainer>
+      <BirdFeedContainer>
+        <BirdFeed feed={state.feed}></BirdFeed>
+      </BirdFeedContainer>
+      <ControlContainer>
+        <Controls>
+          {!isLoaded ? (
+            <Button onClick={() => loadSudoku(nakedPair.test)}>load</Button>
+          ) : state.isSolved ? (
+            <Button onClick={() => loadSudoku(pointingTuple.test)}>
+              reset
             </Button>
-            <Button onClick={() => getNextSolution()}>next</Button>
-          </Controls>
-        )}
-      </Controls>
+          ) : solveInterval ? (
+            <Controls>
+              <Button onClick={() => stopSolveInterval()}>stop</Button>
+              <Button onClick={() => getNextSolution()}>next</Button>
+            </Controls>
+          ) : (
+            <Controls>
+              <Button onClick={() => startSolveInterval(animation.delay)}>
+                auto-solve
+              </Button>
+              <Button onClick={() => getNextSolution()}>next</Button>
+            </Controls>
+          )}
+        </Controls>
+      </ControlContainer>
     </StyledDiv>
   );
 };
@@ -255,11 +276,29 @@ export const SudokuController = (props) => {
 const StyledDiv = styled.div`
   display: grid;
   grid-template-rows: min(80vw, 80vh) 1fr;
-  grid-template-columns: 1fr;
+  grid-template-columns: min(80vw, 80vh) 1fr;
   grid-gap: 2rem;
+  padding: 2rem;
+  grid-template-areas:
+    "sdku feed"
+    "ctrl feed";
 
-  width: min(80vw, 80vh);
+  width: 100%;
   height: 100%;
+`;
+
+const SudokuContainer = styled.div`
+  position: relative;
+  grid-area: sdku;
+  background-color: rgba(30, 0, 60, 0.7);
+`;
+const ControlContainer = styled.div`
+  grid-area: ctrl;
+  background-color: rgba(30, 0, 60, 0.7);
+`;
+const BirdFeedContainer = styled.div`
+  grid-area: feed;
+  background-color: rgba(30, 0, 60, 0.7);
 `;
 
 const Controls = styled.div`
@@ -272,9 +311,9 @@ const Controls = styled.div`
 `;
 
 const Button = styled.button`
-  color: ${colors.sudokuBorder};
+  color: ${colors.neutralHigh};
   background-color: transparent;
-  border: 2px solid ${colors.sudokuBorder};
+  border: 2px solid ${colors.neutralHigh};
   border-radius: 1em;
 
   width: 100%;
@@ -283,14 +322,14 @@ const Button = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: ${colors.sudokuBorder};
-    color: ${colors.appBG};
+    background-color: ${colors.neutralHigh};
+    color: ${colors.neutralLowest};
     transform: scale(1.05);
   }
   &:active {
     transition: all 0.05 ease-in;
-    background-color: ${colors.sudokuBG};
+    background-color: ${colors.neutralMid};
     transform: scale(1.025);
-    color: ${colors.sudokuBorder};
+    color: ${colors.neutralHigh};
   }
 `;
