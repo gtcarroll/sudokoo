@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { colors, animation } from "../params.js";
+import { animation } from "../params.js";
+import { JellyButton, ButtonTray } from "./controls";
 import { Sudoku } from "./sudoku";
 import { BirdFeed } from "./birdfeed";
 import {
@@ -88,8 +89,9 @@ export const SudokuController = (props) => {
   };
 
   const startSolveInterval = (ms) => {
-    getNextSolution();
+    //getNextSolution();
     solveInterval = setInterval(getNextSolution, ms);
+    pushState();
   };
 
   const stopSolveInterval = () => {
@@ -247,27 +249,48 @@ export const SudokuController = (props) => {
         <BirdFeed feed={state.feed}></BirdFeed>
       </BirdFeedContainer>
       <ControlContainer>
-        <Controls>
+        <ButtonTray>
           {!isLoaded ? (
-            <Button onClick={() => loadSudoku(nakedPair.test)}>load</Button>
+            <JellyButton
+              text="load"
+              onClick={() => loadSudoku(nakedPair.test)}
+              color="highlight"
+              doubleWidth
+            />
           ) : state.isSolved ? (
-            <Button onClick={() => loadSudoku(pointingTuple.test)}>
-              reset
-            </Button>
+            <JellyButton
+              text="reset"
+              onClick={() => loadSudoku(pointingTuple.test)}
+              color="removal"
+            />
           ) : solveInterval ? (
-            <Controls>
-              <Button onClick={() => stopSolveInterval()}>stop</Button>
-              <Button onClick={() => getNextSolution()}>next</Button>
-            </Controls>
+            <ButtonTray>
+              <JellyButton
+                text="stop"
+                onClick={() => stopSolveInterval()}
+                color="removal"
+              />
+              <JellyButton
+                text="next"
+                onClick={() => getNextSolution()}
+                color="highlight"
+              />
+            </ButtonTray>
           ) : (
-            <Controls>
-              <Button onClick={() => startSolveInterval(animation.delay)}>
-                auto-solve
-              </Button>
-              <Button onClick={() => getNextSolution()}>next</Button>
-            </Controls>
+            <ButtonTray>
+              <JellyButton
+                text="auto-solve"
+                onClick={() => startSolveInterval(animation.delay)}
+                color="highlightAlt"
+              />
+              <JellyButton
+                text="next"
+                onClick={() => getNextSolution()}
+                color="highlight"
+              />
+            </ButtonTray>
           )}
-        </Controls>
+        </ButtonTray>
       </ControlContainer>
     </StyledDiv>
   );
@@ -283,53 +306,16 @@ const StyledDiv = styled.div`
     "sdku feed"
     "ctrl feed";
 
-  width: 100%;
-  height: 100%;
+  flex-grow: 1;
 `;
 
 const SudokuContainer = styled.div`
   position: relative;
   grid-area: sdku;
-  background-color: rgba(30, 0, 60, 0.7);
 `;
 const ControlContainer = styled.div`
   grid-area: ctrl;
-  background-color: rgba(30, 0, 60, 0.7);
 `;
 const BirdFeedContainer = styled.div`
   grid-area: feed;
-  background-color: rgba(30, 0, 60, 0.7);
-`;
-
-const Controls = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  gap: 2em;
-
-  width: 100%;
-`;
-
-const Button = styled.button`
-  color: ${colors.neutralHigh};
-  background-color: transparent;
-  border: 2px solid ${colors.neutralHigh};
-  border-radius: 1em;
-
-  width: 100%;
-  padding: 0.2em;
-  font-size: 24px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: ${colors.neutralHigh};
-    color: ${colors.neutralLowest};
-    transform: scale(1.05);
-  }
-  &:active {
-    transition: all 0.05 ease-in;
-    background-color: ${colors.neutralMid};
-    transform: scale(1.025);
-    color: ${colors.neutralHigh};
-  }
 `;

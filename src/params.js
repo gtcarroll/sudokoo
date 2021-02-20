@@ -6,8 +6,10 @@ export const colors = {
   neutralHighest: "#808080",
 
   accentHighlight: "#61DBFB",
+  accentHighlightPressed: "#10CAF9",
   accentHighlightAlt: "#B6EEA6",
   accentRemoval: "#FFE2FE",
+  accentRemovalPressed: "#FF99FC",
 };
 
 export const animation = {

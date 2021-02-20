@@ -6,52 +6,40 @@ import { colors } from "./params.js";
 
 function App() {
   return (
-    <StyledDiv>
-      <PaletteStrip></PaletteStrip>
-      <div className="App-header">
-        <SudokuController></SudokuController>
-      </div>
-    </StyledDiv>
+    <ColContainer>
+      <RowContainer>
+        <PaletteStrip reverse />
+        <PaletteStrip />
+      </RowContainer>
+
+      <RowContainer style={{ flexGrow: 1 }}>
+        <SudokuController />
+      </RowContainer>
+
+      <RowContainer>
+        <PaletteStrip reverse />
+        <PaletteStrip />
+      </RowContainer>
+    </ColContainer>
   );
 }
 
-const StyledDiv = styled.div`
-  text-align: center;
+const ColContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 
   background-color: ${colors.neutralLowest};
+  color: ${colors.neutralHighest};
 
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
+  font-size: calc(10px + 2vmin);
+  overflow: scroll;
 
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
+  min-height: 100vh;
+`;
 
-  .App-header {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-
-  .App-link {
-    color: #61dafb;
-  }
-
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+const RowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 export default App;
