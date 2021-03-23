@@ -65,8 +65,8 @@ const Button = styled.button`
   }
 
   &:active {
-    padding-bottom: 1em;
-    transform: translateY(-0.7em);
+    padding-bottom: 0.9em;
+    transform: translateY(-0.6em);
   }
 
   &.highlight {
@@ -77,7 +77,6 @@ const Button = styled.button`
   &.highlightAlt {
     color: ${colors.accentHighlightAlt};
     border-color: ${colors.accentHighlightAlt};
-    }
   }
 
   &.removal {

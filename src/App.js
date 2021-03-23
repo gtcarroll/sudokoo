@@ -8,7 +8,6 @@ function App() {
   return (
     <ColContainer>
       <RowContainer>
-        <PaletteStrip reverse />
         <PaletteStrip />
       </RowContainer>
 
@@ -17,7 +16,6 @@ function App() {
       </RowContainer>
 
       <RowContainer>
-        <PaletteStrip reverse />
         <PaletteStrip />
       </RowContainer>
     </ColContainer>

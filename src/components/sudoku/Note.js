@@ -23,6 +23,12 @@ const Overlay = styled.div`
   width: 100%;
   height: 100%;
 
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+
   color: transparent;
   font-weight: normal;
   font-size: 125%;
