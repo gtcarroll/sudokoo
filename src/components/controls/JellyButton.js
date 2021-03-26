@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../../params.js";
+import { colors, animation } from "../../params.js";
 
 export const JellyButton = (props) => {
   return (
@@ -40,7 +40,7 @@ const Button = styled.button`
 
   width: 100%;
 
-  transition: all 0.1s ease-in;
+  transition: all ${animation.buttonSpeed} ease-in;
 
   &:hover,
   &:focus {
@@ -65,8 +65,9 @@ const Button = styled.button`
   }
 
   &:active {
-    padding-bottom: 0.9em;
-    transform: translateY(-0.6em);
+    transition-duration: 0.05s;
+    padding-bottom: 0.5em;
+    transform: translateY(-0.2em) scale(1.075, 1);
   }
 
   &.highlight {

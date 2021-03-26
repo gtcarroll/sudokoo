@@ -272,7 +272,7 @@ export const SudokuController = (props) => {
               />
               <JellyButton
                 text="next"
-                onClick={() => getNextSolution()}
+                onClick={() => setTimeout(getNextSolution, animation.delay / 6)}
                 color="highlight"
               />
             </ButtonTray>
@@ -285,7 +285,7 @@ export const SudokuController = (props) => {
               />
               <JellyButton
                 text="next"
-                onClick={() => getNextSolution()}
+                onClick={() => setTimeout(getNextSolution, animation.delay / 6)}
                 color="highlight"
               />
             </ButtonTray>

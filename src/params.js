@@ -6,16 +6,17 @@ export const colors = {
   neutralHighest: "#808080",
 
   accentHighlight: "#61DBFB",
-  accentHighlightPressed: "#10CAF9",
+  //accentHighlightPressed: "#10CAF9",
   accentHighlightAlt: "#B6EEA6",
-  accentRemoval: "#FFE2FE",
-  accentRemovalPressed: "#FF99FC",
+  accentRemoval: "#FF99FC", //"#FFE2FE",
+  //accentRemovalPressed: "#FF99FC",
 };
 
 export const animation = {
   speed: "0.8s",
+  buttonSpeed: "0.1s",
   midPoint: "60%",
   fontGrow: "125%",
   fontEmphasis: "bold",
-  delay: 1000,
+  delay: 1200,
 };
