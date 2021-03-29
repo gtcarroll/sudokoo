@@ -4,7 +4,11 @@ import { colors } from "./../../params.js";
 
 export const House = (props) => {
   return (
-    <StyledDiv className={props.isSolved ? "solved" : ""}>
+    <StyledDiv
+      className={
+        (props.isSolved ? "solved " : "") + (props.overlay ? "overlay" : "")
+      }
+    >
       {props.children}
     </StyledDiv>
   );
@@ -12,6 +16,7 @@ export const House = (props) => {
 
 House.defaultProps = {
   isSolved: false,
+  overlay: false,
 };
 
 const StyledDiv = styled.div`
@@ -22,11 +27,17 @@ const StyledDiv = styled.div`
   height: 100%;
   width: 100%;
   background-color: ${colors.neutralMid};
+
+  //TODO: disable border on overlay sudoku
   border: 1px solid ${colors.neutralHigh};
 
   box-sizing: border-box;
 
   &.solved {
     border-color: ${colors.accentHighlight};
+  }
+
+  &.overlay {
+    border: none;
   }
 `;

@@ -28,6 +28,9 @@ export const hiddenSingle = {
       // ...if this cell suspects a note unseen elsewhere in this axis...
       if (unseen.length > 0) {
         helper.writeSolution(unseen[0], cell, state);
+        // helper.highlightRow(state.sudoku, cell.pos.row);
+        // helper.highlightCol(state.sudoku, cell.pos.col);
+        // helper.highlightHouse(state.sudoku, cell.pos.house);
         return true;
       }
     }

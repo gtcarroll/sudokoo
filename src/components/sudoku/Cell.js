@@ -5,7 +5,15 @@ import { colors, animation } from "./../../params.js";
 
 export const Cell = (props) => {
   return (
-    <StyledDiv className={props.data.preset ? "preset" : ""}>
+    <StyledDiv
+      className={
+        (props.data.preset ? "preset " : "") +
+        (props.data.borders[0] ? "top " : "") +
+        (props.data.borders[1] ? "right " : "") +
+        (props.data.borders[2] ? "bottom " : "") +
+        (props.data.borders[3] ? "left " : "")
+      }
+    >
       <Value className={props.data.val > 0 ? "show" : "hide"}>
         <div>{props.data.val}</div>
       </Value>
@@ -29,6 +37,12 @@ Cell.defaultProps = {
     val: -1,
     preset: true,
     notes: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    borders: {
+      top: false,
+      right: false,
+      bottom: false,
+      left: false,
+    },
   },
 };
 
@@ -36,6 +50,8 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  z-index: 5;
 
   height: 100%;
   width: 100%;
@@ -45,6 +61,8 @@ const StyledDiv = styled.div`
   background-color: ${colors.neutralMid};
   box-sizing: border-box;
   position: relative;
+
+  transition: 0.8s;
 
   @keyframes pulse {
     0% {
@@ -60,6 +78,19 @@ const StyledDiv = styled.div`
 
   &.preset {
     background-color: ${colors.neutralLow};
+  }
+
+  &.top {
+    border-top: 2px double ${colors.accentHighlight};
+  }
+  &.right {
+    border-right: 2px double ${colors.accentHighlight};
+  }
+  &.bottom {
+    border-bottom: 2px double ${colors.accentHighlight};
+  }
+  &.left {
+    border-left: 2px double ${colors.accentHighlight};
   }
 
   .show {

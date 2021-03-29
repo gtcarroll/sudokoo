@@ -13,7 +13,6 @@ export const JellyButton = (props) => {
 };
 
 JellyButton.defaultProps = {
-  doubleWidth: false,
   onClick: console.log("clicked"),
   text: "click me",
   color: "",
@@ -42,8 +41,7 @@ const Button = styled.button`
 
   transition: all ${animation.buttonSpeed} ease-in;
 
-  &:hover,
-  &:focus {
+  &:hover {
     padding-bottom: 1.3em;
     transform: translateY(-1em);
 

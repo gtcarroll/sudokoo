@@ -13,7 +13,7 @@ export const colors = {
 };
 
 export const animation = {
-  speed: "0.8s",
+  speed: "1.6s",
   buttonSpeed: "0.1s",
   midPoint: "60%",
   fontGrow: "125%",

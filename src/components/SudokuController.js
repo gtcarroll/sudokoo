@@ -199,6 +199,7 @@ export const SudokuController = (props) => {
       val: v,
       preset: p,
       notes: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      borders: [false, false, false, false],
     };
   };
 
@@ -236,6 +237,7 @@ export const SudokuController = (props) => {
       val: cell.val,
       preset: cell.preset,
       notes: [...cell.notes],
+      borders: [...cell.borders],
     };
   };
 
@@ -255,7 +257,6 @@ export const SudokuController = (props) => {
               text="load"
               onClick={() => loadSudoku(nakedPair.test)}
               color="highlight"
-              doubleWidth
             />
           ) : state.isSolved ? (
             <JellyButton

@@ -28,10 +28,11 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   text-align: center;
+  top: -10%;
 
   color: transparent;
-  font-weight: normal;
-  font-size: 125%;
+  font-weight: 1000;
+  font-size: 150%;
 
   animation: crossOutOverlay ${animation.speed} ease-in-out;
   @keyframes crossOutOverlay {
