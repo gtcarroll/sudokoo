@@ -29,6 +29,8 @@ export const hiddenSingle = {
       if (unseen.length > 0) {
         helper.writeSolution(unseen[0], cell, state);
         helper.highlightAxis(state.sudoku, cell, a);
+        helper.highlightAxis(state.sudoku, cell, (a + 1) % 3, "tertiary");
+        helper.highlightAxis(state.sudoku, cell, (a + 2) % 3, "tertiary");
         return true;
       }
     }

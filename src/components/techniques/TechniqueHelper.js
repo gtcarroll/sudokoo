@@ -20,9 +20,9 @@ export const helper = {
   },
 
   addBorders: (cell, borders, color = "primary") => {
-    if (!cell.borders.set) {
+    if (!cell.borders[color].set) {
       cell.borders[color] = borders;
-      cell.borders.set = true;
+      cell.borders[color].set = true;
     } else {
       for (let i = 0; i < 4; i++) {
         cell.borders[color][i] &= borders[i];

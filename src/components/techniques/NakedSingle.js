@@ -20,7 +20,12 @@ export const nakedSingle = {
   ],
   check: (cell, state) => {
     let suspects = helper.getSuspects(cell);
-    if (suspects.length === 1) helper.writeSolution(suspects[0], cell, state);
+    if (suspects.length === 1) {
+      helper.writeSolution(suspects[0], cell, state);
+      helper.highlightAxis(state.sudoku, cell, 0, "tertiary");
+      helper.highlightAxis(state.sudoku, cell, 1, "tertiary");
+      helper.highlightAxis(state.sudoku, cell, 2, "tertiary");
+    }
     return suspects.length === 1;
   },
 };

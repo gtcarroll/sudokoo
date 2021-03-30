@@ -12,9 +12,9 @@ export const colors = {
 
 export const animation = {
   speed: "1.6s",
-  halfSpeed: "0.8s",
+  halfSpeed: "0.64s",
   buttonSpeed: "0.1s",
-  midPoint: "60%",
+  midPoint: "40%, 60%",
   fontGrow: "125%",
   fontEmphasis: "bold",
   delay: 1200,

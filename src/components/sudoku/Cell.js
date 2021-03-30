@@ -3,44 +3,44 @@ import styled from "styled-components";
 import { Note } from "./";
 import { colors, animation } from "./../../params.js";
 
-let borderBasic = "1px solid " + colors.neutralHigh,
-  borderPrimary = "3px double" + colors.accentPrimary,
-  borderSecondary = "3px double" + colors.accentSecondary,
-  borderTertiary = "3px double" + colors.accentTertiary;
+const allFalse = (arr) => {
+  let result = true;
+  for (let i = 0; i < arr.length; i++) {
+    result &= !arr[i];
+  }
+  return result;
+};
+const getColor = (props) => {
+  if (props.data.borders.primary.set) return "primary";
+  else if (props.data.borders.secondary.set) return "secondary";
+  else return "tertiary";
+};
+
+let borderStyles = {
+  basic: "1px solid " + colors.neutralHigh,
+  primary: "3px double " + colors.accentPrimary,
+  secondary: "3px double " + colors.accentSecondary,
+  tertiary: "3px double " + colors.accentTertiary,
+};
 
 export const Cell = (props) => {
+  let color = getColor(props);
   return (
     <StyledDiv
       className={props.data.preset ? "preset " : ""}
       style={{
-        borderTop: props.data.borders.primary[0]
-          ? borderPrimary
-          : props.data.borders.secondary[0]
-          ? borderSecondary
-          : props.data.borders.tertiary[0]
-          ? borderTertiary
-          : borderBasic,
-        borderRight: props.data.borders.primary[1]
-          ? borderPrimary
-          : props.data.borders.secondary[1]
-          ? borderSecondary
-          : props.data.borders.tertiary[1]
-          ? borderTertiary
-          : borderBasic,
-        borderBottom: props.data.borders.primary[2]
-          ? borderPrimary
-          : props.data.borders.secondary[2]
-          ? borderSecondary
-          : props.data.borders.tertiary[2]
-          ? borderTertiary
-          : borderBasic,
-        borderLeft: props.data.borders.primary[3]
-          ? borderPrimary
-          : props.data.borders.secondary[3]
-          ? borderSecondary
-          : props.data.borders.tertiary[3]
-          ? borderTertiary
-          : borderBasic,
+        borderTop: props.data.borders[color][0]
+          ? borderStyles[color]
+          : borderStyles["basic"],
+        borderRight: props.data.borders[color][1]
+          ? borderStyles[color]
+          : borderStyles["basic"],
+        borderBottom: props.data.borders[color][2]
+          ? borderStyles[color]
+          : borderStyles["basic"],
+        borderLeft: props.data.borders[color][3]
+          ? borderStyles[color]
+          : borderStyles["basic"],
       }}
     >
       <Value className={props.data.val > 0 ? "show" : "hide"}>
