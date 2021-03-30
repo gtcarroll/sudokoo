@@ -119,8 +119,7 @@ export const SudokuController = (props) => {
         // ...for each unsolved cell...
         for (let cell of state.unsolved) {
           // ...if this cell can be solved w this technique...
-          let showcase = techniques[t].check(cell, state, sudokuCopy);
-          if (showcase) {
+          if (techniques[t].check(cell, state, sudokuCopy)) {
             // ...report results.
             console.log(
               techniques[t].name +

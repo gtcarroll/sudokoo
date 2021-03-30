@@ -35,14 +35,13 @@ export const Cell = (props) => {
 Cell.defaultProps = {
   data: {
     val: -1,
-    preset: true,
+    set: false,
     notes: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-    borders: {
-      top: false,
-      right: false,
-      bottom: false,
-      left: false,
-    },
+    // TODO: allow for 3 different border colors
+    borders: [false, false, false, false],
+    // bordersPrimary: [false, false, false, false],
+    // bordersSecondary: [false, false, false, false],
+    // bordersTertiary: [false, false, false, false],
   },
 };
 
@@ -62,7 +61,28 @@ const StyledDiv = styled.div`
   box-sizing: border-box;
   position: relative;
 
-  transition: 0.8s;
+  //transition: 0.8s;
+
+  @keyframes pulseBorders {
+    0% {
+      border: 1px solid ${colors.neutralHigh};
+    }
+  }
+
+  animation: pulseBorders ${animation.speed} ease-in-out;
+
+  &.top {
+    border-top: 3px double ${colors.accentHighlight};
+  }
+  &.right {
+    border-right: 3px double ${colors.accentHighlight};
+  }
+  &.bottom {
+    border-bottom: 3px double ${colors.accentHighlight};
+  }
+  &.left {
+    border-left: 3px double ${colors.accentHighlight};
+  }
 
   @keyframes pulse {
     0% {
@@ -78,19 +98,6 @@ const StyledDiv = styled.div`
 
   &.preset {
     background-color: ${colors.neutralLow};
-  }
-
-  &.top {
-    border-top: 2px double ${colors.accentHighlight};
-  }
-  &.right {
-    border-right: 2px double ${colors.accentHighlight};
-  }
-  &.bottom {
-    border-bottom: 2px double ${colors.accentHighlight};
-  }
-  &.left {
-    border-left: 2px double ${colors.accentHighlight};
   }
 
   .show {

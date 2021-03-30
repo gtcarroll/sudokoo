@@ -72,9 +72,11 @@ export const helper = {
     helper.addBorders(cells[8], [false, true, true, false]);
   },
 
-  // highlightAxis: (cell, axisKey) => {
-
-  // },
+  highlightAxis: (sudoku, cell, a) => {
+    if (a == 0) helper.highlightRow(sudoku, cell.pos.row);
+    if (a == 1) helper.highlightCol(sudoku, cell.pos.col);
+    if (a == 2) helper.highlightHouse(sudoku, cell.pos.house);
+  },
 
   // TODO: test that this works and consider something less hacky
   highlightNote: (note, cell) => {
