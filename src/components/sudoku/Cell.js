@@ -3,13 +3,6 @@ import styled from "styled-components";
 import { Note } from "./";
 import { colors, animation } from "./../../params.js";
 
-const allFalse = (arr) => {
-  let result = true;
-  for (let i = 0; i < arr.length; i++) {
-    result &= !arr[i];
-  }
-  return result;
-};
 const getColor = (props) => {
   if (props.data.borders.primary.set) return "primary";
   else if (props.data.borders.secondary.set) return "secondary";
@@ -93,15 +86,6 @@ const StyledDiv = styled.div`
   position: relative;
 
   transition: ${animation.halfSpeed};
-
-  @keyframes pulseBorders {
-    0% {
-      border: 1px solid ${colors.neutralHigh};
-    }
-  }
-
-  animation: pulseBorders ${animation.speed} ease-in-out;
-  }
 
   @keyframes pulse {
     0% {
