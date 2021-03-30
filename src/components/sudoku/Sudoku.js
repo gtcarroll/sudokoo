@@ -124,7 +124,7 @@ const StyledDiv = styled.div`
   box-sizing: border-box;
 
   &.solved {
-    border-color: ${colors.accentHighlight};
+    border-color: ${colors.accentPrimary};
   }
   &.overlay {
     border: none;

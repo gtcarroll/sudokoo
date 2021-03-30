@@ -5,15 +5,14 @@ export const colors = {
   neutralHigh: "#424242",
   neutralHighest: "#808080",
 
-  accentHighlight: "#61DBFB",
-  //accentHighlightPressed: "#10CAF9",
-  accentHighlightAlt: "#B6EEA6",
-  accentRemoval: "#FF99FC", //"#FFE2FE",
-  //accentRemovalPressed: "#FF99FC",
+  accentPrimary: "#61DBFB",
+  accentSecondary: "#B6EEA6",
+  accentTertiary: "#FF99FC", //"#FFE2FE",
 };
 
 export const animation = {
   speed: "1.6s",
+  halfSpeed: "0.8s",
   buttonSpeed: "0.1s",
   midPoint: "60%",
   fontGrow: "125%",

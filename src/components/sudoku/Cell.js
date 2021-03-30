@@ -3,16 +3,45 @@ import styled from "styled-components";
 import { Note } from "./";
 import { colors, animation } from "./../../params.js";
 
+let borderBasic = "1px solid " + colors.neutralHigh,
+  borderPrimary = "3px double" + colors.accentPrimary,
+  borderSecondary = "3px double" + colors.accentSecondary,
+  borderTertiary = "3px double" + colors.accentTertiary;
+
 export const Cell = (props) => {
   return (
     <StyledDiv
-      className={
-        (props.data.preset ? "preset " : "") +
-        (props.data.borders[0] ? "top " : "") +
-        (props.data.borders[1] ? "right " : "") +
-        (props.data.borders[2] ? "bottom " : "") +
-        (props.data.borders[3] ? "left " : "")
-      }
+      className={props.data.preset ? "preset " : ""}
+      style={{
+        borderTop: props.data.borders.primary[0]
+          ? borderPrimary
+          : props.data.borders.secondary[0]
+          ? borderSecondary
+          : props.data.borders.tertiary[0]
+          ? borderTertiary
+          : borderBasic,
+        borderRight: props.data.borders.primary[1]
+          ? borderPrimary
+          : props.data.borders.secondary[1]
+          ? borderSecondary
+          : props.data.borders.tertiary[1]
+          ? borderTertiary
+          : borderBasic,
+        borderBottom: props.data.borders.primary[2]
+          ? borderPrimary
+          : props.data.borders.secondary[2]
+          ? borderSecondary
+          : props.data.borders.tertiary[2]
+          ? borderTertiary
+          : borderBasic,
+        borderLeft: props.data.borders.primary[3]
+          ? borderPrimary
+          : props.data.borders.secondary[3]
+          ? borderSecondary
+          : props.data.borders.tertiary[3]
+          ? borderTertiary
+          : borderBasic,
+      }}
     >
       <Value className={props.data.val > 0 ? "show" : "hide"}>
         <div>{props.data.val}</div>
@@ -38,10 +67,12 @@ Cell.defaultProps = {
     set: false,
     notes: [1, 1, 1, 1, 1, 1, 1, 1, 1],
     // TODO: allow for 3 different border colors
-    borders: [false, false, false, false],
-    // bordersPrimary: [false, false, false, false],
-    // bordersSecondary: [false, false, false, false],
-    // bordersTertiary: [false, false, false, false],
+    //borders: [false, false, false, false],
+    borders: {
+      primary: [false, false, false, false],
+      secondary: [false, false, false, false],
+      tertiary: [false, false, false, false],
+    },
   },
 };
 
@@ -56,12 +87,12 @@ const StyledDiv = styled.div`
   width: 100%;
   overflow: hidden;
   border: 1px solid ${colors.neutralHigh};
-  color: ${colors.accentHighlight};
+  color: ${colors.accentPrimary};
   background-color: ${colors.neutralMid};
   box-sizing: border-box;
   position: relative;
 
-  //transition: 0.8s;
+  transition: ${animation.halfSpeed};
 
   @keyframes pulseBorders {
     0% {
@@ -70,18 +101,6 @@ const StyledDiv = styled.div`
   }
 
   animation: pulseBorders ${animation.speed} ease-in-out;
-
-  &.top {
-    border-top: 3px double ${colors.accentHighlight};
-  }
-  &.right {
-    border-right: 3px double ${colors.accentHighlight};
-  }
-  &.bottom {
-    border-bottom: 3px double ${colors.accentHighlight};
-  }
-  &.left {
-    border-left: 3px double ${colors.accentHighlight};
   }
 
   @keyframes pulse {
@@ -90,7 +109,7 @@ const StyledDiv = styled.div`
     }
     ${animation.midPoint} {
       font-size: ${animation.fontGrow};
-      background-color: ${colors.accentHighlight};
+      background-color: ${colors.accentPrimary};
       color: ${colors.neutralMid};
       opacity: 1;
     }

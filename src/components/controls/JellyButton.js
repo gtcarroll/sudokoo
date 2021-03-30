@@ -50,15 +50,15 @@ const Button = styled.button`
 
     &.highlight {
       color: ${colors.neutralLowest};
-      background-color: ${colors.accentHighlight};
+      background-color: ${colors.accentPrimary};
     }
     &.highlightAlt {
       color: ${colors.neutralLowest};
-      background-color: ${colors.accentHighlightAlt};
+      background-color: ${colors.accentSecondary};
     }
     &.removal {
       color: ${colors.neutralLowest};
-      background-color: ${colors.accentRemoval};
+      background-color: ${colors.accentTertiary};
     }
   }
 
@@ -69,17 +69,17 @@ const Button = styled.button`
   }
 
   &.highlight {
-    color: ${colors.accentHighlight};
-    border-color: ${colors.accentHighlight};
+    color: ${colors.accentPrimary};
+    border-color: ${colors.accentPrimary};
   }
 
   &.highlightAlt {
-    color: ${colors.accentHighlightAlt};
-    border-color: ${colors.accentHighlightAlt};
+    color: ${colors.accentSecondary};
+    border-color: ${colors.accentSecondary};
   }
 
   &.removal {
-    color: ${colors.accentRemoval};
-    border-color: ${colors.accentRemoval};
+    color: ${colors.accentTertiary};
+    border-color: ${colors.accentTertiary};
   }
 `;

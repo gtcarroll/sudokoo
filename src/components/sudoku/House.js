@@ -28,13 +28,12 @@ const StyledDiv = styled.div`
   width: 100%;
   background-color: ${colors.neutralMid};
 
-  //TODO: disable border on overlay sudoku
   border: 1px solid ${colors.neutralHigh};
 
   box-sizing: border-box;
 
   &.solved {
-    border-color: ${colors.accentHighlight};
+    border-color: ${colors.accentPrimary};
   }
 
   &.overlay {

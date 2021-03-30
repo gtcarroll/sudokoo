@@ -37,7 +37,7 @@ const Overlay = styled.div`
   animation: crossOutOverlay ${animation.speed} ease-in-out;
   @keyframes crossOutOverlay {
     ${animation.midPoint} {
-      color: ${colors.accentRemoval};
+      color: ${colors.accentTertiary};
       font-weight: ${animation.fontEmphasis};
     }
   }
@@ -110,7 +110,7 @@ const StyledDiv = styled.div`
     animation: pulseUnderlay ${animation.speed} ease-in-out;
     @keyframes pulseUnderlay {
       ${animation.midPoint} {
-        background-color: ${colors.accentHighlight};
+        background-color: ${colors.accentPrimary};
       }
     }
   }

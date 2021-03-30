@@ -19,63 +19,53 @@ export const helper = {
     return isAffected;
   },
 
-  addBorders: (cell, borders) => {
-    console.log(cell.borderSet);
-    if (!cell.borderSet) {
-      cell.borders = borders;
-      cell.borderSet = true;
+  addBorders: (cell, borders, color = "primary") => {
+    if (!cell.borders.set) {
+      cell.borders[color] = borders;
+      cell.borders.set = true;
     } else {
       for (let i = 0; i < 4; i++) {
-        cell.borders[i] &= borders[i];
+        cell.borders[color][i] &= borders[i];
       }
     }
   },
 
-  highlightRow: (sudoku, row) => {
+  highlightRow: (sudoku, row, color = "primary") => {
     let cells = sudoku.rows[row];
-    console.log(row);
 
-    // first cell
-    helper.addBorders(cells[0], [true, false, true, true]);
-    // middle cells
+    helper.addBorders(cells[0], [true, false, true, true], color);
     for (let i = 1; i < 8; i++)
-      helper.addBorders(cells[i], [true, false, true, false]);
-    // last cell
-    helper.addBorders(cells[8], [true, true, true, false]);
+      helper.addBorders(cells[i], [true, false, true, false], color);
+    helper.addBorders(cells[8], [true, true, true, false], color);
   },
 
-  highlightCol: (sudoku, col) => {
+  highlightCol: (sudoku, col, color = "primary") => {
     let cells = sudoku.cols[col];
-    console.log(col);
 
-    // first cell
-    helper.addBorders(cells[0], [true, true, false, true]);
-    // middle cells
+    helper.addBorders(cells[0], [true, true, false, true], color);
     for (let i = 1; i < 8; i++)
-      helper.addBorders(cells[i], [false, true, false, true]);
-    // last cell
-    helper.addBorders(cells[8], [false, true, true, true]);
+      helper.addBorders(cells[i], [false, true, false, true], color);
+    helper.addBorders(cells[8], [false, true, true, true], color);
   },
 
-  highlightHouse: (sudoku, house) => {
+  highlightHouse: (sudoku, house, color = "primary") => {
     let cells = sudoku.houses[house];
-    console.log(house);
 
-    helper.addBorders(cells[0], [true, false, false, true]);
-    helper.addBorders(cells[1], [true, false, false, false]);
-    helper.addBorders(cells[2], [true, true, false, false]);
-    helper.addBorders(cells[3], [false, false, false, true]);
-    helper.addBorders(cells[4], [false, false, false, false]);
-    helper.addBorders(cells[5], [false, true, false, false]);
-    helper.addBorders(cells[6], [false, false, true, true]);
-    helper.addBorders(cells[7], [false, false, true, false]);
-    helper.addBorders(cells[8], [false, true, true, false]);
+    helper.addBorders(cells[0], [true, false, false, true], color);
+    helper.addBorders(cells[1], [true, false, false, false], color);
+    helper.addBorders(cells[2], [true, true, false, false], color);
+    helper.addBorders(cells[3], [false, false, false, true], color);
+    helper.addBorders(cells[4], [false, false, false, false], color);
+    helper.addBorders(cells[5], [false, true, false, false], color);
+    helper.addBorders(cells[6], [false, false, true, true], color);
+    helper.addBorders(cells[7], [false, false, true, false], color);
+    helper.addBorders(cells[8], [false, true, true, false], color);
   },
 
-  highlightAxis: (sudoku, cell, a) => {
-    if (a == 0) helper.highlightRow(sudoku, cell.pos.row);
-    if (a == 1) helper.highlightCol(sudoku, cell.pos.col);
-    if (a == 2) helper.highlightHouse(sudoku, cell.pos.house);
+  highlightAxis: (sudoku, cell, a, color = "primary") => {
+    if (a === 0) helper.highlightRow(sudoku, cell.pos.row, color);
+    if (a === 1) helper.highlightCol(sudoku, cell.pos.col, color);
+    if (a === 2) helper.highlightHouse(sudoku, cell.pos.house, color);
   },
 
   // TODO: test that this works and consider something less hacky
