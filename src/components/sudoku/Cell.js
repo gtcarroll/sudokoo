@@ -1,41 +1,52 @@
 import React from "react";
 import styled from "styled-components";
-import { Note } from "./";
+import { Note, BorderBox } from "./";
 import { colors, animation } from "./../../params.js";
 
-const getColor = (props) => {
-  if (props.data.borders.primary.set) return "primary";
-  else if (props.data.borders.secondary.set) return "secondary";
-  else return "tertiary";
-};
+// const getColor = (props) => {
+//   if (props.data.borders.primary.set) return "primary";
+//   else if (props.data.borders.secondary.set) return "secondary";
+//   else return "tertiary";
+// };
+
+//TODO: add house borders to cells
 
 let borderStyles = {
-  basic: "1px solid " + colors.neutralHigh,
-  primary: "3px double " + colors.accentPrimary,
-  secondary: "3px double " + colors.accentSecondary,
-  tertiary: "3px double " + colors.accentTertiary,
+  basic: "1px solid " + colors.neutralHigh50,
+  house: "2px solid " + colors.neutralHigh,
+  primary: "3px solid " + colors.accentPrimary50,
+  secondary: "3px solid " + colors.accentSecondary50,
+  tertiary: "3px solid " + colors.accentTertiary50,
 };
 
 export const Cell = (props) => {
-  let color = getColor(props);
   return (
-    <StyledDiv
-      className={props.data.preset ? "preset " : ""}
-      style={{
-        borderTop: props.data.borders[color][0]
-          ? borderStyles[color]
-          : borderStyles["basic"],
-        borderRight: props.data.borders[color][1]
-          ? borderStyles[color]
-          : borderStyles["basic"],
-        borderBottom: props.data.borders[color][2]
-          ? borderStyles[color]
-          : borderStyles["basic"],
-        borderLeft: props.data.borders[color][3]
-          ? borderStyles[color]
-          : borderStyles["basic"],
-      }}
-    >
+    <StyledDiv className={props.data.preset ? "preset " : ""}>
+      <BorderBox
+        borders={props.data.borders["primary"]}
+        borderStyle={borderStyles["primary"]}
+        zIndex={104}
+      />
+      <BorderBox
+        borders={props.data.borders["secondary"]}
+        borderStyle={borderStyles["secondary"]}
+        zIndex={103}
+      />
+      <BorderBox
+        borders={props.data.borders["tertiary"]}
+        borderStyle={borderStyles["tertiary"]}
+        zIndex={102}
+      />
+      <BorderBox
+        borders={props.sides}
+        borderStyle={borderStyles["house"]}
+        zIndex={101}
+      />
+      <BorderBox
+        borders={[true, true, true, true]}
+        borderStyle={borderStyles["basic"]}
+        zIndex={100}
+      />
       <Value className={props.data.val > 0 ? "show" : "hide"}>
         <div>{props.data.val}</div>
       </Value>
@@ -67,6 +78,7 @@ Cell.defaultProps = {
       tertiary: [false, false, false, false],
     },
   },
+  sides: [false, false, false, false],
 };
 
 const StyledDiv = styled.div`
@@ -78,8 +90,8 @@ const StyledDiv = styled.div`
 
   height: 100%;
   width: 100%;
-  overflow: hidden;
-  border: 1px solid ${colors.neutralHigh};
+  //overflow: hidden;
+  //border: 1px solid ${colors.neutralHigh};
   color: ${colors.accentPrimary};
   background-color: ${colors.neutralMid};
   box-sizing: border-box;
