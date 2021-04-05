@@ -252,7 +252,7 @@ export const SudokuController = (props) => {
     <StyledDiv>
       <SudokuContainer>
         <Sudoku sudoku={state.sudoku} isSolved={state.isSolved}></Sudoku>
-        <Sudoku sudoku={state.showcase} overlay></Sudoku>
+        <Sudoku sudoku={state.snapshot} overlay></Sudoku>
       </SudokuContainer>
       <BirdFeedContainer>
         <BirdFeed feed={state.feed}></BirdFeed>
@@ -274,22 +274,36 @@ export const SudokuController = (props) => {
           ) : solveInterval ? (
             <ButtonTray>
               <JellyButton
+                text="reset"
+                onClick={() => loadSudoku(pointingTuple.test)}
+                color="removal"
+                disabled
+              />
+              <JellyButton
                 text="stop"
                 onClick={() => stopSolveInterval()}
                 color="removal"
+                flexGrow={2}
               />
               <JellyButton
                 text="next"
                 onClick={() => setTimeout(getNextSolution, animation.delay / 6)}
                 color="highlight"
+                disabled
               />
             </ButtonTray>
           ) : (
             <ButtonTray>
               <JellyButton
+                text="reset"
+                onClick={() => loadSudoku(pointingTuple.test)}
+                color="removal"
+              />
+              <JellyButton
                 text="auto-solve"
                 onClick={() => startSolveInterval(animation.delay)}
                 color="highlightAlt"
+                flexGrow={2}
               />
               <JellyButton
                 text="next"

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "./../../params.js";
+import { colors, animation } from "./../../params.js";
 
 export const BorderBox = (props) => {
   return (
@@ -44,4 +44,5 @@ const StyledDiv = styled.div`
   height: 100%;
   position: absolute;
   box-sizing: border-box;
+  transition: ${animation.halfSpeed};
 `;

@@ -14,8 +14,4 @@ const ButtonTrayContainer = styled.div`
   gap: 1em;
 
   width: 100%;
-
-  * {
-    flex-grow: 1;
-  }
 `;
