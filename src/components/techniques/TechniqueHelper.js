@@ -100,6 +100,57 @@ export const helper = {
     }
   },
 
+  createSnapshot: (sudoku) => {
+    let copy = {
+      rows: helper.buildEmpty2DArray(),
+      cols: helper.buildEmpty2DArray(),
+      houses: helper.buildEmpty2DArray(),
+    };
+    for (let h = 0; h < 9; h++) {
+      for (let r = 0; r < 9; r++) {
+        let y = 3 * Math.floor(h / 3) + Math.floor(r / 3);
+        let x = 3 * (h % 3) + (r % 3);
+
+        // create cell object
+        var cell = helper.copyCell(sudoku.houses[h][r]);
+
+        // store cell in each state object
+        copy.houses[h][r] = cell;
+        copy.rows[y][x] = cell;
+        copy.cols[x][y] = cell;
+      }
+    }
+    return copy;
+  },
+
+  // TODO: eliminate redundancy of this method existing both here and in SudokuController
+  buildEmpty2DArray: () => {
+    var result = new Array(9);
+    for (let i = 0; i < 9; i++) {
+      result[i] = new Array(9);
+    }
+    return result;
+  },
+
+  copyCell: (cell) => {
+    return {
+      pos: {
+        row: cell.pos.row,
+        col: cell.pos.col,
+        house: cell.pos.house,
+        room: cell.pos.room,
+      },
+      val: cell.val,
+      preset: cell.preset,
+      notes: [...cell.notes],
+      borders: {
+        primary: [...cell.borders.primary],
+        secondary: [...cell.borders.secondary],
+        tertiary: [...cell.borders.tertiary],
+      },
+    };
+  },
+
   getUnseen: (
     cell,
     state,

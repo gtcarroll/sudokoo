@@ -73,7 +73,10 @@ export const nakedPair = {
             helper.highlightNote(pair[1], cell, state);
             helper.highlightNote(pair[0], other, state);
             helper.highlightNote(pair[1], other, state);
-            return true;
+
+            let snapshot = helper.createSnapshot(state.sudoku);
+            helper.highlightAxis(snapshot, cell, a);
+            return snapshot;
           }
         }
       }

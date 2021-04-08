@@ -28,10 +28,12 @@ export const hiddenSingle = {
       // ...if this cell suspects a note unseen elsewhere in this axis...
       if (unseen.length > 0) {
         helper.writeSolution(unseen[0], cell, state);
-        helper.highlightAxis(state.sudoku, cell, a);
-        helper.highlightAxis(state.sudoku, cell, (a + 1) % 3, "tertiary");
-        helper.highlightAxis(state.sudoku, cell, (a + 2) % 3, "tertiary");
-        return true;
+
+        let snapshot = helper.createSnapshot(state.sudoku);
+        helper.highlightAxis(snapshot, cell, a);
+        helper.highlightAxis(snapshot, cell, (a + 1) % 3, "tertiary");
+        helper.highlightAxis(snapshot, cell, (a + 2) % 3, "tertiary");
+        return snapshot;
       }
     }
     return false;

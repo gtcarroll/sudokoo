@@ -18,7 +18,7 @@ export const pointingTuple = {
     [0, 5, 0, 0, 8, 7, 0, 0, 2],
     [2, 0, 7, 0, 0, 0, 0, 0, 0],
   ],
-  check: (cell, state, snapshot) => {
+  check: (cell, state) => {
     let wasUpdated = false;
     let axisKeys = Object.keys(cell.pos);
     let axes = [state.sudoku.rows, state.sudoku.cols];
@@ -62,7 +62,7 @@ export const pointingTuple = {
                 // ...remove the soln val in state.
                 aff.notes[soln] = -1;
                 // ...remove the soln val in the snapshot.
-                snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = -1;
+                //snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = -1;
               }
             }
           }
@@ -83,7 +83,7 @@ export const pointingTuple = {
                   // ...highlight the soln val in state.
                   aff.notes[soln] = 2;
                   // ...highlight the soln val in the snapshot.
-                  snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = 2;
+                  //snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = 2;
                 }
               }
             }
@@ -91,7 +91,12 @@ export const pointingTuple = {
         }
       }
       // ...if updates to sudoku state were made, return them
-      if (wasUpdated) return snapshot;
+      if (wasUpdated) {
+        let snapshot = helper.createSnapshot(state.sudoku);
+        helper.highlightAxis(snapshot, cell, 2);
+        helper.highlightAxis(snapshot, cell, a, "tertiary");
+        return snapshot;
+      }
     }
 
     return false;

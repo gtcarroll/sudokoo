@@ -72,7 +72,7 @@ const StyledDiv = styled.div`
     border-color: ${colors.accentPrimary};
   }
 
-  &.overlay {
+  /* &.overlay {
     border: none;
-  }
+  } */
 `;

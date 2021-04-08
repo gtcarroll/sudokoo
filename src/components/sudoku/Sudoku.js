@@ -5,9 +5,7 @@ import { colors } from "./../../params.js";
 
 export const Sudoku = (props) => {
   return (
-    <StyledDiv
-      className={props.isSolved ? "solved" : props.overlay ? "overlay" : ""}
-    >
+    <StyledDiv className={props.isSolved ? "solved" : props.overlay ? "" : ""}>
       <House
         house={props.sudoku && props.sudoku.houses[0]}
         isSolved={props.isSolved}
@@ -72,12 +70,12 @@ const StyledDiv = styled.div`
   &.solved {
     border-color: ${colors.accentPrimary};
   }
-  &.overlay {
+  /* &.overlay {
     border: none;
     position: absolute;
     display: none;
     z-index: 10;
-  }
+  } */
 `;
 
 Sudoku.defaultProps = {

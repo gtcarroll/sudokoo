@@ -22,10 +22,14 @@ export const nakedSingle = {
     let suspects = helper.getSuspects(cell);
     if (suspects.length === 1) {
       helper.writeSolution(suspects[0], cell, state);
-      helper.highlightAxis(state.sudoku, cell, 0, "tertiary");
-      helper.highlightAxis(state.sudoku, cell, 1, "tertiary");
-      helper.highlightAxis(state.sudoku, cell, 2, "tertiary");
+      // copy state
+      let snapshot = helper.createSnapshot(state.sudoku);
+      // console.log(snapshot);
+      helper.highlightAxis(snapshot, cell, 0, "tertiary");
+      helper.highlightAxis(snapshot, cell, 1, "tertiary");
+      helper.highlightAxis(snapshot, cell, 2, "tertiary");
+      return snapshot;
     }
-    return suspects.length === 1;
+    return false;
   },
 };

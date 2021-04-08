@@ -74,6 +74,7 @@ export const SudokuController = (props) => {
     }
     isLoaded = true;
     state.isSolved = false;
+    state.overlay = copySudoku(state.sudoku);
     pushState();
 
     console.log("...Sudoku Loaded");
@@ -84,6 +85,7 @@ export const SudokuController = (props) => {
       sudoku: state.sudoku,
       unsolved: state.unsolved,
       isSolved: state.isSolved,
+      snapshot: state.snapshot,
     };
     setState(localState);
   };
@@ -113,13 +115,14 @@ export const SudokuController = (props) => {
       pushState();
       return false;
     } else {
-      let sudokuCopy = copySudoku(state.sudoku);
+      // let sudokuCopy = copySudoku(state.sudoku);
       // for each solving technique...
       for (let t = 0; t < techniques.length; t++) {
         // ...for each unsolved cell...
         for (let cell of state.unsolved) {
           // ...if this cell can be solved w this technique...
-          if (techniques[t].check(cell, state, sudokuCopy)) {
+          let snapshot = techniques[t].check(cell, state);
+          if (snapshot) {
             // ...report results.
             console.log(
               techniques[t].name +
@@ -129,6 +132,7 @@ export const SudokuController = (props) => {
                 cell.pos.row +
                 ")"
             );
+            state.snapshot = snapshot;
             pushState();
             return true;
           }
@@ -262,7 +266,7 @@ export const SudokuController = (props) => {
           {!isLoaded ? (
             <JellyButton
               text="load"
-              onClick={() => loadSudoku(nakedPair.test)}
+              onClick={() => loadSudoku(pointingTuple.test)}
               color="highlight"
             />
           ) : state.isSolved ? (

@@ -18,7 +18,7 @@ export const lockedCandidate = {
     [0, 4, 0, 0, 0, 1, 7, 2, 0],
     [0, 6, 2, 4, 3, 0, 1, 5, 9],
   ],
-  check: (cell, state, snapshot) => {
+  check: (cell, state) => {
     let axisKeys = Object.keys(cell.pos);
     let indexes = [cell.pos.row, cell.pos.col];
 
@@ -61,7 +61,7 @@ export const lockedCandidate = {
                 // ...remove the soln from that cell's suspects.
                 aff.notes[soln] = -1;
                 // ...cross out the soln in the snapshot.
-                snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = -1;
+                //snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = -1;
               }
             }
           }
@@ -80,14 +80,19 @@ export const lockedCandidate = {
                 // ...highlight the soln val in state.
                 aff.notes[soln] = 2;
                 // ...highlight the soln val in the snapshot.
-                snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = 2;
+                //snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = 2;
               }
             }
           }
         }
       }
       // ...if updates to sudoku state were made, return them
-      if (wasUpdated) return snapshot;
+      if (wasUpdated) {
+        let snapshot = helper.createSnapshot(state.sudoku);
+        helper.highlightAxis(snapshot, cell, a);
+        helper.highlightAxis(snapshot, cell, 2, "tertiary");
+        return snapshot;
+      }
     }
     return false;
   },
