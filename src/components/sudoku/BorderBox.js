@@ -7,6 +7,7 @@ export const BorderBox = (props) => {
     <StyledDiv
       style={{
         zIndex: props.zIndex,
+        backgroundColor: props.bgColor,
         borderTop: props.borders[0]
           ? props.borderStyle
           : props.base
@@ -37,6 +38,7 @@ BorderBox.defaultProps = {
   borderStyle: "",
   zIndex: 100,
   base: false,
+  bgColor: "",
 };
 
 const StyledDiv = styled.div`

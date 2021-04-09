@@ -202,6 +202,11 @@ export const SudokuController = (props) => {
       val: v,
       preset: p,
       notes: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      bgColor: {
+        primary: false,
+        secondary: false,
+        tertiary: false,
+      },
       borders: {
         primary: [false, false, false, false],
         secondary: [false, false, false, false],
@@ -244,6 +249,11 @@ export const SudokuController = (props) => {
       val: cell.val,
       preset: cell.preset,
       notes: [...cell.notes],
+      bgColor: {
+        primary: cell.bgColor.primary,
+        secondary: cell.bgColor.secondary,
+        tertiary: cell.bgColor.tertiary,
+      },
       borders: {
         primary: [...cell.borders.primary],
         secondary: [...cell.borders.secondary],

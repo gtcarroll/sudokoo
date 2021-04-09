@@ -20,6 +20,7 @@ export const helper = {
   },
 
   addBorders: (cell, borders, color = "primary") => {
+    helper.fillCell(cell, color);
     if (!cell.borders[color].set) {
       cell.borders[color] = borders;
       cell.borders[color].set = true;
@@ -28,6 +29,16 @@ export const helper = {
         cell.borders[color][i] &= borders[i];
       }
     }
+  },
+
+  fillCell: (cell, color = "primary") => {
+    cell.bgColor[color] = true;
+  },
+
+  highlightCell: (sudoku, cell, color = "primary") => {
+    let localCell = sudoku.rows[cell.pos.row][cell.pos.col];
+    helper.fillCell(localCell, color);
+    helper.addBorders(localCell, [true, true, true, true], color);
   },
 
   highlightRow: (sudoku, row, color = "primary") => {
@@ -143,6 +154,11 @@ export const helper = {
       val: cell.val,
       preset: cell.preset,
       notes: [...cell.notes],
+      bgColor: {
+        primary: cell.bgColor.primary,
+        secondary: cell.bgColor.secondary,
+        tertiary: cell.bgColor.tertiary,
+      },
       borders: {
         primary: [...cell.borders.primary],
         secondary: [...cell.borders.secondary],

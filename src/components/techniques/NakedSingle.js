@@ -25,6 +25,7 @@ export const nakedSingle = {
       // copy state
       let snapshot = helper.createSnapshot(state.sudoku);
       // console.log(snapshot);
+      helper.highlightCell(snapshot, cell);
       helper.highlightAxis(snapshot, cell, 0, "tertiary");
       helper.highlightAxis(snapshot, cell, 1, "tertiary");
       helper.highlightAxis(snapshot, cell, 2, "tertiary");

@@ -7,11 +7,14 @@ export const colors = {
   neutralHighest: "#808080",
 
   accentPrimary: "#61DBFB",
-  accentPrimary50: "rgba(97, 219, 251, 0.5)",
+  accentPrimary50: "rgba(97, 219, 251, 0.5)", // TODO: make this 50% mixin
+  accentPrimaryBG: "rgba(97, 219, 251, 0.25)", // TODO: make this 20% mixin
   accentSecondary: "#B6EEA6",
   accentSecondary50: "rgba(182, 238, 166, 0.5)",
+  accentSecondaryBG: "rgba(182, 238, 166, 0.25)",
   accentTertiary: "#FF99FC",
   accentTertiary50: "rgba(255, 153, 252, 0.5)",
+  accentTertiaryBG: "rgba(255, 153, 252, 0.1)",
 };
 
 export const animation = {

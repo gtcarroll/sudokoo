@@ -21,22 +21,33 @@ let borderStyles = {
 
 export const Cell = (props) => {
   return (
-    <StyledDiv className={props.data.preset ? "preset " : ""}>
-      <BorderBox
-        borders={props.data.borders["primary"]}
-        borderStyle={borderStyles["primary"]}
-        zIndex={104}
-      />
-      <BorderBox
-        borders={props.data.borders["secondary"]}
-        borderStyle={borderStyles["secondary"]}
-        zIndex={103}
-      />
-      <BorderBox
-        borders={props.data.borders["tertiary"]}
-        borderStyle={borderStyles["tertiary"]}
-        zIndex={102}
-      />
+    <StyledDiv
+      className={
+        props.data.preset ? "preset " : props.data.val > 0 ? "set" : ""
+      }
+    >
+      {props.data.borders["primary"].set ? (
+        <BorderBox
+          borders={props.data.borders["primary"]}
+          borderStyle={borderStyles["primary"]}
+          bgColor={colors.accentPrimaryBG}
+          zIndex={104}
+        />
+      ) : props.data.borders["secondary"].set ? (
+        <BorderBox
+          borders={props.data.borders["secondary"]}
+          borderStyle={borderStyles["secondary"]}
+          bgColor={colors.accentSecondaryBG}
+          zIndex={103}
+        />
+      ) : props.data.borders["tertiary"].set ? (
+        <BorderBox
+          borders={props.data.borders["tertiary"]}
+          borderStyle={borderStyles["tertiary"]}
+          bgColor={colors.accentTertiaryBG}
+          zIndex={102}
+        />
+      ) : null}
       <BorderBox
         borders={props.sides}
         borderStyle={borderStyles["house"]}
@@ -47,20 +58,28 @@ export const Cell = (props) => {
         borderStyle={borderStyles["basic"]}
         zIndex={100}
       />
-      <Value className={props.data.val > 0 ? "show" : "hide"}>
-        <div>{props.data.val}</div>
-      </Value>
-      <Notes className={props.data.preset ? "hide" : ""}>
-        <Note num={1} tag={props.data.notes[0]} />
-        <Note num={2} tag={props.data.notes[1]} />
-        <Note num={3} tag={props.data.notes[2]} />
-        <Note num={4} tag={props.data.notes[3]} />
-        <Note num={5} tag={props.data.notes[4]} />
-        <Note num={6} tag={props.data.notes[5]} />
-        <Note num={7} tag={props.data.notes[6]} />
-        <Note num={8} tag={props.data.notes[7]} />
-        <Note num={9} tag={props.data.notes[8]} />
-      </Notes>
+      {props.data.val > 0 ? (
+        <Value
+          className={
+            props.data.preset ? "preset " : props.data.val > 0 ? "set" : ""
+          }
+        >
+          <div>{props.data.val}</div>
+        </Value>
+      ) : null}
+      {!props.data.preset ? (
+        <Notes>
+          <Note num={1} tag={props.data.notes[0]} />
+          <Note num={2} tag={props.data.notes[1]} />
+          <Note num={3} tag={props.data.notes[2]} />
+          <Note num={4} tag={props.data.notes[3]} />
+          <Note num={5} tag={props.data.notes[4]} />
+          <Note num={6} tag={props.data.notes[5]} />
+          <Note num={7} tag={props.data.notes[6]} />
+          <Note num={8} tag={props.data.notes[7]} />
+          <Note num={9} tag={props.data.notes[8]} />
+        </Notes>
+      ) : null}
     </StyledDiv>
   );
 };
@@ -68,10 +87,13 @@ export const Cell = (props) => {
 Cell.defaultProps = {
   data: {
     val: -1,
-    set: false,
+    preset: false,
     notes: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-    // TODO: allow for 3 different border colors
-    //borders: [false, false, false, false],
+    bgColor: {
+      primary: false,
+      secondary: false,
+      tertiary: false,
+    },
     borders: {
       primary: [false, false, false, false],
       secondary: [false, false, false, false],
@@ -86,38 +108,21 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
 
-  z-index: 5;
+  z-index: 10;
 
   height: 100%;
   width: 100%;
-  //overflow: hidden;
-  //border: 1px solid ${colors.neutralHigh};
   color: ${colors.accentPrimary};
-  background-color: ${colors.neutralMid};
   box-sizing: border-box;
   position: relative;
 
   transition: ${animation.halfSpeed};
 
-  @keyframes pulse {
-    0% {
-      opacity: 0;
-    }
-    ${animation.midPoint} {
-      font-size: ${animation.fontGrow};
-      background-color: ${colors.accentPrimary};
-      color: ${colors.neutralMid};
-      opacity: 1;
-    }
-  }
-
-  &.preset {
+  .preset {
     background-color: ${colors.neutralLow};
   }
-
-  .show {
-    background-color: inherit;
-    animation: pulse ${animation.speed} ease-in-out;
+  .set {
+    background-color: ${colors.neutralMid};
   }
 
   .hide {
@@ -133,7 +138,20 @@ const Value = styled.div`
   justify-content: center;
   align-items: center;
 
-  z-index: 10;
+  z-index: 5;
+
+  @keyframes pulse {
+    0% {
+      opacity: 0;
+    }
+    ${animation.midPoint} {
+      font-size: ${animation.fontGrow};
+      background-color: ${colors.accentPrimary};
+      color: ${colors.neutralMid};
+      opacity: 1;
+    }
+  }
+  animation: pulse ${animation.speed} ease-in-out;
 `;
 
 const Notes = styled.div`
