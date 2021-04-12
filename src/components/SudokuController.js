@@ -276,20 +276,20 @@ export const SudokuController = (props) => {
           {!isLoaded ? (
             <JellyButton
               text="load"
-              onClick={() => loadSudoku(pointingTuple.test)}
+              onClick={() => loadSudoku(nakedPair.test)}
               color="highlight"
             />
           ) : state.isSolved ? (
             <JellyButton
               text="reset"
-              onClick={() => loadSudoku(pointingTuple.test)}
+              onClick={() => loadSudoku(nakedPair.test)}
               color="removal"
             />
           ) : solveInterval ? (
             <ButtonTray>
               <JellyButton
                 text="reset"
-                onClick={() => loadSudoku(pointingTuple.test)}
+                onClick={() => loadSudoku(nakedPair.test)}
                 color="removal"
                 disabled
               />
@@ -310,7 +310,7 @@ export const SudokuController = (props) => {
             <ButtonTray>
               <JellyButton
                 text="reset"
-                onClick={() => loadSudoku(pointingTuple.test)}
+                onClick={() => loadSudoku(nakedPair.test)}
                 color="removal"
               />
               <JellyButton

@@ -19,8 +19,41 @@ export const helper = {
     return isAffected;
   },
 
-  addBorders: (cell, borders, color = "primary") => {
-    helper.fillCell(cell, color);
+  addBorders: (sudoku, cell, borders, color = "primary") => {
+    // remove bottom border of above cell if it exists
+    if (borders[0] && cell.pos.row > 0) {
+      let neighbor = sudoku.cols[cell.pos.col][cell.pos.row - 1];
+      if (neighbor.borders[color][2]) {
+        neighbor.borders[color][2] = false;
+        borders[0] = false;
+      }
+    }
+    // remove left border of right cell if it exists
+    if (borders[1] && cell.pos.col < 8) {
+      let neighbor = sudoku.rows[cell.pos.row][cell.pos.col + 1];
+      if (neighbor.borders[color][3]) {
+        neighbor.borders[color][3] = false;
+        borders[1] = false;
+      }
+    }
+    // remove top border of below cell if it exists
+    if (borders[2] && cell.pos.row < 8) {
+      let neighbor = sudoku.cols[cell.pos.col][cell.pos.row + 1];
+      if (neighbor.borders[color][0]) {
+        neighbor.borders[color][0] = false;
+        borders[2] = false;
+      }
+    }
+    // remove right border of left cell if it exists
+    if (borders[3] && cell.pos.col > 0) {
+      let neighbor = sudoku.rows[cell.pos.row][cell.pos.col - 1];
+      if (neighbor.borders[color][1]) {
+        neighbor.borders[color][1] = false;
+        borders[3] = false;
+      }
+    }
+
+    // add borders to cell
     if (!cell.borders[color].set) {
       cell.borders[color] = borders;
       cell.borders[color].set = true;
@@ -37,46 +70,56 @@ export const helper = {
 
   highlightCell: (sudoku, cell, color = "primary") => {
     let localCell = sudoku.rows[cell.pos.row][cell.pos.col];
-    helper.fillCell(localCell, color);
-    helper.addBorders(localCell, [true, true, true, true], color);
+    helper.addBorders(sudoku, localCell, [true, true, true, true], color);
   },
 
-  highlightRow: (sudoku, row, color = "primary") => {
-    let cells = sudoku.rows[row];
-
-    helper.addBorders(cells[0], [true, false, true, true], color);
-    for (let i = 1; i < 8; i++)
-      helper.addBorders(cells[i], [true, false, true, false], color);
-    helper.addBorders(cells[8], [true, true, true, false], color);
+  highlightCells: (sudoku, cells, color = "primary") => {
+    cells.forEach((cell) => {
+      helper.highlightCell(sudoku, cell, color);
+    });
   },
 
-  highlightCol: (sudoku, col, color = "primary") => {
-    let cells = sudoku.cols[col];
+  // highlightRow: (sudoku, row, color = "primary") => {
+  //   let cells = sudoku.rows[row];
 
-    helper.addBorders(cells[0], [true, true, false, true], color);
-    for (let i = 1; i < 8; i++)
-      helper.addBorders(cells[i], [false, true, false, true], color);
-    helper.addBorders(cells[8], [false, true, true, true], color);
-  },
+  //   helper.addBorders(cells[0], [true, false, true, true], color);
+  //   for (let i = 1; i < 8; i++)
+  //     helper.addBorders(cells[i], [true, false, true, false], color);
+  //   helper.addBorders(cells[8], [true, true, true, false], color);
+  // },
 
-  highlightHouse: (sudoku, house, color = "primary") => {
-    let cells = sudoku.houses[house];
+  // highlightCol: (sudoku, col, color = "primary") => {
+  //   let cells = sudoku.cols[col];
 
-    helper.addBorders(cells[0], [true, false, false, true], color);
-    helper.addBorders(cells[1], [true, false, false, false], color);
-    helper.addBorders(cells[2], [true, true, false, false], color);
-    helper.addBorders(cells[3], [false, false, false, true], color);
-    helper.addBorders(cells[4], [false, false, false, false], color);
-    helper.addBorders(cells[5], [false, true, false, false], color);
-    helper.addBorders(cells[6], [false, false, true, true], color);
-    helper.addBorders(cells[7], [false, false, true, false], color);
-    helper.addBorders(cells[8], [false, true, true, false], color);
-  },
+  //   helper.addBorders(cells[0], [true, true, false, true], color);
+  //   for (let i = 1; i < 8; i++)
+  //     helper.addBorders(cells[i], [false, true, false, true], color);
+  //   helper.addBorders(cells[8], [false, true, true, true], color);
+  // },
 
-  highlightAxis: (sudoku, cell, a, color = "primary") => {
-    if (a === 0) helper.highlightRow(sudoku, cell.pos.row, color);
-    if (a === 1) helper.highlightCol(sudoku, cell.pos.col, color);
-    if (a === 2) helper.highlightHouse(sudoku, cell.pos.house, color);
+  // highlightHouse: (sudoku, house, color = "primary") => {
+  //   let cells = sudoku.houses[house];
+
+  //   helper.addBorders(cells[0], [true, false, false, true], color);
+  //   helper.addBorders(cells[1], [true, false, false, false], color);
+  //   helper.addBorders(cells[2], [true, true, false, false], color);
+  //   helper.addBorders(cells[3], [false, false, false, true], color);
+  //   helper.addBorders(cells[4], [false, false, false, false], color);
+  //   helper.addBorders(cells[5], [false, true, false, false], color);
+  //   helper.addBorders(cells[6], [false, false, true, true], color);
+  //   helper.addBorders(cells[7], [false, false, true, false], color);
+  //   helper.addBorders(cells[8], [false, true, true, false], color);
+  // },
+
+  fillAxis: (sudoku, cell, a, color = "primary") => {
+    let cells;
+    if (a === 0) cells = sudoku.rows[cell.pos.row];
+    if (a === 1) cells = sudoku.cols[cell.pos.col];
+    if (a === 2) cells = sudoku.houses[cell.pos.house];
+
+    for (let i = 0; i < 9; i++) {
+      helper.fillCell(cells[i], color);
+    }
   },
 
   // TODO: test that this works and consider something less hacky
@@ -94,6 +137,7 @@ export const helper = {
 
   // writes cell's soln and consequent updates to state
   writeSolution: (soln, cell, state) => {
+    let affected = [];
     // set value of solved cell in state
     state.sudoku.houses[cell.pos.house][cell.pos.room].val = soln + 1;
     // remove solved cell from unsolved list
@@ -107,8 +151,10 @@ export const helper = {
         aff.notes[soln] > 0
       ) {
         aff.notes[soln] = -1;
+        affected.push(aff);
       }
     }
+    return affected;
   },
 
   createSnapshot: (sudoku) => {

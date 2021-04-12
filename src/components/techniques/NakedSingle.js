@@ -21,14 +21,16 @@ export const nakedSingle = {
   check: (cell, state) => {
     let suspects = helper.getSuspects(cell);
     if (suspects.length === 1) {
-      helper.writeSolution(suspects[0], cell, state);
-      // copy state
+      let affected = helper.writeSolution(suspects[0], cell, state);
       let snapshot = helper.createSnapshot(state.sudoku);
-      // console.log(snapshot);
+
       helper.highlightCell(snapshot, cell);
-      helper.highlightAxis(snapshot, cell, 0, "tertiary");
-      helper.highlightAxis(snapshot, cell, 1, "tertiary");
-      helper.highlightAxis(snapshot, cell, 2, "tertiary");
+      helper.highlightCells(snapshot, affected, "tertiary");
+
+      helper.fillAxis(snapshot, cell, 0, "tertiary");
+      helper.fillAxis(snapshot, cell, 1, "tertiary");
+      helper.fillAxis(snapshot, cell, 2, "tertiary");
+
       return snapshot;
     }
     return false;

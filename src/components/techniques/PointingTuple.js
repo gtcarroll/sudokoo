@@ -26,6 +26,8 @@ export const pointingTuple = {
 
     // for each [row, col] this cell belongs to...
     for (let a = 0; a < 2; a++) {
+      let affected = [];
+      let proof = [];
       let axis = axes[a][cellIndexes[a]];
       let diffAxis = (c1, c2) => {
         let axisKey = axisKeys[a];
@@ -61,8 +63,7 @@ export const pointingTuple = {
                 wasUpdated = true;
                 // ...remove the soln val in state.
                 aff.notes[soln] = -1;
-                // ...remove the soln val in the snapshot.
-                //snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = -1;
+                affected.push(aff);
               }
             }
           }
@@ -82,8 +83,7 @@ export const pointingTuple = {
                   wasUpdated = true;
                   // ...highlight the soln val in state.
                   aff.notes[soln] = 2;
-                  // ...highlight the soln val in the snapshot.
-                  //snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = 2;
+                  proof.push(aff);
                 }
               }
             }
@@ -93,8 +93,13 @@ export const pointingTuple = {
       // ...if updates to sudoku state were made, return them
       if (wasUpdated) {
         let snapshot = helper.createSnapshot(state.sudoku);
-        helper.highlightAxis(snapshot, cell, 2);
-        helper.highlightAxis(snapshot, cell, a, "tertiary");
+
+        helper.highlightCells(snapshot, proof);
+        helper.highlightCells(snapshot, affected, "tertiary");
+
+        helper.fillAxis(snapshot, cell, 2);
+        helper.fillAxis(snapshot, cell, a, "tertiary");
+
         return snapshot;
       }
     }

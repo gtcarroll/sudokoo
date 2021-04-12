@@ -26,28 +26,32 @@ export const Cell = (props) => {
         props.data.preset ? "preset " : props.data.val > 0 ? "set" : ""
       }
     >
-      {props.data.borders["primary"].set ? (
+      {(props.data.borders["primary"].set || props.data.bgColor["primary"]) && (
         <BorderBox
           borders={props.data.borders["primary"]}
           borderStyle={borderStyles["primary"]}
           bgColor={colors.accentPrimaryBG}
           zIndex={104}
         />
-      ) : props.data.borders["secondary"].set ? (
+      )}
+      {(props.data.borders["secondary"].set ||
+        props.data.bgColor["secondary"]) && (
         <BorderBox
           borders={props.data.borders["secondary"]}
           borderStyle={borderStyles["secondary"]}
           bgColor={colors.accentSecondaryBG}
           zIndex={103}
         />
-      ) : props.data.borders["tertiary"].set ? (
+      )}
+      {(props.data.borders["tertiary"].set ||
+        props.data.bgColor["tertiary"]) && (
         <BorderBox
           borders={props.data.borders["tertiary"]}
           borderStyle={borderStyles["tertiary"]}
           bgColor={colors.accentTertiaryBG}
           zIndex={102}
         />
-      ) : null}
+      )}
       <BorderBox
         borders={props.sides}
         borderStyle={borderStyles["house"]}
@@ -152,6 +156,7 @@ const Value = styled.div`
     }
   }
   animation: pulse ${animation.speed} ease-in-out;
+  //animation-iteration-count: infinite;
 `;
 
 const Notes = styled.div`

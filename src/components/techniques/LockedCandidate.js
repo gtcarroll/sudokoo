@@ -24,6 +24,8 @@ export const lockedCandidate = {
 
     // for each axis (row and col) this cell belongs to...
     for (let a = 0; a < 2; a++) {
+      let affected = [];
+      let proof = [];
       let wasUpdated = false;
       let diffHouse = (c1, c2) => {
         return c1.pos.house !== c2.pos.house;
@@ -60,8 +62,7 @@ export const lockedCandidate = {
 
                 // ...remove the soln from that cell's suspects.
                 aff.notes[soln] = -1;
-                // ...cross out the soln in the snapshot.
-                //snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = -1;
+                affected.push(aff);
               }
             }
           }
@@ -79,8 +80,7 @@ export const lockedCandidate = {
               ) {
                 // ...highlight the soln val in state.
                 aff.notes[soln] = 2;
-                // ...highlight the soln val in the snapshot.
-                //snapshot.houses[aff.pos.house][aff.pos.room].notes[soln] = 2;
+                proof.push(aff);
               }
             }
           }
@@ -89,8 +89,13 @@ export const lockedCandidate = {
       // ...if updates to sudoku state were made, return them
       if (wasUpdated) {
         let snapshot = helper.createSnapshot(state.sudoku);
-        helper.highlightAxis(snapshot, cell, a);
-        helper.highlightAxis(snapshot, cell, 2, "tertiary");
+
+        helper.highlightCells(snapshot, proof);
+        helper.highlightCells(snapshot, affected, "tertiary");
+
+        helper.fillAxis(snapshot, cell, a);
+        helper.fillAxis(snapshot, cell, 2, "tertiary");
+
         return snapshot;
       }
     }
