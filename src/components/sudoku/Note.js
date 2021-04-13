@@ -41,6 +41,7 @@ const Overlay = styled.div`
       font-weight: ${animation.fontEmphasis};
     }
   }
+  //animation-iteration-count: infinite;
 `;
 
 const StyledDiv = styled.div`

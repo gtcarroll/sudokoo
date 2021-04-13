@@ -20,10 +20,14 @@ let borderStyles = {
 };
 
 export const Cell = (props) => {
+  let repeat =
+    props.data.borders["primary"].set ||
+    props.data.borders["secondary"].set ||
+    props.data.borders["tertiary"].set;
   return (
     <StyledDiv
       className={
-        props.data.preset ? "preset " : props.data.val > 0 ? "set" : ""
+        (props.data.preset ? "preset " : "") + (repeat ? "repeat " : "")
       }
     >
       {(props.data.borders["primary"].set || props.data.bgColor["primary"]) && (
@@ -31,7 +35,7 @@ export const Cell = (props) => {
           borders={props.data.borders["primary"]}
           borderStyle={borderStyles["primary"]}
           bgColor={colors.accentPrimaryBG}
-          zIndex={104}
+          zIndex={14}
         />
       )}
       {(props.data.borders["secondary"].set ||
@@ -40,7 +44,7 @@ export const Cell = (props) => {
           borders={props.data.borders["secondary"]}
           borderStyle={borderStyles["secondary"]}
           bgColor={colors.accentSecondaryBG}
-          zIndex={103}
+          zIndex={13}
         />
       )}
       {(props.data.borders["tertiary"].set ||
@@ -49,29 +53,30 @@ export const Cell = (props) => {
           borders={props.data.borders["tertiary"]}
           borderStyle={borderStyles["tertiary"]}
           bgColor={colors.accentTertiaryBG}
-          zIndex={102}
+          zIndex={12}
         />
       )}
       <BorderBox
         borders={props.sides}
         borderStyle={borderStyles["house"]}
-        zIndex={101}
+        zIndex={11}
       />
       <BorderBox
         borders={[true, true, true, true]}
         borderStyle={borderStyles["basic"]}
-        zIndex={100}
+        zIndex={10}
       />
-      {props.data.val > 0 ? (
+      {props.data.val > 0 && (
         <Value
           className={
-            props.data.preset ? "preset " : props.data.val > 0 ? "set" : ""
+            (repeat ? "repeat " : "") +
+            (props.data.preset ? "preset " : props.data.val > 0 ? "set " : "")
           }
         >
-          <div>{props.data.val}</div>
+          {props.data.val}
         </Value>
-      ) : null}
-      {!props.data.preset ? (
+      )}
+      {!props.data.preset && (
         <Notes>
           <Note num={1} tag={props.data.notes[0]} />
           <Note num={2} tag={props.data.notes[1]} />
@@ -83,7 +88,7 @@ export const Cell = (props) => {
           <Note num={8} tag={props.data.notes[7]} />
           <Note num={9} tag={props.data.notes[8]} />
         </Notes>
-      ) : null}
+      )}
     </StyledDiv>
   );
 };
@@ -112,7 +117,7 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
 
-  z-index: 10;
+  z-index: 0;
 
   height: 100%;
   width: 100%;
@@ -120,16 +125,14 @@ const StyledDiv = styled.div`
   box-sizing: border-box;
   position: relative;
 
-  transition: ${animation.halfSpeed};
-
   .preset {
     background-color: ${colors.neutralLow};
   }
   .set {
     background-color: ${colors.neutralMid};
   }
-
-  .hide {
+  .repeat {
+    animation-iteration-count: infinite;
     opacity: 0;
   }
 `;
@@ -142,7 +145,7 @@ const Value = styled.div`
   justify-content: center;
   align-items: center;
 
-  z-index: 5;
+  z-index: 1;
 
   @keyframes pulse {
     0% {
@@ -156,7 +159,6 @@ const Value = styled.div`
     }
   }
   animation: pulse ${animation.speed} ease-in-out;
-  //animation-iteration-count: infinite;
 `;
 
 const Notes = styled.div`
