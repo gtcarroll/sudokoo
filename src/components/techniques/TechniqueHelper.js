@@ -74,7 +74,6 @@ export const helper = {
     if (note >= 0) {
       if (!localCell.noteAccents) localCell.noteAccents = new Map();
       localCell.noteAccents.set(note, color);
-      console.log(localCell.noteAccents);
     }
   },
 

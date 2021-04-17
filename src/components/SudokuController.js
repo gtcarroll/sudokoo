@@ -276,7 +276,7 @@ export const SudokuController = (props) => {
           {!isLoaded ? (
             <JellyButton
               text="load"
-              onClick={() => loadSudoku(nakedPair.test)}
+              onClick={() => loadSudoku(pointingTuple.test)}
               color="highlight"
             />
           ) : state.isSolved ? (

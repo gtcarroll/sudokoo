@@ -28,6 +28,7 @@ export const pointingTuple = {
     for (let a = 0; a < 2; a++) {
       let affected = [];
       let proof = [];
+      let soln = 0;
       let axis = axes[a][cellIndexes[a]];
       let diffAxis = (c1, c2) => {
         let axisKey = axisKeys[a];
@@ -37,7 +38,7 @@ export const pointingTuple = {
 
       // ...if there are any unseen suspects left...
       if (unseen.length > 0) {
-        let soln = unseen[0];
+        soln = unseen[0];
         let notOnlyOne = false;
         for (let i = 0; i < 9; i++) {
           let roomie = axis[i];
@@ -93,8 +94,8 @@ export const pointingTuple = {
       if (wasUpdated) {
         let snapshot = helper.createSnapshot(state.sudoku);
 
-        helper.highlightUpdates(snapshot, proof);
-        helper.highlightUpdates(snapshot, affected, "tertiary");
+        helper.highlightUpdates(snapshot, proof, "primary", soln);
+        helper.highlightUpdates(snapshot, affected, "tertiary", soln);
 
         helper.fillAxis(snapshot, cell, 2);
         helper.fillAxis(snapshot, cell, a, "tertiary");

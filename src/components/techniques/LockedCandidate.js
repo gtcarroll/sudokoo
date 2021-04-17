@@ -83,7 +83,6 @@ export const lockedCandidate = {
                 affIndexes[a] === indexes[a]
               ) {
                 // ...highlight the soln val in state.
-                aff.notes[soln] = true;
                 proof.push(aff);
               }
             }

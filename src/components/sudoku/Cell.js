@@ -20,7 +20,6 @@ let borderStyles = {
 };
 
 export const Cell = (props) => {
-  // console.log(props.noteAccents);
   let repeat =
     props.data.borders["primary"].set ||
     props.data.borders["secondary"].set ||
