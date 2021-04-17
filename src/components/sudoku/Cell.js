@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Note, BorderBox } from "./";
+import { Note, NoteOverlay } from "./";
 import { colors, animation } from "./../../params.js";
 
 // const getColor = (props) => {
@@ -20,6 +20,7 @@ let borderStyles = {
 };
 
 export const Cell = (props) => {
+  // console.log(props.noteAccents);
   let repeat =
     props.data.borders["primary"].set ||
     props.data.borders["secondary"].set ||
@@ -31,7 +32,7 @@ export const Cell = (props) => {
       }
     >
       {(props.data.borders["primary"].set || props.data.bgColor["primary"]) && (
-        <BorderBox
+        <NoteOverlay
           borders={props.data.borders["primary"]}
           borderStyle={borderStyles["primary"]}
           bgColor={colors.accentPrimaryBG}
@@ -40,7 +41,7 @@ export const Cell = (props) => {
       )}
       {(props.data.borders["secondary"].set ||
         props.data.bgColor["secondary"]) && (
-        <BorderBox
+        <NoteOverlay
           borders={props.data.borders["secondary"]}
           borderStyle={borderStyles["secondary"]}
           bgColor={colors.accentSecondaryBG}
@@ -49,19 +50,19 @@ export const Cell = (props) => {
       )}
       {(props.data.borders["tertiary"].set ||
         props.data.bgColor["tertiary"]) && (
-        <BorderBox
+        <NoteOverlay
           borders={props.data.borders["tertiary"]}
           borderStyle={borderStyles["tertiary"]}
           bgColor={colors.accentTertiaryBG}
           zIndex={12}
         />
       )}
-      <BorderBox
+      <NoteOverlay
         borders={props.sides}
         borderStyle={borderStyles["house"]}
         zIndex={11}
       />
-      <BorderBox
+      <NoteOverlay
         borders={[true, true, true, true]}
         borderStyle={borderStyles["basic"]}
         zIndex={10}
@@ -78,15 +79,51 @@ export const Cell = (props) => {
       )}
       {!props.data.preset && (
         <Notes>
-          <Note num={1} tag={props.data.notes[0]} />
-          <Note num={2} tag={props.data.notes[1]} />
-          <Note num={3} tag={props.data.notes[2]} />
-          <Note num={4} tag={props.data.notes[3]} />
-          <Note num={5} tag={props.data.notes[4]} />
-          <Note num={6} tag={props.data.notes[5]} />
-          <Note num={7} tag={props.data.notes[6]} />
-          <Note num={8} tag={props.data.notes[7]} />
-          <Note num={9} tag={props.data.notes[8]} />
+          <Note
+            num={1}
+            toggle={props.data.notes[0]}
+            accent={props.data.noteAccents}
+          />
+          <Note
+            num={2}
+            toggle={props.data.notes[1]}
+            accent={props.data.noteAccents}
+          />
+          <Note
+            num={3}
+            toggle={props.data.notes[2]}
+            accent={props.data.noteAccents}
+          />
+          <Note
+            num={4}
+            toggle={props.data.notes[3]}
+            accent={props.data.noteAccents}
+          />
+          <Note
+            num={5}
+            toggle={props.data.notes[4]}
+            accent={props.data.noteAccents}
+          />
+          <Note
+            num={6}
+            toggle={props.data.notes[5]}
+            accent={props.data.noteAccents}
+          />
+          <Note
+            num={7}
+            toggle={props.data.notes[6]}
+            accent={props.data.noteAccents}
+          />
+          <Note
+            num={8}
+            toggle={props.data.notes[7]}
+            accent={props.data.noteAccents}
+          />
+          <Note
+            num={9}
+            toggle={props.data.notes[8]}
+            accent={props.data.noteAccents}
+          />
         </Notes>
       )}
     </StyledDiv>
@@ -97,7 +134,7 @@ Cell.defaultProps = {
   data: {
     val: -1,
     preset: false,
-    notes: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    notes: [true, true, true, true, true, true, true, true, true],
     bgColor: {
       primary: false,
       secondary: false,

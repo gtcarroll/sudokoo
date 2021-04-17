@@ -31,7 +31,7 @@ export const hiddenSingle = {
         let snapshot = helper.createSnapshot(state.sudoku);
 
         helper.highlightCell(snapshot, cell);
-        helper.highlightCells(snapshot, affected, "tertiary");
+        helper.highlightUpdates(snapshot, affected, "tertiary", unseen[0]);
 
         helper.fillAxis(snapshot, cell, a);
         helper.fillAxis(snapshot, cell, (a + 1) % 3, "tertiary");

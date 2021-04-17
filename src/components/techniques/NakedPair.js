@@ -74,19 +74,17 @@ export const nakedPair = {
           // ...if updates to sudoku state were made...
           if (wasUpdated) {
             // ...highlight the naked pair values in state.
-            helper.highlightNote(pair[0], cell, state);
-            helper.highlightNote(pair[1], cell, state);
-            helper.highlightNote(pair[0], other, state);
-            helper.highlightNote(pair[1], other, state);
-
             let snapshot = helper.createSnapshot(state.sudoku);
 
             helper.highlightCell(snapshot, cell);
             helper.highlightCell(snapshot, other);
-            helper.highlightCells(snapshot, affected, "tertiary");
-
-            //helper.fillAxis(snapshot, cell, a);
+            helper.highlightNote(snapshot, cell, "primary", pair[0]);
+            helper.highlightNote(snapshot, cell, "primary", pair[1]);
+            helper.highlightNote(snapshot, other, "primary", pair[0]);
+            helper.highlightNote(snapshot, other, "primary", pair[1]);
             helper.fillAxis(snapshot, cell, a, "tertiary");
+            helper.highlightUpdates(snapshot, affected, "tertiary", pair[0]);
+            helper.highlightUpdates(snapshot, affected, "tertiary", pair[1]);
 
             return snapshot;
           }

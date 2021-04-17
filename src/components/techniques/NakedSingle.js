@@ -25,7 +25,7 @@ export const nakedSingle = {
       let snapshot = helper.createSnapshot(state.sudoku);
 
       helper.highlightCell(snapshot, cell);
-      helper.highlightCells(snapshot, affected, "tertiary");
+      helper.highlightUpdates(snapshot, affected, "tertiary", suspects[0]);
 
       helper.fillAxis(snapshot, cell, 0, "tertiary");
       helper.fillAxis(snapshot, cell, 1, "tertiary");

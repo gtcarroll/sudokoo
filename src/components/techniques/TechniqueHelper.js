@@ -3,7 +3,7 @@ export const helper = {
   getSuspects: (cell) => {
     let suspects = [];
     for (let i = 0; i < cell.notes.length; i++)
-      if (cell.notes[i] > 0) suspects.push(i);
+      if (cell.notes[i]) suspects.push(i);
     return suspects;
   },
 
@@ -14,8 +14,8 @@ export const helper = {
 
   // returns whether the note in cell was able to be removed
   tryRemoving: (cell, note) => {
-    let isAffected = cell.val <= 0 && cell.notes[note] > 0;
-    if (isAffected) helper.removeNote(note, cell);
+    let isAffected = cell.val <= 0 && cell.notes[note];
+    if (isAffected) cell.notes[note] = false;
     return isAffected;
   },
 
@@ -68,14 +68,25 @@ export const helper = {
     cell.bgColor[color] = true;
   },
 
-  highlightCell: (sudoku, cell, color = "primary") => {
+  // TODO: test that this works and consider something less hacky
+  highlightNote: (sudoku, cell, color, note) => {
     let localCell = sudoku.rows[cell.pos.row][cell.pos.col];
-    helper.addBorders(sudoku, localCell, [true, true, true, true], color);
+    if (note >= 0) {
+      if (!localCell.noteAccents) localCell.noteAccents = new Map();
+      localCell.noteAccents.set(note, color);
+      console.log(localCell.noteAccents);
+    }
   },
 
-  highlightCells: (sudoku, cells, color = "primary") => {
-    cells.forEach((cell) => {
-      helper.highlightCell(sudoku, cell, color);
+  highlightCell: (sudoku, cell, color = "primary", note = -1) => {
+    let localCell = sudoku.rows[cell.pos.row][cell.pos.col];
+    helper.addBorders(sudoku, localCell, [true, true, true, true], color);
+    helper.highlightNote(sudoku, cell, color, note);
+  },
+
+  highlightUpdates: (sudoku, updated, color = "primary", note = -1) => {
+    updated.forEach((cell) => {
+      helper.highlightCell(sudoku, cell, color, note);
     });
   },
 
@@ -122,19 +133,6 @@ export const helper = {
     }
   },
 
-  // TODO: test that this works and consider something less hacky
-  highlightNote: (note, cell) => {
-    helper.setNote(note, cell, 2, 3);
-  },
-
-  removeNote: (note, cell) => {
-    helper.setNote(note, cell, -1, -2);
-  },
-
-  setNote: (note, cell, v1, v2) => {
-    cell.notes[note] = cell.notes[note] === v1 ? v2 : v1;
-  },
-
   // writes cell's soln and consequent updates to state
   writeSolution: (soln, cell, state) => {
     let affected = [];
@@ -148,9 +146,10 @@ export const helper = {
         (aff.pos.row === cell.pos.row ||
           aff.pos.col === cell.pos.col ||
           aff.pos.house === cell.pos.house) &&
-        aff.notes[soln] > 0
+        aff.notes[soln]
       ) {
-        aff.notes[soln] = -1;
+        aff.notes[soln] = false;
+        // add to map
         affected.push(aff);
       }
     }
@@ -236,7 +235,7 @@ export const helper = {
       ) {
         // ...remove its suspects from the unseen list.
         for (let n = 0; n < 9; n++) {
-          if (other.notes[n] > 0 && unseen.includes(n)) {
+          if (other.notes[n] && unseen.includes(n)) {
             unseen.splice(unseen.indexOf(n), 1);
           }
         }

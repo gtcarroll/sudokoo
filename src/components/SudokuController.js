@@ -67,7 +67,7 @@ export const SudokuController = (props) => {
           // ...if the cell's value is set...
           if (other.val >= 1 && other.val <= 9) {
             // ...remove it from suspect list.
-            cell.notes[other.val - 1] = 0;
+            cell.notes[other.val - 1] = false;
           }
         });
       }
@@ -201,7 +201,7 @@ export const SudokuController = (props) => {
       },
       val: v,
       preset: p,
-      notes: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      notes: [true, true, true, true, true, true, true, true, true],
       bgColor: {
         primary: false,
         secondary: false,

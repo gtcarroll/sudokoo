@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { colors, animation } from "./../../params.js";
 
-export const BorderBox = (props) => {
+export const NoteOverlay = (props) => {
   return (
     <StyledDiv
       style={{
@@ -33,7 +33,7 @@ export const BorderBox = (props) => {
   );
 };
 
-BorderBox.defaultProps = {
+NoteOverlay.defaultProps = {
   borders: [false, false, false, false],
   borderStyle: "",
   zIndex: 100,

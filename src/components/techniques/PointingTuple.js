@@ -44,7 +44,7 @@ export const pointingTuple = {
           notOnlyOne |=
             roomie.house !== cell.pos.house &&
             roomie.val <= 0 &&
-            roomie.notes[soln] > 0 &&
+            roomie.notes[soln] &&
             unseen.includes(soln);
         }
         // ...if this cell is not the only one in its axis and house w soln in suspects...
@@ -56,13 +56,13 @@ export const pointingTuple = {
             // ...if aff would be affected and is in the same axis as cell...
             if (
               aff.val <= 0 &&
-              aff.notes[soln] > 0 &&
+              aff.notes[soln] &&
               affIndexes[a] === cellIndexes[a]
             ) {
               if (aff.pos.house !== cell.pos.house) {
                 wasUpdated = true;
                 // ...remove the soln val in state.
-                aff.notes[soln] = -1;
+                aff.notes[soln] = false;
                 affected.push(aff);
               }
             }
@@ -76,13 +76,12 @@ export const pointingTuple = {
               // ...if aff would be affected and is in the same axis as cell...
               if (
                 aff.val <= 0 &&
-                aff.notes[soln] > 0 &&
+                aff.notes[soln] &&
                 affIndexes[a] === cellIndexes[a]
               ) {
                 if (aff.pos.house === cell.pos.house) {
                   wasUpdated = true;
                   // ...highlight the soln val in state.
-                  aff.notes[soln] = 2;
                   proof.push(aff);
                 }
               }
@@ -94,8 +93,8 @@ export const pointingTuple = {
       if (wasUpdated) {
         let snapshot = helper.createSnapshot(state.sudoku);
 
-        helper.highlightCells(snapshot, proof);
-        helper.highlightCells(snapshot, affected, "tertiary");
+        helper.highlightUpdates(snapshot, proof);
+        helper.highlightUpdates(snapshot, affected, "tertiary");
 
         helper.fillAxis(snapshot, cell, 2);
         helper.fillAxis(snapshot, cell, a, "tertiary");

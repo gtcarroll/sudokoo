@@ -4,17 +4,29 @@ import { colors, animation } from "./../../params.js";
 
 //TODO: clean this up!
 export const Note = (props) => {
+  let accent =
+    props.accent && props.accent.has(props.num - 1)
+      ? props.accent.get(props.num - 1)
+      : "";
   return (
-    <StyledDiv className={"style" + props.tag}>
-      {props.tag < 0 && <Overlay>X</Overlay>}
-      <span className={"style" + props.tag}>{props.num}</span>
+    <StyledDiv className={accent}>
+      {accent === "tertiary" && <Overlay className={accent}>X</Overlay>}
+      <span className={accent + (props.toggle ? " on" : " off")}>
+        {props.num}
+      </span>
     </StyledDiv>
   );
 };
 
 Note.defaultProps = {
   num: 0,
-  tag: 0,
+  toggle: false,
+  accent: false,
+  // accent: {
+  //   primary: false,
+  //   secondary: false,
+  //   tertiary: false,
+  // },
 };
 
 const Overlay = styled.div`
@@ -41,7 +53,6 @@ const Overlay = styled.div`
       font-weight: ${animation.fontEmphasis};
     }
   }
-  //animation-iteration-count: infinite;
 `;
 
 const StyledDiv = styled.div`
@@ -54,12 +65,24 @@ const StyledDiv = styled.div`
   height: 100%;
   width: 100%;
   color: ${colors.neutralHighest};
+  font-weight: normal;
   font-size: 55%;
   overflow: hidden;
 
-  .style-1,
-  .style-2 {
+  &.primary,
+  &.secondary,
+  &.tertiary,
+  .primary,
+  .secondary,
+  .tertiary {
+    animation-iteration-count: infinite !important;
+  }
+
+  .off {
     color: transparent;
+    &.tertiary {
+      color: ${colors.neutralHighest};
+    }
 
     animation: crossOutNum ${animation.speed} ease-in;
     @keyframes crossOutNum {
@@ -67,12 +90,12 @@ const StyledDiv = styled.div`
         color: ${colors.neutralHighest};
       }
       ${animation.midPoint} {
-        color: ${colors.neutralHighest};
+        color: transparent;
       }
     }
   }
 
-  .style0 {
+  /* .style0 {
     color: transparent;
 
     animation: fadeOut ${animation.speed} ease-in;
@@ -81,24 +104,17 @@ const StyledDiv = styled.div`
         color: ${colors.neutralHighest};
       }
       ${animation.midPoint} {
-        color: ${colors.neutralHighest};
+        color: transparent;
       }
     }
-  }
+  } */
 
-  .style1 {
-    font-weight: normal;
-  }
-
-  .style2,
-  .style3 {
+  .primary,
+  .secondary {
     color: ${colors.neutralHighest};
 
     animation: pulseNum ${animation.speed} ease-in-out;
     @keyframes pulseNum {
-      0% {
-        color: ${colors.neutralHighest};
-      }
       ${animation.midPoint} {
         color: ${colors.neutralMid};
         font-size: ${animation.fontGrow};
@@ -106,12 +122,19 @@ const StyledDiv = styled.div`
     }
   }
 
-  &.style2,
-  &.style3 {
+  &.primary {
     animation: pulseUnderlay ${animation.speed} ease-in-out;
     @keyframes pulseUnderlay {
       ${animation.midPoint} {
         background-color: ${colors.accentPrimary};
+      }
+    }
+  }
+  &.secondary {
+    animation: pulseUnderlayS ${animation.speed} ease-in-out;
+    @keyframes pulseUnderlayS {
+      ${animation.midPoint} {
+        background-color: ${colors.accentSecondary};
       }
     }
   }

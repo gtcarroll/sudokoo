@@ -26,6 +26,7 @@ export const lockedCandidate = {
     for (let a = 0; a < 2; a++) {
       let affected = [];
       let proof = [];
+      let soln = 0;
       let wasUpdated = false;
       let diffHouse = (c1, c2) => {
         return c1.pos.house !== c2.pos.house;
@@ -34,14 +35,14 @@ export const lockedCandidate = {
 
       // ...if there are any unseen suspects left...
       if (unseen.length > 0) {
-        let soln = unseen[0];
+        soln = unseen[0];
         let notOnlyOne = false;
         for (let r = 0; r < 9; r++) {
           let roomie = state.sudoku.houses[cell.pos.house][r];
           notOnlyOne |=
             r !== cell.pos.room &&
             roomie.val <= 0 &&
-            roomie.notes[soln] > 0 &&
+            roomie.notes[soln] &&
             unseen.includes(soln);
         }
         // ...if this cell is not the only one in its axis and house w soln in suspects...
@@ -55,13 +56,16 @@ export const lockedCandidate = {
               // ...if aff would be affected and is not in the same axis as cell...
               if (
                 aff.val <= 0 &&
-                aff.notes[soln] > 0 &&
+                aff.notes[soln] &&
                 affIndexes[a] !== indexes[a]
               ) {
                 wasUpdated = true;
 
                 // ...remove the soln from that cell's suspects.
-                aff.notes[soln] = -1;
+                //TODO:
+                //   -turn Note "off"
+                //   -mark Note to animate this snapshot only
+                aff.notes[soln] = false;
                 affected.push(aff);
               }
             }
@@ -75,11 +79,11 @@ export const lockedCandidate = {
               // ...if aff would be affected and is in the same axis as cell...
               if (
                 aff.val <= 0 &&
-                aff.notes[soln] > 0 &&
+                aff.notes[soln] &&
                 affIndexes[a] === indexes[a]
               ) {
                 // ...highlight the soln val in state.
-                aff.notes[soln] = 2;
+                aff.notes[soln] = true;
                 proof.push(aff);
               }
             }
@@ -90,8 +94,8 @@ export const lockedCandidate = {
       if (wasUpdated) {
         let snapshot = helper.createSnapshot(state.sudoku);
 
-        helper.highlightCells(snapshot, proof);
-        helper.highlightCells(snapshot, affected, "tertiary");
+        helper.highlightUpdates(snapshot, proof, "primary", soln);
+        helper.highlightUpdates(snapshot, affected, "tertiary", soln);
 
         helper.fillAxis(snapshot, cell, a);
         helper.fillAxis(snapshot, cell, 2, "tertiary");
