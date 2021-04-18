@@ -141,7 +141,6 @@ const StyledDiv = styled.div`
       animation: pulseUnderlay ${animation.speed} ease-in-out;
       animation-iteration-count: infinite;
     }
-    //animation: pulseUnderlay ${animation.speed} ease-in-out;
     @keyframes pulseUnderlay {
       ${animation.midPoint} {
         background-color: ${colors.accentPrimary};
@@ -149,13 +148,12 @@ const StyledDiv = styled.div`
     }
   }
   &.secondary {
-    background-color: ${colors.accentPrimary};
+    background-color: ${colors.accentSecondary};
     &.repeat {
       background-color: transparent;
       animation: pulseUnderlayS ${animation.speed} ease-in-out;
       animation-iteration-count: infinite;
     }
-    //animation: pulseUnderlayS ${animation.speed} ease-in-out;
     @keyframes pulseUnderlayS {
       ${animation.midPoint} {
         background-color: ${colors.accentSecondary};

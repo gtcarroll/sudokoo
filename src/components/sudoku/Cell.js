@@ -3,16 +3,8 @@ import styled from "styled-components";
 import { Note, NoteOverlay } from "./";
 import { colors, animation } from "./../../params.js";
 
-// const getColor = (props) => {
-//   if (props.data.borders.primary.set) return "primary";
-//   else if (props.data.borders.secondary.set) return "secondary";
-//   else return "tertiary";
-// };
-
-//TODO: add house borders to cells
-
 let borderStyles = {
-  basic: "1px solid " + colors.neutralHigh50,
+  basic: "1px solid " + colors.neutralHigh,
   house: "2px solid " + colors.neutralHigh,
   primary: "3px solid " + colors.accentPrimary50,
   secondary: "3px solid " + colors.accentSecondary50,

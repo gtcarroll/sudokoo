@@ -179,6 +179,7 @@ export const SudokuController = (props) => {
       }
     }
     state.isSolved = true;
+    state.snapshot = false;
     pushState();
     return true;
   };
@@ -308,6 +309,7 @@ const SudokuContainer = styled.div`
 `;
 const ControlContainer = styled.div`
   grid-area: ctrl;
+  grid-gap: none;
 `;
 const BirdFeedContainer = styled.div`
   grid-area: feed;

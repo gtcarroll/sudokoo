@@ -26,10 +26,12 @@ JellyButton.defaultProps = {
 const ButtonContainer = styled.div`
   position: relative;
   display: flex;
+  align-self: flex-end;
   padding-top: 0.3em;
 `;
 
 const Button = styled.button`
+  top: -1.6em;
   position: absolute;
   z-index: 13;
 
@@ -37,10 +39,10 @@ const Button = styled.button`
   background-color: transparent;
 
   border: 2px solid ${colors.neutralHighest};
-  border-radius: 1em;
+  border-radius: 12px;
 
   padding: 0.2em 0.2em 0.3em 0.2em;
-  font-size: 24px;
+  font-size: 1em;
 
   width: 100%;
 

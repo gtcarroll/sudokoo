@@ -73,9 +73,10 @@ const StyledDiv = styled.div`
   height: 100%;
 
   border: 2px solid ${colors.neutralHigh};
-  transition: ${animation.halfSpeed} ease-in-out;
-
+  border-radius: 2px;
   box-sizing: border-box;
+
+  transition: ${animation.halfSpeed} ease-in-out;
 
   &.solved {
     border-color: ${colors.accentPrimary};

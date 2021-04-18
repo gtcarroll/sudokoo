@@ -14,4 +14,5 @@ const ButtonTrayContainer = styled.div`
   gap: 1em;
 
   width: 100%;
+  height: 100%;
 `;
