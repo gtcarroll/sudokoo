@@ -14,8 +14,8 @@ export const Note = (props) => {
       <span
         className={
           (props.auto ? "" : "repeat ") +
-          accent +
-          (props.toggle ? " on" : " off")
+          (props.toggle ? "on " : "off ") +
+          accent
         }
       >
         {props.num}

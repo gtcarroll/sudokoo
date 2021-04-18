@@ -23,7 +23,8 @@ export const nakedPair = {
 
     // if this cell has exactly 2 suspects...
     if (pair.length === 2) {
-      let affected = [];
+      let affected0 = [];
+      let affected1 = [];
       let axisKeys = Object.keys(cell.pos);
 
       // ...for each [row, col, house] this cell belongs to...
@@ -59,10 +60,12 @@ export const nakedPair = {
                     !helper.isSameCell(aff, other)
                   ) {
                     // ...push potential changes to cell.
-                    let wasUpdated0 = helper.tryRemoving(aff, pair[0]);
-                    let wasUpdated1 = helper.tryRemoving(aff, pair[1]);
-                    if (wasUpdated0 || wasUpdated1) {
-                      affected.push(aff);
+                    if (helper.tryRemoving(aff, pair[0])) {
+                      affected0.push(aff);
+                      wasUpdated = true;
+                    }
+                    if (helper.tryRemoving(aff, pair[1])) {
+                      affected1.push(aff);
                       wasUpdated = true;
                     }
                   }
@@ -83,8 +86,8 @@ export const nakedPair = {
             helper.highlightNote(snapshot, other, "primary", pair[0]);
             helper.highlightNote(snapshot, other, "primary", pair[1]);
             helper.fillAxis(snapshot, cell, a, "tertiary");
-            helper.highlightUpdates(snapshot, affected, "tertiary", pair[0]);
-            helper.highlightUpdates(snapshot, affected, "tertiary", pair[1]);
+            helper.highlightUpdates(snapshot, affected0, "tertiary", pair[0]);
+            helper.highlightUpdates(snapshot, affected1, "tertiary", pair[1]);
 
             return snapshot;
           }
