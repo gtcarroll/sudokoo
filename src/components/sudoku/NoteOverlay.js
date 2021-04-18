@@ -13,22 +13,22 @@ export const NoteOverlay = (props) => {
           ? props.borderStyle
           : props.base
           ? "1px solid " + colors.neutralHigh
-          : "1px solid transparent",
+          : "0px solid transparent",
         borderRight: props.borders[1]
           ? props.borderStyle
           : props.base
           ? "1px solid " + colors.neutralHigh
-          : "1px solid transparent",
+          : "0px solid transparent",
         borderBottom: props.borders[2]
           ? props.borderStyle
           : props.base
           ? "1px solid " + colors.neutralHigh
-          : "1px solid transparent",
+          : "0px solid transparent",
         borderLeft: props.borders[3]
           ? props.borderStyle
           : props.base
           ? "1px solid " + colors.neutralHigh
-          : "1px solid transparent",
+          : "0px solid transparent",
       }}
     />
   );

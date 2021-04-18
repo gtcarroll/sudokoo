@@ -73,9 +73,9 @@ const Button = styled.button`
 
   &:active {
     &:not(.disabled) {
-      transition-duration: 0.05s;
+      transition-duration: 0.1s;
       padding-bottom: 0.5em;
-      transform: translateY(-0.2em) scale(1.075, 1);
+      transform: translateY(-0.2em) scaleX(1.075);
     }
   }
 
