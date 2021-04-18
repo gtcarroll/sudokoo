@@ -20,12 +20,13 @@ export const colors = {
   accentTertiaryBG: "rgba(255, 153, 252, 0.2)",
 };
 
+let s = 3;
 export const animation = {
-  speed: "1.6s",
-  halfSpeed: "0.64s",
+  speed: s + "s",
+  halfSpeed: s * 0.4 + "s",
   buttonSpeed: "0.05s",
   midPoint: "40%, 60%",
   fontGrow: "125%",
   fontEmphasis: "bold",
-  delay: 1200,
+  delay: s * 0.6 * 1000,
 };

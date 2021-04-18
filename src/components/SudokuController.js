@@ -74,7 +74,7 @@ export const SudokuController = (props) => {
     }
     isLoaded = true;
     state.isSolved = false;
-    state.overlay = copySudoku(state.sudoku);
+    state.snapshot = false;
     pushState();
 
     console.log("...Sudoku Loaded");
@@ -215,58 +215,15 @@ export const SudokuController = (props) => {
     };
   };
 
-  const copySudoku = (sudoku) => {
-    let copy = {
-      rows: buildEmpty2DArray(),
-      cols: buildEmpty2DArray(),
-      houses: buildEmpty2DArray(),
-    };
-    for (let h = 0; h < 9; h++) {
-      for (let r = 0; r < 9; r++) {
-        let y = 3 * Math.floor(h / 3) + Math.floor(r / 3);
-        let x = 3 * (h % 3) + (r % 3);
-
-        // create cell object
-        var cell = copyCell(sudoku.houses[h][r]);
-
-        // store cell in each state object
-        copy.houses[h][r] = cell;
-        copy.rows[y][x] = cell;
-        copy.cols[x][y] = cell;
-      }
-    }
-    return copy;
-  };
-
-  const copyCell = (cell) => {
-    return {
-      pos: {
-        row: cell.pos.row,
-        col: cell.pos.col,
-        house: cell.pos.house,
-        room: cell.pos.room,
-      },
-      val: cell.val,
-      preset: cell.preset,
-      notes: [...cell.notes],
-      bgColor: {
-        primary: cell.bgColor.primary,
-        secondary: cell.bgColor.secondary,
-        tertiary: cell.bgColor.tertiary,
-      },
-      borders: {
-        primary: [...cell.borders.primary],
-        secondary: [...cell.borders.secondary],
-        tertiary: [...cell.borders.tertiary],
-      },
-    };
-  };
-
   return (
     <StyledDiv>
       <SudokuContainer>
-        <Sudoku sudoku={state.sudoku} isSolved={state.isSolved}></Sudoku>
-        <Sudoku sudoku={state.snapshot} overlay></Sudoku>
+        <Sudoku
+          sudoku={state.snapshot ? state.snapshot : state.sudoku}
+          isSolved={state.isSolved}
+          auto={solveInterval}
+        ></Sudoku>
+        {/* <Sudoku sudoku={state.snapshot}></Sudoku> */}
       </SudokuContainer>
       <BirdFeedContainer>
         <BirdFeed feed={state.feed}></BirdFeed>

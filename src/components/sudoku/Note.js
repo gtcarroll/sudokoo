@@ -9,9 +9,15 @@ export const Note = (props) => {
       ? props.accent.get(props.num - 1)
       : "";
   return (
-    <StyledDiv className={accent}>
-      {accent === "tertiary" && <Overlay className={accent}>X</Overlay>}
-      <span className={accent + (props.toggle ? " on" : " off")}>
+    <StyledDiv className={(props.auto ? "" : "repeat ") + accent}>
+      <Overlay className={(props.auto ? "" : "repeat ") + accent}>X</Overlay>
+      <span
+        className={
+          (props.auto ? "" : "repeat ") +
+          accent +
+          (props.toggle ? " on" : " off")
+        }
+      >
         {props.num}
       </span>
     </StyledDiv>
@@ -22,11 +28,7 @@ Note.defaultProps = {
   num: 0,
   toggle: false,
   accent: false,
-  // accent: {
-  //   primary: false,
-  //   secondary: false,
-  //   tertiary: false,
-  // },
+  auto: false,
 };
 
 const Overlay = styled.div`
@@ -42,14 +44,25 @@ const Overlay = styled.div`
   text-align: center;
   top: -10%;
 
-  color: transparent;
+  opacity: 0;
+  color: ${colors.accentTertiary};
   font-weight: 1000;
   font-size: 150%;
+  /* transition: ${animation.halfSpeed} ease-in-out; */
 
-  animation: crossOutOverlay ${animation.speed} ease-in-out;
+  &.tertiary {
+    opacity: 1;
+    font-weight: ${animation.fontEmphasis};
+    &.repeat {
+      opacity: 0;
+      font-weight: normal;
+      animation: crossOutOverlay ${animation.speed} ease-in-out;
+      animation-iteration-count: infinite;
+    }
+  }
   @keyframes crossOutOverlay {
     ${animation.midPoint} {
-      color: ${colors.accentTertiary};
+      opacity: 1;
       font-weight: ${animation.fontEmphasis};
     }
   }
@@ -65,9 +78,14 @@ const StyledDiv = styled.div`
   height: 100%;
   width: 100%;
   color: ${colors.neutralHighest};
+  background-color: transparent;
   font-weight: normal;
   font-size: 55%;
   overflow: hidden;
+  transition: ${animation.halfSpeed} ease-in-out;
+  * {
+    transition: ${animation.halfSpeed} ease-in-out;
+  }
 
   &.primary,
   &.secondary,
@@ -95,25 +113,19 @@ const StyledDiv = styled.div`
     }
   }
 
-  /* .style0 {
-    color: transparent;
-
-    animation: fadeOut ${animation.speed} ease-in;
-    @keyframes fadeOut {
-      0% {
-        color: ${colors.neutralHighest};
-      }
-      ${animation.midPoint} {
-        color: transparent;
-      }
-    }
-  } */
-
   .primary,
   .secondary {
-    color: ${colors.neutralHighest};
+    color: ${colors.neutralMid};
+    font-size: ${animation.fontGrow};
 
-    animation: pulseNum ${animation.speed} ease-in-out;
+    &.repeat {
+      color: ${colors.neutralHighest};
+      font-size: 100%;
+      animation: pulseNum ${animation.speed} ease-in-out;
+      animation-iteration-count: infinite;
+    }
+
+    //animation: pulseNum ${animation.speed} ease-in-out;
     @keyframes pulseNum {
       ${animation.midPoint} {
         color: ${colors.neutralMid};
@@ -123,7 +135,13 @@ const StyledDiv = styled.div`
   }
 
   &.primary {
-    animation: pulseUnderlay ${animation.speed} ease-in-out;
+    background-color: ${colors.accentPrimary};
+    &.repeat {
+      background-color: transparent;
+      animation: pulseUnderlay ${animation.speed} ease-in-out;
+      animation-iteration-count: infinite;
+    }
+    //animation: pulseUnderlay ${animation.speed} ease-in-out;
     @keyframes pulseUnderlay {
       ${animation.midPoint} {
         background-color: ${colors.accentPrimary};
@@ -131,7 +149,13 @@ const StyledDiv = styled.div`
     }
   }
   &.secondary {
-    animation: pulseUnderlayS ${animation.speed} ease-in-out;
+    background-color: ${colors.accentPrimary};
+    &.repeat {
+      background-color: transparent;
+      animation: pulseUnderlayS ${animation.speed} ease-in-out;
+      animation-iteration-count: infinite;
+    }
+    //animation: pulseUnderlayS ${animation.speed} ease-in-out;
     @keyframes pulseUnderlayS {
       ${animation.midPoint} {
         background-color: ${colors.accentSecondary};

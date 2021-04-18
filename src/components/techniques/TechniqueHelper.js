@@ -79,6 +79,7 @@ export const helper = {
 
   highlightCell: (sudoku, cell, color = "primary", note = -1) => {
     let localCell = sudoku.rows[cell.pos.row][cell.pos.col];
+    helper.fillCell(localCell, color);
     helper.addBorders(sudoku, localCell, [true, true, true, true], color);
     helper.highlightNote(sudoku, cell, color, note);
   },
