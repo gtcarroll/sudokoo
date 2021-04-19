@@ -16,7 +16,7 @@ export const JellyButton = (props) => {
 };
 
 JellyButton.defaultProps = {
-  onClick: console.log("clicked"),
+  onClick: null,
   text: "click me",
   color: "",
   flexGrow: 1,
@@ -26,71 +26,65 @@ JellyButton.defaultProps = {
 const ButtonContainer = styled.div`
   position: relative;
   display: flex;
-  align-self: flex-end;
-  padding-top: 0.3em;
 `;
 
 const Button = styled.button`
-  top: -1.6em;
-  position: absolute;
-  z-index: 13;
+  transition: ${animation.buttonSpeed};
 
-  color: ${colors.neutralHighest};
-  background-color: transparent;
-
-  border: 2px solid ${colors.neutralHighest};
-  border-radius: 12px;
-
-  padding: 0.2em 0.2em 0.3em 0.2em;
   font-size: 1em;
-
+  padding: 0.2em 0.2em 0.4em 0.2em;
   width: 100%;
 
-  transition: all ${animation.buttonSpeed} ease-in;
+  border: 2px solid;
+  border-radius: 0.4em;
 
-  &:hover {
-    &:not(.disabled) {
-      padding-bottom: 1.3em;
-      transform: translateY(-1em);
+  top: 7px;
+  position: absolute;
+  box-shadow: 0 0 0 0;
 
-      color: ${colors.neutralLowest};
-      background-color: ${colors.neutralHighest};
-    }
-
-    &.highlight {
-      color: ${colors.neutralLowest};
-      background-color: ${colors.accentPrimary};
-    }
-    &.highlightAlt {
-      color: ${colors.neutralLowest};
-      background-color: ${colors.accentSecondary};
-    }
-    &.removal {
-      color: ${colors.neutralLowest};
-      background-color: ${colors.accentTertiary};
-    }
-  }
-
-  &:active {
-    &:not(.disabled) {
-      transition-duration: 0.1s;
-      padding-bottom: 0.5em;
-      transform: translateY(-0.2em) scaleX(1.075);
-    }
-  }
-
-  &.highlight {
+  color: ${colors.neutralHighest};
+  border-color: ${colors.neutralHighest};
+  background-color: transparent;
+  &.primary {
     color: ${colors.accentPrimary};
     border-color: ${colors.accentPrimary};
   }
-
-  &.highlightAlt {
+  &.secondary {
     color: ${colors.accentSecondary};
     border-color: ${colors.accentSecondary};
   }
-
-  &.removal {
+  &.tertiary {
     color: ${colors.accentTertiary};
     border-color: ${colors.accentTertiary};
+  }
+
+  &:hover&:not(.disabled) {
+    top: 0px;
+    box-shadow: 0 7px 0 0;
+
+    &.primary {
+      background-color: ${colors.accentPrimaryBG};
+    }
+    &.secondary {
+      background-color: ${colors.accentSecondaryBG};
+    }
+    &.tertiary {
+      background-color: ${colors.accentTertiaryBG};
+    }
+  }
+
+  &:active&:not(.disabled) {
+    top: 7px;
+    box-shadow: 0 0 0 0;
+
+    &.primary {
+      background-color: ${colors.accentPrimaryPressed};
+    }
+    &.secondary {
+      background-color: ${colors.accentSecondaryPressed};
+    }
+    &.tertiary {
+      background-color: ${colors.accentTertiaryPressed};
+    }
   }
 `;

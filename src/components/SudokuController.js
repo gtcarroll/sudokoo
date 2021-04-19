@@ -110,7 +110,9 @@ export const SudokuController = (props) => {
       stopSolveInterval();
       return false;
     } else if (state.unsolved.length === 0) {
-      console.log("Nothing left to solve. Sudoku soln is " + verifySolution());
+      console.log(
+        "Nothing left to solve. \nSudoku solution is " + verifySolution() + "."
+      );
       stopSolveInterval();
       pushState();
       return false;
@@ -235,32 +237,32 @@ export const SudokuController = (props) => {
             <JellyButton
               text="load"
               onClick={() => loadSudoku(pointingTuple.test)}
-              color="highlight"
+              color="primary"
             />
           ) : state.isSolved ? (
             <JellyButton
               text="reset"
-              onClick={() => loadSudoku(nakedPair.test)}
-              color="removal"
+              onClick={() => loadSudoku(pointingTuple.test)}
+              color="tertiary"
             />
           ) : solveInterval ? (
             <ButtonTray>
               <JellyButton
                 text="reset"
-                onClick={() => loadSudoku(nakedPair.test)}
-                color="removal"
+                onClick={() => loadSudoku(pointingTuple.test)}
+                color="tertiary"
                 disabled
               />
               <JellyButton
                 text="stop"
                 onClick={() => stopSolveInterval()}
-                color="removal"
+                color="tertiary"
                 flexGrow={2}
               />
               <JellyButton
                 text="next"
                 onClick={() => setTimeout(getNextSolution, animation.delay / 6)}
-                color="highlight"
+                color="primary"
                 disabled
               />
             </ButtonTray>
@@ -268,19 +270,19 @@ export const SudokuController = (props) => {
             <ButtonTray>
               <JellyButton
                 text="reset"
-                onClick={() => loadSudoku(nakedPair.test)}
-                color="removal"
+                onClick={() => loadSudoku(pointingTuple.test)}
+                color="tertiary"
               />
               <JellyButton
                 text="auto-solve"
                 onClick={() => startSolveInterval(animation.delay)}
-                color="highlightAlt"
+                color="secondary"
                 flexGrow={2}
               />
               <JellyButton
                 text="next"
                 onClick={() => setTimeout(getNextSolution, animation.delay / 6)}
-                color="highlight"
+                color="primary"
               />
             </ButtonTray>
           )}
