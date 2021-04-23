@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { animation } from "../params.js";
+import { colors, animation } from "../params.js";
 import { JellyButton, ButtonTray } from "./controls";
 import { Sudoku } from "./sudoku";
-import { BirdFeed } from "./birdfeed";
+import { BirdFeed, BirdTweet } from "./birdfeed";
 import {
   nakedSingle,
   hiddenSingle,
@@ -14,6 +14,7 @@ import {
 
 var solveInterval = false;
 var isLoaded = false;
+var keyIterator = 0;
 
 export const SudokuController = (props) => {
   const [state, setState] = useState([]);
@@ -86,6 +87,7 @@ export const SudokuController = (props) => {
       unsolved: state.unsolved,
       isSolved: state.isSolved,
       snapshot: state.snapshot,
+      feed: state.feed,
     };
     setState(localState);
   };
@@ -135,6 +137,14 @@ export const SudokuController = (props) => {
                 ")"
             );
             state.snapshot = snapshot;
+            let snapshotData = {
+              snapshot: snapshot,
+              technique: techniques[t],
+              key: keyIterator,
+            };
+            keyIterator++;
+            if (state.feed) state.feed.push(snapshotData);
+            else state.feed = [snapshotData];
             pushState();
             return true;
           }
@@ -218,6 +228,20 @@ export const SudokuController = (props) => {
     };
   };
 
+  const mountSnapshot = (snapshot) => {
+    // console.log(snapshot);
+    state.isSolved = true;
+    state.snapshot = snapshot;
+    pushState();
+  };
+
+  const dismountSnapshot = () => {
+    // console.log(snapshot);
+    state.isSolved = false;
+    state.snapshot = state.feed[state.feed.length - 1].snapshot;
+    pushState();
+  };
+
   return (
     <StyledDiv>
       <SudokuContainer>
@@ -229,8 +253,36 @@ export const SudokuController = (props) => {
         {/* <Sudoku sudoku={state.snapshot}></Sudoku> */}
       </SudokuContainer>
       <BirdFeedContainer>
-        <BirdFeed feed={state.feed}></BirdFeed>
+        <TweetList>
+          {state.feed &&
+            state.feed.map((tweet) => (
+              <BirdTweet
+                tweet={tweet}
+                onMouseEnter={() => mountSnapshot(tweet.snapshot)}
+              />
+              // <li
+              //   key={tweet.key}
+              //   // onClick={() => mountSnapshot(tweet.snapshot)}
+              //   // onMouseEnter={() => mountSnapshot(tweet.snapshot)}
+              //   // onMouseLeave={() => dismountSnapshot()}
+              //   onFocus={() => mountSnapshot(tweet.snapshot)}
+              //   onBlur={() => dismountSnapshot()}
+              //   tabIndex={0}
+              // >
+              //   <div className={"tweet-label"}>{tweet.technique.name}</div>
+              //   <div className={"tweet-text tweet-desc"}>
+              //     {tweet.technique.desc && tweet.technique.desc}
+              //   </div>
+              //   <div className={"tweet-text tweet-cons"}>
+              //     {tweet.technique.cons && tweet.technique.cons}
+              //   </div>
+              // </li>
+            ))}
+        </TweetList>
       </BirdFeedContainer>
+      {/* <BirdFeedContainer>
+        <BirdFeed feed={state.feed}></BirdFeed>
+      </BirdFeedContainer> */}
       <ControlContainer>
         <ButtonTray>
           {!isLoaded ? (
@@ -296,6 +348,7 @@ const StyledDiv = styled.div`
   display: grid;
   grid-template-rows: min(80vw, 80vh) 1fr;
   grid-template-columns: min(80vw, 80vh) 1fr;
+  // TODO: make this consistent across browsers
   grid-gap: 2rem;
   padding: 2rem;
   grid-template-areas:
@@ -303,6 +356,9 @@ const StyledDiv = styled.div`
     "ctrl feed";
 
   flex-grow: 1;
+
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const SudokuContainer = styled.div`
@@ -315,4 +371,19 @@ const ControlContainer = styled.div`
 `;
 const BirdFeedContainer = styled.div`
   grid-area: feed;
+`;
+
+const TweetList = styled.ul`
+  height: 80vh;
+  margin: 0;
+  padding: 0;
+
+  overflow-y: scroll;
+  list-style-type: none;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;

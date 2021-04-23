@@ -4,6 +4,7 @@ export const colors = {
   neutralMid: "#202020",
   neutralHigh: "#313131",
   neutralHighest: "#ADADAD",
+  neutralHighest50: "rgba(173, 173, 173, 0.5)",
 
   accentPrimaryName: "blue",
   accentPrimary: "#61DBFB",
@@ -18,8 +19,8 @@ export const colors = {
   accentTertiaryName: "pink",
   accentTertiary: "#FF99FC",
   accentTertiary50: "rgba(255, 153, 252, 0.5)",
-  accentTertiaryBG: "rgba(255, 153, 252, 0.15)",
-  accentTertiaryPressed: "rgba(255, 153, 252, 0.25)",
+  accentTertiaryBG: "rgba(255, 153, 252, 0.125)",
+  accentTertiaryPressed: "rgba(255, 153, 252, 0.225)",
 };
 
 let s = 2.31;

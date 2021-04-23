@@ -7,6 +7,16 @@ import { helper } from "./TechniqueHelper.js";
 
 export const nakedSingle = {
   name: "Naked Single",
+  desc: {
+    primary: {
+      subject: "This cell...",
+      text: "must be X, because its only remaining candidate is X.",
+    },
+    tertiary: {
+      subject: "So, other cells...",
+      text: "in the same house, row, or column can eliminate X as a candidate.",
+    },
+  },
   test: [
     [0, 4, 9, 0, 0, 0, 0, 3, 0],
     [0, 5, 0, 6, 1, 0, 0, 0, 0],

@@ -36,7 +36,7 @@ const Button = styled.button`
   width: 100%;
 
   border: 2px solid;
-  border-radius: 0.4em;
+  border-radius: 0.4em; // TODO: paramaterize these vals for re-use in BirdFeed
 
   top: 7px;
   position: absolute;
