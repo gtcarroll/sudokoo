@@ -31,8 +31,8 @@ const ButtonContainer = styled.div`
 const Button = styled.button`
   transition: ${animation.buttonSpeed};
 
-  font-size: 1em;
-  padding: 0.2em 0.2em 0.4em 0.2em;
+  font-size: 1.5rem;
+  padding: 0.4rem 0.4rem 0.8rem 0.4rem;
   width: 100%;
 
   border: 2px solid;

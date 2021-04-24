@@ -7,6 +7,16 @@ import { helper } from "./TechniqueHelper.js";
 
 export const nakedPair = {
   name: "Naked Pair",
+  desc: {
+    primary: {
+      subject: "These cells...",
+      text: "can both only be X1 or X2, which means that...",
+    },
+    tertiary: {
+      subject: "other cells...",
+      text: "in the same Y1 can eliminate X1 and X2 as suspects.",
+    },
+  },
   test: [
     [0, 3, 0, 0, 0, 8, 0, 0, 7],
     [8, 0, 0, 3, 0, 0, 2, 6, 0],

@@ -7,6 +7,16 @@ import { helper } from "./TechniqueHelper.js";
 
 export const hiddenSingle = {
   name: "Hidden Single",
+  desc: {
+    primary: {
+      subject: "This cell...",
+      text: "must be X, because its the only cell in its Y1 that can be X.",
+    },
+    tertiary: {
+      subject: "So, other cells...",
+      text: "in the same Y2 or Y3 can eliminate X as a suspect.",
+    },
+  },
   test: [
     [0, 3, 0, 0, 0, 8, 0, 0, 7],
     [8, 0, 0, 3, 0, 0, 2, 6, 0],

@@ -14,7 +14,7 @@ import {
 
 var solveInterval = false;
 var isLoaded = false;
-var keyIterator = 0;
+var keyIterator = 1;
 
 export const SudokuController = (props) => {
   const [state, setState] = useState([]);
@@ -29,6 +29,8 @@ export const SudokuController = (props) => {
   // input is a 2d array of starting values
   const loadSudoku = (input) => {
     console.log("Loading Sudoku...");
+
+    keyIterator = 1;
 
     state.sudoku = {
       rows: buildEmpty2DArray(),
@@ -254,30 +256,35 @@ export const SudokuController = (props) => {
       </SudokuContainer>
       <BirdFeedContainer>
         <TweetList>
-          {state.feed &&
-            state.feed.map((tweet) => (
-              <BirdTweet
-                tweet={tweet}
-                onMouseEnter={() => mountSnapshot(tweet.snapshot)}
+          {
+            state.feed && (
+              <BirdFeed
+                currTweet={
+                  state.feed.length > 1
+                    ? state.feed[state.feed.length - 2]
+                    : false
+                }
+                nextTweet={state.feed[state.feed.length - 1]}
               />
-              // <li
-              //   key={tweet.key}
-              //   // onClick={() => mountSnapshot(tweet.snapshot)}
-              //   // onMouseEnter={() => mountSnapshot(tweet.snapshot)}
-              //   // onMouseLeave={() => dismountSnapshot()}
-              //   onFocus={() => mountSnapshot(tweet.snapshot)}
-              //   onBlur={() => dismountSnapshot()}
-              //   tabIndex={0}
-              // >
-              //   <div className={"tweet-label"}>{tweet.technique.name}</div>
-              //   <div className={"tweet-text tweet-desc"}>
-              //     {tweet.technique.desc && tweet.technique.desc}
-              //   </div>
-              //   <div className={"tweet-text tweet-cons"}>
-              //     {tweet.technique.cons && tweet.technique.cons}
-              //   </div>
-              // </li>
-            ))}
+            )
+            // <li
+            //   key={tweet.key}
+            //   // onClick={() => mountSnapshot(tweet.snapshot)}
+            //   // onMouseEnter={() => mountSnapshot(tweet.snapshot)}
+            //   // onMouseLeave={() => dismountSnapshot()}
+            //   onFocus={() => mountSnapshot(tweet.snapshot)}
+            //   onBlur={() => dismountSnapshot()}
+            //   tabIndex={0}
+            // >
+            //   <div className={"tweet-label"}>{tweet.technique.name}</div>
+            //   <div className={"tweet-text tweet-desc"}>
+            //     {tweet.technique.desc && tweet.technique.desc}
+            //   </div>
+            //   <div className={"tweet-text tweet-cons"}>
+            //     {tweet.technique.cons && tweet.technique.cons}
+            //   </div>
+            // </li>
+          }
         </TweetList>
       </BirdFeedContainer>
       {/* <BirdFeedContainer>
@@ -300,7 +307,7 @@ export const SudokuController = (props) => {
           ) : solveInterval ? (
             <ButtonTray>
               <JellyButton
-                text="reset"
+                text="< prev"
                 onClick={() => loadSudoku(pointingTuple.test)}
                 color="tertiary"
                 disabled
@@ -312,7 +319,7 @@ export const SudokuController = (props) => {
                 flexGrow={2}
               />
               <JellyButton
-                text="next"
+                text="next >"
                 onClick={() => setTimeout(getNextSolution, animation.delay / 6)}
                 color="primary"
                 disabled
@@ -321,7 +328,7 @@ export const SudokuController = (props) => {
           ) : (
             <ButtonTray>
               <JellyButton
-                text="reset"
+                text="< prev"
                 onClick={() => loadSudoku(pointingTuple.test)}
                 color="tertiary"
               />
@@ -332,7 +339,7 @@ export const SudokuController = (props) => {
                 flexGrow={2}
               />
               <JellyButton
-                text="next"
+                text="next >"
                 onClick={() => setTimeout(getNextSolution, animation.delay / 6)}
                 color="primary"
               />

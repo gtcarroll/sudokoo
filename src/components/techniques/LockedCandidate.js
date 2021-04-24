@@ -2,11 +2,21 @@
 import { helper } from "./TechniqueHelper.js";
 
 // const LockedCandidate = (props) => {
-//   return <h2>locked candidate</h2>;
+//   return <h2>locked suspect</h2>;
 // };
 
 export const lockedCandidate = {
   name: "Locked Candidate",
+  desc: {
+    primary: {
+      subject: "These cells...",
+      text: "are the only cells that can be X in their Y1, which means that...",
+    },
+    tertiary: {
+      subject: "other cells...",
+      text: "in the same house can eliminate X as a suspect.",
+    },
+  },
   test: [
     [1, 2, 0, 0, 9, 0, 0, 6, 0],
     [6, 0, 3, 1, 4, 0, 0, 9, 2],

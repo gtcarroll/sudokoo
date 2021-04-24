@@ -7,6 +7,17 @@ import { helper } from "./TechniqueHelper.js";
 
 export const pointingTuple = {
   name: "Pointing Tuple",
+  desc: {
+    primary: {
+      subject: "These cells...",
+      text:
+        "are the only cells that can be X in their house, which means that...",
+    },
+    tertiary: {
+      subject: "other cells...",
+      text: "in the same Y2 can eliminate X as a suspect.",
+    },
+  },
   test: [
     [0, 0, 0, 0, 0, 0, 3, 9, 5],
     [5, 0, 0, 0, 7, 0, 0, 2, 0],

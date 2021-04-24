@@ -5,12 +5,8 @@ import { colors, animation } from "../../params.js";
 export const BirdTweet = (props) => {
   return (
     <StyledLi
+      className={props.className}
       key={props.tweet.key}
-      // onClick={() => mountSnapshot(tweet.snapshot)}
-      // onMouseEnter={() => mountSnapshot(tweet.snapshot)}
-      // onMouseLeave={() => dismountSnapshot()}
-      // onFocus={() => mountSnapshot(props.tweet.snapshot)}
-      // onBlur={() => dismountSnapshot()}
       tabIndex={0}
       active={true}
     >
@@ -18,36 +14,36 @@ export const BirdTweet = (props) => {
         <div>{props.tweet.technique.name}</div>
         <div className={"tweet-key"}>#{props.tweet.key}</div>
       </div>
-      {props.tweet.technique.desc && props.tweet.technique.desc["primary"] && (
+      {props.tweet.snapshot.desc && props.tweet.snapshot.desc["primary"] && (
         <TweetNode>
           <MiniCell className="primary" />
           <div className={"tweet-name primary"}>
-            {props.tweet.technique.desc["primary"].subject}
+            {props.tweet.snapshot.desc["primary"].subject}
           </div>
           <div className={"tweet-text"}>
-            {props.tweet.technique.desc["primary"].text}
+            {props.tweet.snapshot.desc["primary"].text}
           </div>
         </TweetNode>
       )}
-      {props.tweet.technique.desc && props.tweet.technique.desc["secondary"] && (
+      {props.tweet.snapshot.desc && props.tweet.snapshot.desc["secondary"] && (
         <TweetNode>
           <MiniCell className="secondary" />
           <div className={"tweet-name secondary"}>
-            {props.tweet.technique.desc["secondary"].subject}
+            {props.tweet.snapshot.desc["secondary"].subject}
           </div>
           <div className={"tweet-text"}>
-            {props.tweet.technique.desc["secondary"].text}
+            {props.tweet.snapshot.desc["secondary"].text}
           </div>
         </TweetNode>
       )}
-      {props.tweet.technique.desc && props.tweet.technique.desc["tertiary"] && (
+      {props.tweet.snapshot.desc && props.tweet.snapshot.desc["tertiary"] && (
         <TweetNode>
           <MiniCell className="tertiary" />
           <div className={"tweet-name tertiary"}>
-            {props.tweet.technique.desc["tertiary"].subject}
+            {props.tweet.snapshot.desc["tertiary"].subject}
           </div>
           <div className={"tweet-text"}>
-            {props.tweet.technique.desc["tertiary"].text}
+            {props.tweet.snapshot.desc["tertiary"].text}
           </div>
         </TweetNode>
       )}
@@ -68,13 +64,23 @@ const StyledLi = styled.li`
   overflow: hidden;
   box-sizing: border-box;
 
-  height: 3.1rem;
+  height: 100%;
   max-width: 60vh;
   &:active,
   &:focus,
   &.active {
     color: ${colors.accentPrimary};
     height: 100%;
+  }
+
+  animation: tweetFadeIn ${animation.speed} ease-in-out;
+  @keyframes tweetFadeIn {
+    0% {
+      opacity: 0;
+    }
+    ${animation.midPoint} {
+      opacity: 1;
+    }
   }
 
   .tweet-name {
@@ -102,37 +108,28 @@ const StyledLi = styled.li`
     padding: 0.4rem 0.4rem 0.6rem 0.6rem;
 
     border: 2px solid ${colors.neutralHigh};
-    /* * {
-      &:hover,
-      &:focus,
-      &:active,
-      &.active {
-        color: ${colors.accentPrimary};
-        border-color: ${colors.accentPrimary};
-        background-color: ${colors.accentPrimaryBG};
-      }
-    } */
 
-    // TODO: position w flexbox instead
     display: grid;
     grid-template-columns: 1fr 2rem;
+
     .tweet-key {
       color: ${colors.neutralHighest50};
       font-size: 1rem;
+      margin-top: 0.3rem;
     }
   }
 
   .tweet-text {
     grid-area: desc;
-    font-size: 0.8em;
-    padding: 0.2em 0.6em 0.4em 0.6em;
+    font-size: 1.4rem;
+    padding: 0em 0.6em 0.4em 0.6em;
     margin: 0rem 1.5rem;
 
     border-radius: 2px;
     border: 2px solid;
 
     color: ${colors.neutralHighest};
-    background-color: ${colors.neutralLow};
+    /* background-color: ${colors.neutralLow}; */
     border: none;
   }
 `;
