@@ -39,7 +39,12 @@ export const SudokuController = (props) => {
     };
     state.isSolved = false;
     state.unsolved = [];
-    state.feed = [];
+    state.birdfeed = {
+      i: 0,
+      tweets: [],
+      curr: false,
+      next: false,
+    };
 
     // for every sudoku cell...
     for (let h = 0; h < 9; h++) {
@@ -89,7 +94,7 @@ export const SudokuController = (props) => {
       unsolved: state.unsolved,
       isSolved: state.isSolved,
       snapshot: state.snapshot,
-      feed: state.feed,
+      birdfeed: state.birdfeed,
     };
     setState(localState);
   };
@@ -145,9 +150,10 @@ export const SudokuController = (props) => {
               key: keyIterator,
             };
             keyIterator++;
-            if (state.feed) state.feed.push(snapshotData);
-            else state.feed = [snapshotData];
-            pushState();
+            if (state.birdfeed.tweets) state.birdfeed.tweets.push(snapshotData);
+            else state.birdfeed.tweets = [snapshotData];
+            nextTweet();
+            // pushState();
             return true;
           }
         }
@@ -230,9 +236,39 @@ export const SudokuController = (props) => {
     };
   };
 
+  const getNextTweet = () => {
+    if (!nextTweet()) setTimeout(getNextSolution, animation.delay / 6);
+  };
+
+  const nextTweet = () => {
+    // console.log(state.birdfeed);
+    let tweetsLeft = state.birdfeed.i < state.birdfeed.tweets.length - 1;
+    if (tweetsLeft) {
+      state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
+      state.birdfeed.i++;
+      state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
+      mountSnapshot(state.birdfeed.next.snapshot);
+    } else if (state.birdfeed.i === state.birdfeed.tweets.length - 1) {
+      state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
+      mountSnapshot(state.birdfeed.next.snapshot);
+    }
+    return tweetsLeft;
+  };
+
+  const prevTweet = () => {
+    if (state.birdfeed.i > 0) {
+      state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
+      state.birdfeed.i--;
+      state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
+      mountSnapshot(state.birdfeed.next.snapshot);
+    } else {
+      // TODO: put reset function here
+    }
+  };
+
   const mountSnapshot = (snapshot) => {
     // console.log(snapshot);
-    state.isSolved = true;
+    // state.isSolved = true;
     state.snapshot = snapshot;
     pushState();
   };
@@ -240,7 +276,8 @@ export const SudokuController = (props) => {
   const dismountSnapshot = () => {
     // console.log(snapshot);
     state.isSolved = false;
-    state.snapshot = state.feed[state.feed.length - 1].snapshot;
+    state.snapshot =
+      state.birdfeed.tweets[state.birdfeed.tweets.length - 1].snapshot;
     pushState();
   };
 
@@ -257,14 +294,10 @@ export const SudokuController = (props) => {
       <BirdFeedContainer>
         <TweetList>
           {
-            state.feed && (
+            state.birdfeed && (
               <BirdFeed
-                currTweet={
-                  state.feed.length > 1
-                    ? state.feed[state.feed.length - 2]
-                    : false
-                }
-                nextTweet={state.feed[state.feed.length - 1]}
+                currTweet={state.birdfeed.curr}
+                nextTweet={state.birdfeed.next}
               />
             )
             // <li
@@ -288,7 +321,7 @@ export const SudokuController = (props) => {
         </TweetList>
       </BirdFeedContainer>
       {/* <BirdFeedContainer>
-        <BirdFeed feed={state.feed}></BirdFeed>
+        <BirdFeed feed={state.birdfeed.tweets}></BirdFeed>
       </BirdFeedContainer> */}
       <ControlContainer>
         <ButtonTray>
@@ -308,7 +341,7 @@ export const SudokuController = (props) => {
             <ButtonTray>
               <JellyButton
                 text="< prev"
-                onClick={() => loadSudoku(pointingTuple.test)}
+                onClick={() => prevTweet()} //loadSudoku(pointingTuple.test)}
                 color="tertiary"
                 disabled
               />
@@ -320,7 +353,7 @@ export const SudokuController = (props) => {
               />
               <JellyButton
                 text="next >"
-                onClick={() => setTimeout(getNextSolution, animation.delay / 6)}
+                onClick={() => getNextTweet()}
                 color="primary"
                 disabled
               />
@@ -329,7 +362,7 @@ export const SudokuController = (props) => {
             <ButtonTray>
               <JellyButton
                 text="< prev"
-                onClick={() => loadSudoku(pointingTuple.test)}
+                onClick={() => prevTweet()} //loadSudoku(pointingTuple.test)}
                 color="tertiary"
               />
               <JellyButton
@@ -340,7 +373,7 @@ export const SudokuController = (props) => {
               />
               <JellyButton
                 text="next >"
-                onClick={() => setTimeout(getNextSolution, animation.delay / 6)}
+                onClick={() => getNextTweet()}
                 color="primary"
               />
             </ButtonTray>

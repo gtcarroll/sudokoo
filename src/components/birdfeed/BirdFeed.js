@@ -4,7 +4,7 @@ import { BirdTweet } from "./";
 import { colors, animation } from "../../params.js";
 
 export const BirdFeed = (props) => {
-  console.log(props.currTweet);
+  // console.log(props.currTweet);
   return (
     <StyledUl className={props.nextTweet ? "next" : ""}>
       {props.currTweet && (
