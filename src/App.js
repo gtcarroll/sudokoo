@@ -11,7 +11,7 @@ function App() {
         <PaletteStrip />
       </RowContainer>
 
-      <RowContainer style={{ flexGrow: 1 }}>
+      <RowContainer style={{ flexGrow: 1, margin: "auto" }}>
         <SudokuController />
       </RowContainer>
 

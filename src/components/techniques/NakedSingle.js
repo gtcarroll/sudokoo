@@ -1,22 +1,54 @@
-//import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { helper } from "./TechniqueHelper.js";
+import { colors, animation } from "../../params.js";
+import { ReportNode, MiniCell, Pop, Hlt } from "../birdfeed";
 
-// const NakedSingleComponent = (props) => {
-//   return <h2>naked single</h2>;
-// };
+const NakedSingleReport = (props) => {
+  return (
+    <div>
+      <ReportNode className="primary">
+        <MiniCell className="mini-cell" />
+        <div className="lead">
+          <Pop className="pri">This cell...</Pop>
+        </div>
+        <div className="text">
+          must be <Pop className="pri">{props.x}</Pop>, because that is its only
+          remaining option.
+          {/* must be <Pop className="pri">{props.x}</Pop>, because its only
+          remaining suspect is <Pop className="pri">{props.x}</Pop>. */}
+        </div>
+      </ReportNode>
+      <ReportNode className="tertiary">
+        <MiniCell className="mini-cell" />
+        <div className="lead">
+          <Pop className="ter">So, other cells...</Pop>
+        </div>
+        <div className="text">
+          in the same <Hlt className="ter">house</Hlt>,{" "}
+          <Hlt className="ter">row</Hlt>, or <Hlt className="ter">column</Hlt>{" "}
+          can no longer be <Pop className="ter">{props.x}</Pop>.
+        </div>
+      </ReportNode>
+    </div>
+  );
+};
+
+NakedSingleReport.defaultProps = {
+  x: 0,
+};
 
 export const nakedSingle = {
   name: "Naked Single",
+  //TODO: test if this works as is, otherwise reconstruct how BirdTweet accepts input
+  report: (soln) => {
+    return NakedSingleReport(soln);
+  },
   getDesc: (soln) => {
     return {
       primary: {
         subject: "This cell...",
-        text:
-          "must be " +
-          soln +
-          ", because its only remaining suspect is " +
-          soln +
-          ".",
+        text: "must be x0, because its only remaining suspect is x0.",
       },
       tertiary: {
         subject: "So, other cells...",
@@ -59,6 +91,9 @@ export const nakedSingle = {
       helper.fillAxis(snapshot, cell, 1, "tertiary");
       helper.fillAxis(snapshot, cell, 2, "tertiary");
       snapshot.desc = nakedSingle.getDesc(suspects[0] + 1);
+      snapshot.props = {
+        x: suspects[0] + 1,
+      };
       return snapshot;
     }
     return false;

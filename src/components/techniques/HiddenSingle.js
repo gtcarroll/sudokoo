@@ -1,12 +1,43 @@
-//import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { helper } from "./TechniqueHelper.js";
+import { colors, animation } from "../../params.js";
+import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
 
-// const HiddenSingleComponent = (props) => {
-//   return <h2>naked single</h2>;
-// };
+const HiddenSingleReport = (props) => {
+  return (
+    <div>
+      <ReportNode className="primary">
+        <MiniCell className="mini-cell" />
+        <div className="lead">
+          <Pop className="pri">This cell...</Pop>
+        </div>
+        <div className="text">
+          must be <Pop className="pri">{props.x}</Pop>, because its the only
+          possible <Pop className="pri">{props.x}</Pop> in its{" "}
+          <Hlt className="pri">{axesNames[props.a % 3]}</Hlt>.
+        </div>
+      </ReportNode>
+      <ReportNode className="tertiary">
+        <MiniCell className="mini-cell" />
+        <div className="lead">
+          <Pop className="ter">So, other cells...</Pop>
+        </div>
+        <div className="text">
+          in the same <Hlt className="ter">{axesNames[(props.a + 1) % 3]}</Hlt>{" "}
+          or <Hlt className="ter">{axesNames[(props.a + 2) % 3]}</Hlt> can no
+          longer be <Pop className="ter">{props.x}</Pop>.
+        </div>
+      </ReportNode>
+    </div>
+  );
+};
 
 export const hiddenSingle = {
   name: "Hidden Single",
+  report: (props) => {
+    return HiddenSingleReport(props);
+  },
   desc: {
     primary: {
       subject: "This cell...",
@@ -46,6 +77,11 @@ export const hiddenSingle = {
         helper.fillAxis(snapshot, cell, a);
         helper.fillAxis(snapshot, cell, (a + 1) % 3, "tertiary");
         helper.fillAxis(snapshot, cell, (a + 2) % 3, "tertiary");
+
+        snapshot.props = {
+          x: unseen[0] + 1,
+          a: a,
+        };
 
         return snapshot;
       }

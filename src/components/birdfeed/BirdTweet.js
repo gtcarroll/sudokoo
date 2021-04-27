@@ -2,52 +2,22 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { colors, animation } from "../../params.js";
 
+export const axesNames = ["row", "column", "house"];
+
 export const BirdTweet = (props) => {
   return (
-    <StyledLi
+    <StyledDiv
       className={props.className}
       key={props.tweet.key}
       tabIndex={0}
       active={true}
     >
-      <div className={"tweet-label"}>
+      <ReportHeader>
         <div>{props.tweet.technique.name}</div>
         <div className={"tweet-key"}>#{props.tweet.key}</div>
-      </div>
-      {props.tweet.snapshot.desc && props.tweet.snapshot.desc["primary"] && (
-        <TweetNode>
-          <MiniCell className="primary" />
-          <div className={"tweet-name primary"}>
-            {props.tweet.snapshot.desc["primary"].subject}
-          </div>
-          <div className={"tweet-text"}>
-            {props.tweet.snapshot.desc["primary"].text}
-          </div>
-        </TweetNode>
-      )}
-      {props.tweet.snapshot.desc && props.tweet.snapshot.desc["secondary"] && (
-        <TweetNode>
-          <MiniCell className="secondary" />
-          <div className={"tweet-name secondary"}>
-            {props.tweet.snapshot.desc["secondary"].subject}
-          </div>
-          <div className={"tweet-text"}>
-            {props.tweet.snapshot.desc["secondary"].text}
-          </div>
-        </TweetNode>
-      )}
-      {props.tweet.snapshot.desc && props.tweet.snapshot.desc["tertiary"] && (
-        <TweetNode>
-          <MiniCell className="tertiary" />
-          <div className={"tweet-name tertiary"}>
-            {props.tweet.snapshot.desc["tertiary"].subject}
-          </div>
-          <div className={"tweet-text"}>
-            {props.tweet.snapshot.desc["tertiary"].text}
-          </div>
-        </TweetNode>
-      )}
-    </StyledLi>
+      </ReportHeader>
+      {props.tweet.report}
+    </StyledDiv>
   );
 };
 
@@ -56,113 +26,112 @@ BirdTweet.defaultProps = {
     key: -1,
     snapshot: false,
     technique: false,
+    report: false,
   },
 };
 
-const StyledLi = styled.li`
-  transition: all ${animation.halfSpeed} ease;
-  overflow: hidden;
-  box-sizing: border-box;
-
-  height: 100%;
-  max-width: 60vh;
-  &:active,
-  &:focus,
-  &.active {
-    color: ${colors.accentPrimary};
-    height: 100%;
-  }
-
-  animation: tweetFadeIn ${animation.speed} ease-in-out;
-  @keyframes tweetFadeIn {
-    0% {
-      opacity: 0;
-    }
-    ${animation.midPoint} {
-      opacity: 1;
-    }
-  }
-
-  .tweet-name {
-    grid-area: name;
-    font-size: 1.4rem;
-    padding: 0.8rem 0rem 0rem 0.4rem;
-
-    &.primary {
-      color: ${colors.accentPrimary};
-    }
-    &.secondary {
-      color: ${colors.accentSecondary};
-    }
-    &.tertiary {
-      color: ${colors.accentTertiary};
-    }
-  }
-
-  .tweet-label {
-    color: ${colors.neutralHighest};
-    background-color: ${colors.neutralLow};
-    transition: inherit;
-
-    font-size: 1.5rem;
-    padding: 0.4rem 0.4rem 0.6rem 0.6rem;
-
-    border: 2px solid ${colors.neutralHigh};
-
-    display: grid;
-    grid-template-columns: 1fr 2rem;
-
-    .tweet-key {
-      color: ${colors.neutralHighest50};
-      font-size: 1rem;
-      margin-top: 0.3rem;
-    }
-  }
-
-  .tweet-text {
-    grid-area: desc;
-    font-size: 1.4rem;
-    padding: 0em 0.6em 0.4em 0.6em;
-    margin: 0rem 1.5rem;
-
-    border-radius: 2px;
-    border: 2px solid;
-
-    color: ${colors.neutralHighest};
-    /* background-color: ${colors.neutralLow}; */
-    border: none;
-  }
+const StyledDiv = styled.div`
+  max-width: 28rem;
 `;
 
-const TweetNode = styled.div`
+const ReportHeader = styled.div`
+  color: ${colors.neutralHighest};
+  background-color: ${colors.neutralLow};
+  transition: inherit;
+
+  font-size: 1.5rem;
+  padding: 0.4rem 0.4rem 0.6rem 0.6rem;
+
+  border: 2px solid ${colors.neutralHigh};
+
+  display: grid;
+  grid-template-columns: 1fr 2rem;
+
+  .tweet-key {
+    color: ${colors.neutralHighest50};
+    font-size: 1rem;
+    margin-top: 0.3rem;
+  }
+`;
+export const ReportNode = styled.div`
   display: grid;
   grid-template-rows: 3rem 1fr;
   grid-template-columns: 3rem 1fr;
   grid-template-areas:
-    "cell name"
-    "desc desc";
+    "cell lead"
+    "text text";
   width: 100%;
-  margin-top: 1rem;
+  margin: 1rem 0.8rem 0 0.8rem;
   padding-bottom: 0.5rem;
-`;
 
-const MiniCell = styled.div`
+  color: ${colors.neutralHighest};
+
+  .text {
+    grid-area: text;
+    font-size: 1.4rem;
+    padding: 0em 0.6em 0.4em 0.6em;
+    margin: 0rem 1.5rem;
+  }
+
+  .lead {
+    grid-area: lead;
+    font-size: 1.5rem;
+    padding: 0.8rem 0rem 0rem 0.3rem;
+  }
+
+  .text,
+  .lead {
+    font-size: 1.4rem;
+  }
+  &.primary {
+    .mini-cell {
+      background-color: ${colors.accentPrimaryBG};
+      border: 2px solid ${colors.accentPrimary50};
+    }
+  }
+  &.secondary {
+    .mini-cell {
+      background-color: ${colors.accentSecondaryBG};
+      border: 2px solid ${colors.accentSecondary50};
+    }
+  }
+  &.tertiary {
+    .mini-cell {
+      background-color: ${colors.accentTertiaryBG};
+      border: 2px solid ${colors.accentTertiary50};
+    }
+  }
+`;
+export const Pop = styled.span`
+  padding: 0rem 0.1rem;
+  &.pri {
+    color: ${colors.accentPrimary};
+  }
+  &.sec {
+    color: ${colors.accentSecondary};
+  }
+  &.ter {
+    color: ${colors.accentTertiary};
+  }
+`;
+export const Hlt = styled.span`
+  padding: 0rem 0.3rem;
+  border-radius: 2px;
+  &.pri {
+    background-color: ${colors.accentPrimaryPressed};
+  }
+  &.sec {
+    background-color: ${colors.accentSecondaryPressed};
+  }
+  &.ter {
+    background-color: ${colors.accentTertiaryPressed};
+  }
+`;
+export const MiniCell = styled.div`
   grid-area: cell;
 
   margin: 0.9rem;
   height: 1.2rem;
   width: 1.2rem;
   border-radius: 2px;
-  &.primary {
-    background-color: ${colors.accentPrimaryBG};
-    border: 2px solid ${colors.accentPrimary50};
-  }
-  &.secondary {
-    background-color: ${colors.accentSecondaryBG};
-    border: 2px solid ${colors.accentSecondary50};
-  }
-  &.tertiary {
-    background-color: ${colors.accentTertiaryBG};
-    border: 2px solid ${colors.accentTertiary50};
-  }
 `;

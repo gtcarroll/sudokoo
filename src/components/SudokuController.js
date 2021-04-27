@@ -15,6 +15,7 @@ import {
 var solveInterval = false;
 var isLoaded = false;
 var keyIterator = 1;
+var report = <h1>report</h1>;
 
 export const SudokuController = (props) => {
   const [state, setState] = useState([]);
@@ -150,6 +151,12 @@ export const SudokuController = (props) => {
               key: keyIterator,
             };
             keyIterator++;
+            if (techniques[t].report) {
+              console.log("debug hello");
+              snapshotData.report = techniques[t].report(
+                snapshotData.snapshot.props
+              );
+            }
             if (state.birdfeed.tweets) state.birdfeed.tweets.push(snapshotData);
             else state.birdfeed.tweets = [snapshotData];
             nextTweet();
@@ -294,29 +301,14 @@ export const SudokuController = (props) => {
       <BirdFeedContainer>
         <TweetList>
           {
+            // TODO: replace curr and next w report vals
             state.birdfeed && (
               <BirdFeed
                 currTweet={state.birdfeed.curr}
                 nextTweet={state.birdfeed.next}
+                report={report}
               />
             )
-            // <li
-            //   key={tweet.key}
-            //   // onClick={() => mountSnapshot(tweet.snapshot)}
-            //   // onMouseEnter={() => mountSnapshot(tweet.snapshot)}
-            //   // onMouseLeave={() => dismountSnapshot()}
-            //   onFocus={() => mountSnapshot(tweet.snapshot)}
-            //   onBlur={() => dismountSnapshot()}
-            //   tabIndex={0}
-            // >
-            //   <div className={"tweet-label"}>{tweet.technique.name}</div>
-            //   <div className={"tweet-text tweet-desc"}>
-            //     {tweet.technique.desc && tweet.technique.desc}
-            //   </div>
-            //   <div className={"tweet-text tweet-cons"}>
-            //     {tweet.technique.cons && tweet.technique.cons}
-            //   </div>
-            // </li>
           }
         </TweetList>
       </BirdFeedContainer>
@@ -346,7 +338,7 @@ export const SudokuController = (props) => {
                 disabled
               />
               <JellyButton
-                text="stop"
+                text="pause"
                 onClick={() => stopSolveInterval()}
                 color="tertiary"
                 flexGrow={2}
@@ -366,7 +358,7 @@ export const SudokuController = (props) => {
                 color="tertiary"
               />
               <JellyButton
-                text="auto-solve"
+                text="play"
                 onClick={() => startSolveInterval(animation.delay)}
                 color="secondary"
                 flexGrow={2}
@@ -386,19 +378,14 @@ export const SudokuController = (props) => {
 
 const StyledDiv = styled.div`
   display: grid;
-  grid-template-rows: min(80vw, 80vh) 1fr;
-  grid-template-columns: min(80vw, 80vh) 1fr;
-  // TODO: make this consistent across browsers
   grid-gap: 2rem;
   padding: 2rem;
+
+  grid-template-rows: min(80vw, 80vh) 1fr;
+  grid-template-columns: min(80vw, 80vh) 28rem;
   grid-template-areas:
     "sdku feed"
     "ctrl feed";
-
-  flex-grow: 1;
-
-  margin-left: auto;
-  margin-right: auto;
 `;
 
 const SudokuContainer = styled.div`
@@ -413,17 +400,8 @@ const BirdFeedContainer = styled.div`
   grid-area: feed;
 `;
 
-const TweetList = styled.ul`
+const TweetList = styled.div`
   height: 80vh;
   margin: 0;
   padding: 0;
-
-  overflow-y: scroll;
-  list-style-type: none;
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
