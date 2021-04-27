@@ -15,7 +15,7 @@ const HiddenSingleReport = (props) => {
         <div className="text">
           must be <Pop className="pri">{props.x}</Pop>, because its the only
           possible <Pop className="pri">{props.x}</Pop> in its{" "}
-          <Hlt className="pri">{axesNames[props.a % 3]}</Hlt>.
+          <Hlt className="pri">{axesNames[props.a]}</Hlt>.
         </div>
       </ReportNode>
       <ReportNode className="tertiary">
@@ -25,29 +25,20 @@ const HiddenSingleReport = (props) => {
         </div>
         <div className="text">
           in the same <Hlt className="ter">{axesNames[(props.a + 1) % 3]}</Hlt>{" "}
-          or <Hlt className="ter">{axesNames[(props.a + 2) % 3]}</Hlt> can no
-          longer be <Pop className="ter">{props.x}</Pop>.
+          or <Hlt className="ter">{axesNames[(props.a + 2) % 3]}</Hlt> must not
+          be <Pop className="ter">{props.x}</Pop>.
         </div>
       </ReportNode>
     </div>
   );
 };
+HiddenSingleReport.defaultProps = {
+  x: 0,
+  a: 0,
+};
 
 export const hiddenSingle = {
   name: "Hidden Single",
-  report: (props) => {
-    return HiddenSingleReport(props);
-  },
-  desc: {
-    primary: {
-      subject: "This cell...",
-      text: "must be X, because its the only cell in its Y1 that can be X.",
-    },
-    tertiary: {
-      subject: "So, other cells...",
-      text: "in the same Y2 or Y3 can eliminate X as a suspect.",
-    },
-  },
   test: [
     [0, 3, 0, 0, 0, 8, 0, 0, 7],
     [8, 0, 0, 3, 0, 0, 2, 6, 0],
@@ -59,6 +50,9 @@ export const hiddenSingle = {
     [0, 8, 0, 2, 7, 1, 0, 0, 3],
     [3, 0, 7, 8, 0, 0, 0, 1, 0],
   ],
+  report: (props) => {
+    return HiddenSingleReport(props);
+  },
   check: (cell, state) => {
     let axisKeys = Object.keys(cell.pos);
 

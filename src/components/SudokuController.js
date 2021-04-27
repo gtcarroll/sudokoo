@@ -306,7 +306,6 @@ export const SudokuController = (props) => {
               <BirdFeed
                 currTweet={state.birdfeed.curr}
                 nextTweet={state.birdfeed.next}
-                report={report}
               />
             )
           }
@@ -320,7 +319,7 @@ export const SudokuController = (props) => {
           {!isLoaded ? (
             <JellyButton
               text="load"
-              onClick={() => loadSudoku(pointingTuple.test)}
+              onClick={() => loadSudoku(nakedPair.test)}
               color="primary"
             />
           ) : state.isSolved ? (
@@ -377,9 +376,11 @@ export const SudokuController = (props) => {
 };
 
 const StyledDiv = styled.div`
-  display: grid;
-  grid-gap: 2rem;
   padding: 2rem;
+
+  display: grid;
+  column-gap: 2rem;
+  row-gap: 1.2rem;
 
   grid-template-rows: min(80vw, 80vh) 1fr;
   grid-template-columns: min(80vw, 80vh) 28rem;

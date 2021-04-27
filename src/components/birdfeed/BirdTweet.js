@@ -64,7 +64,7 @@ export const ReportNode = styled.div`
   margin: 1rem 0.8rem 0 0.8rem;
   padding-bottom: 0.5rem;
 
-  color: ${colors.neutralHighest};
+  color: ${colors.text};
 
   .text {
     grid-area: text;

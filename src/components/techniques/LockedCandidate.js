@@ -1,22 +1,44 @@
-//import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { helper } from "./TechniqueHelper.js";
+import { colors, animation } from "../../params.js";
+import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
 
-// const LockedCandidate = (props) => {
-//   return <h2>locked suspect</h2>;
-// };
+const LockedCandidateReport = (props) => {
+  return (
+    <div>
+      <ReportNode className="primary">
+        <MiniCell className="mini-cell" />
+        <div className="lead">
+          <Pop className="pri">These cells...</Pop>
+        </div>
+        <div className="text">
+          are the only cells that can be <Pop className="pri">{props.x}</Pop> in
+          their <Hlt className="pri">{axesNames[props.a]}</Hlt>. This means that
+          one of them must be <Pop className="pri">{props.x}</Pop>. Since they
+          also share a <Hlt className="ter">house</Hlt> together...
+        </div>
+      </ReportNode>
+      <ReportNode className="tertiary">
+        <MiniCell className="mini-cell" />
+        <div className="lead">
+          <Pop className="ter">other cells...</Pop>
+        </div>
+        <div className="text">
+          in the same <Hlt className="ter">house</Hlt> must not be{" "}
+          <Pop className="ter">{props.x}</Pop>.
+        </div>
+      </ReportNode>
+    </div>
+  );
+};
+LockedCandidateReport.defaultProps = {
+  x: 0,
+  a: 0,
+};
 
 export const lockedCandidate = {
   name: "Locked Candidate",
-  desc: {
-    primary: {
-      subject: "These cells...",
-      text: "are the only cells that can be X in their Y1, which means that...",
-    },
-    tertiary: {
-      subject: "other cells...",
-      text: "in the same house can eliminate X as a suspect.",
-    },
-  },
   test: [
     [1, 2, 0, 0, 9, 0, 0, 6, 0],
     [6, 0, 3, 1, 4, 0, 0, 9, 2],
@@ -28,6 +50,9 @@ export const lockedCandidate = {
     [0, 4, 0, 0, 0, 1, 7, 2, 0],
     [0, 6, 2, 4, 3, 0, 1, 5, 9],
   ],
+  report: (props) => {
+    return LockedCandidateReport(props);
+  },
   check: (cell, state) => {
     let axisKeys = Object.keys(cell.pos);
     let indexes = [cell.pos.row, cell.pos.col];
@@ -108,6 +133,11 @@ export const lockedCandidate = {
 
         helper.fillAxis(snapshot, cell, a);
         helper.fillAxis(snapshot, cell, 2, "tertiary");
+
+        snapshot.props = {
+          x: soln + 1,
+          a: a,
+        };
 
         return snapshot;
       }

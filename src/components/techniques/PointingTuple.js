@@ -1,23 +1,44 @@
-//import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { helper } from "./TechniqueHelper.js";
+import { colors, animation } from "../../params.js";
+import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
 
-// const PointingTuple = (props) => {
-//   return <h2>pointing tuple</h2>;
-// };
+const PointingTupleReport = (props) => {
+  return (
+    <div>
+      <ReportNode className="primary">
+        <MiniCell className="mini-cell" />
+        <div className="lead">
+          <Pop className="pri">These cells...</Pop>
+        </div>
+        <div className="text">
+          are the only cells that can be <Pop className="pri">{props.x}</Pop> in
+          their <Hlt className="pri">house</Hlt>. This means that one of them
+          must be <Pop className="pri">{props.x}</Pop>. Since they also share a{" "}
+          <Hlt className="ter">{axesNames[props.a]}</Hlt> together...
+        </div>
+      </ReportNode>
+      <ReportNode className="tertiary">
+        <MiniCell className="mini-cell" />
+        <div className="lead">
+          <Pop className="ter">other cells...</Pop>
+        </div>
+        <div className="text">
+          in the same <Hlt className="ter">{axesNames[props.a]}</Hlt> must not
+          be <Pop className="ter">{props.x}</Pop>.
+        </div>
+      </ReportNode>
+    </div>
+  );
+};
+PointingTupleReport.defaultProps = {
+  x: 0,
+  a: 0,
+};
 
 export const pointingTuple = {
   name: "Pointing Tuple",
-  desc: {
-    primary: {
-      subject: "These cells...",
-      text:
-        "are the only cells that can be X in their house, which means that...",
-    },
-    tertiary: {
-      subject: "other cells...",
-      text: "in the same Y2 can eliminate X as a suspect.",
-    },
-  },
   test: [
     [0, 0, 0, 0, 0, 0, 3, 9, 5],
     [5, 0, 0, 0, 7, 0, 0, 2, 0],
@@ -29,6 +50,9 @@ export const pointingTuple = {
     [0, 5, 0, 0, 8, 7, 0, 0, 2],
     [2, 0, 7, 0, 0, 0, 0, 0, 0],
   ],
+  report: (props) => {
+    return PointingTupleReport(props);
+  },
   check: (cell, state) => {
     let wasUpdated = false;
     let axisKeys = Object.keys(cell.pos);
@@ -110,6 +134,11 @@ export const pointingTuple = {
 
         helper.fillAxis(snapshot, cell, 2);
         helper.fillAxis(snapshot, cell, a, "tertiary");
+
+        snapshot.props = {
+          x: soln + 1,
+          a: a,
+        };
 
         return snapshot;
       }

@@ -1,22 +1,47 @@
-//import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { helper } from "./TechniqueHelper.js";
+import { colors, animation } from "../../params.js";
+import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
 
-// const NakedPair = (props) => {
-//   return <h2>naked pair</h2>;
-// };
+const NakedPairReport = (props) => {
+  return (
+    <div>
+      <ReportNode className="primary">
+        <MiniCell className="mini-cell" />
+        <div className="lead">
+          <Pop className="pri">These cells...</Pop>
+        </div>
+        <div className="text">
+          can only be <Pop className="pri">{props.x}</Pop> or{" "}
+          <Pop className="pri">{props.y}</Pop> and are both in the same{" "}
+          <Hlt className="pri">{axesNames[props.a]}</Hlt>. This means that one
+          must be <Pop className="pri">{props.x}</Pop> and the other must be{" "}
+          <Pop className="pri">{props.y}</Pop>.
+        </div>
+      </ReportNode>
+      <ReportNode className="tertiary">
+        <MiniCell className="mini-cell" />
+        <div className="lead">
+          <Pop className="ter">So, other cells...</Pop>
+        </div>
+        <div className="text">
+          in the same <Hlt className="ter">{axesNames[props.a]}</Hlt> must not
+          be <Pop className="ter">{props.x}</Pop> or{" "}
+          <Pop className="ter">{props.y}</Pop>.
+        </div>
+      </ReportNode>
+    </div>
+  );
+};
+NakedPairReport.defaultProps = {
+  x: 0,
+  y: 0,
+  a: 0,
+};
 
 export const nakedPair = {
   name: "Naked Pair",
-  desc: {
-    primary: {
-      subject: "These cells...",
-      text: "can both only be X1 or X2, which means that...",
-    },
-    tertiary: {
-      subject: "other cells...",
-      text: "in the same Y1 can eliminate X1 and X2 as suspects.",
-    },
-  },
   test: [
     [0, 3, 0, 0, 0, 8, 0, 0, 7],
     [8, 0, 0, 3, 0, 0, 2, 6, 0],
@@ -28,6 +53,9 @@ export const nakedPair = {
     [0, 8, 0, 2, 7, 1, 0, 0, 3],
     [3, 0, 7, 8, 0, 0, 0, 1, 0],
   ],
+  report: (props) => {
+    return NakedPairReport(props);
+  },
   check: (cell, state) => {
     let pair = helper.getSuspects(cell);
 
@@ -98,6 +126,12 @@ export const nakedPair = {
             helper.fillAxis(snapshot, cell, a, "tertiary");
             helper.highlightUpdates(snapshot, affected0, "tertiary", pair[0]);
             helper.highlightUpdates(snapshot, affected1, "tertiary", pair[1]);
+
+            snapshot.props = {
+              x: pair[0] + 1,
+              y: pair[1] + 1,
+              a: a,
+            };
 
             return snapshot;
           }

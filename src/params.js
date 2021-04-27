@@ -1,4 +1,5 @@
 export const colors = {
+  text: "rgb(231,231,231)",
   neutralLowest: "#080808",
   neutralLow: "#121212",
   neutralMid: "#202020",

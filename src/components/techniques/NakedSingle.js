@@ -27,46 +27,18 @@ const NakedSingleReport = (props) => {
         <div className="text">
           in the same <Hlt className="ter">house</Hlt>,{" "}
           <Hlt className="ter">row</Hlt>, or <Hlt className="ter">column</Hlt>{" "}
-          can no longer be <Pop className="ter">{props.x}</Pop>.
+          must not be <Pop className="ter">{props.x}</Pop>.
         </div>
       </ReportNode>
     </div>
   );
 };
-
 NakedSingleReport.defaultProps = {
   x: 0,
 };
 
 export const nakedSingle = {
   name: "Naked Single",
-  //TODO: test if this works as is, otherwise reconstruct how BirdTweet accepts input
-  report: (soln) => {
-    return NakedSingleReport(soln);
-  },
-  getDesc: (soln) => {
-    return {
-      primary: {
-        subject: "This cell...",
-        text: "must be x0, because its only remaining suspect is x0.",
-      },
-      tertiary: {
-        subject: "So, other cells...",
-        text:
-          "in the same house, row, or column can no longer be " + soln + ".",
-      },
-    };
-  },
-  // desc: {
-  //   primary: {
-  //     subject: "This cell...",
-  //     text: "must be X, because its only remaining suspect is X.",
-  //   },
-  //   tertiary: {
-  //     subject: "So, other cells...",
-  //     text: "in the same house, row, or column can eliminate X as a suspect.",
-  //   },
-  // },
   test: [
     [0, 4, 9, 0, 0, 0, 0, 3, 0],
     [0, 5, 0, 6, 1, 0, 0, 0, 0],
@@ -78,6 +50,9 @@ export const nakedSingle = {
     [5, 0, 0, 4, 0, 8, 7, 0, 0],
     [0, 8, 7, 0, 0, 0, 0, 9, 5],
   ],
+  report: (soln) => {
+    return NakedSingleReport(soln);
+  },
   check: (cell, state) => {
     let suspects = helper.getSuspects(cell);
     if (suspects.length === 1) {
@@ -90,10 +65,11 @@ export const nakedSingle = {
       helper.fillAxis(snapshot, cell, 0, "tertiary");
       helper.fillAxis(snapshot, cell, 1, "tertiary");
       helper.fillAxis(snapshot, cell, 2, "tertiary");
-      snapshot.desc = nakedSingle.getDesc(suspects[0] + 1);
+
       snapshot.props = {
         x: suspects[0] + 1,
       };
+
       return snapshot;
     }
     return false;
