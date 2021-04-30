@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { colors, animation } from "../../params.js";
+import { colors } from "../../params.js";
 
 export const axesNames = ["row", "column", "house"];
 
 export const BirdTweet = (props) => {
   return (
-    <StyledDiv
-      className={props.className}
-      key={props.tweet.key}
-      tabIndex={0}
-      active={true}
-    >
+    <StyledDiv className={props.className} key={props.tweet.key} active={true}>
       <ReportHeader>
         <div>{props.tweet.technique.name}</div>
         <div className={"tweet-key"}>#{props.tweet.key}</div>
@@ -61,7 +56,7 @@ export const ReportNode = styled.div`
     "cell lead"
     "text text";
   width: 100%;
-  margin: 1rem 0.8rem 0 0.8rem;
+  margin: 1rem 0.8rem 0 0;
   padding-bottom: 0.5rem;
 
   color: ${colors.text};
@@ -77,6 +72,7 @@ export const ReportNode = styled.div`
     grid-area: lead;
     font-size: 1.5rem;
     padding: 0.8rem 0rem 0rem 0.3rem;
+    white-space: nowrap;
   }
 
   .text,

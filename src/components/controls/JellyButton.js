@@ -6,7 +6,7 @@ export const JellyButton = (props) => {
   return (
     <ButtonContainer style={{ flexGrow: props.flexGrow }}>
       <Button
-        className={props.disabled ? "disabled" : props.color}
+        className={(props.disabled ? "disabled " : "") + props.color}
         onClick={props.disabled ? null : props.onClick}
       >
         {props.text}
@@ -36,7 +36,7 @@ const Button = styled.button`
   width: 100%;
 
   border: 2px solid;
-  border-radius: 0.4em; // TODO: paramaterize these vals for re-use in BirdFeed
+  border-radius: 2px; //0.4em;
 
   top: 7px;
   position: absolute;
@@ -48,6 +48,10 @@ const Button = styled.button`
   &.primary {
     color: ${colors.accentPrimary};
     border-color: ${colors.accentPrimary};
+    &.disabled {
+      color: ${colors.accentPrimary50};
+      border-color: ${colors.accentPrimary50};
+    }
   }
   &.secondary {
     color: ${colors.accentSecondary};
@@ -85,6 +89,21 @@ const Button = styled.button`
     }
     &.tertiary {
       background-color: ${colors.accentTertiaryPressed};
+    }
+  }
+
+  &.disabled {
+    &.primary {
+      color: ${colors.accentPrimary50};
+      border-color: ${colors.accentPrimary50};
+    }
+    &.secondary {
+      color: ${colors.accentSecondary50};
+      border-color: ${colors.accentSecondary50};
+    }
+    &.tertiary {
+      color: ${colors.accentTertiary50};
+      border-color: ${colors.accentTertiary50};
     }
   }
 `;

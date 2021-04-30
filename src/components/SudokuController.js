@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { colors, animation } from "../params.js";
+import { animation } from "../params.js";
 import { JellyButton, ButtonTray } from "./controls";
 import { Sudoku } from "./sudoku";
-import { BirdFeed, BirdTweet } from "./birdfeed";
+import { BirdFeed } from "./birdfeed";
 import {
   nakedSingle,
   hiddenSingle,
@@ -15,7 +15,6 @@ import {
 var solveInterval = false;
 var isLoaded = false;
 var keyIterator = 1;
-var report = <h1>report</h1>;
 
 export const SudokuController = (props) => {
   const [state, setState] = useState([]);
@@ -152,7 +151,6 @@ export const SudokuController = (props) => {
             };
             keyIterator++;
             if (techniques[t].report) {
-              console.log("debug hello");
               snapshotData.report = techniques[t].report(
                 snapshotData.snapshot.props
               );
@@ -280,14 +278,6 @@ export const SudokuController = (props) => {
     pushState();
   };
 
-  const dismountSnapshot = () => {
-    // console.log(snapshot);
-    state.isSolved = false;
-    state.snapshot =
-      state.birdfeed.tweets[state.birdfeed.tweets.length - 1].snapshot;
-    pushState();
-  };
-
   return (
     <StyledDiv>
       <SudokuContainer>
@@ -324,9 +314,9 @@ export const SudokuController = (props) => {
             />
           ) : state.isSolved ? (
             <JellyButton
-              text="reset"
+              text="S O L V E D"
               onClick={() => loadSudoku(pointingTuple.test)}
-              color="tertiary"
+              color="primary"
             />
           ) : solveInterval ? (
             <ButtonTray>
@@ -339,7 +329,7 @@ export const SudokuController = (props) => {
               <JellyButton
                 text="pause"
                 onClick={() => stopSolveInterval()}
-                color="tertiary"
+                color="secondary"
                 flexGrow={2}
               />
               <JellyButton
@@ -383,7 +373,7 @@ const StyledDiv = styled.div`
   row-gap: 1.2rem;
 
   grid-template-rows: min(80vw, 80vh) 1fr;
-  grid-template-columns: min(80vw, 80vh) 28rem;
+  grid-template-columns: min(80vw, 80vh) 1fr;
   grid-template-areas:
     "sdku feed"
     "ctrl feed";
@@ -402,7 +392,7 @@ const BirdFeedContainer = styled.div`
 `;
 
 const TweetList = styled.div`
-  height: 80vh;
+  height: 100%;
   margin: 0;
   padding: 0;
 `;

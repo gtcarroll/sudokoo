@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
 import { helper } from "./TechniqueHelper.js";
-import { colors, animation } from "../../params.js";
 import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
 
 const PointingTupleReport = (props) => {

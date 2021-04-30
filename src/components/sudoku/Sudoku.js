@@ -79,7 +79,13 @@ const StyledDiv = styled.div`
   transition: ${animation.halfSpeed} ease-in-out;
 
   &.solved {
-    border-color: ${colors.accentPrimary};
+    border-image: conic-gradient(
+        ${colors.accentPrimary},
+        ${colors.accentSecondary},
+        ${colors.accentTertiary},
+        ${colors.accentPrimary}
+      )
+      2;
   }
 `;
 
