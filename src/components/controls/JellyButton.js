@@ -6,7 +6,11 @@ export const JellyButton = (props) => {
   return (
     <ButtonContainer style={{ flexGrow: props.flexGrow }}>
       <Button
-        className={(props.disabled ? "disabled " : "") + props.color}
+        className={
+          (props.disabled ? "disabled " : "") +
+          (props.solved ? "solved " : "") +
+          props.color
+        }
         onClick={props.disabled ? null : props.onClick}
       >
         {props.text}
@@ -21,6 +25,7 @@ JellyButton.defaultProps = {
   color: "",
   flexGrow: 1,
   disabled: false,
+  solved: false,
 };
 
 const ButtonContainer = styled.div`
@@ -105,5 +110,24 @@ const Button = styled.button`
       color: ${colors.accentTertiary50};
       border-color: ${colors.accentTertiary50};
     }
+  }
+
+  &.solved {
+    color: ${colors.accentSecondary};
+    background: conic-gradient(
+      from 20deg at 50%,
+      ${colors.accentPrimaryBG} 40deg,
+      ${colors.accentSecondaryBG} 130deg,
+      ${colors.accentTertiaryBG} 230deg,
+      ${colors.accentPrimaryBG} 320deg
+    );
+    border-image: conic-gradient(
+        from 20deg at 50%,
+        ${colors.accentPrimary} 40deg,
+        ${colors.accentSecondary} 130deg,
+        ${colors.accentTertiary} 230deg,
+        ${colors.accentPrimary} 320deg
+      )
+      2;
   }
 `;

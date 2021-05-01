@@ -13,6 +13,9 @@ import {
 } from "./techniques";
 
 var solveInterval = false;
+var prev = false;
+var next = false;
+var isNewTweet = false;
 var isLoaded = false;
 var keyIterator = 1;
 
@@ -100,9 +103,10 @@ export const SudokuController = (props) => {
   };
 
   const startSolveInterval = (ms) => {
-    //getNextSolution();
-    solveInterval = setInterval(getNextSolution, ms);
-    pushState();
+    prev = false;
+    next = false;
+    getNextTweet();
+    solveInterval = setInterval(getNextTweet, ms);
   };
 
   const stopSolveInterval = () => {
@@ -123,7 +127,6 @@ export const SudokuController = (props) => {
         "Nothing left to solve. \nSudoku solution is " + verifySolution() + "."
       );
       stopSolveInterval();
-      pushState();
       return false;
     } else {
       // let sudokuCopy = copySudoku(state.sudoku);
@@ -158,7 +161,6 @@ export const SudokuController = (props) => {
             if (state.birdfeed.tweets) state.birdfeed.tweets.push(snapshotData);
             else state.birdfeed.tweets = [snapshotData];
             nextTweet();
-            // pushState();
             return true;
           }
         }
@@ -241,12 +243,16 @@ export const SudokuController = (props) => {
     };
   };
 
-  const getNextTweet = () => {
-    if (!nextTweet()) setTimeout(getNextSolution, animation.delay / 6);
+  const getNextTweet = (isNext = false) => {
+    next = isNext;
+    prev = false;
+    isNewTweet = !nextTweet();
+    if (isNewTweet) {
+      setTimeout(getNextSolution, animation.delay / 6);
+    }
   };
 
   const nextTweet = () => {
-    // console.log(state.birdfeed);
     let tweetsLeft = state.birdfeed.i < state.birdfeed.tweets.length - 1;
     if (tweetsLeft) {
       state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
@@ -255,25 +261,25 @@ export const SudokuController = (props) => {
       mountSnapshot(state.birdfeed.next.snapshot);
     } else if (state.birdfeed.i === state.birdfeed.tweets.length - 1) {
       state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
-      mountSnapshot(state.birdfeed.next.snapshot);
+      if (state.birdfeed.tweets.length === 1)
+        mountSnapshot(state.birdfeed.next.snapshot);
     }
     return tweetsLeft;
   };
 
   const prevTweet = () => {
+    prev = true;
+    next = false;
+    isNewTweet = false;
     if (state.birdfeed.i > 0) {
       state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
       state.birdfeed.i--;
       state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
       mountSnapshot(state.birdfeed.next.snapshot);
-    } else {
-      // TODO: put reset function here
     }
   };
 
   const mountSnapshot = (snapshot) => {
-    // console.log(snapshot);
-    // state.isSolved = true;
     state.snapshot = snapshot;
     pushState();
   };
@@ -286,43 +292,51 @@ export const SudokuController = (props) => {
           isSolved={state.isSolved}
           auto={solveInterval}
         ></Sudoku>
-        {/* <Sudoku sudoku={state.snapshot}></Sudoku> */}
       </SudokuContainer>
       <BirdFeedContainer>
         <TweetList>
-          {
-            // TODO: replace curr and next w report vals
-            state.birdfeed && (
-              <BirdFeed
-                currTweet={state.birdfeed.curr}
-                nextTweet={state.birdfeed.next}
-              />
-            )
-          }
+          {state.birdfeed && (
+            <BirdFeed
+              currTweet={state.birdfeed.curr}
+              nextTweet={state.birdfeed.next}
+              key={state.birdfeed.next.key}
+              isSolved={state.isSolved}
+              auto={solveInterval}
+              prev={prev}
+              next={next}
+              isNewTweet={isNewTweet}
+            />
+          )}
         </TweetList>
       </BirdFeedContainer>
-      {/* <BirdFeedContainer>
-        <BirdFeed feed={state.birdfeed.tweets}></BirdFeed>
-      </BirdFeedContainer> */}
       <ControlContainer>
         <ButtonTray>
           {!isLoaded ? (
             <JellyButton
               text="load"
-              onClick={() => loadSudoku(nakedPair.test)}
-              color="primary"
+              onClick={() => loadSudoku(pointingTuple.test)}
+              color="secondary"
             />
           ) : state.isSolved ? (
-            <JellyButton
-              text="S O L V E D"
-              onClick={() => loadSudoku(pointingTuple.test)}
-              color="primary"
-            />
+            <ButtonTray>
+              <JellyButton
+                text="< prev"
+                onClick={() => prevTweet()}
+                color="tertiary"
+              />
+              <JellyButton
+                text="S O L V E D"
+                onClick={() => loadSudoku(pointingTuple.test)}
+                solved
+                disabled
+                flexGrow={3}
+              />
+            </ButtonTray>
           ) : solveInterval ? (
             <ButtonTray>
               <JellyButton
                 text="< prev"
-                onClick={() => prevTweet()} //loadSudoku(pointingTuple.test)}
+                onClick={() => prevTweet()}
                 color="tertiary"
                 disabled
               />
@@ -334,7 +348,7 @@ export const SudokuController = (props) => {
               />
               <JellyButton
                 text="next >"
-                onClick={() => getNextTweet()}
+                onClick={() => getNextTweet(true)}
                 color="primary"
                 disabled
               />
@@ -343,7 +357,7 @@ export const SudokuController = (props) => {
             <ButtonTray>
               <JellyButton
                 text="< prev"
-                onClick={() => prevTweet()} //loadSudoku(pointingTuple.test)}
+                onClick={() => prevTweet()}
                 color="tertiary"
               />
               <JellyButton
@@ -354,7 +368,7 @@ export const SudokuController = (props) => {
               />
               <JellyButton
                 text="next >"
-                onClick={() => getNextTweet()}
+                onClick={() => getNextTweet(true)}
                 color="primary"
               />
             </ButtonTray>

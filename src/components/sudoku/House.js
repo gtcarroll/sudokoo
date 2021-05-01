@@ -74,15 +74,9 @@ const StyledDiv = styled.div`
   width: 100%;
   background-color: ${colors.neutralMid};
 
-  /* border: 1px solid ${colors.neutralHigh}; */
-
   box-sizing: border-box;
 
   &.solved {
     border-color: ${colors.accentPrimary};
   }
-
-  /* &.overlay {
-    border: none;
-  } */
 `;

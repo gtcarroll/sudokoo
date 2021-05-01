@@ -80,10 +80,10 @@ const StyledDiv = styled.div`
 
   &.solved {
     border-image: conic-gradient(
-        ${colors.accentPrimary},
-        ${colors.accentSecondary},
-        ${colors.accentTertiary},
-        ${colors.accentPrimary}
+        ${colors.accentSecondary} 40deg,
+        ${colors.accentPrimary} 130deg,
+        ${colors.accentTertiary} 230deg,
+        ${colors.accentSecondary} 320deg
       )
       2;
   }
