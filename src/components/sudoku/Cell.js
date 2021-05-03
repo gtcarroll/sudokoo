@@ -24,7 +24,7 @@ export const Cell = (props) => {
       }
     >
       <NoteOverlay
-        toggle={props.data.bgColor["primary"]}
+        toggle={!props.isLoaded ? true : props.data.bgColor["primary"]}
         borders={props.data.borders["primary"]}
         borderStyle={borderStyles["primary"]}
         bgColor={colors.accentPrimaryBG}
@@ -147,6 +147,7 @@ export const Cell = (props) => {
 };
 
 Cell.defaultProps = {
+  isLoaded: false,
   data: {
     val: -1,
     preset: false,

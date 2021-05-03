@@ -29,6 +29,12 @@ export const SudokuController = (props) => {
     pointingTuple,
   ];
 
+  const randomSudoku = () => {
+    let r = Math.floor(Math.random() * techniques.length);
+    console.log(r);
+    loadSudoku(techniques[r].test);
+  };
+
   // input is a 2d array of starting values
   const loadSudoku = (input) => {
     console.log("Loading Sudoku...");
@@ -290,12 +296,13 @@ export const SudokuController = (props) => {
         <Sudoku
           sudoku={state.snapshot ? state.snapshot : state.sudoku}
           isSolved={state.isSolved}
+          isLoaded={isLoaded}
           auto={solveInterval}
         ></Sudoku>
       </SudokuContainer>
       <BirdFeedContainer>
         <TweetList>
-          {state.birdfeed && (
+          {state.birdfeed ? (
             <BirdFeed
               currTweet={state.birdfeed.curr}
               nextTweet={state.birdfeed.next}
@@ -306,6 +313,8 @@ export const SudokuController = (props) => {
               next={next}
               isNewTweet={isNewTweet}
             />
+          ) : (
+            <BirdFeed />
           )}
         </TweetList>
       </BirdFeedContainer>
@@ -313,9 +322,9 @@ export const SudokuController = (props) => {
         <ButtonTray>
           {!isLoaded ? (
             <JellyButton
-              text="load"
-              onClick={() => loadSudoku(pointingTuple.test)}
-              color="secondary"
+              text="random"
+              onClick={() => randomSudoku()}
+              color="tertiary"
             />
           ) : state.isSolved ? (
             <ButtonTray>
@@ -359,6 +368,7 @@ export const SudokuController = (props) => {
                 text="< prev"
                 onClick={() => prevTweet()}
                 color="tertiary"
+                disabled={!state.birdfeed.next || state.birdfeed.next.key <= 1}
               />
               <JellyButton
                 text="play"

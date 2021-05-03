@@ -114,6 +114,7 @@ const Button = styled.button`
 
   &.solved {
     color: ${colors.accentSecondary};
+    padding: 0.5rem 0.4rem 0.7rem 0.4rem;
     background: conic-gradient(
       from 20deg at 50%,
       ${colors.accentPrimaryBG} 40deg,

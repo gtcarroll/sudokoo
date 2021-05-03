@@ -16,6 +16,7 @@ export const BirdFeed = (props) => {
       {props.nextTweet && (
         <BirdTweet className="next" tweet={props.nextTweet} />
       )}
+      {!props.currTweet && !props.nextTweet && <BirdTweet />}
 
       <img
         draggable="false"
@@ -103,6 +104,11 @@ const StyledDiv = styled.div`
       box-shadow: 0 0 0 0 ${colors.neutralLowest},
         0 0 0.5rem 0.5rem ${colors.accentSecondary50};
       content: url(${birdSquish});
+      &.eureka {
+        box-shadow: 0 0 0 0.3rem ${colors.accentPrimary50},
+          0 0 0 0.6rem ${colors.accentSecondary50},
+          0 0 0 0.9rem ${colors.accentTertiary50};
+      }
     }
   }
 

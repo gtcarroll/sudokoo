@@ -8,17 +8,49 @@ export const BirdTweet = (props) => {
   return (
     <StyledDiv className={props.className} key={props.tweet.key} active={true}>
       <ReportHeader>
-        <div>{props.tweet.technique.name}</div>
+        <div>
+          {props.tweet.technique ? props.tweet.technique.name : "Hello There!"}
+        </div>
         <div className={"tweet-key"}>#{props.tweet.key}</div>
       </ReportHeader>
-      {props.tweet.report}
+      {props.tweet.report ? (
+        props.tweet.report
+      ) : (
+        <div>
+          <ReportNode style={{ paddingBottom: 0 }} className="primary">
+            <MiniCell className="mini-cell" />
+            <div className="lead">
+              <Pop className="pri">Enter a sudoku</Pop>
+            </div>
+          </ReportNode>
+          <ReportNode className="connector">
+            <div className="lead">
+              <Pop>or</Pop>
+            </div>
+          </ReportNode>
+          <ReportNode
+            style={{ marginTop: 0, paddingBottom: 0 }}
+            className="tertiary"
+          >
+            <MiniCell className="mini-cell" />
+            <div className="lead">
+              <Pop className="ter">get a random one!</Pop>
+            </div>
+          </ReportNode>
+          <ReportNode>
+            <div className="lead">
+              Then, I'll break down how I would solve it!
+            </div>
+          </ReportNode>
+        </div>
+      )}
     </StyledDiv>
   );
 };
 
 BirdTweet.defaultProps = {
   tweet: {
-    key: -1,
+    key: 0,
     snapshot: false,
     technique: false,
     report: false,
@@ -30,6 +62,7 @@ const StyledDiv = styled.div`
 `;
 
 const ReportHeader = styled.div`
+  width: 28rem;
   color: ${colors.neutralHighest};
   background-color: ${colors.neutralLow};
   transition: inherit;
@@ -60,6 +93,11 @@ export const ReportNode = styled.div`
   padding-bottom: 0.5rem;
 
   color: ${colors.text};
+
+  &.connector {
+    margin: 0;
+    padding: 0;
+  }
 
   .text {
     grid-area: text;
