@@ -47,24 +47,24 @@ const Button = styled.button`
   position: absolute;
   box-shadow: 0 0 0 0;
 
-  color: ${colors.neutralHighest};
-  border-color: ${colors.neutralHighest};
+  color: ${colors.neutral4};
+  border-color: ${colors.neutral4};
   background-color: transparent;
   &.primary {
-    color: ${colors.accentPrimary};
-    border-color: ${colors.accentPrimary};
+    color: ${colors.primary};
+    border-color: ${colors.primary};
     &.disabled {
-      color: ${colors.accentPrimary50};
-      border-color: ${colors.accentPrimary50};
+      color: ${colors.primary50};
+      border-color: ${colors.primary50};
     }
   }
   &.secondary {
-    color: ${colors.accentSecondary};
-    border-color: ${colors.accentSecondary};
+    color: ${colors.secondary};
+    border-color: ${colors.secondary};
   }
   &.tertiary {
-    color: ${colors.accentTertiary};
-    border-color: ${colors.accentTertiary};
+    color: ${colors.tertiary};
+    border-color: ${colors.tertiary};
   }
 
   &:hover&:not(.disabled) {
@@ -72,13 +72,13 @@ const Button = styled.button`
     box-shadow: 0 7px 0 0;
 
     &.primary {
-      background-color: ${colors.accentPrimaryBG};
+      background-color: ${colors.primary15};
     }
     &.secondary {
-      background-color: ${colors.accentSecondaryBG};
+      background-color: ${colors.secondary15};
     }
     &.tertiary {
-      background-color: ${colors.accentTertiaryBG};
+      background-color: ${colors.tertiary15};
     }
   }
 
@@ -87,47 +87,47 @@ const Button = styled.button`
     box-shadow: 0 0 0 0;
 
     &.primary {
-      background-color: ${colors.accentPrimaryPressed};
+      background-color: ${colors.primary25};
     }
     &.secondary {
-      background-color: ${colors.accentSecondaryPressed};
+      background-color: ${colors.secondary25};
     }
     &.tertiary {
-      background-color: ${colors.accentTertiaryPressed};
+      background-color: ${colors.tertiary25};
     }
   }
 
   &.disabled {
     &.primary {
-      color: ${colors.accentPrimary50};
-      border-color: ${colors.accentPrimary50};
+      color: ${colors.primary50};
+      border-color: ${colors.primary50};
     }
     &.secondary {
-      color: ${colors.accentSecondary50};
-      border-color: ${colors.accentSecondary50};
+      color: ${colors.secondary50};
+      border-color: ${colors.secondary50};
     }
     &.tertiary {
-      color: ${colors.accentTertiary50};
-      border-color: ${colors.accentTertiary50};
+      color: ${colors.tertiary50};
+      border-color: ${colors.tertiary50};
     }
   }
 
   &.solved {
-    color: ${colors.accentSecondary};
+    color: ${colors.secondary};
     padding: 0.5rem 0.4rem 0.7rem 0.4rem;
     background: conic-gradient(
       from 20deg at 50%,
-      ${colors.accentPrimaryBG} 40deg,
-      ${colors.accentSecondaryBG} 130deg,
-      ${colors.accentTertiaryBG} 230deg,
-      ${colors.accentPrimaryBG} 320deg
+      ${colors.primary15} 40deg,
+      ${colors.secondary15} 130deg,
+      ${colors.tertiary15} 230deg,
+      ${colors.primary15} 320deg
     );
     border-image: conic-gradient(
         from 20deg at 50%,
-        ${colors.accentPrimary} 40deg,
-        ${colors.accentSecondary} 130deg,
-        ${colors.accentTertiary} 230deg,
-        ${colors.accentPrimary} 320deg
+        ${colors.primary} 40deg,
+        ${colors.secondary} 130deg,
+        ${colors.tertiary} 230deg,
+        ${colors.primary} 320deg
       )
       2;
   }

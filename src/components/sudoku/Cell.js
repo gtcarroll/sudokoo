@@ -4,11 +4,14 @@ import { Note, NoteOverlay } from "./";
 import { colors, animation } from "./../../params.js";
 
 let borderStyles = {
-  basic: "1px solid " + colors.neutralHigh,
-  house: "2px solid " + colors.neutralHigh,
-  primary: "3px solid " + colors.accentPrimary50,
-  secondary: "3px solid " + colors.accentSecondary50,
-  tertiary: "3px solid " + colors.accentTertiary50,
+  basic: "1px solid " + colors.neutral3,
+  house: "2px solid " + colors.neutral3,
+  primary: "3px solid " + colors.primary50,
+  secondary: "3px solid " + colors.secondary50,
+  tertiary: "3px solid " + colors.tertiary50,
+
+  housePri: "2px solid " + colors.primary50,
+  basicPri: "1px solid " + colors.primary50,
 };
 
 export const Cell = (props) => {
@@ -19,15 +22,15 @@ export const Cell = (props) => {
   return (
     <StyledDiv
       className={
-        (props.data.preset ? "preset " : "") +
+        (props.data.preset || !props.isLoaded ? "preset " : "") +
         (highlighted ? "highlighted " : "")
       }
     >
       <NoteOverlay
-        toggle={!props.isLoaded ? true : props.data.bgColor["primary"]}
+        toggle={props.data.bgColor["primary"]}
         borders={props.data.borders["primary"]}
         borderStyle={borderStyles["primary"]}
-        bgColor={colors.accentPrimaryBG}
+        bgColor={colors.primary15}
         zIndex={14}
       />
 
@@ -35,7 +38,7 @@ export const Cell = (props) => {
         toggle={props.data.bgColor["secondary"]}
         borders={props.data.borders["secondary"]}
         borderStyle={borderStyles["secondary"]}
-        bgColor={colors.accentSecondaryBG}
+        bgColor={colors.secondary15}
         zIndex={13}
       />
 
@@ -44,7 +47,7 @@ export const Cell = (props) => {
           toggle={props.data.bgColor["tertiary"]}
           borders={props.data.borders["tertiary"]}
           borderStyle={borderStyles["tertiary"]}
-          bgColor={colors.accentTertiaryBG}
+          bgColor={colors.tertiary15}
           zIndex={12}
         />
       }
@@ -58,7 +61,11 @@ export const Cell = (props) => {
         borderStyle={borderStyles["basic"]}
         zIndex={10}
       />
-      {!props.auto ? (
+      {!props.isLoaded ? (
+        <Value style={{ zIndex: 99 }}>
+          <input type="text" maxLength="1"></input>
+        </Value>
+      ) : !props.auto ? (
         props.data.val > 0 && (
           <Value
             className={
@@ -84,7 +91,7 @@ export const Cell = (props) => {
         </Value>
       )}
 
-      {!props.data.preset && (
+      {!props.data.preset && props.isLoaded && (
         <Notes>
           <Note
             num={1}
@@ -176,16 +183,17 @@ const StyledDiv = styled.div`
 
   height: 100%;
   width: 100%;
-  color: ${colors.accentPrimary};
+  color: ${colors.primary};
   box-sizing: border-box;
   position: relative;
 
+  &.preset,
   .preset {
-    background-color: ${colors.neutralLow};
+    background-color: ${colors.neutral1};
     opacity: 1;
   }
   .set {
-    background-color: ${colors.neutralMid};
+    background-color: ${colors.neutral2};
     opacity: 1;
   }
 `;
@@ -200,6 +208,26 @@ const Value = styled.div`
   transition: ${animation.halfSpeed} ease-in-out;
 
   z-index: 1;
+  input {
+    z-index: 100;
+    background-color: transparent;
+    color: ${colors.secondary};
+    width: 100%;
+    font-size: calc(10px + 2vmin);
+    text-align: center;
+    height: 100%;
+    border: none;
+    margin: auto;
+    padding: 0;
+
+    &:hover {
+      box-shadow: inset 0 0 8px 1px ${colors.secondary};
+    }
+    &:focus {
+      box-shadow: inset 0 0 0 2px ${colors.secondary};
+      outline: none;
+    }
+  }
 
   &.off {
     opacity: 0 !important;
@@ -207,8 +235,8 @@ const Value = styled.div`
 
   &.highlighted {
     font-size: ${animation.fontGrow};
-    background-color: ${colors.accentPrimary};
-    color: ${colors.neutralMid};
+    background-color: ${colors.primary};
+    color: ${colors.neutral2};
     &.repeat {
       opacity: 0;
       animation: pulse ${animation.speed} ease-in-out;
@@ -222,8 +250,8 @@ const Value = styled.div`
     }
     ${animation.midPoint} {
       font-size: ${animation.fontGrow};
-      background-color: ${colors.accentPrimary};
-      color: ${colors.neutralMid};
+      background-color: ${colors.primary};
+      color: ${colors.neutral2};
       opacity: 1;
     }
   }

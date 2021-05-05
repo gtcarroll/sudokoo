@@ -45,7 +45,7 @@ const Overlay = styled.div`
   top: -10%;
 
   opacity: 0;
-  color: ${colors.accentTertiary};
+  color: ${colors.tertiary};
   font-weight: 1000;
   font-size: 150%;
   /* transition: ${animation.halfSpeed} ease-in-out; */
@@ -77,7 +77,7 @@ const StyledDiv = styled.div`
 
   height: 100%;
   width: 100%;
-  color: ${colors.neutralHighest};
+  color: ${colors.neutral4};
   background-color: transparent;
   font-weight: normal;
   font-size: 55%;
@@ -99,13 +99,13 @@ const StyledDiv = styled.div`
   .off {
     color: transparent;
     &.tertiary {
-      color: ${colors.neutralHighest};
+      color: ${colors.neutral4};
     }
 
     animation: crossOutNum ${animation.speed} ease-in;
     @keyframes crossOutNum {
       0% {
-        color: ${colors.neutralHighest};
+        color: ${colors.neutral4};
       }
       ${animation.midPoint} {
         color: transparent;
@@ -115,11 +115,11 @@ const StyledDiv = styled.div`
 
   .primary,
   .secondary {
-    color: ${colors.neutralMid};
+    color: ${colors.neutral2};
     font-size: ${animation.fontGrow};
 
     &.repeat {
-      color: ${colors.neutralHighest};
+      color: ${colors.neutral4};
       font-size: 100%;
       animation: pulseNum ${animation.speed} ease-in-out;
       animation-iteration-count: infinite;
@@ -128,14 +128,14 @@ const StyledDiv = styled.div`
     //animation: pulseNum ${animation.speed} ease-in-out;
     @keyframes pulseNum {
       ${animation.midPoint} {
-        color: ${colors.neutralMid};
+        color: ${colors.neutral2};
         font-size: ${animation.fontGrow};
       }
     }
   }
 
   &.primary {
-    background-color: ${colors.accentPrimary};
+    background-color: ${colors.primary};
     &.repeat {
       background-color: transparent;
       animation: pulseUnderlay ${animation.speed} ease-in-out;
@@ -143,12 +143,12 @@ const StyledDiv = styled.div`
     }
     @keyframes pulseUnderlay {
       ${animation.midPoint} {
-        background-color: ${colors.accentPrimary};
+        background-color: ${colors.primary};
       }
     }
   }
   &.secondary {
-    background-color: ${colors.accentSecondary};
+    background-color: ${colors.secondary};
     &.repeat {
       background-color: transparent;
       animation: pulseUnderlayS ${animation.speed} ease-in-out;
@@ -156,7 +156,7 @@ const StyledDiv = styled.div`
     }
     @keyframes pulseUnderlayS {
       ${animation.midPoint} {
-        background-color: ${colors.accentSecondary};
+        background-color: ${colors.secondary};
       }
     }
   }

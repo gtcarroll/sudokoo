@@ -6,7 +6,9 @@ import { colors, animation } from "./../../params.js";
 export const Sudoku = (props) => {
   return (
     <StyledDiv
-      className={props.isSolved ? "solved " : !props.isLoaded ? "loaded " : ""}
+      className={
+        props.isSolved ? "solved " : !props.isLoaded ? "editable " : ""
+      }
     >
       <House
         house={props.sudoku && props.sudoku.houses[0]}
@@ -83,21 +85,21 @@ const StyledDiv = styled.div`
   width: 100%;
   height: 100%;
 
-  border: 2px solid ${colors.neutralHigh};
+  border: 2px solid ${colors.neutral3};
   border-radius: 2px;
   box-sizing: border-box;
 
   transition: ${animation.halfSpeed} ease-in-out;
 
-  &.loaded {
-    border-color: ${colors.accentPrimary};
+  &.editable {
+    border-color: ${colors.secondary};
   }
   &.solved {
     border-image: conic-gradient(
-        ${colors.accentSecondary} 40deg,
-        ${colors.accentPrimary} 130deg,
-        ${colors.accentTertiary} 230deg,
-        ${colors.accentSecondary} 320deg
+        ${colors.secondary} 40deg,
+        ${colors.primary} 130deg,
+        ${colors.tertiary} 230deg,
+        ${colors.secondary} 320deg
       )
       2;
   }

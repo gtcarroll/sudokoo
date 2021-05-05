@@ -17,10 +17,10 @@ PaletteStrip.defaultProps = {
 const GradientContainer = styled.div`
   background: linear-gradient(
     to right,
-    ${colors.accentPrimary},
-    ${colors.accentSecondary},
-    ${colors.accentTertiary},
-    ${colors.accentPrimary}
+    ${colors.primary},
+    ${colors.secondary},
+    ${colors.tertiary},
+    ${colors.primary}
   );
 
   width: 100%;

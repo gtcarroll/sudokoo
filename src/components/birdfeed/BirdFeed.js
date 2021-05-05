@@ -58,16 +58,17 @@ const StyledDiv = styled.div`
   display: flex;
 
   img {
+    box-shadow: 0 0 0 0rem ${colors.neutral0}, 0 0 0 0rem ${colors.secondary50};
     position: absolute;
     right: 0;
     bottom: 0;
-    background-color: ${colors.neutralLowest};
+    background-color: ${colors.neutral0};
 
     max-width: 80%;
     max-height: 250px;
     transition: all ${animation.buttonSpeed} ease-out;
 
-    border: 2px solid ${colors.neutralHigh};
+    border: 2px solid ${colors.neutral3};
     border-radius: 50%;
 
     content: url(${bird});
@@ -91,23 +92,21 @@ const StyledDiv = styled.div`
     }
     &.eureka {
       content: url(${birdEureka});
-      box-shadow: 0 0 0 0.2rem ${colors.accentPrimary50},
-        0 0 0 0.4rem ${colors.accentSecondary50},
-        0 0 0 0.6rem ${colors.accentTertiary50};
+      box-shadow: 0 0 0 0.1rem ${colors.primary50},
+        0 0 0 0.2rem ${colors.secondary50}, 0 0 0 0.3rem ${colors.tertiary50};
     }
     &:hover {
-      border-color: ${colors.accentSecondary};
+      border-color: ${colors.secondary};
       transform: scale(1.025);
     }
     &:active {
+      box-shadow: 0 0 0 0rem ${colors.neutral0},
+        0 0 0 0.8rem ${colors.secondary50};
       transform: scale(0.98, 0.96);
-      box-shadow: 0 0 0 0 ${colors.neutralLowest},
-        0 0 0.5rem 0.5rem ${colors.accentSecondary50};
       content: url(${birdSquish});
       &.eureka {
-        box-shadow: 0 0 0 0.3rem ${colors.accentPrimary50},
-          0 0 0 0.6rem ${colors.accentSecondary50},
-          0 0 0 0.9rem ${colors.accentTertiary50};
+        box-shadow: 0 0 0 0.3rem ${colors.primary50},
+          0 0 0 0.6rem ${colors.secondary50}, 0 0 0 0.9rem ${colors.tertiary50};
       }
     }
   }
@@ -130,85 +129,72 @@ const StyledDiv = styled.div`
 
   @keyframes ripplePriChirp {
     20% {
-      box-shadow: 0 0 0 0 ${colors.neutralLowest},
-        0 0 0 0.5rem ${colors.accentPrimary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0 ${colors.primary50};
       transform: scale(0.98, 0.96);
       content: url(${birdSquish});
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutralLowest},
-        0 0 0 1rem ${colors.accentPrimary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1rem ${colors.primary50};
       content: url(${birdEureka});
     }
     100% {
-      box-shadow: 0 0 0 2rem ${colors.neutralLowest},
-        0 0 0 2rem ${colors.accentPrimary50};
+      box-shadow: 0 0 0 2rem ${colors.neutral0}, 0 0 0 2rem ${colors.primary50};
       content: url(${birdEureka});
     }
   }
   @keyframes ripplePri {
     20% {
-      box-shadow: 0 0 0 0.5rem ${colors.neutralLowest},
-        0 0 0 0 ${colors.accentPrimary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0 ${colors.primary50};
       transform: scale(0.98, 0.96);
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutralLowest},
-        0 0 0 1rem ${colors.accentPrimary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1rem ${colors.primary50};
     }
     100% {
-      box-shadow: 0 0 0 2rem ${colors.neutralLowest},
-        0 0 0 2rem ${colors.accentPrimary50};
+      box-shadow: 0 0 0 2rem ${colors.neutral0}, 0 0 0 2rem ${colors.primary50};
       content: url(${bird});
     }
   }
   @keyframes rippleSec {
     20% {
-      box-shadow: 0 0 0 0.5rem ${colors.neutralLowest},
-        0 0 0 0 ${colors.accentSecondary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0 ${colors.secondary50};
       transform: scale(0.98, 0.96);
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutralLowest},
-        0 0 0 1rem ${colors.accentSecondary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1rem ${colors.secondary50};
     }
     100% {
-      box-shadow: 0 0 0 2rem ${colors.neutralLowest},
-        0 0 0 2rem ${colors.accentSecondary50};
+      box-shadow: 0 0 0 2rem ${colors.neutral0},
+        0 0 0 2rem ${colors.secondary50};
       content: url(${bird});
     }
   }
   @keyframes rippleSecChirp {
     20% {
-      box-shadow: 0 0 0 0.5rem ${colors.neutralLowest},
-        0 0 0 0 ${colors.accentSecondary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0 ${colors.secondary50};
       transform: scale(0.98, 0.96);
       content: url(${birdSquish});
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutralLowest},
-        0 0 0 1rem ${colors.accentSecondary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1rem ${colors.secondary50};
       content: url(${birdEureka});
     }
     100% {
-      box-shadow: 0 0 0 2rem ${colors.neutralLowest},
-        0 0 0 2rem ${colors.accentSecondary50};
+      box-shadow: 0 0 0 2rem ${colors.neutral0},
+        0 0 0 2rem ${colors.secondary50};
       content: url(${birdEureka});
     }
   }
   @keyframes rippleTer {
     20% {
-      box-shadow: 0 0 0 0.5rem ${colors.neutralLowest},
-        0 0 0 0 ${colors.accentTertiary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0 ${colors.tertiary50};
       transform: scale(0.98, 0.96);
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutralLowest},
-        0 0 0 1rem ${colors.accentTertiary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1rem ${colors.tertiary50};
     }
     100% {
-      box-shadow: 0 0 0 2rem ${colors.neutralLowest},
-        0 0 0 2rem ${colors.accentTertiary50};
+      box-shadow: 0 0 0 2rem ${colors.neutral0}, 0 0 0 2rem ${colors.tertiary50};
       content: url(${bird});
     }
   }

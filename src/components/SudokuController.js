@@ -321,11 +321,19 @@ export const SudokuController = (props) => {
       <ControlContainer>
         <ButtonTray>
           {!isLoaded ? (
-            <JellyButton
-              text="random"
-              onClick={() => randomSudoku()}
-              color="tertiary"
-            />
+            <ButtonTray>
+              <JellyButton
+                text="load this sudoku"
+                onClick={() => randomSudoku()}
+                color="secondary"
+                flexGrow={3}
+              />
+              <JellyButton
+                text="random"
+                onClick={() => randomSudoku()}
+                color="primary"
+              />
+            </ButtonTray>
           ) : state.isSolved ? (
             <ButtonTray>
               <JellyButton

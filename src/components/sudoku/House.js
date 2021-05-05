@@ -82,11 +82,11 @@ const StyledDiv = styled.div`
 
   height: 100%;
   width: 100%;
-  background-color: ${colors.neutralMid};
+  background-color: ${colors.neutral2};
 
   box-sizing: border-box;
 
   &.solved {
-    border-color: ${colors.accentPrimary};
+    border-color: ${colors.primary};
   }
 `;

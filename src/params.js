@@ -1,27 +1,61 @@
+let darkP = "rgba(97, 219, 231",
+  darkS = "rgba(182, 231, 166",
+  darkT = "rgba(231, 153, 231";
 export const colors = {
-  text: "rgb(231,231,231)",
-  neutralLowest: "#080808",
-  neutralLow: "#121212",
-  neutralMid: "#202020",
-  neutralHigh: "#313131",
-  neutralHighest: "#ADADAD",
-  neutralHighest50: "rgba(173, 173, 173, 0.5)",
+  neutral0: "#080808",
+  neutral1: "#121212",
+  neutral2: "#202020",
+  neutral3: "#313131",
+  neutral4: "#ADADAD",
+  neutral5: "#E7E7E7",
 
-  accentPrimaryName: "blue",
-  accentPrimary: "rgba(97, 219, 231, 1)",
-  accentPrimary50: "rgba(97, 219, 231, 0.5)",
-  accentPrimaryBG: "rgba(97, 219, 231, 0.2)",
-  accentPrimaryPressed: "rgba(97, 219, 231, 0.3)",
-  accentSecondaryName: "green",
-  accentSecondary: "rgba(182, 231, 166, 1)",
-  accentSecondary50: "rgba(182, 231, 166, 0.5)",
-  accentSecondaryBG: "rgba(182, 231, 166, 0.25)",
-  accentSecondaryPressed: "rgba(182, 231, 166, 0.35)",
-  accentTertiaryName: "pink",
-  accentTertiary: "rgba(231, 153, 231, 1)",
-  accentTertiary50: "rgba(231, 153, 231, 0.5)",
-  accentTertiaryBG: "rgba(231, 153, 231, 0.125)",
-  accentTertiaryPressed: "rgba(231, 153, 231, 0.225)",
+  // #61DBE7
+  primary: darkP + ", 1)",
+  primary15: darkP + ", 0.15)",
+  primary25: darkP + ", 0.25)",
+  primary50: darkP + ", 0.5)",
+
+  // #B6E7A6
+  secondary: darkS + ", 1)",
+  secondary15: darkS + ", 0.15)",
+  secondary25: darkS + ", 0.25)",
+  secondary50: darkS + ", 0.5)",
+
+  // #E799E7
+  tertiary: darkT + ", 1)",
+  tertiary15: darkT + ", 0.15)",
+  tertiary25: darkT + ", 0.25)",
+  tertiary50: darkT + ", 0.5)",
+};
+
+let lightP = "rgba(7, 141, 72",
+  lightS = "rgba(115, 100, 180",
+  lightT = "rgba(222, 99, 18";
+export const colors_light = {
+  neutral0: "#F7F7F7",
+  neutral1: "#EDEDED",
+  neutral2: "#DFDFDF",
+  neutral3: "#CECECE",
+  neutral4: "#525252",
+  neutral5: "#181818",
+
+  // #078D48
+  primary: lightP + ", 1)",
+  primary15: lightP + ", 0.15)",
+  primary25: lightP + ", 0.25)",
+  primary50: lightP + ", 0.5)",
+
+  // #7364B4
+  secondary: lightS + ", 1)",
+  secondary15: lightS + ", 0.15)",
+  secondary25: lightS + ", 0.25)",
+  secondary50: lightS + ", 0.5)",
+
+  // #DE6312
+  tertiary: lightT + ", 1)",
+  tertiary15: lightT + ", 0.15)",
+  tertiary25: lightT + ", 0.25)",
+  tertiary50: lightT + ", 0.5)",
 };
 
 let s = 2.31;

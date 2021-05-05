@@ -17,10 +17,10 @@ export const BirdTweet = (props) => {
         props.tweet.report
       ) : (
         <div>
-          <ReportNode style={{ paddingBottom: 0 }} className="primary">
-            <MiniCell className="mini-cell" />
+          <ReportNode style={{ paddingBottom: 0 }} className="secondary">
+            <MiniCell className="mini-cell solid" />
             <div className="lead">
-              <Pop className="pri">Enter a sudoku</Pop>
+              <Pop className="sec">Enter a sudoku</Pop>
             </div>
           </ReportNode>
           <ReportNode className="connector">
@@ -30,11 +30,11 @@ export const BirdTweet = (props) => {
           </ReportNode>
           <ReportNode
             style={{ marginTop: 0, paddingBottom: 0 }}
-            className="tertiary"
+            className="primary"
           >
-            <MiniCell className="mini-cell" />
+            <MiniCell className="mini-cell solid" />
             <div className="lead">
-              <Pop className="ter">get a random one!</Pop>
+              <Pop className="pri">get a random one!</Pop>
             </div>
           </ReportNode>
           <ReportNode>
@@ -63,20 +63,20 @@ const StyledDiv = styled.div`
 
 const ReportHeader = styled.div`
   width: 28rem;
-  color: ${colors.neutralHighest};
-  background-color: ${colors.neutralLow};
+  color: ${colors.neutral4};
+  background-color: ${colors.neutral1};
   transition: inherit;
 
   font-size: 1.5rem;
   padding: 0.4rem 0.4rem 0.6rem 0.6rem;
 
-  border: 2px solid ${colors.neutralHigh};
+  border: 2px solid ${colors.neutral3};
 
   display: grid;
   grid-template-columns: 1fr 2rem;
 
   .tweet-key {
-    color: ${colors.neutralHighest50};
+    color: ${colors.neutral4};
     font-size: 1rem;
     margin-top: 0.3rem;
   }
@@ -92,7 +92,7 @@ export const ReportNode = styled.div`
   margin: 1rem 0.8rem 0 0;
   padding-bottom: 0.5rem;
 
-  color: ${colors.text};
+  color: ${colors.neutral5};
 
   &.connector {
     margin: 0;
@@ -119,46 +119,58 @@ export const ReportNode = styled.div`
   }
   &.primary {
     .mini-cell {
-      background-color: ${colors.accentPrimaryBG};
-      border: 2px solid ${colors.accentPrimary50};
+      background-color: ${colors.primary15};
+      border: 2px solid ${colors.primary50};
+      &.solid {
+        background-color: ${colors.primary};
+        border-color: ${colors.primary};
+      }
     }
   }
   &.secondary {
     .mini-cell {
-      background-color: ${colors.accentSecondaryBG};
-      border: 2px solid ${colors.accentSecondary50};
+      background-color: ${colors.secondary15};
+      border: 2px solid ${colors.secondary50};
+      &.solid {
+        background-color: ${colors.secondary};
+        border-color: ${colors.secondary};
+      }
     }
   }
   &.tertiary {
     .mini-cell {
-      background-color: ${colors.accentTertiaryBG};
-      border: 2px solid ${colors.accentTertiary50};
+      background-color: ${colors.tertiary15};
+      border: 2px solid ${colors.tertiary50};
+      &.solid {
+        background-color: ${colors.tertiary};
+        border-color: ${colors.tertiary};
+      }
     }
   }
 `;
 export const Pop = styled.span`
   padding: 0rem 0.1rem;
   &.pri {
-    color: ${colors.accentPrimary};
+    color: ${colors.primary};
   }
   &.sec {
-    color: ${colors.accentSecondary};
+    color: ${colors.secondary};
   }
   &.ter {
-    color: ${colors.accentTertiary};
+    color: ${colors.tertiary};
   }
 `;
 export const Hlt = styled.span`
   padding: 0rem 0.3rem;
   border-radius: 2px;
   &.pri {
-    background-color: ${colors.accentPrimaryPressed};
+    background-color: ${colors.primary25};
   }
   &.sec {
-    background-color: ${colors.accentSecondaryPressed};
+    background-color: ${colors.secondary25};
   }
   &.ter {
-    background-color: ${colors.accentTertiaryPressed};
+    background-color: ${colors.tertiary25};
   }
 `;
 export const MiniCell = styled.div`

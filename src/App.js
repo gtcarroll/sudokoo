@@ -26,8 +26,8 @@ const ColContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  background-color: ${colors.neutralLowest};
-  color: ${colors.neutralHighest};
+  background-color: ${colors.neutral0};
+  color: ${colors.neutral4};
 
   font-size: calc(10px + 2vmin);
   overflow: scroll;
