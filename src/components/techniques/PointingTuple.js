@@ -18,7 +18,7 @@ const PointingTupleReport = (props) => {
         </div>
       </ReportNode>
       <ReportNode className="tertiary">
-        <MiniCell className="mini-cell" />
+        <MiniCell className="mini-cell">X</MiniCell>
         <div className="lead">
           <Pop className="ter">other cells...</Pop>
         </div>

@@ -21,7 +21,6 @@ export const BirdFeed = (props) => {
       <img
         draggable="false"
         alt="bird"
-        key={props.key}
         onAnimationEnd={() => setAnimate(false)}
         className={
           (animate ? "animate " : "") +
@@ -43,7 +42,7 @@ BirdFeed.defaultProps = {
   currTweet: false,
   nextTweet: false,
   auto: false,
-  key: 0,
+  key: false,
   next: false,
   prev: false,
   isNewTweet: true,

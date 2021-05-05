@@ -1,4 +1,5 @@
 import { BirdFeed } from "./BirdFeed.js";
+import { tweetUnloaded } from "./tweets.js";
 import {
   BirdTweet,
   ReportNode,
@@ -8,4 +9,13 @@ import {
   axesNames,
 } from "./BirdTweet.js";
 
-export { BirdFeed, BirdTweet, ReportNode, MiniCell, Pop, Hlt, axesNames };
+export {
+  BirdFeed,
+  BirdTweet,
+  ReportNode,
+  MiniCell,
+  Pop,
+  Hlt,
+  axesNames,
+  tweetUnloaded,
+};

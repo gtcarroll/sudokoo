@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../../params.js";
+import { tweetUnloaded } from "./";
 
 export const axesNames = ["row", "column", "house"];
 
@@ -11,46 +12,18 @@ export const BirdTweet = (props) => {
         <div>
           {props.tweet.technique ? props.tweet.technique.name : "Hello There!"}
         </div>
-        <div className={"tweet-key"}>#{props.tweet.key}</div>
+        {(props.tweet.key || props.tweet.key === 0) && (
+          <div className={"tweet-key"}>#{props.tweet.key}</div>
+        )}
       </ReportHeader>
-      {props.tweet.report ? (
-        props.tweet.report
-      ) : (
-        <div>
-          <ReportNode style={{ paddingBottom: 0 }} className="secondary">
-            <MiniCell className="mini-cell solid" />
-            <div className="lead">
-              <Pop className="sec">Enter a sudoku</Pop>
-            </div>
-          </ReportNode>
-          <ReportNode className="connector">
-            <div className="lead">
-              <Pop>or</Pop>
-            </div>
-          </ReportNode>
-          <ReportNode
-            style={{ marginTop: 0, paddingBottom: 0 }}
-            className="primary"
-          >
-            <MiniCell className="mini-cell solid" />
-            <div className="lead">
-              <Pop className="pri">get a random one!</Pop>
-            </div>
-          </ReportNode>
-          <ReportNode>
-            <div className="lead">
-              Then, I'll break down how I would solve it!
-            </div>
-          </ReportNode>
-        </div>
-      )}
+      {props.tweet.report ? props.tweet.report : tweetUnloaded()}
     </StyledDiv>
   );
 };
 
 BirdTweet.defaultProps = {
   tweet: {
-    key: 0,
+    key: false,
     snapshot: false,
     technique: false,
     report: false,
@@ -121,9 +94,16 @@ export const ReportNode = styled.div`
     .mini-cell {
       background-color: ${colors.primary15};
       border: 2px solid ${colors.primary50};
+      color: ${colors.neutral0};
+      &.hollow,
+      &.solid {
+        border-color: ${colors.primary};
+      }
+      &.hollow {
+        background-color: transparent;
+      }
       &.solid {
         background-color: ${colors.primary};
-        border-color: ${colors.primary};
       }
     }
   }
@@ -131,9 +111,16 @@ export const ReportNode = styled.div`
     .mini-cell {
       background-color: ${colors.secondary15};
       border: 2px solid ${colors.secondary50};
+      color: ${colors.secondary};
+      &.hollow,
+      &.solid {
+        border-color: ${colors.secondary};
+      }
+      &.hollow {
+        background-color: transparent;
+      }
       &.solid {
         background-color: ${colors.secondary};
-        border-color: ${colors.secondary};
       }
     }
   }
@@ -141,9 +128,16 @@ export const ReportNode = styled.div`
     .mini-cell {
       background-color: ${colors.tertiary15};
       border: 2px solid ${colors.tertiary50};
+      color: ${colors.tertiary};
+      &.hollow,
+      &.solid {
+        border-color: ${colors.tertiary};
+      }
+      &.hollow {
+        background-color: transparent;
+      }
       &.solid {
         background-color: ${colors.tertiary};
-        border-color: ${colors.tertiary};
       }
     }
   }
@@ -180,4 +174,24 @@ export const MiniCell = styled.div`
   height: 1.2rem;
   width: 1.2rem;
   border-radius: 2px;
+
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+
+  &.solved {
+    background: conic-gradient(
+      ${colors.secondary} 40deg,
+      ${colors.primary} 130deg,
+      ${colors.tertiary} 230deg,
+      ${colors.secondary} 320deg
+    );
+    border-image: conic-gradient(
+        ${colors.secondary} 40deg,
+        ${colors.primary} 130deg,
+        ${colors.tertiary} 230deg,
+        ${colors.secondary} 320deg
+      )
+      2 !important;
+  }
 `;

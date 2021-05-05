@@ -6,7 +6,7 @@ const NakedSingleReport = (props) => {
   return (
     <div>
       <ReportNode className="primary">
-        <MiniCell className="mini-cell" />
+        <MiniCell className="mini-cell solid">{props.x}</MiniCell>
         <div className="lead">
           <Pop className="pri">This cell...</Pop>
         </div>
@@ -18,7 +18,7 @@ const NakedSingleReport = (props) => {
         </div>
       </ReportNode>
       <ReportNode className="tertiary">
-        <MiniCell className="mini-cell" />
+        <MiniCell className="mini-cell">X</MiniCell>
         <div className="lead">
           <Pop className="ter">So, other cells...</Pop>
         </div>
