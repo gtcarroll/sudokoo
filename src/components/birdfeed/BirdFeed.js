@@ -92,8 +92,8 @@ const StyledDiv = styled.div`
     }
     &.eureka {
       content: url(${birdEureka});
-      box-shadow: 0 0 0 0.1rem ${colors.primary50},
-        0 0 0 0.2rem ${colors.secondary50}, 0 0 0 0.3rem ${colors.tertiary50};
+      box-shadow: 0 0 0 0rem ${colors.secondary50},
+        0 0 0 0.2rem ${colors.primary50}, 0 0 0 0.4rem ${colors.tertiary50};
     }
     &:hover {
       border-color: ${colors.secondary};
@@ -105,8 +105,8 @@ const StyledDiv = styled.div`
       transform: scale(0.98, 0.96);
       content: url(${birdSquish});
       &.eureka {
-        box-shadow: 0 0 0 0.3rem ${colors.primary50},
-          0 0 0 0.6rem ${colors.secondary50}, 0 0 0 0.9rem ${colors.tertiary50};
+        box-shadow: 0 0 0 0.3rem ${colors.secondary50},
+          0 0 0 0.6rem ${colors.primary50}, 0 0 0 0.9rem ${colors.tertiary50};
       }
     }
   }
