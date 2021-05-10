@@ -10,13 +10,19 @@ export const BirdTweet = (props) => {
     <StyledDiv className={props.className} key={props.tweet.key} active={true}>
       <ReportHeader>
         <div>
-          {props.tweet.technique ? props.tweet.technique.name : "Hello There!"}
+          {props.tweet.technique
+            ? props.tweet.technique.name
+            : tweetUnloaded.technique.name}
         </div>
-        {(props.tweet.key || props.tweet.key === 0) && (
-          <div className={"tweet-key"}>#{props.tweet.key}</div>
-        )}
+        <div className={"tweet-key"}>
+          {(props.tweet.key || props.tweet.key === 0) && "#" + props.tweet.key}
+        </div>
       </ReportHeader>
-      {props.tweet.report ? props.tweet.report : tweetUnloaded()}
+      {props.tweet.report
+        ? !props.tweet.key || props.tweet.key === 0
+          ? props.tweet.report()
+          : props.tweet.report
+        : tweetUnloaded.report()}
     </StyledDiv>
   );
 };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { animation } from "../params.js";
 import { JellyButton, ButtonTray } from "./controls";
 import { Sudoku } from "./sudoku";
-import { BirdFeed } from "./birdfeed";
+import { BirdFeed, tweetUnloaded, tweetLoaded } from "./birdfeed";
 import {
   nakedSingle,
   hiddenSingle,
@@ -50,9 +50,9 @@ export const SudokuController = (props) => {
     state.unsolved = [];
     state.birdfeed = {
       i: 0,
-      tweets: [],
-      curr: false,
-      next: false,
+      tweets: [tweetLoaded],
+      curr: tweetUnloaded,
+      next: tweetLoaded,
     };
 
     // for every sudoku cell...
@@ -274,14 +274,21 @@ export const SudokuController = (props) => {
   };
 
   const prevTweet = () => {
-    prev = true;
-    next = false;
-    isNewTweet = false;
-    if (state.birdfeed.i > 0) {
-      state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
-      state.birdfeed.i--;
+    if (state.isSolved) {
+      state.isSolved = false;
+      state.birdfeed.curr = state.birdfeed.next;
       state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
       mountSnapshot(state.birdfeed.next.snapshot);
+    } else {
+      prev = true;
+      next = false;
+      isNewTweet = false;
+      if (state.birdfeed.i > 0) {
+        state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
+        state.birdfeed.i--;
+        state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
+        mountSnapshot(state.birdfeed.next.snapshot);
+      }
     }
   };
 
@@ -301,12 +308,6 @@ export const SudokuController = (props) => {
     onClick: () => getNextTweet(true),
     flexGrow: 1,
     disabled: false,
-  };
-  const priNextDisabled = {
-    text: "next >",
-    onClick: () => getNextTweet(true),
-    flexGrow: 1,
-    disabled: true,
   };
 
   const secLoad = {
@@ -378,79 +379,21 @@ export const SudokuController = (props) => {
       </BirdFeedContainer>
       <ControlContainer>
         {!isLoaded ? (
-          <ButtonTray
-            // tertiary={terPrev}
-            secondary={secLoad}
-            primary={priRandom}
-          />
+          <ButtonTray secondary={secLoad} primary={priRandom} />
         ) : state.isSolved ? (
-          <ButtonTray tertiary={terPrev} secondary={secSolved}>
-            {/* <JellyButton
-                text="< prev"
-                onClick={() => prevTweet()}
-                color="tertiary"
-              />
-              <JellyButton
-                text="S O L V E D"
-                onClick={() => loadSudoku(pointingTuple.test)}
-                solved
-                disabled
-                flexGrow={3}
-              /> */}
-          </ButtonTray>
+          <ButtonTray tertiary={terPrev} secondary={secSolved}></ButtonTray>
         ) : solveInterval ? (
-          <ButtonTray
-            tertiary={terPrevDisabled}
-            secondary={secPause}
-            primary={priNextDisabled}
-          >
-            {/* <JellyButton
-                text="< prev"
-                onClick={() => prevTweet()}
-                color="tertiary"
-                disabled
-              />
-              <JellyButton
-                text="pause"
-                onClick={() => stopSolveInterval()}
-                color="secondary"
-                flexGrow={2}
-              />
-              <JellyButton
-                text="next >"
-                onClick={() => getNextTweet(true)}
-                color="primary"
-                disabled
-              /> */}
-          </ButtonTray>
+          <ButtonTray secondary={secPause}></ButtonTray>
         ) : (
           <ButtonTray
             tertiary={
-              !state.birdfeed.next || state.birdfeed.next.key <= 1
+              !state.birdfeed.next || state.birdfeed.next.key <= 0
                 ? terPrevDisabled
                 : terPrev
             }
             secondary={secPlay}
             primary={priNext}
-          >
-            {/* <JellyButton
-                text="< prev"
-                onClick={() => prevTweet()}
-                color="tertiary"
-                disabled={!state.birdfeed.next || state.birdfeed.next.key <= 1}
-              />
-              <JellyButton
-                text="play"
-                onClick={() => startSolveInterval(animation.delay)}
-                color="secondary"
-                flexGrow={2}
-              />
-              <JellyButton
-                text="next >"
-                onClick={() => getNextTweet(true)}
-                color="primary"
-              /> */}
-          </ButtonTray>
+          ></ButtonTray>
         )}
       </ControlContainer>
     </StyledDiv>

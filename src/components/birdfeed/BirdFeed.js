@@ -90,6 +90,7 @@ const StyledDiv = styled.div`
       }
     }
     &.eureka {
+      animation: rippleEureka ${animation.halfSpeed} ease-out;
       content: url(${birdEureka});
       box-shadow: 0 0 0 0rem ${colors.secondary50},
         0 0 0 0.2rem ${colors.primary50}, 0 0 0 0.4rem ${colors.tertiary50};
@@ -123,6 +124,25 @@ const StyledDiv = styled.div`
   &.next {
     .next {
       animation: fadeIn ${animation.speed} linear;
+    }
+  }
+
+  @keyframes rippleEureka {
+    0% {
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0 ${colors.secondary50},
+        0 0 0 0 ${colors.primary50}, 0 0 0 0 ${colors.tertiary50};
+      transform: scale(0.98, 0.96);
+      content: url(${birdSquish});
+    }
+    60% {
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0.3rem ${colors.secondary50},
+        0 0 0 0.6rem ${colors.primary50}, 0 0 0 0.9rem ${colors.tertiary50};
+      content: url(${birdEureka});
+    }
+    100% {
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0rem ${colors.secondary50},
+        0 0 0 0.2rem ${colors.primary50}, 0 0 0 0.4rem ${colors.tertiary50};
+      content: url(${birdEureka});
     }
   }
 

@@ -91,7 +91,8 @@ const StyledDiv = styled.div`
 
   transition: ${animation.halfSpeed} ease-in-out;
 
-  &.editable {
+  &.editable,
+  &.solved {
     border-color: ${colors.secondary};
   }
   &.solved {

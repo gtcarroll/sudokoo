@@ -1,5 +1,5 @@
 import { BirdFeed } from "./BirdFeed.js";
-import { tweetUnloaded } from "./tweets.js";
+import { tweetUnloaded, tweetLoaded } from "./tweets.js";
 import {
   BirdTweet,
   ReportNode,
@@ -18,4 +18,5 @@ export {
   Hlt,
   axesNames,
   tweetUnloaded,
+  tweetLoaded,
 };
