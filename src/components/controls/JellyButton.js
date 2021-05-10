@@ -4,11 +4,17 @@ import { colors, animation } from "../../params.js";
 
 export const JellyButton = (props) => {
   return (
-    <ButtonContainer style={{ flexGrow: props.flexGrow }}>
+    <ButtonContainer
+      style={{ flexGrow: props.flexGrow }}
+      className={props.padding}
+    >
       <Button
         className={
           (props.disabled ? "disabled " : "") +
           (props.solved ? "solved " : "") +
+          (props.hidden ? "hidden " : "") +
+          props.padding +
+          " " +
           props.color
         }
         onClick={props.disabled ? null : props.onClick}
@@ -21,24 +27,41 @@ export const JellyButton = (props) => {
 
 JellyButton.defaultProps = {
   onClick: null,
-  text: "click me",
+  text: "",
   color: "",
-  flexGrow: 1,
+  flexGrow: 0,
   disabled: false,
   solved: false,
+  hidden: false,
+  padding: "",
 };
 
 const ButtonContainer = styled.div`
+  transition: ${animation.buttonSpeed};
   position: relative;
   display: flex;
+  &.left {
+    padding-left: 1rem;
+  }
+  &.right {
+    padding-right: 1rem;
+  }
 `;
 
 const Button = styled.button`
-  transition: ${animation.buttonSpeed};
+  transition: ${animation.buttonSpeed}, color ${animation.halfSpeed},
+    border-color ${animation.halfSpeed};
 
   font-size: 1.5rem;
   padding: 0.4rem 0.4rem 0.8rem 0.4rem;
   width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &.right,
+  &.left {
+    width: calc(100% - 1rem);
+  }
 
   border: 2px solid;
   border-radius: 2px; //0.4em;
@@ -53,10 +76,6 @@ const Button = styled.button`
   &.primary {
     color: ${colors.primary};
     border-color: ${colors.primary};
-    &.disabled {
-      color: ${colors.primary50};
-      border-color: ${colors.primary50};
-    }
   }
   &.secondary {
     color: ${colors.secondary};
@@ -97,6 +116,12 @@ const Button = styled.button`
     }
   }
 
+  &.hidden {
+    width: 0;
+    border: none;
+    flex-grow: 0;
+  }
+
   &.disabled {
     &.primary {
       color: ${colors.primary50};
@@ -105,6 +130,9 @@ const Button = styled.button`
     &.secondary {
       color: ${colors.secondary50};
       border-color: ${colors.secondary50};
+      &.solved {
+        color: ${colors.secondary};
+      }
     }
     &.tertiary {
       color: ${colors.tertiary50};

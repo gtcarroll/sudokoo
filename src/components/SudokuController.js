@@ -290,6 +290,64 @@ export const SudokuController = (props) => {
     pushState();
   };
 
+  const priRandom = {
+    text: "random",
+    onClick: () => randomSudoku(),
+    flexGrow: 1,
+    disabled: false,
+  };
+  const priNext = {
+    text: "next >",
+    onClick: () => getNextTweet(true),
+    flexGrow: 1,
+    disabled: false,
+  };
+  const priNextDisabled = {
+    text: "next >",
+    onClick: () => getNextTweet(true),
+    flexGrow: 1,
+    disabled: true,
+  };
+
+  const secLoad = {
+    text: "load this sudoku",
+    onClick: () => randomSudoku(),
+    flexGrow: 3,
+    disabled: false,
+  };
+  const secPlay = {
+    text: "play",
+    onClick: () => startSolveInterval(animation.delay),
+    flexGrow: 2,
+    disabled: false,
+  };
+  const secPause = {
+    text: "pause",
+    onClick: () => stopSolveInterval(),
+    flexGrow: 2,
+    disabled: false,
+  };
+  const secSolved = {
+    text: "S O L V E D",
+    onClick: () => console.log("S O L V E D"),
+    flexGrow: 3,
+    disabled: true,
+    solved: true,
+  };
+
+  const terPrev = {
+    text: "< prev",
+    onClick: () => prevTweet(),
+    flexGrow: 1,
+    disabled: false, //!state.birdfeed.next || state.birdfeed.next.key <= 1,
+  };
+  const terPrevDisabled = {
+    text: "< prev",
+    onClick: () => prevTweet(),
+    flexGrow: 1,
+    disabled: true,
+  };
+
   return (
     <StyledDiv>
       <SudokuContainer>
@@ -319,24 +377,15 @@ export const SudokuController = (props) => {
         </TweetList>
       </BirdFeedContainer>
       <ControlContainer>
-        <ButtonTray>
-          {!isLoaded ? (
-            <ButtonTray>
-              <JellyButton
-                text="load this sudoku"
-                onClick={() => randomSudoku()}
-                color="secondary"
-                flexGrow={3}
-              />
-              <JellyButton
-                text="random"
-                onClick={() => randomSudoku()}
-                color="primary"
-              />
-            </ButtonTray>
-          ) : state.isSolved ? (
-            <ButtonTray>
-              <JellyButton
+        {!isLoaded ? (
+          <ButtonTray
+            // tertiary={terPrev}
+            secondary={secLoad}
+            primary={priRandom}
+          />
+        ) : state.isSolved ? (
+          <ButtonTray tertiary={terPrev} secondary={secSolved}>
+            {/* <JellyButton
                 text="< prev"
                 onClick={() => prevTweet()}
                 color="tertiary"
@@ -347,11 +396,15 @@ export const SudokuController = (props) => {
                 solved
                 disabled
                 flexGrow={3}
-              />
-            </ButtonTray>
-          ) : solveInterval ? (
-            <ButtonTray>
-              <JellyButton
+              /> */}
+          </ButtonTray>
+        ) : solveInterval ? (
+          <ButtonTray
+            tertiary={terPrevDisabled}
+            secondary={secPause}
+            primary={priNextDisabled}
+          >
+            {/* <JellyButton
                 text="< prev"
                 onClick={() => prevTweet()}
                 color="tertiary"
@@ -368,11 +421,19 @@ export const SudokuController = (props) => {
                 onClick={() => getNextTweet(true)}
                 color="primary"
                 disabled
-              />
-            </ButtonTray>
-          ) : (
-            <ButtonTray>
-              <JellyButton
+              /> */}
+          </ButtonTray>
+        ) : (
+          <ButtonTray
+            tertiary={
+              !state.birdfeed.next || state.birdfeed.next.key <= 1
+                ? terPrevDisabled
+                : terPrev
+            }
+            secondary={secPlay}
+            primary={priNext}
+          >
+            {/* <JellyButton
                 text="< prev"
                 onClick={() => prevTweet()}
                 color="tertiary"
@@ -388,10 +449,9 @@ export const SudokuController = (props) => {
                 text="next >"
                 onClick={() => getNextTweet(true)}
                 color="primary"
-              />
-            </ButtonTray>
-          )}
-        </ButtonTray>
+              /> */}
+          </ButtonTray>
+        )}
       </ControlContainer>
     </StyledDiv>
   );
@@ -399,6 +459,7 @@ export const SudokuController = (props) => {
 
 const StyledDiv = styled.div`
   padding: 2rem;
+  height: 100%;
 
   display: grid;
   column-gap: 2rem;
@@ -418,6 +479,7 @@ const SudokuContainer = styled.div`
 const ControlContainer = styled.div`
   grid-area: ctrl;
   grid-gap: none;
+  height: 4rem;
 `;
 const BirdFeedContainer = styled.div`
   grid-area: feed;

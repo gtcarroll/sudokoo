@@ -101,16 +101,6 @@ const StyledDiv = styled.div`
     &.tertiary {
       color: ${colors.neutral4};
     }
-
-    animation: crossOutNum ${animation.speed} ease-in;
-    @keyframes crossOutNum {
-      0% {
-        color: ${colors.neutral4};
-      }
-      ${animation.midPoint} {
-        color: transparent;
-      }
-    }
   }
 
   .primary,

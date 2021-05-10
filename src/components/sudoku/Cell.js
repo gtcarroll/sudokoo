@@ -221,7 +221,8 @@ const Value = styled.div`
     padding: 0;
 
     &:hover {
-      box-shadow: inset 0 0 8px 1px ${colors.secondary};
+      background: ${colors.secondary15};
+      box-shadow: inset 0 0 0 2px ${colors.secondary25};
     }
     &:focus {
       box-shadow: inset 0 0 0 2px ${colors.secondary};

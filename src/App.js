@@ -14,10 +14,6 @@ function App() {
       <RowContainer style={{ flexGrow: 1, margin: "auto" }}>
         <SudokuController />
       </RowContainer>
-
-      <RowContainer>
-        <PaletteStrip />
-      </RowContainer>
     </ColContainer>
   );
 }
@@ -30,7 +26,7 @@ const ColContainer = styled.div`
   color: ${colors.neutral4};
 
   font-size: calc(10px + 2vmin);
-  overflow: scroll;
+  overflow: hidden;
 
   min-height: 100vh;
 `;

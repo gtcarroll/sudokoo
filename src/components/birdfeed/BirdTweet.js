@@ -35,7 +35,6 @@ const StyledDiv = styled.div`
 `;
 
 const ReportHeader = styled.div`
-  width: 28rem;
   color: ${colors.neutral4};
   background-color: ${colors.neutral1};
   transition: inherit;
@@ -46,12 +45,14 @@ const ReportHeader = styled.div`
   border: 2px solid ${colors.neutral3};
 
   display: grid;
-  grid-template-columns: 1fr 2rem;
+  grid-template-columns: 1fr auto;
 
   .tweet-key {
     color: ${colors.neutral4};
     font-size: 1rem;
-    margin-top: 0.3rem;
+    margin-top: 0.4rem;
+    padding-left: 0.5rem;
+    width: 1.8rem;
   }
 `;
 export const ReportNode = styled.div`
@@ -83,7 +84,6 @@ export const ReportNode = styled.div`
     grid-area: lead;
     font-size: 1.5rem;
     padding: 0.8rem 0rem 0rem 0.3rem;
-    white-space: nowrap;
   }
 
   .text,

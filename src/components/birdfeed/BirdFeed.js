@@ -64,7 +64,7 @@ const StyledDiv = styled.div`
     background-color: ${colors.neutral0};
 
     max-width: 80%;
-    max-height: 250px;
+    max-height: min(250px, 30vh);
     transition: all ${animation.buttonSpeed} ease-out;
 
     border: 2px solid ${colors.neutral3};
