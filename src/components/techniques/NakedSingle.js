@@ -48,7 +48,7 @@ export const nakedSingle = {
     [5, 0, 0, 4, 0, 8, 7, 0, 0],
     [0, 8, 7, 0, 0, 0, 0, 9, 5],
   ],
-  report: (soln) => {
+  getReport: (soln) => {
     return NakedSingleReport(soln);
   },
   check: (cell, state) => {

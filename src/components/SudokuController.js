@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { animation } from "../params.js";
-import { JellyButton, ButtonTray } from "./controls";
+import { ButtonTray } from "./controls";
 import { Sudoku } from "./sudoku";
-import { BirdFeed, tweetUnloaded, tweetLoaded } from "./birdfeed";
+import { BirdFeed, tweetUnloaded, tweetLoaded, tweetSolved } from "./birdfeed";
 import {
+  helper,
   nakedSingle,
   hiddenSingle,
   nakedPair,
@@ -16,8 +17,6 @@ var solveInterval = false;
 var prev = false;
 var next = false;
 var isNewTweet = false;
-var isLoaded = false;
-var keyIterator = 1;
 
 export const SudokuController = (props) => {
   const [state, setState] = useState([]);
@@ -39,21 +38,25 @@ export const SudokuController = (props) => {
   const loadSudoku = (input) => {
     console.log("Loading Sudoku...");
 
-    keyIterator = 1;
-
     state.sudoku = {
       rows: buildEmpty2DArray(),
       cols: buildEmpty2DArray(),
       houses: buildEmpty2DArray(),
     };
-    state.isSolved = false;
-    state.unsolved = [];
     state.birdfeed = {
       i: 0,
       tweets: [tweetLoaded],
       curr: tweetUnloaded,
       next: tweetLoaded,
     };
+    state.techCounts = new Map();
+    techniques.forEach((tech) => {
+      state.techCounts.set(tech.name, 0);
+    });
+    state.keyIterator = 1;
+    state.isSolved = false;
+    state.isLoaded = true;
+    state.unsolved = [];
 
     // for every sudoku cell...
     for (let h = 0; h < 9; h++) {
@@ -89,21 +92,22 @@ export const SudokuController = (props) => {
         });
       }
     }
-    isLoaded = true;
-    state.isSolved = false;
-    state.snapshot = false;
+    state.birdfeed.tweets[0].snapshot = helper.createSnapshot(state.sudoku);
+    state.snapshot = state.birdfeed.tweets[0].snapshot;
     pushState();
-
     console.log("...Sudoku Loaded");
   };
 
   const pushState = () => {
     let localState = {
       sudoku: state.sudoku,
-      unsolved: state.unsolved,
-      isSolved: state.isSolved,
-      snapshot: state.snapshot,
       birdfeed: state.birdfeed,
+      techCounts: state.techCounts,
+      keyIterator: state.keyIterator,
+      isSolved: state.isSolved,
+      isLoaded: state.isLoaded,
+      unsolved: state.unsolved,
+      snapshot: state.snapshot,
     };
     setState(localState);
   };
@@ -124,7 +128,7 @@ export const SudokuController = (props) => {
   };
 
   const getNextSolution = () => {
-    if (!isLoaded) {
+    if (!state.isLoaded) {
       console.log("No sudoku loaded.");
       stopSolveInterval();
       return false;
@@ -135,7 +139,6 @@ export const SudokuController = (props) => {
       stopSolveInterval();
       return false;
     } else {
-      // let sudokuCopy = copySudoku(state.sudoku);
       // for each solving technique...
       for (let t = 0; t < techniques.length; t++) {
         // ...for each unsolved cell...
@@ -156,14 +159,19 @@ export const SudokuController = (props) => {
             let snapshotData = {
               snapshot: snapshot,
               technique: techniques[t],
-              key: keyIterator,
+              key: state.keyIterator,
             };
-            keyIterator++;
-            if (techniques[t].report) {
-              snapshotData.report = techniques[t].report(
+            state.keyIterator++;
+            if (techniques[t].getReport) {
+              snapshotData.report = techniques[t].getReport(
                 snapshotData.snapshot.props
               );
             }
+            let techCount = 0;
+            if (state.techCounts.has(techniques[t].name))
+              techCount = state.techCounts.get(techniques[t].name);
+            state.techCounts.set(techniques[t].name, techCount + 1);
+
             if (state.birdfeed.tweets) state.birdfeed.tweets.push(snapshotData);
             else state.birdfeed.tweets = [snapshotData];
             nextTweet();
@@ -213,7 +221,11 @@ export const SudokuController = (props) => {
     }
     state.isSolved = true;
     state.snapshot = false;
-    pushState();
+
+    let snapshotData = tweetSolved;
+    snapshotData.report = tweetSolved.getReport(state.techCounts);
+    state.birdfeed.tweets.push(snapshotData);
+    nextTweet();
     return true;
   };
 
@@ -261,6 +273,9 @@ export const SudokuController = (props) => {
   const nextTweet = () => {
     let tweetsLeft = state.birdfeed.i < state.birdfeed.tweets.length - 1;
     if (tweetsLeft) {
+      if (state.birdfeed.tweets[state.birdfeed.i + 1].solved) {
+        state.isSolved = true;
+      }
       state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
       state.birdfeed.i++;
       state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
@@ -274,21 +289,19 @@ export const SudokuController = (props) => {
   };
 
   const prevTweet = () => {
-    if (state.isSolved) {
-      state.isSolved = false;
-      state.birdfeed.curr = state.birdfeed.next;
-      state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
-      mountSnapshot(state.birdfeed.next.snapshot);
-    } else {
+    if (!state.isSolved) {
       prev = true;
       next = false;
       isNewTweet = false;
-      if (state.birdfeed.i > 0) {
-        state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
-        state.birdfeed.i--;
-        state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
-        mountSnapshot(state.birdfeed.next.snapshot);
-      }
+    } else {
+      state.isSolved = false;
+    }
+
+    if (state.birdfeed.i > 0) {
+      state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
+      state.birdfeed.i--;
+      state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
+      mountSnapshot(state.birdfeed.next.snapshot);
     }
   };
 
@@ -355,7 +368,7 @@ export const SudokuController = (props) => {
         <Sudoku
           sudoku={state.snapshot ? state.snapshot : state.sudoku}
           isSolved={state.isSolved}
-          isLoaded={isLoaded}
+          isLoaded={state.isLoaded}
           auto={solveInterval}
         ></Sudoku>
       </SudokuContainer>
@@ -378,7 +391,7 @@ export const SudokuController = (props) => {
         </TweetList>
       </BirdFeedContainer>
       <ControlContainer>
-        {!isLoaded ? (
+        {!state.isLoaded ? (
           <ButtonTray secondary={secLoad} primary={priRandom} />
         ) : state.isSolved ? (
           <ButtonTray tertiary={terPrev} secondary={secSolved}></ButtonTray>

@@ -16,7 +16,7 @@ export const ButtonTray = (props) => {
           padding="right"
         />
       ) : (
-        <JellyButton hidden color="tertiary" />
+        <JellyButton hidden disabled color="tertiary" />
       )}
       {props.secondary ? (
         <JellyButton
@@ -28,7 +28,7 @@ export const ButtonTray = (props) => {
           color="secondary"
         />
       ) : (
-        <JellyButton hidden color="secondary" />
+        <JellyButton hidden disabled color="secondary" />
       )}
       {props.primary ? (
         <JellyButton
@@ -40,7 +40,7 @@ export const ButtonTray = (props) => {
           padding="left"
         />
       ) : (
-        <JellyButton hidden color="primary" />
+        <JellyButton hidden disabled color="primary" />
       )}
     </ButtonTrayContainer>
   );

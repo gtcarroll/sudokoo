@@ -48,7 +48,7 @@ export const lockedCandidate = {
     [0, 4, 0, 0, 0, 1, 7, 2, 0],
     [0, 6, 2, 4, 3, 0, 1, 5, 9],
   ],
-  report: (props) => {
+  getReport: (props) => {
     return LockedCandidateReport(props);
   },
   check: (cell, state) => {

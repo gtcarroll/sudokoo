@@ -8,21 +8,25 @@ export const axesNames = ["row", "column", "house"];
 export const BirdTweet = (props) => {
   return (
     <StyledDiv className={props.className} key={props.tweet.key} active={true}>
-      <ReportHeader>
+      <ReportHeader className={props.tweet.solved ? "solved " : ""}>
         <div>
           {props.tweet.technique
             ? props.tweet.technique.name
             : tweetUnloaded.technique.name}
         </div>
-        <div className={"tweet-key"}>
-          {(props.tweet.key || props.tweet.key === 0) && "#" + props.tweet.key}
-        </div>
+        {props.tweet.solved ? (
+          <div className={"tweet-key sec"}>&#9733;</div>
+        ) : (
+          (props.tweet.key || props.tweet.key === 0) && (
+            <div className={"tweet-key"}>{"#" + props.tweet.key}</div>
+          )
+        )}
       </ReportHeader>
       {props.tweet.report
-        ? !props.tweet.key || props.tweet.key === 0
-          ? props.tweet.report()
+        ? !props.tweet.solved && (!props.tweet.key || props.tweet.key === 0)
+          ? props.tweet.getReport()
           : props.tweet.report
-        : tweetUnloaded.report()}
+        : tweetUnloaded.getReport()}
     </StyledDiv>
   );
 };
@@ -38,6 +42,7 @@ BirdTweet.defaultProps = {
 
 const StyledDiv = styled.div`
   max-width: 28rem;
+  min-width: 18rem;
 `;
 
 const ReportHeader = styled.div`
@@ -59,6 +64,32 @@ const ReportHeader = styled.div`
     margin-top: 0.4rem;
     padding-left: 0.5rem;
     width: 1.8rem;
+    &.pri {
+      color: ${colors.primary};
+    }
+    &.sec {
+      color: ${colors.secondary};
+    }
+    &.ter {
+      color: ${colors.tertiary};
+    }
+  }
+
+  &.solved {
+    color: ${colors.secondary};
+    background: conic-gradient(
+      ${colors.primary15} 0deg,
+      ${colors.secondary15} 120deg,
+      ${colors.tertiary15} 240deg,
+      ${colors.primary15} 360deg
+    );
+    border-image: conic-gradient(
+        ${colors.primary} 0deg,
+        ${colors.secondary} 120deg,
+        ${colors.tertiary} 240deg,
+        ${colors.primary} 360deg
+      )
+      2;
   }
 `;
 export const ReportNode = styled.div`
@@ -186,18 +217,14 @@ export const MiniCell = styled.div`
   text-align: center;
 
   &.solved {
+    width: calc(1.2rem + 4px) !important;
+    height: calc(1.2rem + 4px) !important;
+    border-width: 0px !important;
     background: conic-gradient(
-      ${colors.secondary} 40deg,
-      ${colors.primary} 130deg,
-      ${colors.tertiary} 230deg,
-      ${colors.secondary} 320deg
+      ${colors.primary} 0deg,
+      ${colors.secondary} 120deg,
+      ${colors.tertiary} 240deg,
+      ${colors.primary} 360deg
     );
-    border-image: conic-gradient(
-        ${colors.secondary} 40deg,
-        ${colors.primary} 130deg,
-        ${colors.tertiary} 230deg,
-        ${colors.secondary} 320deg
-      )
-      2 !important;
   }
 `;

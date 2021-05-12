@@ -97,10 +97,10 @@ const StyledDiv = styled.div`
   }
   &.solved {
     border-image: conic-gradient(
-        ${colors.secondary} 40deg,
-        ${colors.primary} 130deg,
-        ${colors.tertiary} 230deg,
-        ${colors.secondary} 320deg
+        ${colors.primary} 0deg,
+        ${colors.secondary} 120deg,
+        ${colors.tertiary} 240deg,
+        ${colors.primary} 360deg
       )
       2;
   }

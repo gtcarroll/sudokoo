@@ -72,7 +72,7 @@ const StyledDiv = styled.div`
 
     content: url(${bird});
 
-    &.animate {
+    &.animate:not(.eureka) {
       &.primary {
         animation: ripplePri ${animation.halfSpeed} ease-out;
         &.chirp {
@@ -134,9 +134,9 @@ const StyledDiv = styled.div`
       transform: scale(0.98, 0.96);
       content: url(${birdSquish});
     }
-    60% {
+    40% {
       box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0.3rem ${colors.secondary50},
-        0 0 0 0.6rem ${colors.primary50}, 0 0 0 0.9rem ${colors.tertiary50};
+        0 0 0 0.65rem ${colors.primary50}, 0 0 0 1rem ${colors.tertiary50};
       content: url(${birdEureka});
     }
     100% {

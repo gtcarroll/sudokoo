@@ -86,7 +86,7 @@ const Button = styled.button`
     border-color: ${colors.tertiary};
   }
 
-  &:hover&:not(.disabled) {
+  &:hover:not(.disabled) {
     top: 0px;
     box-shadow: 0 7px 0 0;
 
@@ -101,7 +101,7 @@ const Button = styled.button`
     }
   }
 
-  &:active&:not(.disabled) {
+  &:active:not(.disabled) {
     top: 7px;
     box-shadow: 0 0 0 0;
 
@@ -144,18 +144,16 @@ const Button = styled.button`
     color: ${colors.secondary};
     padding: 0.5rem 0.4rem 0.7rem 0.4rem;
     background: conic-gradient(
-      from 20deg at 50%,
-      ${colors.primary15} 40deg,
-      ${colors.secondary15} 130deg,
-      ${colors.tertiary15} 230deg,
-      ${colors.primary15} 320deg
+      ${colors.primary15} 0deg,
+      ${colors.secondary15} 120deg,
+      ${colors.tertiary15} 240deg,
+      ${colors.primary15} 360deg
     );
     border-image: conic-gradient(
-        from 20deg at 50%,
-        ${colors.primary} 40deg,
-        ${colors.secondary} 130deg,
-        ${colors.tertiary} 230deg,
-        ${colors.primary} 320deg
+        ${colors.primary} 0deg,
+        ${colors.secondary} 120deg,
+        ${colors.tertiary} 240deg,
+        ${colors.primary} 360deg
       )
       2;
   }
