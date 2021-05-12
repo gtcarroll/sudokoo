@@ -116,7 +116,13 @@ export const SudokuController = (props) => {
     prev = false;
     next = false;
     getNextTweet();
-    solveInterval = setInterval(getNextTweet, ms);
+    if (
+      !(
+        state.birdfeed.tweets[state.birdfeed.tweets.length - 1].solved &&
+        state.birdfeed.i >= state.birdfeed.tweets.length - 1
+      )
+    )
+      solveInterval = setInterval(getNextTweet, ms);
   };
 
   const stopSolveInterval = () => {
@@ -222,10 +228,12 @@ export const SudokuController = (props) => {
     state.isSolved = true;
     state.snapshot = false;
 
-    let snapshotData = tweetSolved;
-    snapshotData.report = tweetSolved.getReport(state.techCounts);
-    state.birdfeed.tweets.push(snapshotData);
-    nextTweet();
+    if (!state.birdfeed.tweets[state.birdfeed.tweets.length - 1].solved) {
+      let snapshotData = tweetSolved;
+      snapshotData.report = tweetSolved.getReport(state.techCounts);
+      state.birdfeed.tweets.push(snapshotData);
+      getNextTweet();
+    }
     return true;
   };
 
@@ -272,6 +280,9 @@ export const SudokuController = (props) => {
 
   const nextTweet = () => {
     let tweetsLeft = state.birdfeed.i < state.birdfeed.tweets.length - 1;
+    let alreadySolved =
+      state.birdfeed.tweets[state.birdfeed.tweets.length - 1].solved;
+    if (alreadySolved) stopSolveInterval();
     if (tweetsLeft) {
       if (state.birdfeed.tweets[state.birdfeed.i + 1].solved) {
         state.isSolved = true;
@@ -285,7 +296,7 @@ export const SudokuController = (props) => {
       if (state.birdfeed.tweets.length === 1)
         mountSnapshot(state.birdfeed.next.snapshot);
     }
-    return tweetsLeft;
+    return tweetsLeft || alreadySolved;
   };
 
   const prevTweet = () => {
@@ -394,7 +405,10 @@ export const SudokuController = (props) => {
         {!state.isLoaded ? (
           <ButtonTray secondary={secLoad} primary={priRandom} />
         ) : state.isSolved ? (
-          <ButtonTray tertiary={terPrev} secondary={secSolved}></ButtonTray>
+          <ButtonTray
+            tertiary={solveInterval ? terPrevDisabled : terPrev}
+            secondary={secSolved}
+          ></ButtonTray>
         ) : solveInterval ? (
           <ButtonTray secondary={secPause}></ButtonTray>
         ) : (

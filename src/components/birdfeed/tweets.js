@@ -74,7 +74,6 @@ export const tweetLoaded = {
 };
 
 const TechNode = (props) => {
-  console.log(props);
   let isSingle =
     props.name === "Naked Single" || props.name === "Hidden Single";
   return (
@@ -89,28 +88,9 @@ const TechNode = (props) => {
     </ReportNode>
   );
 };
-
 TechNode.defaultProps = {
   name: "Technique",
   count: 1,
-};
-
-const SolvedReport = (props) => {
-  console.log([...props]);
-  return (
-    <div>
-      <ReportNode style={{ paddingBottom: 0 }} className="secondary">
-        <MiniCell className="mini-cell solved" />
-        <div className="lead">
-          <Pop className="sec">This sudoku is solved!</Pop>
-        </div>
-        <div className="text">We did it using the following techniques...</div>
-      </ReportNode>
-      {[...props].map(
-        (kv) => kv[1] > 0 && <TechNode name={kv[0]} count={kv[1]} />
-      )}
-    </div>
-  );
 };
 
 export const tweetSolved = {
@@ -119,6 +99,21 @@ export const tweetSolved = {
   technique: { name: "Hurray!" },
   key: "S",
   getReport: (props) => {
-    return SolvedReport(props);
+    return (
+      <div>
+        <ReportNode style={{ paddingBottom: 0 }} className="secondary">
+          <MiniCell className="mini-cell solved" />
+          <div className="lead">
+            <Pop className="sec">This sudoku is solved!</Pop>
+          </div>
+          <div className="text">
+            We did it using the following techniques...
+          </div>
+        </ReportNode>
+        {[...props].map(
+          (kv) => kv[1] > 0 && <TechNode name={kv[0]} count={kv[1]} />
+        )}
+      </div>
+    );
   },
 };
