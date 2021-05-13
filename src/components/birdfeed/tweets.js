@@ -97,7 +97,7 @@ export const tweetSolved = {
   solved: true,
   snapshot: false,
   technique: { name: "Hurray!" },
-  key: "S",
+  key: 1,
   getReport: (props) => {
     return (
       <div>
@@ -111,7 +111,8 @@ export const tweetSolved = {
           </div>
         </ReportNode>
         {[...props].map(
-          (kv) => kv[1] > 0 && <TechNode name={kv[0]} count={kv[1]} />
+          (kv) =>
+            kv[1] > 0 && <TechNode key={kv[0]} name={kv[0]} count={kv[1]} />
         )}
       </div>
     );

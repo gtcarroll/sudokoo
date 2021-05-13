@@ -27,11 +27,28 @@ export const SudokuController = (props) => {
     lockedCandidate,
     pointingTuple,
   ];
+  var sudokus = [nakedPair.test, lockedCandidate.test, pointingTuple.test];
 
   const randomSudoku = () => {
-    let r = Math.floor(Math.random() * techniques.length);
-    console.log(r);
-    loadSudoku(techniques[r].test);
+    let r = Math.floor(Math.random() * sudokus.length);
+    loadSudoku(sudokus[r]);
+  };
+
+  const loadInput = () => {
+    let inputCells = document.querySelectorAll(".input-cell");
+
+    let input = buildEmpty2DArray();
+    for (let i = 0; i < inputCells.length; i++) {
+      let val = parseInt(inputCells[i].value);
+      if (isNaN(val)) val = 0;
+      let h = Math.floor(i / 9),
+        r = i % 9,
+        y = 3 * Math.floor(h / 3) + Math.floor(r / 3),
+        x = 3 * (h % 3) + (r % 3);
+      input[y][x] = val;
+    }
+
+    loadSudoku(input);
   };
 
   // input is a 2d array of starting values
@@ -125,11 +142,11 @@ export const SudokuController = (props) => {
       solveInterval = setInterval(getNextTweet, ms);
   };
 
-  const stopSolveInterval = () => {
+  const stopSolveInterval = (push = true) => {
     if (solveInterval) {
       clearInterval(solveInterval);
       solveInterval = false;
-      pushState();
+      if (push) pushState();
     }
   };
 
@@ -280,9 +297,6 @@ export const SudokuController = (props) => {
 
   const nextTweet = () => {
     let tweetsLeft = state.birdfeed.i < state.birdfeed.tweets.length - 1;
-    let alreadySolved =
-      state.birdfeed.tweets[state.birdfeed.tweets.length - 1].solved;
-    if (alreadySolved) stopSolveInterval();
     if (tweetsLeft) {
       if (state.birdfeed.tweets[state.birdfeed.i + 1].solved) {
         state.isSolved = true;
@@ -296,7 +310,7 @@ export const SudokuController = (props) => {
       if (state.birdfeed.tweets.length === 1)
         mountSnapshot(state.birdfeed.next.snapshot);
     }
-    return tweetsLeft || alreadySolved;
+    return tweetsLeft;
   };
 
   const prevTweet = () => {
@@ -336,7 +350,7 @@ export const SudokuController = (props) => {
 
   const secLoad = {
     text: "load this sudoku",
-    onClick: () => randomSudoku(),
+    onClick: () => loadInput(),
     flexGrow: 3,
     disabled: false,
   };

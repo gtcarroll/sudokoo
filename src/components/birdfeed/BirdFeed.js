@@ -42,7 +42,6 @@ BirdFeed.defaultProps = {
   currTweet: false,
   nextTweet: false,
   auto: false,
-  key: false,
   next: false,
   prev: false,
   isNewTweet: true,

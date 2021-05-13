@@ -63,7 +63,7 @@ export const Cell = (props) => {
       />
       {!props.isLoaded ? (
         <Value style={{ zIndex: 99 }}>
-          <input type="text" maxLength="1"></input>
+          <input className="input-cell" type="text" maxLength="1"></input>
         </Value>
       ) : !props.auto ? (
         props.data.val > 0 && (

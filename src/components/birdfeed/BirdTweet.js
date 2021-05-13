@@ -23,9 +23,9 @@ export const BirdTweet = (props) => {
         )}
       </ReportHeader>
       {props.tweet.report
-        ? !props.tweet.solved && (!props.tweet.key || props.tweet.key === 0)
-          ? props.tweet.getReport()
-          : props.tweet.report
+        ? props.tweet.report
+        : props.tweet.getReport
+        ? props.tweet.getReport()
         : tweetUnloaded.getReport()}
     </StyledDiv>
   );
@@ -120,7 +120,7 @@ export const ReportNode = styled.div`
   .lead {
     grid-area: lead;
     font-size: 1.5rem;
-    padding: 0.8rem 0rem 0rem 0.3rem;
+    padding: 0.8rem 0.9rem 0rem 0.3rem;
   }
 
   .text,
