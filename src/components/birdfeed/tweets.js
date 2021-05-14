@@ -34,6 +34,7 @@ export const tweetUnloaded = {
 };
 
 export const tweetLoaded = {
+  justLoaded: true,
   snapshot: false,
   technique: { name: "Let's solve it!" },
   key: 0,

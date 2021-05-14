@@ -10,7 +10,11 @@ export const BirdTweet = (props) => {
     <StyledDiv className={props.className} key={props.tweet.key} active={true}>
       <ReportHeader
         className={
-          props.tweet.solved ? "solved " : props.tweet.failed ? "failed " : ""
+          props.tweet.solved || props.tweet.justLoaded
+            ? "solved "
+            : props.tweet.failed
+            ? "tertiary "
+            : ""
         }
       >
         <div>
@@ -18,7 +22,7 @@ export const BirdTweet = (props) => {
             ? props.tweet.technique.name
             : tweetUnloaded.technique.name}
         </div>
-        {props.tweet.solved ? (
+        {props.tweet.solved || props.tweet.justLoaded ? (
           <div className={"tweet-key sec"}>&#9733;</div>
         ) : props.tweet.failed ? (
           <div className={"tweet-key ter"}>:(</div>
@@ -81,7 +85,7 @@ const ReportHeader = styled.div`
     }
   }
 
-  &.failed {
+  &.tertiary {
     color: ${colors.tertiary};
     border-color: ${colors.tertiary50};
     background-color: ${colors.tertiary15};

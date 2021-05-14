@@ -158,8 +158,6 @@ export const SudokuController = (props) => {
           false,
         ];
 
-        console.log(axis);
-
         for (let j = 0; j < 9; j++) {
           if (axis[j].val > 0) {
             let cell = axis[j];
@@ -379,12 +377,9 @@ export const SudokuController = (props) => {
   const nextTweet = () => {
     let tweetsLeft = state.birdfeed.i < state.birdfeed.tweets.length - 1;
     if (tweetsLeft) {
-      if (state.birdfeed.tweets[state.birdfeed.i + 1].solved) {
-        state.isSolved = true;
-      }
-      if (state.birdfeed.tweets[state.birdfeed.i + 1].failed) {
-        state.isFailed = true;
-      }
+      state.isSolved = state.birdfeed.tweets[state.birdfeed.i + 1].solved;
+      state.isFailed = state.birdfeed.tweets[state.birdfeed.i + 1].failed;
+
       state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
       state.birdfeed.i++;
       state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];

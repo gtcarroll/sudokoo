@@ -3,6 +3,7 @@ import { helper } from "./TechniqueHelper.js";
 import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
 
 const NakedPairReport = (props) => {
+  console.log(props.a);
   return (
     <div>
       <ReportNode className="primary">
@@ -13,9 +14,15 @@ const NakedPairReport = (props) => {
         <div className="text">
           can only be <Pop className="pri">{props.x}</Pop> or{" "}
           <Pop className="pri">{props.y}</Pop> and are both in the same{" "}
-          <Hlt className="pri">{axesNames[props.a]}</Hlt>. This means that one
-          must be <Pop className="pri">{props.x}</Pop> and the other must be{" "}
-          <Pop className="pri">{props.y}</Pop>.
+          <Hlt className="pri">{axesNames[props.a[0]]}</Hlt>
+          {props.a.length > 1 && (
+            <span>
+              {" and "}
+              <Hlt className="pri">{axesNames[props.a[1]]}</Hlt>
+            </span>
+          )}
+          . This means that one must be <Pop className="pri">{props.x}</Pop> and
+          the other must be <Pop className="pri">{props.y}</Pop>.
         </div>
       </ReportNode>
       <ReportNode className="tertiary">
@@ -24,8 +31,14 @@ const NakedPairReport = (props) => {
           <Pop className="ter">So, other cells...</Pop>
         </div>
         <div className="text">
-          in the same <Hlt className="ter">{axesNames[props.a]}</Hlt> must not
-          be <Pop className="ter">{props.x}</Pop> or{" "}
+          in the same <Hlt className="ter">{axesNames[props.a[0]]}</Hlt>
+          {props.a.length > 1 && (
+            <span>
+              {" or "}
+              <Hlt className="ter">{axesNames[props.a[1]]}</Hlt>
+            </span>
+          )}{" "}
+          must not be <Pop className="ter">{props.x}</Pop> or{" "}
           <Pop className="ter">{props.y}</Pop>.
         </div>
       </ReportNode>
@@ -61,6 +74,7 @@ export const nakedPair = {
     if (pair.length === 2) {
       let affected0 = [];
       let affected1 = [];
+      let affectedAxes = [];
       let axisKeys = Object.keys(cell.pos);
 
       // ...for each [row, col, house] this cell belongs to...
@@ -98,10 +112,12 @@ export const nakedPair = {
                     // ...push potential changes to cell.
                     if (helper.tryRemoving(aff, pair[0])) {
                       affected0.push(aff);
+                      if (!affectedAxes.includes(b)) affectedAxes.push(b);
                       wasUpdated = true;
                     }
                     if (helper.tryRemoving(aff, pair[1])) {
                       affected1.push(aff);
+                      if (!affectedAxes.includes(b)) affectedAxes.push(b);
                       wasUpdated = true;
                     }
                   }
@@ -128,7 +144,7 @@ export const nakedPair = {
             snapshot.props = {
               x: pair[0] + 1,
               y: pair[1] + 1,
-              a: a,
+              a: affectedAxes,
             };
 
             return snapshot;
