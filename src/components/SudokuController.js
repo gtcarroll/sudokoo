@@ -43,11 +43,13 @@ export const SudokuController = (props) => {
 
   const loadInput = () => {
     let inputCells = document.querySelectorAll(".input-cell");
+    let noInput = true;
 
     let input = buildEmpty2DArray();
     for (let i = 0; i < inputCells.length; i++) {
       let val = parseInt(inputCells[i].value);
       if (isNaN(val)) val = 0;
+      else noInput = false;
       let h = Math.floor(i / 9),
         r = i % 9,
         y = 3 * Math.floor(h / 3) + Math.floor(r / 3),
@@ -55,7 +57,7 @@ export const SudokuController = (props) => {
       input[y][x] = val;
     }
 
-    loadSudoku(input);
+    if (!noInput) loadSudoku(input);
   };
 
   const reset = () => {
@@ -380,6 +382,9 @@ export const SudokuController = (props) => {
       if (state.birdfeed.tweets[state.birdfeed.i + 1].solved) {
         state.isSolved = true;
       }
+      if (state.birdfeed.tweets[state.birdfeed.i + 1].failed) {
+        state.isFailed = true;
+      }
       state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
       state.birdfeed.i++;
       state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
@@ -399,6 +404,14 @@ export const SudokuController = (props) => {
       isNewTweet = false;
     } else {
       state.isSolved = false;
+    }
+
+    if (!state.isFailed) {
+      prev = true;
+      next = false;
+      isNewTweet = false;
+    } else {
+      state.isFailed = false;
     }
 
     if (state.birdfeed.i > 0) {
@@ -462,20 +475,9 @@ export const SudokuController = (props) => {
     text: "< prev",
     onClick: () => prevTweet(),
     flexGrow: 1,
-    disabled: false,
-  };
-  const terPrevDisabled = {
-    text: "< prev",
-    onClick: () => prevTweet(),
-    flexGrow: 1,
-    disabled: true,
-  };
-  const terFailed = {
-    text: "O O P S !",
-    onClick: () => console.log("O O P S !"),
-    flexGrow: 1,
-    disabled: true,
-    failed: true,
+    disabled:
+      state.birdfeed &&
+      (!state.birdfeed.next || state.birdfeed.next.key <= 0 || solveInterval),
   };
 
   return (
@@ -510,23 +512,16 @@ export const SudokuController = (props) => {
       </BirdFeedContainer>
       <ControlContainer>
         {state.isFailed ? (
-          <ButtonTray tertiary={terFailed} secondary={secReset} />
+          <ButtonTray tertiary={terPrev} secondary={secReset} />
         ) : !state.isLoaded ? (
           <ButtonTray secondary={secLoad} primary={priRandom} />
         ) : state.isSolved ? (
-          <ButtonTray
-            tertiary={solveInterval ? terPrevDisabled : terPrev}
-            secondary={secSolved}
-          ></ButtonTray>
+          <ButtonTray tertiary={terPrev} secondary={secSolved}></ButtonTray>
         ) : solveInterval ? (
           <ButtonTray secondary={secPause}></ButtonTray>
         ) : (
           <ButtonTray
-            tertiary={
-              !state.birdfeed.next || state.birdfeed.next.key <= 0
-                ? terPrevDisabled
-                : terPrev
-            }
+            tertiary={terPrev}
             secondary={secPlay}
             primary={priNext}
           ></ButtonTray>

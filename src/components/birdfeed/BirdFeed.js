@@ -72,7 +72,7 @@ const StyledDiv = styled.div`
 
     content: url(${bird});
 
-    &.animate:not(.eureka) {
+    &.animate:not(.eureka):not(.oops) {
       &.primary {
         animation: ripplePri ${animation.halfSpeed} ease-out;
         &.chirp {

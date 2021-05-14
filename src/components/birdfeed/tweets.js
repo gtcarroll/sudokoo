@@ -123,7 +123,7 @@ export const tweetNoSolution = {
   failed: true,
   snapshot: false,
   technique: { name: "I can't solve this..." },
-  key: 0,
+  key: 1,
   getReport: () => {
     return (
       <div>
@@ -155,7 +155,7 @@ export const tweetInvalidSudoku = {
   failed: true,
   snapshot: false,
   technique: { name: "I can't solve this..." },
-  key: 0,
+  key: 1,
   getReport: (props) => {
     return (
       <div>
