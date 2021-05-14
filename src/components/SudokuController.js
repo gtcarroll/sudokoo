@@ -57,7 +57,14 @@ export const SudokuController = (props) => {
       input[y][x] = val;
     }
 
-    if (!noInput) loadSudoku(input);
+    if (!noInput) {
+      loadSudoku(input);
+    } else {
+      state.shake === "shake"
+        ? (state.shake = "shake2")
+        : (state.shake = "shake");
+      pushState();
+    }
   };
 
   const reset = () => {
@@ -69,6 +76,7 @@ export const SudokuController = (props) => {
     state.isLoaded = false;
     state.unsolved = false;
     state.snapshot = false;
+    state.shake = false;
     pushState();
   };
 
@@ -196,6 +204,7 @@ export const SudokuController = (props) => {
       isLoaded: state.isLoaded,
       unsolved: state.unsolved,
       snapshot: state.snapshot,
+      shake: state.shake,
     };
     setState(localState);
   };
@@ -483,6 +492,7 @@ export const SudokuController = (props) => {
           isSolved={state.isSolved}
           isFailed={state.isFailed}
           isLoaded={state.isLoaded}
+          shake={state.shake}
           auto={solveInterval}
         ></Sudoku>
       </SudokuContainer>

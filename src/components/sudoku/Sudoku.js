@@ -7,13 +7,13 @@ export const Sudoku = (props) => {
   return (
     <StyledDiv
       className={
-        props.isSolved
+        (props.isSolved
           ? "solved "
           : !props.isLoaded
           ? "editable "
           : props.isFailed
           ? "failed "
-          : ""
+          : "") + props.shake
       }
     >
       <House
@@ -112,6 +112,34 @@ const StyledDiv = styled.div`
         ${colors.primary} 360deg
       )
       2;
+  }
+  &.shake {
+    animation: shake 0.5s ease;
+  }
+  &.shake2 {
+    animation: shake2 0.5s ease;
+  }
+  @keyframes shake {
+    25% {
+      transform: translateX(0.3rem);
+    }
+    50% {
+      transform: translateX(-0.3rem);
+    }
+    75% {
+      transform: translateX(0.3rem);
+    }
+  }
+  @keyframes shake2 {
+    25% {
+      transform: translateX(-0.3rem);
+    }
+    50% {
+      transform: translateX(0.3rem);
+    }
+    75% {
+      transform: translateX(-0.3rem);
+    }
   }
 `;
 
