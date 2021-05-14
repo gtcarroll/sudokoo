@@ -7,7 +7,13 @@ export const Sudoku = (props) => {
   return (
     <StyledDiv
       className={
-        props.isSolved ? "solved " : !props.isLoaded ? "editable " : ""
+        props.isSolved
+          ? "solved "
+          : !props.isLoaded
+          ? "editable "
+          : props.isFailed
+          ? "failed "
+          : ""
       }
     >
       <House
@@ -95,6 +101,9 @@ const StyledDiv = styled.div`
   &.solved {
     border-color: ${colors.secondary};
   }
+  &.failed {
+    border-color: ${colors.tertiary};
+  }
   &.solved {
     border-image: conic-gradient(
         ${colors.primary} 0deg,
@@ -109,6 +118,7 @@ const StyledDiv = styled.div`
 Sudoku.defaultProps = {
   overlay: false,
   isSolved: false,
+  isFailed: false,
   isLoad: false,
   auto: false,
 };

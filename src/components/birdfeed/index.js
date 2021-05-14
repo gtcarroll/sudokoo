@@ -1,5 +1,11 @@
 import { BirdFeed } from "./BirdFeed.js";
-import { tweetUnloaded, tweetLoaded, tweetSolved } from "./tweets.js";
+import {
+  tweetUnloaded,
+  tweetLoaded,
+  tweetSolved,
+  tweetNoSolution,
+  tweetInvalidSudoku,
+} from "./tweets.js";
 import {
   BirdTweet,
   ReportNode,
@@ -20,4 +26,6 @@ export {
   tweetUnloaded,
   tweetLoaded,
   tweetSolved,
+  tweetNoSolution,
+  tweetInvalidSudoku,
 };

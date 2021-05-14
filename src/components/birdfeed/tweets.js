@@ -1,5 +1,5 @@
 import React from "react";
-import { ReportNode, MiniCell, Pop, Hlt } from "../birdfeed";
+import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
 
 export const tweetUnloaded = {
   snapshot: false,
@@ -117,4 +117,74 @@ export const tweetSolved = {
       </div>
     );
   },
+};
+
+export const tweetNoSolution = {
+  failed: true,
+  snapshot: false,
+  technique: { name: "I can't solve this..." },
+  key: 0,
+  getReport: () => {
+    return (
+      <div>
+        <ReportNode style={{ paddingBottom: 0 }} className="tertiary">
+          <MiniCell className="mini-cell solid">&#9888;</MiniCell>
+          <div className="lead">
+            <Pop className="ter">{"I'm sorry..."}</Pop>
+          </div>
+          <div className="text">
+            I couldn't find a solution with the techniques I know.
+          </div>
+        </ReportNode>
+        <ReportNode style={{ paddingBottom: 0 }} className="secondary">
+          <MiniCell className="mini-cell hollow" />
+          <div className="lead">
+            <Pop className="sec">{"Press 'reset'..."}</Pop>
+          </div>
+          <div className="text">
+            to <Hlt className="sec">load a new sudoku</Hlt> and I'll try my best
+            to solve that one!
+          </div>
+        </ReportNode>
+      </div>
+    );
+  },
+};
+
+export const tweetInvalidSudoku = {
+  failed: true,
+  snapshot: false,
+  technique: { name: "I can't solve this..." },
+  key: 0,
+  getReport: (props) => {
+    return (
+      <div>
+        <ReportNode style={{ paddingBottom: 0 }} className="tertiary">
+          <MiniCell className="mini-cell solid">&#9888;</MiniCell>
+          <div className="lead">
+            <Pop className="ter">{"This sudoku is invalid."}</Pop>
+          </div>
+          <div className="text">
+            This <Hlt className="ter">{axesNames[props.a]}</Hlt> has more than
+            one <Pop className="ter">{props.x}</Pop>.
+          </div>
+        </ReportNode>
+        <ReportNode style={{ paddingBottom: 0 }} className="secondary">
+          <MiniCell className="mini-cell hollow" />
+          <div className="lead">
+            <Pop className="sec">{"Press 'reset'..."}</Pop>
+          </div>
+          <div className="text">
+            to <Hlt className="sec">load a new sudoku</Hlt> and I'll try my best
+            to solve that one!
+          </div>
+        </ReportNode>
+      </div>
+    );
+  },
+};
+
+tweetNoSolution.defaultProps = {
+  x: 0,
+  a: 0,
 };

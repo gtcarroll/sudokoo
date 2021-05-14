@@ -8,7 +8,11 @@ export const axesNames = ["row", "column", "house"];
 export const BirdTweet = (props) => {
   return (
     <StyledDiv className={props.className} key={props.tweet.key} active={true}>
-      <ReportHeader className={props.tweet.solved ? "solved " : ""}>
+      <ReportHeader
+        className={
+          props.tweet.solved ? "solved " : props.tweet.failed ? "failed " : ""
+        }
+      >
         <div>
           {props.tweet.technique
             ? props.tweet.technique.name
@@ -16,6 +20,8 @@ export const BirdTweet = (props) => {
         </div>
         {props.tweet.solved ? (
           <div className={"tweet-key sec"}>&#9733;</div>
+        ) : props.tweet.failed ? (
+          <div className={"tweet-key ter"}>:(</div>
         ) : (
           (props.tweet.key || props.tweet.key === 0) && (
             <div className={"tweet-key"}>{"#" + props.tweet.key}</div>
@@ -75,6 +81,12 @@ const ReportHeader = styled.div`
     }
   }
 
+  &.failed {
+    color: ${colors.tertiary};
+    border-color: ${colors.tertiary50};
+    background-color: ${colors.tertiary15};
+  }
+
   &.solved {
     color: ${colors.secondary};
     background: conic-gradient(
@@ -131,7 +143,7 @@ export const ReportNode = styled.div`
     .mini-cell {
       background-color: ${colors.primary15};
       border: 2px solid ${colors.primary50};
-      color: ${colors.neutral0};
+      color: ${colors.primary};
       &.hollow,
       &.solid {
         border-color: ${colors.primary};
@@ -141,6 +153,7 @@ export const ReportNode = styled.div`
       }
       &.solid {
         background-color: ${colors.primary};
+        color: ${colors.neutral0};
       }
     }
   }
@@ -158,6 +171,7 @@ export const ReportNode = styled.div`
       }
       &.solid {
         background-color: ${colors.secondary};
+        color: ${colors.neutral0};
       }
     }
   }
@@ -175,6 +189,7 @@ export const ReportNode = styled.div`
       }
       &.solid {
         background-color: ${colors.tertiary};
+        color: ${colors.neutral0};
       }
     }
   }

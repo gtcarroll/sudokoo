@@ -12,6 +12,7 @@ export const JellyButton = (props) => {
         className={
           (props.disabled ? "disabled " : "") +
           (props.solved ? "solved " : "") +
+          (props.failed ? "failed " : "") +
           (props.hidden ? "hidden " : "") +
           props.padding +
           " " +
@@ -137,7 +138,17 @@ const Button = styled.button`
     &.tertiary {
       color: ${colors.tertiary50};
       border-color: ${colors.tertiary50};
+      &.failed {
+        color: ${colors.tertiary};
+        border-color: ${colors.tertiary50};
+        background-color: ${colors.tertiary15};
+      }
     }
+  }
+
+  &.solved,
+  &.failed {
+    padding: 0.5rem 0.4rem 0.7rem 0.4rem;
   }
 
   &.solved {

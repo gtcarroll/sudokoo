@@ -28,7 +28,8 @@ export const BirdFeed = (props) => {
           (props.next ? "primary " : "") +
           (props.auto ? "secondary " : "") +
           (props.prev ? "tertiary " : "") +
-          (props.isSolved ? "eureka " : "")
+          (props.isSolved ? "eureka " : "") +
+          (props.isFailed ? "oops " : "")
         }
         onClick={() => {
           console.log("open bird menu");
@@ -87,6 +88,9 @@ const StyledDiv = styled.div`
       &.tertiary {
         animation: rippleTer ${animation.halfSpeed} ease-out;
       }
+    }
+    &.oops {
+      content: url(${birdSquish});
     }
     &.eureka {
       animation: rippleEureka ${animation.halfSpeed} ease-out;

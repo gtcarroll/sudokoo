@@ -12,6 +12,7 @@ export const ButtonTray = (props) => {
           onClick={props.tertiary.onClick}
           flexGrow={props.tertiary.flexGrow}
           disabled={props.tertiary.disabled}
+          failed={props.tertiary.failed}
           color="tertiary"
           padding="right"
         />
