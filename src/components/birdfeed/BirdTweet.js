@@ -239,6 +239,7 @@ export const MiniCell = styled.div`
     width: calc(1.2rem + 4px) !important;
     height: calc(1.2rem + 4px) !important;
     border-width: 0px !important;
+    color: ${colors.neutral0} !important;
     background: conic-gradient(
       ${colors.primary} 0deg,
       ${colors.secondary} 120deg,

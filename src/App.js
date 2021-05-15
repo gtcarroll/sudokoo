@@ -7,6 +7,9 @@ import { colors } from "./params.js";
 function App() {
   return (
     <ColContainer>
+      {/* <RowContainer style={{ backgroundColor: colors.neutral2 }}>
+        <h1>patreon pls</h1>
+      </RowContainer> */}
       <RowContainer>
         <PaletteStrip />
       </RowContainer>
@@ -28,7 +31,7 @@ const ColContainer = styled.div`
   font-size: calc(10px + 2vmin);
   overflow: hidden;
 
-  min-height: 100vh;
+  height: 100vh;
 `;
 
 const RowContainer = styled.div`

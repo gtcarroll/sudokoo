@@ -60,7 +60,7 @@ const StyledDiv = styled.div`
     box-shadow: 0 0 0 0rem ${colors.neutral0}, 0 0 0 0rem ${colors.secondary50};
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: 3rem;
     background-color: ${colors.neutral0};
 
     max-width: 80%;
