@@ -53,6 +53,11 @@ BirdTweet.defaultProps = {
 const StyledDiv = styled.div`
   max-width: 28rem;
   min-width: 18rem;
+
+  @media (orientation: portrait) {
+    max-width: 100%;
+    overflow-y: scroll;
+  }
 `;
 
 const ReportHeader = styled.div`
@@ -67,6 +72,10 @@ const ReportHeader = styled.div`
 
   display: grid;
   grid-template-columns: 1fr auto;
+
+  @media (orientation: portrait) {
+    width: calc(100vw - 3rem - 4px);
+  }
 
   .tweet-key {
     color: ${colors.neutral4};
@@ -120,6 +129,13 @@ export const ReportNode = styled.div`
   padding-bottom: 0.5rem;
 
   color: ${colors.neutral5};
+
+  @media (orientation: portrait) {
+    max-width: 28rem;
+    position: relative;
+    z-index: 10;
+    overflow-y: scroll;
+  }
 
   &.connector {
     margin: 0;

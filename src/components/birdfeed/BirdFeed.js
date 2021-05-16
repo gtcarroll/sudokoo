@@ -59,6 +59,7 @@ const StyledDiv = styled.div`
   img {
     box-shadow: 0 0 0 0rem ${colors.neutral0}, 0 0 0 0rem ${colors.secondary50};
     position: absolute;
+    z-index: 0;
     right: 0;
     bottom: 3rem;
     background-color: ${colors.neutral0};
@@ -71,6 +72,12 @@ const StyledDiv = styled.div`
     border-radius: 50%;
 
     content: url(${bird});
+
+    @media (orientation: portrait) {
+      bottom: 0rem;
+      right: -2rem;
+      max-height: 7rem;
+    }
 
     &.animate:not(.eureka):not(.oops) {
       &.primary {

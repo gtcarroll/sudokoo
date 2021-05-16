@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { colors, animation } from "./../../params.js";
 
-//TODO: clean this up!
 export const Note = (props) => {
   let accent =
     props.accent && props.accent.has(props.num - 1)
@@ -10,7 +9,9 @@ export const Note = (props) => {
       : "";
   return (
     <StyledDiv className={(props.auto ? "" : "repeat ") + accent}>
-      <Overlay className={(props.auto ? "" : "repeat ") + accent}>X</Overlay>
+      <Overlay className={(props.auto ? "" : "repeat ") + "overlayX " + accent}>
+        X
+      </Overlay>
       <span
         className={
           (props.auto ? "" : "repeat ") +
@@ -42,13 +43,10 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   text-align: center;
-  top: -10%;
 
   opacity: 0;
   color: ${colors.tertiary};
   font-weight: 1000;
-  font-size: 150%;
-  /* transition: ${animation.halfSpeed} ease-in-out; */
 
   &.tertiary {
     opacity: 1;
@@ -115,7 +113,6 @@ const StyledDiv = styled.div`
       animation-iteration-count: infinite;
     }
 
-    //animation: pulseNum ${animation.speed} ease-in-out;
     @keyframes pulseNum {
       ${animation.midPoint} {
         color: ${colors.neutral2};

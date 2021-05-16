@@ -544,11 +544,23 @@ const StyledDiv = styled.div`
   column-gap: 2rem;
   row-gap: 1.2rem;
 
-  grid-template-rows: min(80vw, 80vh) 1fr;
-  grid-template-columns: min(80vw, 80vh) 1fr;
+  grid-template-rows: calc(100vh - 10rem) 1fr;
+  grid-template-columns: calc(100vh - 10rem) 1fr;
   grid-template-areas:
     "sdku feed"
     "ctrl feed";
+
+  @media (orientation: portrait) {
+    width: 100%;
+    padding: 1rem;
+    row-gap: 0.6rem;
+    grid-template-rows: calc(100vh - (100vw + 5rem)) calc(100vw - 2rem) 9rem;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "feed"
+      "sdku"
+      "ctrl";
+  }
 `;
 
 const SudokuContainer = styled.div`

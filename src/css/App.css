@@ -1,0 +1,59 @@
+@media (orientation: portrait) {
+  .main-content {
+    margin: 0;
+  }
+  .overlayX {
+    top: -12.5%;
+    font-size: 125%;
+  }
+}
+@media (orientation: portrait) and (min-height: 0px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media (orientation: portrait) and (min-height: 700px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media (orientation: portrait) and (min-height: 800px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (orientation: landscape) {
+  .main-content {
+    margin: auto;
+  }
+  .overlayX {
+    top: -0.125rem;
+    font-size: 1.25rem;
+  }
+}
+@media (orientation: landscape) and (min-height: 0px) {
+  html {
+    font-size: 8px;
+  }
+}
+@media (orientation: landscape) and (min-height: 375px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media (orientation: landscape) and (min-height: 500px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media (orientation: landscape) and (min-height: 600px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media (orientation: landscape) and (min-height: 800px) {
+  html {
+    font-size: 16px;
+  }
+}

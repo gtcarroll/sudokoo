@@ -88,14 +88,20 @@ const StyledDiv = styled.div`
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-  height: 100%;
+  width: calc(100vh - 10rem);
+  height: calc(100vh - 10rem);
+
+  @media (orientation: portrait) {
+    width: calc(100vw - 2rem);
+    height: calc(100vw - 2rem);
+    z-index: 1000;
+  }
 
   border: 2px solid ${colors.neutral3};
   border-radius: 2px;
   box-sizing: border-box;
 
-  transition: ${animation.halfSpeed} ease-in-out;
+  transition: all ${animation.halfSpeed} ease-in-out, width 0s, height 0s;
 
   &.editable,
   &.solved {
