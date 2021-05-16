@@ -74,7 +74,7 @@ const StyledDiv = styled.div`
     content: url(${bird});
 
     @media (orientation: portrait) {
-      bottom: 0rem;
+      bottom: 1rem;
       right: -2rem;
       max-height: 7rem;
     }
@@ -123,7 +123,7 @@ const StyledDiv = styled.div`
 
   &.next {
     .curr {
-      animation: fadeOut ${animation.speed} linear;
+      animation: fadeOut ${animation.halfSpeed} linear;
       position: absolute;
       top: 0;
       left: 0;
@@ -133,7 +133,7 @@ const StyledDiv = styled.div`
   }
   &.next {
     .next {
-      animation: fadeIn ${animation.speed} linear;
+      animation: fadeIn ${animation.halfSpeed} linear;
     }
   }
 
