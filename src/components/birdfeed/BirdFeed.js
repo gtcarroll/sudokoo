@@ -55,9 +55,14 @@ const StyledDiv = styled.div`
   padding: 0;
   position: relative;
   display: flex;
+  font-size: 1rem;
+
+  @media (orientation: portrait) {
+    font-size: 0.6rem;
+  }
 
   img {
-    box-shadow: 0 0 0 0rem ${colors.neutral0}, 0 0 0 0rem ${colors.secondary50};
+    box-shadow: 0 0 0 0em ${colors.neutral0}, 0 0 0 0em ${colors.secondary50};
     position: absolute;
     z-index: 0;
     right: 0;
@@ -74,9 +79,10 @@ const StyledDiv = styled.div`
     content: url(${bird});
 
     @media (orientation: portrait) {
-      bottom: 1rem;
+      top: 0rem;
       right: -2rem;
-      max-height: 7rem;
+      max-height: 9rem;
+      z-index: 104;
     }
 
     &.animate:not(.eureka):not(.oops) {
@@ -102,21 +108,21 @@ const StyledDiv = styled.div`
     &.eureka {
       animation: rippleEureka ${animation.halfSpeed} ease-out;
       content: url(${birdEureka});
-      box-shadow: 0 0 0 0rem ${colors.secondary50},
-        0 0 0 0.2rem ${colors.primary50}, 0 0 0 0.4rem ${colors.tertiary50};
+      box-shadow: 0 0 0 0em ${colors.secondary50},
+        0 0 0 0.2em ${colors.primary50}, 0 0 0 0.4em ${colors.tertiary50};
     }
     &:hover {
       border-color: ${colors.secondary};
       transform: scale(1.025);
     }
     &:active {
-      box-shadow: 0 0 0 0rem ${colors.neutral0},
-        0 0 0 0.8rem ${colors.secondary50};
+      box-shadow: 0 0 0 0em ${colors.neutral0},
+        0 0 0 0.8em ${colors.secondary50};
       transform: scale(0.98, 0.96);
       content: url(${birdSquish});
       &.eureka {
-        box-shadow: 0 0 0 0.3rem ${colors.secondary50},
-          0 0 0 0.6rem ${colors.primary50}, 0 0 0 0.9rem ${colors.tertiary50};
+        box-shadow: 0 0 0 0.3em ${colors.secondary50},
+          0 0 0 0.6em ${colors.primary50}, 0 0 0 0.9em ${colors.tertiary50};
       }
     }
   }
@@ -145,13 +151,13 @@ const StyledDiv = styled.div`
       content: url(${birdSquish});
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0.3rem ${colors.secondary50},
-        0 0 0 0.65rem ${colors.primary50}, 0 0 0 1rem ${colors.tertiary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0.3em ${colors.secondary50},
+        0 0 0 0.65em ${colors.primary50}, 0 0 0 1em ${colors.tertiary50};
       content: url(${birdEureka});
     }
     100% {
-      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0rem ${colors.secondary50},
-        0 0 0 0.2rem ${colors.primary50}, 0 0 0 0.4rem ${colors.tertiary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0em ${colors.secondary50},
+        0 0 0 0.2em ${colors.primary50}, 0 0 0 0.4em ${colors.tertiary50};
       content: url(${birdEureka});
     }
   }
@@ -163,11 +169,11 @@ const StyledDiv = styled.div`
       content: url(${birdSquish});
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1rem ${colors.primary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1em ${colors.primary50};
       content: url(${birdEureka});
     }
     100% {
-      box-shadow: 0 0 0 2rem ${colors.neutral0}, 0 0 0 2rem ${colors.primary50};
+      box-shadow: 0 0 0 2em ${colors.neutral0}, 0 0 0 2em ${colors.primary50};
       content: url(${birdEureka});
     }
   }
@@ -177,10 +183,10 @@ const StyledDiv = styled.div`
       transform: scale(0.98, 0.96);
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1rem ${colors.primary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1em ${colors.primary50};
     }
     100% {
-      box-shadow: 0 0 0 2rem ${colors.neutral0}, 0 0 0 2rem ${colors.primary50};
+      box-shadow: 0 0 0 2em ${colors.neutral0}, 0 0 0 2em ${colors.primary50};
       content: url(${bird});
     }
   }
@@ -190,11 +196,10 @@ const StyledDiv = styled.div`
       transform: scale(0.98, 0.96);
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1rem ${colors.secondary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1em ${colors.secondary50};
     }
     100% {
-      box-shadow: 0 0 0 2rem ${colors.neutral0},
-        0 0 0 2rem ${colors.secondary50};
+      box-shadow: 0 0 0 2em ${colors.neutral0}, 0 0 0 2em ${colors.secondary50};
       content: url(${bird});
     }
   }
@@ -205,12 +210,11 @@ const StyledDiv = styled.div`
       content: url(${birdSquish});
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1rem ${colors.secondary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1em ${colors.secondary50};
       content: url(${birdEureka});
     }
     100% {
-      box-shadow: 0 0 0 2rem ${colors.neutral0},
-        0 0 0 2rem ${colors.secondary50};
+      box-shadow: 0 0 0 2em ${colors.neutral0}, 0 0 0 2em ${colors.secondary50};
       content: url(${birdEureka});
     }
   }
@@ -220,10 +224,10 @@ const StyledDiv = styled.div`
       transform: scale(0.98, 0.96);
     }
     40% {
-      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1rem ${colors.tertiary50};
+      box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1em ${colors.tertiary50};
     }
     100% {
-      box-shadow: 0 0 0 2rem ${colors.neutral0}, 0 0 0 2rem ${colors.tertiary50};
+      box-shadow: 0 0 0 2em ${colors.neutral0}, 0 0 0 2em ${colors.tertiary50};
       content: url(${bird});
     }
   }

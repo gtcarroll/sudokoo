@@ -554,12 +554,12 @@ const StyledDiv = styled.div`
     width: 100%;
     padding: 1rem;
     row-gap: 0;
-    grid-template-rows: calc(100vh - (100vw + 5rem)) calc(100vw - 2rem) 1rem 9rem;
+    grid-template-rows: calc(100vw - 2rem) 1rem calc(100vh - (100vw + 5rem)) 9rem;
     grid-template-columns: 1fr;
     grid-template-areas:
-      "feed"
       "sdku"
       "gap"
+      "feed"
       "ctrl";
   }
 `;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { animation } from "../../params.js";
+import { animation, colors } from "../../params.js";
 import { JellyButton } from "./";
 
 export const ButtonTray = (props) => {
@@ -55,6 +55,10 @@ ButtonTray.defaultProps = {
 
 const ButtonTrayContainer = styled.div`
   transition: ${animation.buttonSpeed};
+  background-color: ${colors.neutral0};
+
+  position: relative;
+  z-index: 102;
 
   display: flex;
   flex-direction: row;

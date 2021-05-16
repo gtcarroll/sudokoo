@@ -11,18 +11,21 @@ export const colors = {
 
   // #61DBE7
   primary: darkP + ", 1)",
+  primary15f: "#152829",
   primary15: darkP + ", 0.15)",
   primary25: darkP + ", 0.25)",
   primary50: darkP + ", 0.5)",
 
   // #B6E7A6
   secondary: darkS + ", 1)",
+  secondary15f: "#222920",
   secondary15: darkS + ", 0.15)",
   secondary25: darkS + ", 0.25)",
   secondary50: darkS + ", 0.5)",
 
   // #E799E7
   tertiary: darkT + ", 1)",
+  tertiary15f: "#291E29",
   tertiary15: darkT + ", 0.15)",
   tertiary25: darkT + ", 0.25)",
   tertiary50: darkT + ", 0.5)",
@@ -41,18 +44,21 @@ export const colors_light = {
 
   // #078D48
   primary: lightP + ", 1)",
+  primary15f: "#D3E7DD",
   primary15: lightP + ", 0.15)",
   primary25: lightP + ", 0.25)",
   primary50: lightP + ", 0.5)",
 
   // #7364B4
   secondary: lightS + ", 1)",
+  secondary15f: "#E3E1ED",
   secondary15: lightS + ", 0.15)",
   secondary25: lightS + ", 0.25)",
   secondary50: lightS + ", 0.5)",
 
   // #DE6312
   tertiary: lightT + ", 1)",
+  tertiary15f: "#F3E1D5",
   tertiary15: lightT + ", 0.15)",
   tertiary25: lightT + ", 0.25)",
   tertiary50: lightT + ", 0.5)",

@@ -58,6 +58,7 @@ const Button = styled.button`
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
+  z-index: 102;
 
   &.right,
   &.left {

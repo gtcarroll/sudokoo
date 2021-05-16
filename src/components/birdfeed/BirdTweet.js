@@ -37,6 +37,7 @@ export const BirdTweet = (props) => {
         : props.tweet.getReport
         ? props.tweet.getReport()
         : tweetUnloaded.getReport()}
+      <ScrollGap />
     </StyledDiv>
   );
 };
@@ -50,13 +51,22 @@ BirdTweet.defaultProps = {
   },
 };
 
+const ScrollGap = styled.div`
+  height: 25%;
+`;
+
 const StyledDiv = styled.div`
   max-width: 28rem;
   min-width: 18rem;
 
+  overflow-y: scroll;
+
   @media (orientation: portrait) {
     max-width: 100%;
-    overflow-y: scroll;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
   }
 `;
 
@@ -64,6 +74,10 @@ const ReportHeader = styled.div`
   color: ${colors.neutral4};
   background-color: ${colors.neutral1};
   transition: inherit;
+
+  position: sticky;
+  top: 0;
+  z-index: 101;
 
   font-size: 1.5rem;
   padding: 0.4rem 0.4rem 0.6rem 0.6rem;
@@ -74,7 +88,10 @@ const ReportHeader = styled.div`
   grid-template-columns: 1fr auto;
 
   @media (orientation: portrait) {
-    width: calc(100vw - 3rem - 4px);
+    width: calc(100vw - 6rem - 4px);
+    .tweet-key {
+      padding-right: calc(5rem - 2px);
+    }
   }
 
   .tweet-key {
@@ -97,16 +114,16 @@ const ReportHeader = styled.div`
   &.tertiary {
     color: ${colors.tertiary};
     border-color: ${colors.tertiary50};
-    background-color: ${colors.tertiary15};
+    background-color: ${colors.tertiary15f};
   }
 
   &.solved {
     color: ${colors.secondary};
     background: conic-gradient(
-      ${colors.primary15} 0deg,
-      ${colors.secondary15} 120deg,
-      ${colors.tertiary15} 240deg,
-      ${colors.primary15} 360deg
+      ${colors.primary15f} 0deg,
+      ${colors.secondary15f} 120deg,
+      ${colors.tertiary15f} 240deg,
+      ${colors.primary15f} 360deg
     );
     border-image: conic-gradient(
         ${colors.primary} 0deg,
@@ -129,11 +146,12 @@ export const ReportNode = styled.div`
   padding-bottom: 0.5rem;
 
   color: ${colors.neutral5};
+  position: relative;
+  z-index: 100;
 
   @media (orientation: portrait) {
-    max-width: 28rem;
+    max-width: max(calc(100% - 8rem), 20rem);
     position: relative;
-    z-index: 10;
     overflow-y: scroll;
   }
 
