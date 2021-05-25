@@ -25,4 +25,7 @@ const GradientContainer = styled.div`
 
   width: 100%;
   height: 5px;
+
+  position: absolute;
+  bottom: -5px;
 `;

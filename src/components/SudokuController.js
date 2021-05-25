@@ -537,7 +537,7 @@ export const SudokuController = (props) => {
 };
 
 const StyledDiv = styled.div`
-  padding: 2rem;
+  padding: 3rem 2rem 2rem 2rem;
   height: 100%;
 
   display: grid;
@@ -554,7 +554,7 @@ const StyledDiv = styled.div`
     width: 100%;
     padding: 1rem;
     row-gap: 0;
-    grid-template-rows: calc(100vw - 2rem) 1rem calc(100vh - (100vw + 5rem)) 9rem;
+    grid-template-rows: calc(100vw - 2rem) 1rem calc(100vh - (100vw + 6.5rem)) 9rem;
     grid-template-columns: 1fr;
     grid-template-areas:
       "sdku"

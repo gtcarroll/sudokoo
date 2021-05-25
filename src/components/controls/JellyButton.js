@@ -58,7 +58,6 @@ const Button = styled.button`
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
-  z-index: 102;
 
   &.right,
   &.left {
@@ -66,7 +65,7 @@ const Button = styled.button`
   }
 
   border: 2px solid;
-  border-radius: 2px; //0.4em;
+  border-radius: 2px;
 
   top: 7px;
   position: absolute;

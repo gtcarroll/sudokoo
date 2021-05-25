@@ -26,9 +26,14 @@ export const colors = {
   // #E799E7
   tertiary: darkT + ", 1)",
   tertiary15f: "#291E29",
+  tertiary25f: "#402C40",
+  tertiary50f: "#785178",
   tertiary15: darkT + ", 0.15)",
   tertiary25: darkT + ", 0.25)",
   tertiary50: darkT + ", 0.5)",
+
+  kofiPink: "#FF5E5B",
+  kofiBlue: "#29ABE0",
 };
 
 let lightP = "rgba(7, 141, 72",

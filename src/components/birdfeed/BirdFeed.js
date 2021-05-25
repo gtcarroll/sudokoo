@@ -8,6 +8,7 @@ import birdSquish from "../../assets/bird_squish.png";
 
 export const BirdFeed = (props) => {
   const [animate, setAnimate] = useState(true);
+  const [toggle, setToggle] = useState(false);
   return (
     <StyledDiv className={props.nextTweet ? "next" : ""}>
       {props.currTweet && (
@@ -32,9 +33,11 @@ export const BirdFeed = (props) => {
           (props.isFailed ? "oops " : "")
         }
         onClick={() => {
-          console.log("open bird menu");
+          console.log(toggle);
+          setToggle(!toggle);
         }}
       />
+      <button>a</button>
     </StyledDiv>
   );
 };
@@ -61,12 +64,19 @@ const StyledDiv = styled.div`
     font-size: 0.6rem;
   }
 
+  button {
+    position: absolute;
+    z-index: 1;
+    right: 4rem;
+    bottom: 5rem;
+  }
+
   img {
     box-shadow: 0 0 0 0em ${colors.neutral0}, 0 0 0 0em ${colors.secondary50};
     position: absolute;
     z-index: 0;
     right: 0;
-    bottom: 3rem;
+    bottom: 4rem;
     background-color: ${colors.neutral0};
 
     max-width: 80%;

@@ -94,7 +94,7 @@ const StyledDiv = styled.div`
   @media (orientation: portrait) {
     width: calc(100vw - 2rem);
     height: calc(100vw - 2rem);
-    z-index: 1000;
+    z-index: 999;
   }
 
   border: 2px solid ${colors.neutral3};

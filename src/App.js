@@ -1,18 +1,18 @@
 import "./css/App.css";
 import styled from "styled-components";
 import { SudokuController } from "./components/SudokuController.js";
-import { PaletteStrip } from "./components/PaletteStrip.js";
+import { Credits } from "./components/Credits.js";
 import { colors } from "./params.js";
+
+var dropDownToggle = false;
 
 function App() {
   return (
     <ColContainer>
-      {/* <RowContainer style={{ backgroundColor: colors.neutral2 }}>
-        <h1>patreon pls</h1>
-      </RowContainer> */}
-      <RowContainer>
-        <PaletteStrip />
+      <RowContainer style={{ backgroundColor: colors.neutral2 }}>
+        <Credits dropToggle={dropDownToggle} />
       </RowContainer>
+      <RowContainer></RowContainer>
 
       <RowContainer className="main-content" style={{ flexGrow: 1 }}>
         <SudokuController />
