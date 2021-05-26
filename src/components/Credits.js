@@ -3,6 +3,10 @@ import styled from "styled-components";
 import { PaletteStrip } from "./../components/PaletteStrip.js";
 import { colors, animation } from "./../params.js";
 import gacarrProfile from "./../assets/gacarr_profile.jpg";
+import bearyTeaProfile from "./../assets/b-tea_profile.png";
+import socialLinkedIn from "./../assets/linked-in_logo.png";
+import socialGitHub from "./../assets/github_logo.png";
+import socialCarrd from "./../assets/carrd_logo.png";
 import kofiButton from "./../assets/kofi_button.png";
 
 export const Credits = (props) => {
@@ -33,29 +37,74 @@ export const Credits = (props) => {
           <span className="heart">&#9825;</span>
         )}
       </button>
-      <CreditsContainer>
-        <div className="thanks"></div>
+      <LoveContainer>
+        <div className="about">
+          <div>Thank you for checking out Sudokoo!</div>{" "}
+          <div>
+            If you want to see more accesible, ad-free, &amp; open-source
+            experiences on the web like this, please consider supporting me on
+            Ko-Fi!
+          </div>
+        </div>
         <div className="support">
           <img
-            className="kofi"
+            draggable="false"
+            className={(toggle ? "show " : "hide ") + "kofi"}
             src={kofiButton}
             alt="Support me on Ko-fi"
             onClick={() => window.open("https://ko-fi.com/gacarr")}
           />
         </div>
-        <div className="credits gabe"></div>
-        <div className="credits b-tea"></div>
-      </CreditsContainer>
-      {/* </div>
-        <div className="title">
-          <div>
-            <div className="contribution">Design &amp; Engineering</div>
+        <div className="credits">
+          <div className="credit">
             <div className="name">Gabe Carroll</div>
+            <div className="title">Design &amp; Engineering</div>
+            <img
+              className={(toggle ? "show " : "hide ") + "photo gaca"}
+              src={gacarrProfile}
+              alt="Gabe's profile"
+              onClick={() => window.open("https://github.com/gtcarroll")}
+            />
+            <div className="social">
+              <img
+                draggable="false"
+                src={socialLinkedIn}
+                alt="LinkedIn logo"
+                onClick={() =>
+                  window.open(
+                    "https://www.linkedin.com/in/gabe-carroll-443197107/"
+                  )
+                }
+              />
+              <img
+                draggable="false"
+                src={socialGitHub}
+                alt="GitHub logo"
+                onClick={() => window.open("https://github.com/gtcarroll")}
+              />
+            </div>
           </div>
-          <img className="button" src={kofiButton} alt="Support me on Ko-fi" />
+          <div className="credit">
+            <div className="name">BearyMilkTea</div>
+            <div className="title">Illustration</div>
+            <img
+              className={(toggle ? "show " : "hide ") + "photo b-tea"}
+              src={bearyTeaProfile}
+              alt="Beary Milk Tea's profile"
+              onClick={() => window.open("https://bearymilktea.carrd.co/")}
+            />
+            <div className="social">
+              <img
+                className="b-tea"
+                draggable="false"
+                src={socialCarrd}
+                alt="Carrd logo"
+                onClick={() => window.open("https://bearymilktea.carrd.co/")}
+              />
+            </div>
+          </div>
         </div>
-        <img className="profile" src={gacarrProfile} /> */}
-      {/* <img className="button" src={kofiButton} alt="Support me on Ko-fi" /> */}
+      </LoveContainer>
     </StyledDiv>
   );
 };
@@ -64,68 +113,211 @@ Credits.defaultProps = {
   dropToggle: false,
 };
 
-const CreditsContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  z-index: 1000;
-
-  max-width: 100vw;
-  height: 30rem;
-  padding-right: 5rem;
-
+const LoveContainer = styled.div`
   display: grid;
-  grid-template-rows: 4fr 4.6rem 2fr;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas:
-    "thnks thnks"
-    "spprt spprt"
-    "crdtL crdtR";
+  grid-template-rows: 22rem 5rem 12rem;
+  grid-template-areas: "about" "support" "credits";
 
-  div {
-    width: calc(100vw - 5rem);
-    &.credits {
-      width: calc(50vw - 2.5rem);
+  position: absolute;
+  z-index: 1000;
+  bottom: 0;
+
+  height: 40rem;
+  max-width: 100vw;
+  padding-right: 6rem;
+
+  .about {
+    grid-area: about;
+
+    width: calc(100vw - 10rem);
+    color: ${colors.neutral5};
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+
+    font-size: 1.5rem;
+    padding: 1rem 2rem 1.5rem 2rem;
+
+    div {
+      padding: 1.5rem 0 0 0;
+      max-width: 38rem;
     }
   }
 
-  .thanks {
-    grid-area: thnks;
-    background-color: burlywood;
-  }
-
   .support {
-    grid-area: spprt;
+    grid-area: support;
+
     text-align: center;
+    padding-bottom: 0.5rem;
 
     .kofi {
-      height: 4rem;
-      margin-top: 0.3rem;
+      top: 0.3rem;
+      position: relative;
+
+      max-height: 3.5rem;
       border-radius: 0.75rem;
 
       transition: ${animation.buttonSpeed};
       cursor: pointer;
 
       &:hover {
-        transform: translateY(-0.6rem);
+        top: -0.3rem;
         box-shadow: 0 0.2rem 0 0 ${colors.secondary},
           0 0.4rem 0 0 ${colors.primary}, 0 0.6rem 0 0 ${colors.tertiary};
       }
       &:active {
-        transform: translateY(0rem);
+        top: 0.3rem;
         box-shadow: 0 0 0 0 ${colors.secondary}, 0 0 0 0 ${colors.primary},
           0 0 0 0 ${colors.tertiary};
       }
     }
   }
 
-  .gabe {
-    grid-area: crdtL;
-    background-color: lavenderblush;
+  .credits {
+    grid-area: credits;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .credit {
+      display: grid;
+      grid-template-rows: 2.5rem 3.5rem 4rem;
+      grid-template-columns: 10.5rem 13.5rem;
+      grid-template-areas:
+        "photo name"
+        "photo title"
+        "photo social";
+
+      padding: 1rem;
+
+      .photo {
+        grid-area: photo;
+
+        max-height: 8rem;
+        padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+        margin-right: 1rem;
+        border-radius: 2px;
+
+        background-color: #fff;
+        cursor: pointer;
+
+        transition: all ${animation.halfSpeed} ease-in,
+          box-shadow ${animation.buttonSpeed};
+
+        &.hide {
+          &.gaca {
+            transform: translate(0, -10rem) rotate(7deg);
+          }
+          &.b-tea {
+            transform: translate(0, -10rem) rotate(-10deg);
+          }
+        }
+        &.gaca {
+          transform: rotate(-2deg);
+          &:hover {
+            box-shadow: 0 0 0.6rem 0.3rem ${colors.primary};
+          }
+        }
+        &.b-tea {
+          transform: rotate(3deg);
+          &:hover {
+            box-shadow: 0 0 0.6rem 0.3rem ${colors.secondary};
+          }
+        }
+      }
+      .name {
+        grid-area: name;
+
+        font-size: 1.5rem;
+        white-space: nowrap;
+
+        color: ${colors.neutral5};
+      }
+      .title {
+        grid-area: title;
+
+        font-size: 1.4rem;
+        white-space: nowrap;
+
+        color: ${colors.neutral4};
+      }
+      .social {
+        grid-area: social;
+
+        img {
+          height: 2.5rem;
+          width: 2.5rem;
+          margin-right: 1rem;
+
+          border: 2px solid ${colors.neutral4};
+          border-radius: 1.5rem;
+
+          transition: ${animation.buttonSpeed};
+
+          &:hover {
+            &.b-tea {
+              border-color: ${colors.secondary};
+            }
+            border-color: ${colors.primary};
+            cursor: pointer;
+            transform: scale(1.05);
+          }
+          &:active {
+            border-color: ${colors.primary};
+            transform: scale(0.98, 0.96);
+          }
+        }
+      }
+    }
   }
 
-  .b-tea {
-    grid-area: crdtR;
-    background-color: rosybrown;
+  @media (orientation: portrait) {
+    grid-template-rows: 23rem 4rem 23rem;
+    height: 50rem;
+    width: calc(100vw - 5rem);
+
+    .about {
+      width: calc(100vw - 9rem);
+    }
+    .support {
+      width: calc(100vw - 5rem);
+    }
+    .credits {
+      flex-direction: column;
+      .credit {
+        grid-template-rows: 2rem 2.5rem 3.5rem;
+        grid-template-columns: 9.5rem 20rem;
+        .name {
+          font-size: 1.4rem;
+        }
+        .title {
+          font-size: 1.25rem;
+        }
+        .photo {
+          max-height: 7rem;
+          padding: 0.3rem 0.3rem 1rem 0.3rem;
+
+          &.hide {
+            &.gaca {
+              transform: translate(0, -10rem) rotate(-10deg) !important;
+            }
+            &.b-tea {
+              transform: translate(0, -10rem) rotate(7deg) !important;
+            }
+          }
+          &.gaca {
+            transform: rotate(1deg) !important;
+          }
+          &.b-tea {
+            transform: rotate(-2deg) !important;
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -191,6 +383,18 @@ const StyledDiv = styled.div`
 
       &.heart {
         height: 2rem;
+      }
+    }
+  }
+
+  @media (orientation: portrait) {
+    &.show {
+      height: 45rem;
+    }
+    .heart-ribbon {
+      height: 47.5rem;
+      span {
+        height: 4.5rem;
       }
     }
   }

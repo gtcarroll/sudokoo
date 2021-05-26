@@ -55,10 +55,10 @@ ButtonTray.defaultProps = {
 
 const ButtonTrayContainer = styled.div`
   transition: ${animation.buttonSpeed};
-  background-color: ${colors.neutral0};
+  /* background-color: ${colors.neutral0}; */
 
   position: relative;
-  z-index: 102;
+  z-index: 105;
 
   display: flex;
   flex-direction: row;
