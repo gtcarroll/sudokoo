@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { PaletteStrip } from "./../components/PaletteStrip.js";
+import { Hlt } from "./../components/birdfeed";
 import { colors, animation } from "./../params.js";
 import gacarrProfile from "./../assets/gacarr_profile.jpg";
 import bearyTeaProfile from "./../assets/b-tea_profile.png";
@@ -8,6 +9,8 @@ import socialLinkedIn from "./../assets/linked-in_logo.png";
 import socialGitHub from "./../assets/github_logo.png";
 import socialCarrd from "./../assets/carrd_logo.png";
 import kofiButton from "./../assets/kofi_button.png";
+import heartOn from "./../assets/heart_on.png";
+import heartOff from "./../assets/heart_off.png";
 
 export const Credits = (props) => {
   const [toggle, setToggle] = useState(false);
@@ -32,18 +35,26 @@ export const Credits = (props) => {
         <span>U</span>
         <span> </span>
         {toggle ? (
-          <span className="heart">&#9829;</span>
+          <span className="heart">
+            <img draggable="false" src={heartOn} alt="pink heart" />
+          </span>
         ) : (
-          <span className="heart">&#9825;</span>
+          <span className="heart">
+            <img draggable="false" src={heartOff} alt="pink heart outline" />
+          </span>
         )}
       </button>
       <LoveContainer>
         <div className="about">
-          <div>Thank you for checking out Sudokoo!</div>{" "}
           <div>
-            If you want to see more accesible, ad-free, &amp; open-source
-            experiences on the web like this, please consider supporting me on
-            Ko-Fi!
+            Sudokoo was created to share the joy of sudoku in a visual &amp; fun
+            way.
+          </div>{" "}
+          <div>
+            If you'd like to see more <Hlt className="ter">accessible</Hlt>,{" "}
+            <Hlt className="sec">ad-free</Hlt>, &amp;{" "}
+            <Hlt className="pri">open-source</Hlt> experiences on the web,
+            please consider supporting me on Ko-Fi!
           </div>
         </div>
         <div className="support">
@@ -68,6 +79,12 @@ export const Credits = (props) => {
             <div className="social">
               <img
                 draggable="false"
+                src={socialGitHub}
+                alt="GitHub logo"
+                onClick={() => window.open("https://github.com/gtcarroll")}
+              />
+              <img
+                draggable="false"
                 src={socialLinkedIn}
                 alt="LinkedIn logo"
                 onClick={() =>
@@ -75,12 +92,6 @@ export const Credits = (props) => {
                     "https://www.linkedin.com/in/gabe-carroll-443197107/"
                   )
                 }
-              />
-              <img
-                draggable="false"
-                src={socialGitHub}
-                alt="GitHub logo"
-                onClick={() => window.open("https://github.com/gtcarroll")}
               />
             </div>
           </div>
@@ -115,14 +126,14 @@ Credits.defaultProps = {
 
 const LoveContainer = styled.div`
   display: grid;
-  grid-template-rows: 22rem 5rem 12rem;
+  grid-template-rows: 13rem 5rem 13rem;
   grid-template-areas: "about" "support" "credits";
 
   position: absolute;
   z-index: 1000;
   bottom: 0;
 
-  height: 40rem;
+  height: 31rem;
   max-width: 100vw;
   padding-right: 6rem;
 
@@ -139,10 +150,11 @@ const LoveContainer = styled.div`
 
     font-size: 1.5rem;
     padding: 1rem 2rem 1.5rem 2rem;
+    text-align: center;
 
     div {
       padding: 1.5rem 0 0 0;
-      max-width: 38rem;
+      max-width: 31rem;
     }
   }
 
@@ -205,7 +217,7 @@ const LoveContainer = styled.div`
         background-color: #fff;
         cursor: pointer;
 
-        transition: all ${animation.halfSpeed} ease-in,
+        transition: all ${animation.halfSpeed} ease-in-out,
           box-shadow ${animation.buttonSpeed};
 
         &.hide {
@@ -278,19 +290,20 @@ const LoveContainer = styled.div`
   @media (orientation: portrait) {
     grid-template-rows: 23rem 4rem 23rem;
     height: 50rem;
-    width: calc(100vw - 5rem);
+    width: calc(100vw - 6rem);
 
     .about {
       width: calc(100vw - 9rem);
+      text-align: left;
     }
     .support {
-      width: calc(100vw - 5rem);
+      width: calc(100vw - 6rem);
     }
     .credits {
       flex-direction: column;
       .credit {
         grid-template-rows: 2rem 2.5rem 3.5rem;
-        grid-template-columns: 9.5rem 20rem;
+        grid-template-columns: 9.5rem 15rem;
         .name {
           font-size: 1.4rem;
         }
@@ -337,7 +350,7 @@ const StyledDiv = styled.div`
   }
 
   &.show {
-    height: 30rem;
+    height: 31rem;
   }
 
   .heart-ribbon {
@@ -372,17 +385,21 @@ const StyledDiv = styled.div`
       right: 1rem;
     }
     width: 4rem;
-    height: 32.5rem;
+    height: 33.5rem;
 
     display: flex;
     align-content: center;
+    text-align: center;
 
     span {
       width: 100%;
       height: 3rem;
 
       &.heart {
-        height: 2rem;
+        height: 1.7rem;
+        img {
+          height: 1.4rem;
+        }
       }
     }
   }
