@@ -281,11 +281,11 @@ const LoveContainer = styled.div`
             }
             border-color: ${colors.primary};
             cursor: pointer;
-            transform: scale(1.05);
+            transform: scale(1.1);
           }
           &:active {
             border-color: ${colors.primary};
-            transform: scale(0.98, 0.96);
+            transform: scale(0.96, 0.94);
           }
         }
       }

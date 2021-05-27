@@ -5,10 +5,17 @@ import { colors, animation } from "../../params.js";
 import bird from "../../assets/bird_idle.png";
 import birdEureka from "../../assets/bird_eureka.png";
 import birdSquish from "../../assets/bird_squish.png";
+import skipBack from "../../assets/skip_back.png";
+import skipBackOff from "../../assets/skip_back_off.png";
+import skipForward from "../../assets/skip_forward.png";
+import skipForwardOff from "../../assets/skip_forward_off.png";
+import resetSudoku from "../../assets/delete.png";
 
 export const BirdFeed = (props) => {
   const [animate, setAnimate] = useState(true);
   const [toggle, setToggle] = useState(false);
+  let backToggle = true;
+  let forwardToggle = true;
   return (
     <StyledDiv className={props.nextTweet ? "next" : ""}>
       {props.currTweet && (
@@ -24,6 +31,7 @@ export const BirdFeed = (props) => {
         alt="bird"
         onAnimationEnd={() => setAnimate(false)}
         className={
+          "bird " +
           (animate ? "animate " : "") +
           (props.isNewTweet ? "chirp " : "") +
           (props.next ? "primary " : "") +
@@ -37,7 +45,32 @@ export const BirdFeed = (props) => {
           setToggle(!toggle);
         }}
       />
-      <button>a</button>
+      <img
+        draggable="false"
+        className={"submenu delete " + (toggle ? "show " : "hide ")}
+        src={resetSudoku}
+        alt="reset sudoku button"
+      />
+      <img
+        draggable="false"
+        className={
+          "submenu skip back " +
+          (toggle ? "show " : "hide ") +
+          (backToggle ? "" : "disabled ")
+        }
+        src={backToggle ? skipBack : skipBackOff}
+        alt="skip back button"
+      />
+      <img
+        draggable="false"
+        className={
+          "submenu skip forward " +
+          (toggle ? "show " : "hide ") +
+          (forwardToggle ? "" : "disabled ")
+        }
+        src={forwardToggle ? skipForward : skipForwardOff}
+        alt="skip forward button"
+      />
     </StyledDiv>
   );
 };
@@ -64,17 +97,68 @@ const StyledDiv = styled.div`
     font-size: 0.6rem;
   }
 
-  button {
-    position: absolute;
-    z-index: 1;
-    right: 4rem;
-    bottom: 5rem;
-  }
-
-  img {
-    box-shadow: 0 0 0 0em ${colors.neutral0}, 0 0 0 0em ${colors.secondary50};
+  .submenu {
     position: absolute;
     z-index: 0;
+    right: 5rem;
+    bottom: 7rem;
+
+    height: 3rem;
+    border-radius: 50%;
+    border: 2px solid ${colors.neutral3};
+
+    transition: all ${animation.buttonSpeed}, bottom 0.231s ease,
+      right 0.231s ease;
+
+    &:hover:not(.disabled) {
+      transform: scale(1.1);
+    }
+    &:active:not(.disabled) {
+      transform: scale(0.96, 0.94);
+    }
+
+    &.skip {
+      &:hover:not(.disabled) {
+        border-color: ${colors.primary};
+        background-color: ${colors.primary15};
+      }
+      &:active:not(.disabled) {
+        background-color: ${colors.primary25};
+      }
+      &.show {
+        bottom: calc(min(250px, 30vh) + 4.5rem);
+      }
+    }
+    &.back {
+      &.show {
+        right: calc(min(125px, 15vh) + 0.5rem);
+      }
+    }
+    &.forward {
+      &.show {
+        right: calc(min(125px, 15vh) - 3.5rem);
+      }
+    }
+    &.delete {
+      height: 2.5rem;
+      &:hover {
+        border-color: ${colors.tertiary};
+        background-color: ${colors.tertiary15};
+      }
+      &:active {
+        background-color: ${colors.tertiary25};
+      }
+      &.show {
+        right: calc(min(250px, 30vh) - 0.5rem);
+        bottom: 5rem;
+      }
+    }
+  }
+
+  .bird {
+    box-shadow: 0 0 0 0em ${colors.neutral0}, 0 0 0 0em ${colors.secondary50};
+    position: absolute;
+    z-index: 1;
     right: 0;
     bottom: 4rem;
     background-color: ${colors.neutral0};
