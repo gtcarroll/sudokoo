@@ -7,7 +7,8 @@ import gacarrProfile from "./../assets/gacarr_profile.jpg";
 import bearyTeaProfile from "./../assets/b-tea_profile.png";
 import socialLinkedIn from "./../assets/linked-in_logo.png";
 import socialGitHub from "./../assets/github_logo.png";
-import socialCarrd from "./../assets/carrd_logo.png";
+import socialInstagram from "./../assets/instagram_logo.png";
+import socialTwitter from "./../assets/twitter_logo.png";
 import kofiButton from "./../assets/kofi_button.png";
 import heartOn from "./../assets/heart_on.png";
 import heartOff from "./../assets/heart_off.png";
@@ -47,8 +48,8 @@ export const Credits = (props) => {
       <LoveContainer>
         <div className="about">
           <div>
-            Sudokoo was created to share the joy of sudoku in a visual &amp; fun
-            way.
+            Sudokoo was created to share the joy of sudoku in a way that is
+            intuitive &amp; fun.
           </div>{" "}
           <div>
             If you'd like to see more <Hlt className="ter">accessible</Hlt>,{" "}
@@ -56,8 +57,6 @@ export const Credits = (props) => {
             <Hlt className="pri">open-source</Hlt> experiences on the web,
             please consider supporting me on Ko-Fi!
           </div>
-        </div>
-        <div className="support">
           <img
             draggable="false"
             className={(toggle ? "show " : "hide ") + "kofi"}
@@ -108,9 +107,18 @@ export const Credits = (props) => {
               <img
                 className="b-tea"
                 draggable="false"
-                src={socialCarrd}
-                alt="Carrd logo"
-                onClick={() => window.open("https://bearymilktea.carrd.co/")}
+                src={socialInstagram}
+                alt="Instagram logo"
+                onClick={() =>
+                  window.open("https://www.instagram.com/bearymilktea/")
+                }
+              />
+              <img
+                className="b-tea"
+                draggable="false"
+                src={socialTwitter}
+                alt="Twitter logo"
+                onClick={() => window.open("https://twitter.com/bearymilktea")}
               />
             </div>
           </div>
@@ -126,14 +134,14 @@ Credits.defaultProps = {
 
 const LoveContainer = styled.div`
   display: grid;
-  grid-template-rows: 13rem 5rem 13rem;
-  grid-template-areas: "about" "support" "credits";
+  grid-template-rows: 21rem 13rem;
+  grid-template-areas: "about" "credits";
 
   position: absolute;
   z-index: 1000;
   bottom: 0;
 
-  height: 31rem;
+  height: 34rem;
   max-width: 100vw;
   padding-right: 6rem;
 
@@ -150,16 +158,13 @@ const LoveContainer = styled.div`
 
     font-size: 1.5rem;
     padding: 1rem 2rem 1.5rem 2rem;
+    margin: auto 0;
     text-align: center;
 
     div {
-      padding: 1.5rem 0 0 0;
+      padding: 0 0 1.5rem 0;
       max-width: 31rem;
     }
-  }
-
-  .support {
-    grid-area: support;
 
     text-align: center;
     padding-bottom: 0.5rem;
@@ -288,16 +293,13 @@ const LoveContainer = styled.div`
   }
 
   @media (orientation: portrait) {
-    grid-template-rows: 23rem 4rem 23rem;
-    height: 50rem;
+    grid-template-rows: 24rem 23rem; //20rem 4rem 23rem;
+    height: 47rem;
     width: calc(100vw - 6rem);
 
     .about {
       width: calc(100vw - 9rem);
       text-align: left;
-    }
-    .support {
-      width: calc(100vw - 6rem);
     }
     .credits {
       flex-direction: column;
@@ -350,7 +352,7 @@ const StyledDiv = styled.div`
   }
 
   &.show {
-    height: 31rem;
+    height: 34rem;
   }
 
   .heart-ribbon {
@@ -385,7 +387,7 @@ const StyledDiv = styled.div`
       right: 1rem;
     }
     width: 4rem;
-    height: 33.5rem;
+    height: 36.5rem;
 
     display: flex;
     align-content: center;
@@ -406,10 +408,10 @@ const StyledDiv = styled.div`
 
   @media (orientation: portrait) {
     &.show {
-      height: 45rem;
+      height: 47rem;
     }
     .heart-ribbon {
-      height: 47.5rem;
+      height: 49.5rem;
       span {
         height: 4.5rem;
       }
