@@ -115,8 +115,8 @@ const StyledDiv = styled.div`
     bottom: 7rem;
     height: 3rem;
     @media (orientation: portrait) {
-      right: 2rem;
-      bottom: calc(100% - 4rem);
+      right: 1.5rem;
+      bottom: calc(100% - 5rem);
       height: 3.5rem;
     }
 

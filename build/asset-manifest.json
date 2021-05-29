@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/sudokoo/static/css/main.0479ab29.chunk.css",
+    "main.js": "/sudokoo/static/js/main.4ee890f8.chunk.js",
+    "main.js.map": "/sudokoo/static/js/main.4ee890f8.chunk.js.map",
+    "runtime-main.js": "/sudokoo/static/js/runtime-main.c3e96c63.js",
+    "runtime-main.js.map": "/sudokoo/static/js/runtime-main.c3e96c63.js.map",
+    "static/js/2.0a8ae72d.chunk.js": "/sudokoo/static/js/2.0a8ae72d.chunk.js",
+    "static/js/2.0a8ae72d.chunk.js.map": "/sudokoo/static/js/2.0a8ae72d.chunk.js.map",
+    "index.html": "/sudokoo/index.html",
+    "static/css/main.0479ab29.chunk.css.map": "/sudokoo/static/css/main.0479ab29.chunk.css.map",
+    "static/js/2.0a8ae72d.chunk.js.LICENSE.txt": "/sudokoo/static/js/2.0a8ae72d.chunk.js.LICENSE.txt",
+    "static/media/b-tea_profile.c6a80c9a.png": "/sudokoo/static/media/b-tea_profile.c6a80c9a.png",
+    "static/media/bird_eureka.a3acce1c.png": "/sudokoo/static/media/bird_eureka.a3acce1c.png",
+    "static/media/bird_idle.5ae12d08.png": "/sudokoo/static/media/bird_idle.5ae12d08.png",
+    "static/media/bird_squish.2e4bc26e.png": "/sudokoo/static/media/bird_squish.2e4bc26e.png",
+    "static/media/gacarr_profile.6a2c975f.jpg": "/sudokoo/static/media/gacarr_profile.6a2c975f.jpg",
+    "static/media/github_logo.c761f9cb.png": "/sudokoo/static/media/github_logo.c761f9cb.png",
+    "static/media/heart_off.4276e5b4.png": "/sudokoo/static/media/heart_off.4276e5b4.png",
+    "static/media/instagram_logo.856b3b9f.png": "/sudokoo/static/media/instagram_logo.856b3b9f.png",
+    "static/media/kofi_button.0013e7d1.png": "/sudokoo/static/media/kofi_button.0013e7d1.png",
+    "static/media/linked-in_logo.a0038cf7.png": "/sudokoo/static/media/linked-in_logo.a0038cf7.png",
+    "static/media/skip_back.54c379f9.png": "/sudokoo/static/media/skip_back.54c379f9.png",
+    "static/media/skip_back_off.4f717155.png": "/sudokoo/static/media/skip_back_off.4f717155.png",
+    "static/media/skip_forward.d7da8ce8.png": "/sudokoo/static/media/skip_forward.d7da8ce8.png",
+    "static/media/skip_forward_off.a0f40147.png": "/sudokoo/static/media/skip_forward_off.a0f40147.png",
+    "static/media/twitter_logo.c31eb3d1.png": "/sudokoo/static/media/twitter_logo.c31eb3d1.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c3e96c63.js",
+    "static/js/2.0a8ae72d.chunk.js",
+    "static/css/main.0479ab29.chunk.css",
+    "static/js/main.4ee890f8.chunk.js"
+  ]
+}
