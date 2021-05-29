@@ -219,7 +219,8 @@ const StyledDiv = styled.div`
     @media (orientation: portrait) {
       top: 0rem;
       right: -2rem;
-      max-height: 9rem;
+      height: 9rem;
+      width: 9rem;
       z-index: 104;
     }
 
