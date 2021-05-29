@@ -10,12 +10,14 @@ import skipBackOff from "../../assets/skip_back_off.png";
 import skipForward from "../../assets/skip_forward.png";
 import skipForwardOff from "../../assets/skip_forward_off.png";
 import resetSudoku from "../../assets/delete.png";
+import resetSudokuOff from "../../assets/delete_off.png";
 
 export const BirdFeed = (props) => {
   const [animate, setAnimate] = useState(true);
-  const [toggle, setToggle] = useState(false);
-  let backToggle = true;
-  let forwardToggle = true;
+  const [subMenuToggle, setToggle] = useState(false);
+  let backToggle = !props.isFirstTweet;
+  let forwardToggle = !props.isLastTweet;
+  let resetToggle = props.isLoaded;
   return (
     <StyledDiv className={props.nextTweet ? "next" : ""}>
       {props.currTweet && (
@@ -41,35 +43,41 @@ export const BirdFeed = (props) => {
           (props.isFailed ? "oops " : "")
         }
         onClick={() => {
-          console.log(toggle);
-          setToggle(!toggle);
+          setToggle(!subMenuToggle);
         }}
       />
       <img
         draggable="false"
-        className={"submenu delete " + (toggle ? "show " : "hide ")}
-        src={resetSudoku}
+        className={
+          "submenu delete " +
+          (subMenuToggle ? "show " : "hide ") +
+          (resetToggle ? "" : "disabled ")
+        }
+        src={resetToggle ? resetSudoku : resetSudokuOff}
         alt="reset sudoku button"
+        onClick={resetToggle ? () => props.resetSudoku() : null}
       />
       <img
         draggable="false"
         className={
           "submenu skip back " +
-          (toggle ? "show " : "hide ") +
+          (subMenuToggle ? "show " : "hide ") +
           (backToggle ? "" : "disabled ")
         }
         src={backToggle ? skipBack : skipBackOff}
         alt="skip back button"
+        onClick={backToggle ? () => props.firstTweet() : null}
       />
       <img
         draggable="false"
         className={
           "submenu skip forward " +
-          (toggle ? "show " : "hide ") +
+          (subMenuToggle ? "show " : "hide ") +
           (forwardToggle ? "" : "disabled ")
         }
         src={forwardToggle ? skipForward : skipForwardOff}
         alt="skip forward button"
+        onClick={forwardToggle ? () => props.lastTweet() : null}
       />
     </StyledDiv>
   );
@@ -82,6 +90,9 @@ BirdFeed.defaultProps = {
   next: false,
   prev: false,
   isNewTweet: true,
+  isLoaded: false,
+  isFirstTweet: true,
+  isLastTweet: true,
 };
 
 const StyledDiv = styled.div`
@@ -141,11 +152,11 @@ const StyledDiv = styled.div`
     }
     &.delete {
       height: 2.5rem;
-      &:hover {
+      &:hover:not(.disabled) {
         border-color: ${colors.tertiary};
         background-color: ${colors.tertiary15};
       }
-      &:active {
+      &:active:not(.disabled) {
         background-color: ${colors.tertiary25};
       }
       &.show {

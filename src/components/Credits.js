@@ -236,13 +236,19 @@ const LoveContainer = styled.div`
         &.gaca {
           transform: rotate(-2deg);
           &:hover {
-            box-shadow: 0 0 0.6rem 0.3rem ${colors.primary};
+            box-shadow: 0 0 0 0.3rem ${colors.primary};
+          }
+          &:active {
+            box-shadow: 0 0 0 0.1rem ${colors.primary};
           }
         }
         &.b-tea {
           transform: rotate(3deg);
           &:hover {
-            box-shadow: 0 0 0.6rem 0.3rem ${colors.secondary};
+            box-shadow: 0 0 0 0.3rem ${colors.secondary};
+          }
+          &:active {
+            box-shadow: 0 0 0 0.1rem ${colors.secondary};
           }
         }
       }
@@ -276,9 +282,6 @@ const LoveContainer = styled.div`
           transition: ${animation.buttonSpeed};
 
           &:hover {
-            &.b-tea {
-              border-color: ${colors.secondary};
-            }
             border-color: ${colors.primary};
             cursor: pointer;
             transform: scale(1.1);

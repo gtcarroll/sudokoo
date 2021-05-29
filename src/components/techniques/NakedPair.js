@@ -3,7 +3,6 @@ import { helper } from "./TechniqueHelper.js";
 import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
 
 const NakedPairReport = (props) => {
-  console.log(props.a);
   return (
     <div>
       <ReportNode className="primary">

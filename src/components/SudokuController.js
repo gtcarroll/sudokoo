@@ -67,7 +67,12 @@ export const SudokuController = (props) => {
     }
   };
 
-  const reset = () => {
+  const resetSudoku = () => {
+    solveInterval = false;
+    prev = false;
+    next = false;
+    isNewTweet = false;
+
     state.birdfeed = false;
     state.techCounts = false;
     state.keyIterator = 0;
@@ -426,6 +431,30 @@ export const SudokuController = (props) => {
     }
   };
 
+  const firstTweet = () => {
+    state.isFailed = false;
+    state.isSolved = false;
+
+    if (state.birdfeed.i > 0) {
+      state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
+      state.birdfeed.i = 0;
+      state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
+      mountSnapshot(state.birdfeed.next.snapshot);
+    }
+  };
+
+  const lastTweet = () => {
+    if (state.birdfeed.i < state.birdfeed.tweets.length - 1) {
+      state.birdfeed.curr = state.birdfeed.tweets[state.birdfeed.i];
+      state.birdfeed.i = state.birdfeed.tweets.length - 1;
+      state.birdfeed.next = state.birdfeed.tweets[state.birdfeed.i];
+
+      state.isSolved = state.birdfeed.next.solved;
+      state.isFailed = state.birdfeed.next.failed;
+      mountSnapshot(state.birdfeed.next.snapshot);
+    }
+  };
+
   const mountSnapshot = (snapshot) => {
     state.snapshot = snapshot;
     pushState();
@@ -471,7 +500,7 @@ export const SudokuController = (props) => {
   };
   const secReset = {
     text: "reset",
-    onClick: () => reset(),
+    onClick: () => resetSudoku(),
     flexGrow: 3,
   };
 
@@ -505,10 +534,18 @@ export const SudokuController = (props) => {
               key={state.birdfeed.next.key}
               isSolved={state.isSolved}
               isFailed={state.isFailed}
+              isLoaded={state.isLoaded}
               auto={solveInterval}
               prev={prev}
               next={next}
               isNewTweet={isNewTweet}
+              isFirstTweet={state.birdfeed.i === 0}
+              isLastTweet={
+                state.birdfeed.i === state.birdfeed.tweets.length - 1
+              }
+              firstTweet={firstTweet}
+              lastTweet={lastTweet}
+              resetSudoku={resetSudoku}
             />
           ) : (
             <BirdFeed />
