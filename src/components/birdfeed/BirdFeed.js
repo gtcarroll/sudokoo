@@ -113,6 +113,10 @@ const StyledDiv = styled.div`
     z-index: 0;
     right: 5rem;
     bottom: 7rem;
+    @media (orientation: portrait) {
+      right: 2rem;
+      bottom: calc(100% - 4rem);
+    }
 
     height: 3rem;
     border-radius: 50%;
@@ -138,16 +142,25 @@ const StyledDiv = styled.div`
       }
       &.show {
         bottom: calc(min(250px, 30vh) + 4.5rem);
+        @media (orientation: portrait) {
+          bottom: calc(100% - 13rem);
+        }
       }
     }
     &.back {
       &.show {
         right: calc(min(125px, 15vh) + 0.5rem);
+        @media (orientation: portrait) {
+          right: 4rem;
+        }
       }
     }
     &.forward {
       &.show {
         right: calc(min(125px, 15vh) - 3.5rem);
+        @media (orientation: portrait) {
+          right: 0rem;
+        }
       }
     }
     &.delete {
@@ -162,6 +175,10 @@ const StyledDiv = styled.div`
       &.show {
         right: calc(min(250px, 30vh) - 0.5rem);
         bottom: 5rem;
+        @media (orientation: portrait) {
+          right: 0.5rem;
+          bottom: calc(100% - 18rem);
+        }
       }
     }
   }
