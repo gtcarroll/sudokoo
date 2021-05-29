@@ -70,6 +70,7 @@ export const Credits = (props) => {
             <div className="name">Gabe Carroll</div>
             <div className="title">Design &amp; Engineering</div>
             <img
+              draggable="false"
               className={(toggle ? "show " : "hide ") + "photo gaca"}
               src={gacarrProfile}
               alt="Gabe's profile"
@@ -98,6 +99,7 @@ export const Credits = (props) => {
             <div className="name">BearyMilkTea</div>
             <div className="title">Illustration</div>
             <img
+              draggable="false"
               className={(toggle ? "show " : "hide ") + "photo b-tea"}
               src={bearyTeaProfile}
               alt="Beary Milk Tea's profile"
@@ -239,7 +241,7 @@ const LoveContainer = styled.div`
             box-shadow: 0 0 0 0.3rem ${colors.primary};
           }
           &:active {
-            box-shadow: 0 0 0 0.1rem ${colors.primary};
+            box-shadow: 0 0 0 0.15rem ${colors.primary};
           }
         }
         &.b-tea {
@@ -248,7 +250,7 @@ const LoveContainer = styled.div`
             box-shadow: 0 0 0 0.3rem ${colors.secondary};
           }
           &:active {
-            box-shadow: 0 0 0 0.1rem ${colors.secondary};
+            box-shadow: 0 0 0 0.15rem ${colors.secondary};
           }
         }
       }
@@ -283,11 +285,17 @@ const LoveContainer = styled.div`
 
           &:hover {
             border-color: ${colors.primary};
+            &.b-tea {
+              border-color: ${colors.secondary};
+            }
             cursor: pointer;
             transform: scale(1.1);
           }
           &:active {
             border-color: ${colors.primary};
+            &.b-tea {
+              border-color: ${colors.secondary};
+            }
             transform: scale(0.96, 0.94);
           }
         }

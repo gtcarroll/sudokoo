@@ -19,6 +19,7 @@ export const JellyButton = (props) => {
           props.color
         }
         onClick={props.disabled ? null : props.onClick}
+        tabIndex={props.disabled ? "-1" : "0"}
       >
         {props.text}
       </Button>

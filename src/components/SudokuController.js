@@ -87,8 +87,6 @@ export const SudokuController = (props) => {
 
   // input is a 2d array of starting values
   const loadSudoku = (input) => {
-    console.log("Loading Sudoku...");
-
     state.sudoku = {
       rows: buildEmpty2DArray(),
       cols: buildEmpty2DArray(),
@@ -148,7 +146,7 @@ export const SudokuController = (props) => {
       state.birdfeed.tweets[0].snapshot = helper.createSnapshot(state.sudoku);
       state.snapshot = state.birdfeed.tweets[0].snapshot;
       pushState();
-      console.log("...Sudoku Loaded");
+      console.log("Sudoku Loaded.");
     }
   };
 
