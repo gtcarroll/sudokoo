@@ -523,6 +523,23 @@ export const SudokuController = (props) => {
           auto={solveInterval}
         ></Sudoku>
       </SudokuContainer>
+      <ControlContainer>
+        {state.isFailed ? (
+          <ButtonTray tertiary={terPrev} secondary={secReset} />
+        ) : !state.isLoaded ? (
+          <ButtonTray secondary={secLoad} primary={priRandom} />
+        ) : state.isSolved ? (
+          <ButtonTray tertiary={terPrev} secondary={secSolved}></ButtonTray>
+        ) : solveInterval ? (
+          <ButtonTray secondary={secPause}></ButtonTray>
+        ) : (
+          <ButtonTray
+            tertiary={terPrev}
+            secondary={secPlay}
+            primary={priNext}
+          ></ButtonTray>
+        )}
+      </ControlContainer>
       <BirdFeedContainer>
         <TweetList>
           {state.birdfeed ? (
@@ -550,23 +567,6 @@ export const SudokuController = (props) => {
           )}
         </TweetList>
       </BirdFeedContainer>
-      <ControlContainer>
-        {state.isFailed ? (
-          <ButtonTray tertiary={terPrev} secondary={secReset} />
-        ) : !state.isLoaded ? (
-          <ButtonTray secondary={secLoad} primary={priRandom} />
-        ) : state.isSolved ? (
-          <ButtonTray tertiary={terPrev} secondary={secSolved}></ButtonTray>
-        ) : solveInterval ? (
-          <ButtonTray secondary={secPause}></ButtonTray>
-        ) : (
-          <ButtonTray
-            tertiary={terPrev}
-            secondary={secPlay}
-            primary={priNext}
-          ></ButtonTray>
-        )}
-      </ControlContainer>
     </StyledDiv>
   );
 };

@@ -9,13 +9,12 @@ var dropDownToggle = false;
 function App() {
   return (
     <ColContainer>
-      <RowContainer style={{ backgroundColor: colors.neutral2 }}>
-        <Credits dropToggle={dropDownToggle} />
-      </RowContainer>
-      <RowContainer></RowContainer>
-
       <RowContainer className="main-content" style={{ flexGrow: 1 }}>
         <SudokuController />
+      </RowContainer>
+      <RowContainer></RowContainer>
+      <RowContainer style={{ backgroundColor: colors.neutral2 }}>
+        <Credits dropToggle={dropDownToggle} />
       </RowContainer>
     </ColContainer>
   );
@@ -23,7 +22,7 @@ function App() {
 
 const ColContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 
   background-color: ${colors.neutral0};
   color: ${colors.neutral4};

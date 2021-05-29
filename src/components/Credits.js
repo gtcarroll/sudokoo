@@ -57,13 +57,11 @@ export const Credits = (props) => {
             <Hlt className="pri">open-source</Hlt> experiences on the web,
             please consider supporting me on Ko-Fi!
           </div>
-          <img
-            draggable="false"
+          <button
             className={(toggle ? "show " : "hide ") + "kofi"}
-            src={kofiButton}
-            alt="Support me on Ko-fi"
             onClick={() => window.open("https://ko-fi.com/gacarr")}
-          />
+            tabIndex={toggle ? "0" : "-1"}
+          ></button>
         </div>
         <div className="credits">
           <div className="credit">
@@ -175,8 +173,12 @@ const LoveContainer = styled.div`
       top: 0.3rem;
       position: relative;
 
-      max-height: 3.5rem;
+      height: 3.5rem;
+      width: 20.685rem;
       border-radius: 0.75rem;
+      border: none;
+      background: url(${kofiButton});
+      background-size: 100% 100%;
 
       transition: ${animation.buttonSpeed};
       cursor: pointer;

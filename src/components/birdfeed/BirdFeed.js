@@ -28,9 +28,7 @@ export const BirdFeed = (props) => {
       )}
       {!props.currTweet && !props.nextTweet && <BirdTweet />}
 
-      <img
-        draggable="false"
-        alt="bird"
+      <button
         onAnimationEnd={() => setAnimate(false)}
         className={
           "bird " +
@@ -45,40 +43,34 @@ export const BirdFeed = (props) => {
         onClick={() => {
           setToggle(!subMenuToggle);
         }}
-      />
-      <img
-        draggable="false"
-        className={
-          "submenu delete " +
-          (subMenuToggle ? "show " : "hide ") +
-          (resetToggle ? "" : "disabled ")
-        }
-        src={resetToggle ? resetSudoku : resetSudokuOff}
-        alt="reset sudoku button"
-        onClick={resetToggle ? () => props.resetSudoku() : null}
-      />
-      <img
-        draggable="false"
+      ></button>
+      <button
         className={
           "submenu skip back " +
           (subMenuToggle ? "show " : "hide ") +
           (backToggle ? "" : "disabled ")
         }
-        src={backToggle ? skipBack : skipBackOff}
-        alt="skip back button"
         onClick={backToggle ? () => props.firstTweet() : null}
-      />
-      <img
-        draggable="false"
+        tabIndex={subMenuToggle ? "0" : "-1"}
+      ></button>
+      <button
         className={
           "submenu skip forward " +
           (subMenuToggle ? "show " : "hide ") +
           (forwardToggle ? "" : "disabled ")
         }
-        src={forwardToggle ? skipForward : skipForwardOff}
-        alt="skip forward button"
         onClick={forwardToggle ? () => props.lastTweet() : null}
-      />
+        tabIndex={subMenuToggle ? "0" : "-1"}
+      ></button>
+      <button
+        className={
+          "submenu delete " +
+          (subMenuToggle ? "show " : "hide ") +
+          (resetToggle ? "" : "disabled ")
+        }
+        onClick={resetToggle ? () => props.resetSudoku() : null}
+        tabIndex={subMenuToggle ? "0" : "-1"}
+      ></button>
     </StyledDiv>
   );
 };
@@ -109,15 +101,19 @@ const StyledDiv = styled.div`
   }
 
   .submenu {
+    background-color: ${colors.neutral0};
+    background-size: 100% 100%;
     position: absolute;
     z-index: 0;
     right: 5rem;
     bottom: 7rem;
     height: 3rem;
+    width: 3rem;
     @media (orientation: portrait) {
       right: 1.5rem;
       bottom: calc(100% - 5rem);
       height: 3.5rem;
+      width: 3.5rem;
     }
 
     border-radius: 50%;
@@ -149,23 +145,33 @@ const StyledDiv = styled.div`
       }
     }
     &.back {
+      background-image: url(${skipBack});
       &.show {
         right: calc(min(125px, 15vh) + 0.5rem);
         @media (orientation: portrait) {
           right: 4rem;
         }
       }
+      &.disabled {
+        background-image: url(${skipBackOff});
+      }
     }
     &.forward {
+      background-image: url(${skipForward});
       &.show {
         right: calc(min(125px, 15vh) - 3.5rem);
         @media (orientation: portrait) {
           right: -0.5rem;
         }
       }
+      &.disabled {
+        background-image: url(${skipForwardOff});
+      }
     }
     &.delete {
       height: 2.5rem;
+      width: 2.5rem;
+      background-image: url(${resetSudoku});
       &:hover:not(.disabled) {
         border-color: ${colors.tertiary};
         background-color: ${colors.tertiary15};
@@ -177,9 +183,13 @@ const StyledDiv = styled.div`
         right: calc(min(250px, 30vh) - 0.5rem);
         bottom: 5rem;
       }
+      &.disabled {
+        background-image: url(${resetSudokuOff});
+      }
 
       @media (orientation: portrait) {
         height: 3rem;
+        width: 3rem;
         &.show {
           right: -0.5rem;
           bottom: calc(100% - 18rem);
@@ -196,14 +206,15 @@ const StyledDiv = styled.div`
     bottom: 4rem;
     background-color: ${colors.neutral0};
 
-    max-width: 80%;
-    max-height: min(250px, 30vh);
+    width: min(250px, 30vh);
+    height: min(250px, 30vh);
     transition: all ${animation.buttonSpeed} ease-out;
 
     border: 2px solid ${colors.neutral3};
     border-radius: 50%;
 
-    content: url(${bird});
+    background-image: url(${bird});
+    background-size: 100% 100%;
 
     @media (orientation: portrait) {
       top: 0rem;
@@ -230,11 +241,11 @@ const StyledDiv = styled.div`
       }
     }
     &.oops {
-      content: url(${birdSquish});
+      background-image: url(${birdSquish});
     }
     &.eureka {
       animation: rippleEureka ${animation.halfSpeed} ease-out;
-      content: url(${birdEureka});
+      background-image: url(${birdEureka});
       box-shadow: 0 0 0 0em ${colors.secondary50},
         0 0 0 0.2em ${colors.primary50}, 0 0 0 0.4em ${colors.tertiary50};
     }
@@ -246,7 +257,7 @@ const StyledDiv = styled.div`
       box-shadow: 0 0 0 0em ${colors.neutral0},
         0 0 0 0.8em ${colors.secondary50};
       transform: scale(0.98, 0.96);
-      content: url(${birdSquish});
+      background-image: url(${birdSquish});
       &.eureka {
         box-shadow: 0 0 0 0.3em ${colors.secondary50},
           0 0 0 0.6em ${colors.primary50}, 0 0 0 0.9em ${colors.tertiary50};
@@ -275,17 +286,17 @@ const StyledDiv = styled.div`
       box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0 ${colors.secondary50},
         0 0 0 0 ${colors.primary50}, 0 0 0 0 ${colors.tertiary50};
       transform: scale(0.98, 0.96);
-      content: url(${birdSquish});
+      background-image: url(${birdSquish});
     }
     40% {
       box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0.3em ${colors.secondary50},
         0 0 0 0.65em ${colors.primary50}, 0 0 0 1em ${colors.tertiary50};
-      content: url(${birdEureka});
+      background-image: url(${birdEureka});
     }
     100% {
       box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0em ${colors.secondary50},
         0 0 0 0.2em ${colors.primary50}, 0 0 0 0.4em ${colors.tertiary50};
-      content: url(${birdEureka});
+      background-image: url(${birdEureka});
     }
   }
 
@@ -293,15 +304,15 @@ const StyledDiv = styled.div`
     20% {
       box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0 ${colors.primary50};
       transform: scale(0.98, 0.96);
-      content: url(${birdSquish});
+      background-image: url(${birdSquish});
     }
     40% {
       box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1em ${colors.primary50};
-      content: url(${birdEureka});
+      background-image: url(${birdEureka});
     }
     100% {
       box-shadow: 0 0 0 2em ${colors.neutral0}, 0 0 0 2em ${colors.primary50};
-      content: url(${birdEureka});
+      background-image: url(${birdEureka});
     }
   }
   @keyframes ripplePri {
@@ -314,7 +325,7 @@ const StyledDiv = styled.div`
     }
     100% {
       box-shadow: 0 0 0 2em ${colors.neutral0}, 0 0 0 2em ${colors.primary50};
-      content: url(${bird});
+      background-image: url(${bird});
     }
   }
   @keyframes rippleSec {
@@ -327,22 +338,22 @@ const StyledDiv = styled.div`
     }
     100% {
       box-shadow: 0 0 0 2em ${colors.neutral0}, 0 0 0 2em ${colors.secondary50};
-      content: url(${bird});
+      background-image: url(${bird});
     }
   }
   @keyframes rippleSecChirp {
     20% {
       box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 0 ${colors.secondary50};
       transform: scale(0.98, 0.96);
-      content: url(${birdSquish});
+      background-image: url(${birdSquish});
     }
     40% {
       box-shadow: 0 0 0 0 ${colors.neutral0}, 0 0 0 1em ${colors.secondary50};
-      content: url(${birdEureka});
+      background-image: url(${birdEureka});
     }
     100% {
       box-shadow: 0 0 0 2em ${colors.neutral0}, 0 0 0 2em ${colors.secondary50};
-      content: url(${birdEureka});
+      background-image: url(${birdEureka});
     }
   }
   @keyframes rippleTer {
@@ -355,7 +366,7 @@ const StyledDiv = styled.div`
     }
     100% {
       box-shadow: 0 0 0 2em ${colors.neutral0}, 0 0 0 2em ${colors.tertiary50};
-      content: url(${bird});
+      background-image: url(${bird});
     }
   }
   @keyframes fadeOut {
