@@ -104,16 +104,14 @@ const StyledDiv = styled.div`
     background-color: ${colors.neutral0};
     background-size: 100% 100%;
     position: absolute;
-    z-index: 0;
     right: 5rem;
     bottom: 7rem;
-    height: 3rem;
-    width: 3rem;
+    height: 3.5rem;
+    width: 3.5rem;
+    z-index: 103;
     @media (orientation: portrait) {
       right: 1.5rem;
       bottom: calc(100% - 5rem);
-      height: 3.5rem;
-      width: 3.5rem;
     }
 
     border-radius: 50%;
@@ -159,7 +157,7 @@ const StyledDiv = styled.div`
     &.forward {
       background-image: url(${skipForward});
       &.show {
-        right: calc(min(125px, 15vh) - 3.5rem);
+        right: calc(min(125px, 15vh) - 4rem);
         @media (orientation: portrait) {
           right: -0.5rem;
         }
@@ -169,8 +167,8 @@ const StyledDiv = styled.div`
       }
     }
     &.delete {
-      height: 2.5rem;
-      width: 2.5rem;
+      height: 3rem;
+      width: 3rem;
       background-image: url(${resetSudoku});
       &:hover:not(.disabled) {
         border-color: ${colors.tertiary};
@@ -188,8 +186,6 @@ const StyledDiv = styled.div`
       }
 
       @media (orientation: portrait) {
-        height: 3rem;
-        width: 3rem;
         &.show {
           right: -0.5rem;
           bottom: calc(100% - 18rem);
@@ -201,7 +197,7 @@ const StyledDiv = styled.div`
   .bird {
     box-shadow: 0 0 0 0em ${colors.neutral0}, 0 0 0 0em ${colors.secondary50};
     position: absolute;
-    z-index: 1;
+    z-index: 104;
     right: 0;
     bottom: 4rem;
     background-color: ${colors.neutral0};
@@ -221,7 +217,8 @@ const StyledDiv = styled.div`
       right: -2rem;
       height: 9rem;
       width: 9rem;
-      z-index: 104;
+
+      font-size: 0.6rem;
     }
 
     &.animate:not(.eureka):not(.oops) {

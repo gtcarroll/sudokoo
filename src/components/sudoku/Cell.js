@@ -63,7 +63,7 @@ export const Cell = (props) => {
       />
       {!props.isLoaded ? (
         <Value style={{ zIndex: 99 }}>
-          <input className="input-cell" type="text" maxLength="1"></input>
+          <input className="input-cell" type="number"></input>
         </Value>
       ) : !props.auto ? (
         props.data.val > 0 && (
@@ -208,6 +208,16 @@ const Value = styled.div`
   transition: ${animation.halfSpeed} ease-in-out;
 
   z-index: 1;
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
   input {
     z-index: 100;
     background-color: transparent;

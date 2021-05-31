@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/sudokoo/static/css/main.0479ab29.chunk.css",
-    "main.js": "/sudokoo/static/js/main.e09d6832.chunk.js",
-    "main.js.map": "/sudokoo/static/js/main.e09d6832.chunk.js.map",
+    "main.css": "/sudokoo/static/css/main.95710294.chunk.css",
+    "main.js": "/sudokoo/static/js/main.1482a42a.chunk.js",
+    "main.js.map": "/sudokoo/static/js/main.1482a42a.chunk.js.map",
     "runtime-main.js": "/sudokoo/static/js/runtime-main.c3e96c63.js",
     "runtime-main.js.map": "/sudokoo/static/js/runtime-main.c3e96c63.js.map",
     "static/js/2.0a8ae72d.chunk.js": "/sudokoo/static/js/2.0a8ae72d.chunk.js",
     "static/js/2.0a8ae72d.chunk.js.map": "/sudokoo/static/js/2.0a8ae72d.chunk.js.map",
     "index.html": "/sudokoo/index.html",
-    "static/css/main.0479ab29.chunk.css.map": "/sudokoo/static/css/main.0479ab29.chunk.css.map",
+    "static/css/main.95710294.chunk.css.map": "/sudokoo/static/css/main.95710294.chunk.css.map",
     "static/js/2.0a8ae72d.chunk.js.LICENSE.txt": "/sudokoo/static/js/2.0a8ae72d.chunk.js.LICENSE.txt",
     "static/media/b-tea_profile.c6a80c9a.png": "/sudokoo/static/media/b-tea_profile.c6a80c9a.png",
     "static/media/bird_eureka.a3acce1c.png": "/sudokoo/static/media/bird_eureka.a3acce1c.png",
@@ -29,7 +29,7 @@
   "entrypoints": [
     "static/js/runtime-main.c3e96c63.js",
     "static/js/2.0a8ae72d.chunk.js",
-    "static/css/main.0479ab29.chunk.css",
-    "static/js/main.e09d6832.chunk.js"
+    "static/css/main.95710294.chunk.css",
+    "static/js/main.1482a42a.chunk.js"
   ]
 }

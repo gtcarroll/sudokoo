@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden;
+}
 @media (orientation: portrait) {
   .main-content {
     margin: 0;

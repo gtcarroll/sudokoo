@@ -48,7 +48,7 @@ export const SudokuController = (props) => {
     let input = buildEmpty2DArray();
     for (let i = 0; i < inputCells.length; i++) {
       let val = parseInt(inputCells[i].value);
-      if (isNaN(val)) val = 0;
+      if (isNaN(val) || val <= 0 || val > 9) val = 0;
       else noInput = false;
       let h = Math.floor(i / 9),
         r = i % 9,
@@ -572,7 +572,7 @@ export const SudokuController = (props) => {
 };
 
 const StyledDiv = styled.div`
-  padding: 3rem 2rem 2rem 2rem;
+  padding: 3rem 2rem 0rem 2rem;
   height: 100%;
 
   display: grid;
@@ -587,9 +587,9 @@ const StyledDiv = styled.div`
 
   @media (orientation: portrait) {
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
     row-gap: 0;
-    grid-template-rows: calc(100vw - 2rem) 1rem calc(100vh - (100vw + 6.5rem)) 9rem;
+    grid-template-rows: calc(100vw - 2rem) 1rem calc(100vh - (100vw + 6.5rem)) 10rem;
     grid-template-columns: 1fr;
     grid-template-areas:
       "sdku"
