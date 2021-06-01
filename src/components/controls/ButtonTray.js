@@ -17,7 +17,7 @@ export const ButtonTray = (props) => {
           padding="right"
         />
       ) : (
-        <JellyButton hidden disabled color="tertiary" />
+        <JellyButton hidden disabled text="< prev" color="tertiary" />
       )}
       {props.secondary ? (
         <JellyButton
@@ -41,7 +41,7 @@ export const ButtonTray = (props) => {
           padding="left"
         />
       ) : (
-        <JellyButton hidden disabled color="primary" />
+        <JellyButton hidden disabled text="next >" color="primary" />
       )}
     </ButtonTrayContainer>
   );
@@ -54,7 +54,7 @@ ButtonTray.defaultProps = {
 };
 
 const ButtonTrayContainer = styled.div`
-  transition: ${animation.buttonSpeed};
+  transition: ${animation.buttonSlowSpeed};
   background-color: ${colors.neutral0};
 
   position: relative;

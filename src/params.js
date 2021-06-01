@@ -74,6 +74,7 @@ export const animation = {
   speed: s + "s",
   halfSpeed: s * 0.4 + "s",
   buttonSpeed: "0.1s",
+  buttonSlowSpeed: "0.231s",
   midPoint: "40%, 60%",
   fontGrow: "125%",
   fontEmphasis: "bold",

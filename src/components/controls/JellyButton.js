@@ -39,7 +39,7 @@ JellyButton.defaultProps = {
 };
 
 const ButtonContainer = styled.div`
-  transition: ${animation.buttonSpeed};
+  transition: ${animation.buttonSlowSpeed} ease-in;
   position: relative;
   display: flex;
   &.left {
@@ -51,8 +51,8 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-  transition: ${animation.buttonSpeed}, color ${animation.halfSpeed},
-    border-color ${animation.halfSpeed};
+  transition: ${animation.buttonSpeed}, color ${animation.buttonSlowSpeed},
+    border-color ${animation.buttonSlowSpeed};
 
   font-size: 1.5rem;
   padding: 0.4rem 0.4rem 0.8rem 0.4rem;
@@ -119,8 +119,8 @@ const Button = styled.button`
   }
 
   &.hidden {
-    width: 0;
-    border: none;
+    border-color: transparent !important;
+    color: transparent !important;
     flex-grow: 0;
   }
 

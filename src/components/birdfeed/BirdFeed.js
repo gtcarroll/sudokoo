@@ -113,8 +113,9 @@ const StyledDiv = styled.div`
     border-radius: 50%;
     border: 2px solid ${colors.neutral3};
 
-    transition: all ${animation.buttonSpeed}, bottom 0.231s ease,
-      right 0.231s ease;
+    transition: all ${animation.buttonSpeed},
+      bottom ${animation.buttonSlowSpeed} ease,
+      right ${animation.buttonSlowSpeed} ease;
 
     &:hover:not(.disabled) {
       transform: scale(1.1);
