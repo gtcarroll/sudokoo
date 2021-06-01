@@ -49,7 +49,7 @@ export const Credits = (props) => {
         <div className="about">
           <div>
             Sudokoo was created to share the joy of sudoku in a way that is
-            intuitive &amp; fun.
+            visual &amp; fun.
           </div>{" "}
           <div>
             If you'd like to see more <Hlt className="ter">accessible</Hlt>,{" "}
