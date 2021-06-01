@@ -18,6 +18,7 @@ import {
   nakedPair,
   lockedCandidate,
   pointingTuple,
+  hiddenPair,
 } from "./techniques";
 
 var solveInterval = false;
@@ -33,8 +34,14 @@ export const SudokuController = (props) => {
     nakedPair,
     lockedCandidate,
     pointingTuple,
+    hiddenPair,
   ];
-  var sudokus = [nakedPair.test, lockedCandidate.test, pointingTuple.test];
+  var sudokus = [
+    nakedPair.test,
+    lockedCandidate.test,
+    pointingTuple.test,
+    hiddenPair.test,
+  ];
 
   const randomSudoku = () => {
     let r = Math.floor(Math.random() * sudokus.length);

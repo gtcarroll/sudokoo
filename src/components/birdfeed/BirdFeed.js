@@ -96,10 +96,6 @@ const StyledDiv = styled.div`
   display: flex;
   font-size: 1rem;
 
-  @media (orientation: portrait) {
-    font-size: 0.6rem;
-  }
-
   .submenu {
     background-color: ${colors.neutral0};
     background-size: 100% 100%;

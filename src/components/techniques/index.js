@@ -4,6 +4,7 @@ import { hiddenSingle } from "./HiddenSingle.js";
 import { nakedPair } from "./NakedPair.js";
 import { lockedCandidate } from "./LockedCandidate.js";
 import { pointingTuple } from "./PointingTuple.js";
+import { hiddenPair } from "./HiddenPair.js";
 
 export {
   helper,
@@ -12,4 +13,5 @@ export {
   nakedPair,
   lockedCandidate,
   pointingTuple,
+  hiddenPair,
 };
