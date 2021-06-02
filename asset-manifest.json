@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/sudokoo/static/css/main.95710294.chunk.css",
-    "main.js": "/sudokoo/static/js/main.1482a42a.chunk.js",
-    "main.js.map": "/sudokoo/static/js/main.1482a42a.chunk.js.map",
+    "main.js": "/sudokoo/static/js/main.b5f1896e.chunk.js",
+    "main.js.map": "/sudokoo/static/js/main.b5f1896e.chunk.js.map",
     "runtime-main.js": "/sudokoo/static/js/runtime-main.c3e96c63.js",
     "runtime-main.js.map": "/sudokoo/static/js/runtime-main.c3e96c63.js.map",
-    "static/js/2.0a8ae72d.chunk.js": "/sudokoo/static/js/2.0a8ae72d.chunk.js",
-    "static/js/2.0a8ae72d.chunk.js.map": "/sudokoo/static/js/2.0a8ae72d.chunk.js.map",
+    "static/js/2.ca8af71f.chunk.js": "/sudokoo/static/js/2.ca8af71f.chunk.js",
+    "static/js/2.ca8af71f.chunk.js.map": "/sudokoo/static/js/2.ca8af71f.chunk.js.map",
     "index.html": "/sudokoo/index.html",
     "static/css/main.95710294.chunk.css.map": "/sudokoo/static/css/main.95710294.chunk.css.map",
-    "static/js/2.0a8ae72d.chunk.js.LICENSE.txt": "/sudokoo/static/js/2.0a8ae72d.chunk.js.LICENSE.txt",
+    "static/js/2.ca8af71f.chunk.js.LICENSE.txt": "/sudokoo/static/js/2.ca8af71f.chunk.js.LICENSE.txt",
     "static/media/b-tea_profile.c6a80c9a.png": "/sudokoo/static/media/b-tea_profile.c6a80c9a.png",
     "static/media/bird_eureka.a3acce1c.png": "/sudokoo/static/media/bird_eureka.a3acce1c.png",
     "static/media/bird_idle.5ae12d08.png": "/sudokoo/static/media/bird_idle.5ae12d08.png",
@@ -28,8 +28,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.c3e96c63.js",
-    "static/js/2.0a8ae72d.chunk.js",
+    "static/js/2.ca8af71f.chunk.js",
     "static/css/main.95710294.chunk.css",
-    "static/js/main.1482a42a.chunk.js"
+    "static/js/main.b5f1896e.chunk.js"
   ]
 }
