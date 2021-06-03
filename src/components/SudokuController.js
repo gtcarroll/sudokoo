@@ -595,7 +595,7 @@ const StyledDiv = styled.div`
     width: 100%;
     padding: 1rem 1rem 0rem 1rem;
     row-gap: 0;
-    grid-template-rows: calc(100vw - 2rem) 1rem calc(100vh - (100vw + 6.5rem)) 10rem;
+    grid-template-rows: calc(100vw - 2rem) 1rem calc(100vh - (100vw + 4.5rem)) 10rem;
     grid-template-columns: 1fr;
     grid-template-areas:
       "sdku"

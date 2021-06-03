@@ -88,6 +88,22 @@ const Button = styled.button`
     border-color: ${colors.tertiary};
   }
 
+  @media (orientation: portrait) {
+    &:not(.disabled) {
+      top: 0px;
+      box-shadow: 0 7px 0 0;
+      &.primary {
+        background-color: ${colors.primary15};
+      }
+      &.secondary {
+        background-color: ${colors.secondary15};
+      }
+      &.tertiary {
+        background-color: ${colors.tertiary15};
+      }
+    }
+  }
+
   &:hover:not(.disabled) {
     top: 0px;
     box-shadow: 0 7px 0 0;

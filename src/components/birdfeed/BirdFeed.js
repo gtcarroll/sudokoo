@@ -216,6 +216,10 @@ const StyledDiv = styled.div`
       width: 9rem;
 
       font-size: 0.6rem;
+
+      // hover styles
+      border-color: ${colors.secondary};
+      transform: scale(1.025);
     }
 
     &.animate:not(.eureka):not(.oops) {
