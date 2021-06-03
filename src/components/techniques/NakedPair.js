@@ -37,7 +37,7 @@ const NakedPairReport = (props) => {
               <Hlt className="ter">{axesNames[props.a[1]]}</Hlt>
             </span>
           )}{" "}
-          must not be <Pop className="ter">{props.x}</Pop> or{" "}
+          can't be <Pop className="ter">{props.x}</Pop> or{" "}
           <Pop className="ter">{props.y}</Pop>.
         </div>
       </ReportNode>
@@ -136,7 +136,9 @@ export const nakedPair = {
             helper.highlightNote(snapshot, cell, "primary", pair[1]);
             helper.highlightNote(snapshot, other, "primary", pair[0]);
             helper.highlightNote(snapshot, other, "primary", pair[1]);
-            helper.fillAxis(snapshot, cell, a, "tertiary");
+            affectedAxes.forEach((affAxis) => {
+              helper.fillAxis(snapshot, cell, affAxis, "tertiary");
+            });
             helper.highlightUpdates(snapshot, affected0, "tertiary", pair[0]);
             helper.highlightUpdates(snapshot, affected1, "tertiary", pair[1]);
 
@@ -146,6 +148,7 @@ export const nakedPair = {
               a: affectedAxes,
             };
 
+            console.log(affectedAxes);
             return snapshot;
           }
         }

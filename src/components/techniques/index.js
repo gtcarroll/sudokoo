@@ -6,6 +6,7 @@ import { lockedCandidate } from "./LockedCandidate.js";
 import { pointingTuple } from "./PointingTuple.js";
 import { hiddenPair } from "./HiddenPair.js";
 import { nakedTriple } from "./NakedTriple.js";
+import { xWing } from "./XWing.js";
 
 export {
   helper,
@@ -16,4 +17,5 @@ export {
   pointingTuple,
   hiddenPair,
   nakedTriple,
+  xWing,
 };

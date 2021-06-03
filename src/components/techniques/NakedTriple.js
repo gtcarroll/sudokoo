@@ -39,7 +39,7 @@ const NakedTripleReport = (props) => {
               <Hlt className="ter">{axesNames[props.a[1]]}</Hlt>
             </span>
           )}{" "}
-          must not be <Pop className="ter">{props.x}</Pop>,{" "}
+          can't be <Pop className="ter">{props.x}</Pop>,{" "}
           <Pop className="ter">{props.y}</Pop>, or{" "}
           <Pop className="ter">{props.z}</Pop>.
         </div>

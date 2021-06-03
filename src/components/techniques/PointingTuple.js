@@ -23,8 +23,8 @@ const PointingTupleReport = (props) => {
           <Pop className="ter">other cells...</Pop>
         </div>
         <div className="text">
-          in the same <Hlt className="ter">{axesNames[props.a]}</Hlt> must not
-          be <Pop className="ter">{props.x}</Pop>.
+          in the same <Hlt className="ter">{axesNames[props.a]}</Hlt> can't be{" "}
+          <Pop className="ter">{props.x}</Pop>.
         </div>
       </ReportNode>
     </div>

@@ -9,7 +9,7 @@ export const tweetUnloaded = {
     return (
       <div>
         <ReportNode style={{ paddingBottom: 0 }} className="secondary">
-          <MiniCell className="mini-cell hollow" />
+          <MiniCell className="mini-cell solid" />
           <div className="lead">
             <Pop className="sec">Enter a sudoku</Pop>
           </div>
@@ -20,7 +20,7 @@ export const tweetUnloaded = {
           </div>
         </ReportNode>
         <ReportNode style={{ marginTop: 0 }} className="primary">
-          <MiniCell className="mini-cell hollow" />
+          <MiniCell className="mini-cell solid" />
           <div className="lead">
             <Pop className="pri">get a random one!</Pop>
           </div>
@@ -42,7 +42,7 @@ export const tweetLoaded = {
     return (
       <div>
         <ReportNode style={{ paddingBottom: 0 }} className="primary">
-          <MiniCell className="mini-cell hollow" />
+          <MiniCell className="mini-cell solid" />
           <div className="lead">
             <Pop className="pri">{"Press 'next >'..."}</Pop>
           </div>
@@ -51,7 +51,7 @@ export const tweetLoaded = {
           </div>
         </ReportNode>
         <ReportNode style={{ paddingBottom: 0 }} className="secondary">
-          <MiniCell className="mini-cell hollow" />
+          <MiniCell className="mini-cell solid" />
           <div className="lead">
             <Pop className="sec">{"Press 'play'..."}</Pop>
           </div>
@@ -61,7 +61,7 @@ export const tweetLoaded = {
           </div>
         </ReportNode>
         <ReportNode style={{ paddingBottom: 0 }} className="tertiary">
-          <MiniCell className="mini-cell hollow" />
+          <MiniCell className="mini-cell solid" />
           <div className="lead">
             <Pop className="ter">{"Press '< prev'..."}</Pop>
           </div>
@@ -138,7 +138,7 @@ export const tweetNoSolution = {
           </div>
         </ReportNode>
         <ReportNode style={{ paddingBottom: 0 }} className="secondary">
-          <MiniCell className="mini-cell hollow" />
+          <MiniCell className="mini-cell solid" />
           <div className="lead">
             <Pop className="sec">{"Press 'reset'..."}</Pop>
           </div>
@@ -171,7 +171,7 @@ export const tweetInvalidSudoku = {
           </div>
         </ReportNode>
         <ReportNode style={{ paddingBottom: 0 }} className="secondary">
-          <MiniCell className="mini-cell hollow" />
+          <MiniCell className="mini-cell solid" />
           <div className="lead">
             <Pop className="sec">{"Press 'reset'..."}</Pop>
           </div>

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../../params.js";
 import { tweetUnloaded } from "./";
+import playSymbol from "../../assets/play.png";
 
 export const axesNames = ["row", "column", "house"];
 
@@ -280,5 +281,10 @@ export const MiniCell = styled.div`
       ${colors.tertiary} 240deg,
       ${colors.primary} 360deg
     );
+  }
+
+  &.play {
+    background-image: url(${playSymbol});
+    background-size: 100% 100%;
   }
 `;

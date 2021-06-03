@@ -23,8 +23,8 @@ const HiddenSingleReport = (props) => {
         </div>
         <div className="text">
           in the same <Hlt className="ter">{axesNames[(props.a + 1) % 3]}</Hlt>{" "}
-          or <Hlt className="ter">{axesNames[(props.a + 2) % 3]}</Hlt> must not
-          be <Pop className="ter">{props.x}</Pop>.
+          or <Hlt className="ter">{axesNames[(props.a + 2) % 3]}</Hlt> can't be{" "}
+          <Pop className="ter">{props.x}</Pop>.
         </div>
       </ReportNode>
     </div>

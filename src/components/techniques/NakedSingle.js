@@ -25,7 +25,7 @@ const NakedSingleReport = (props) => {
         <div className="text">
           in the same <Hlt className="ter">house</Hlt>,{" "}
           <Hlt className="ter">row</Hlt>, or <Hlt className="ter">column</Hlt>{" "}
-          must not be <Pop className="ter">{props.x}</Pop>.
+          can't be <Pop className="ter">{props.x}</Pop>.
         </div>
       </ReportNode>
     </div>

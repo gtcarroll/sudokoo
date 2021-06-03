@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { animation } from "../params.js";
+import { sudokus } from "../sudokus.js";
 import { ButtonTray } from "./controls";
 import { Sudoku } from "./sudoku";
 import {
@@ -20,6 +21,7 @@ import {
   pointingTuple,
   hiddenPair,
   nakedTriple,
+  xWing,
 } from "./techniques";
 
 var solveInterval = false;
@@ -37,13 +39,7 @@ export const SudokuController = (props) => {
     pointingTuple,
     hiddenPair,
     nakedTriple,
-  ];
-  var sudokus = [
-    nakedPair.test,
-    lockedCandidate.test,
-    pointingTuple.test,
-    hiddenPair.test,
-    nakedTriple.test,
+    xWing,
   ];
 
   const randomSudoku = () => {

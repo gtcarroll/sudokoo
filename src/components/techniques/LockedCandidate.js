@@ -23,7 +23,7 @@ const LockedCandidateReport = (props) => {
           <Pop className="ter">other cells...</Pop>
         </div>
         <div className="text">
-          in the same <Hlt className="ter">house</Hlt> must not be{" "}
+          in the same <Hlt className="ter">house</Hlt> can't be{" "}
           <Pop className="ter">{props.x}</Pop>.
         </div>
       </ReportNode>

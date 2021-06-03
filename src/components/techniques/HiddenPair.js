@@ -1,6 +1,7 @@
 import React from "react";
 import { helper } from "./TechniqueHelper.js";
 import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
+import { colors } from "../../params.js";
 
 const HiddenPairReport = (props) => {
   return (
@@ -13,10 +14,25 @@ const HiddenPairReport = (props) => {
         <div className="text">
           are the only cells that can be <Pop className="pri">{props.x}</Pop> or{" "}
           <Pop className="pri">{props.y}</Pop> in their{" "}
-          <Hlt className="pri">{axesNames[props.a]}</Hlt>. This means that one
-          must be <Pop className="pri">{props.x}</Pop> and the other must be{" "}
-          <Pop className="pri">{props.y}</Pop>, so we can rule out any of their
-          other options.
+          <Hlt className="pri">{axesNames[props.a]}</Hlt>. Since this means that
+          one must be <Pop className="pri">{props.x}</Pop> and the other must be{" "}
+          <Pop className="pri">{props.y}</Pop>...
+        </div>
+      </ReportNode>
+      <ReportNode className="primary">
+        <MiniCell
+          style={{
+            color: colors.tertiary,
+          }}
+          className="mini-cell"
+        >
+          X
+        </MiniCell>
+        <div className="lead">
+          <Pop className="pri">those same cells...</Pop>
+        </div>
+        <div className="text">
+          can rule out any of their <Pop className="ter">other</Pop> options.
         </div>
       </ReportNode>
       {props.b.length > 0 && (
@@ -26,8 +42,8 @@ const HiddenPairReport = (props) => {
             <Pop className="ter">Also, other cells...</Pop>
           </div>
           <div className="text">
-            in the same <Hlt className="ter">{axesNames[props.b[0]]}</Hlt> must
-            not be <Pop className="ter">{props.x}</Pop> or{" "}
+            in the same <Hlt className="ter">{axesNames[props.b]}</Hlt> can't be{" "}
+            <Pop className="ter">{props.x}</Pop> or{" "}
             <Pop className="ter">{props.y}</Pop>.
           </div>
         </ReportNode>
@@ -69,6 +85,7 @@ export const hiddenPair = {
       let affectedCell = [];
       let affectedOther = [];
       let affectedAxes = [];
+
       // ...for each [row, col, house] this cell belongs to...
       for (let a = 0; a < 3; a++) {
         let axis = state.sudoku[axisKeys[a] + "s"][cell.pos[axisKeys[a]]];
