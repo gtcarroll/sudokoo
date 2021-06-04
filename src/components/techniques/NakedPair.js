@@ -148,7 +148,6 @@ export const nakedPair = {
               a: affectedAxes,
             };
 
-            console.log(affectedAxes);
             return snapshot;
           }
         }

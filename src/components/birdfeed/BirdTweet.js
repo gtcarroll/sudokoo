@@ -72,11 +72,14 @@ const StyledDiv = styled.div`
   @media (orientation: portrait) {
     height: 100%;
     max-width: 100%;
-    ::-webkit-scrollbar {
-      display: none;
-    }
-    -ms-overflow-style: none;
   }
+
+  /* Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `;
 
 const ReportHeader = styled.div`

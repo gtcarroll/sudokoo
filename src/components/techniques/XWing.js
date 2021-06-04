@@ -61,9 +61,6 @@ export const xWing = {
   check: (cell, state) => {
     let suspects = helper.getSuspects(cell);
 
-    if (cell.pos.row === 3 && cell.pos.col === 4)
-      console.log("DEBUG FLAG BABYYY");
-
     // if this cell has more than 1 suspect...
     if (suspects.length >= 2) {
       let axisKeys = Object.keys(cell.pos);
@@ -91,8 +88,6 @@ export const xWing = {
         for (let [k, v] of suspectCounts.entries()) {
           if (v === 2) numsSeenTwice.push(k);
         }
-        if (cell.pos.row === 3 && cell.pos.col === 4)
-          console.log(numsSeenTwice);
 
         for (let n = 0; n < numsSeenTwice.length; n++) {
           let targetAxes = [cell.pos[axisKeys[(a + 1) % 2]]];
