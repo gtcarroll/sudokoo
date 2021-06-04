@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors } from "../../params.js";
 import { tweetUnloaded } from "./";
 import miniBird from "../../assets/mini_bird.png";
+import { tweetLoaded } from "./tweets.js";
 
 export const axesNames = ["row", "column", "house"];
 
@@ -38,7 +39,7 @@ export const BirdTweet = (props) => {
         : props.tweet.getReport
         ? props.tweet.getReport()
         : tweetUnloaded.getReport()}
-      <ScrollGap />
+      <ScrollGap className={props.tweet.justLoaded ? "just-loaded " : ""} />
     </StyledDiv>
   );
 };
@@ -54,6 +55,11 @@ BirdTweet.defaultProps = {
 
 const ScrollGap = styled.div`
   height: calc(60% - 3rem);
+  &.just-loaded {
+    @media (orientation: portrait) {
+      height: 3rem;
+    }
+  }
 `;
 
 const StyledDiv = styled.div`
