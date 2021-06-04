@@ -1,4 +1,5 @@
 import React from "react";
+import { colors } from "../../params";
 import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
 
 export const tweetUnloaded = {
@@ -67,6 +68,16 @@ export const tweetLoaded = {
           </div>
           <div className="text">
             to see my <Hlt className="ter">previous solution</Hlt> again.
+          </div>
+        </ReportNode>
+        <ReportNode style={{ paddingBottom: 0 }}>
+          <MiniCell className="mini-cell solid mini-bird" />
+          <div className="lead">
+            <Pop>{"Press me..."}</Pop>
+          </div>
+          <div className="text">
+            to see the <Hlt className="pri">skip</Hlt> and{" "}
+            <Hlt className="ter">delete</Hlt> buttons
           </div>
         </ReportNode>
       </div>

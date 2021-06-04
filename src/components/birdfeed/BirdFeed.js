@@ -14,7 +14,7 @@ import resetSudokuOff from "../../assets/delete_off.png";
 
 export const BirdFeed = (props) => {
   const [animate, setAnimate] = useState(true);
-  const [subMenuToggle, setToggle] = useState(false);
+  const [subMenuToggle, setToggle] = useState(props.isSolved);
   let backToggle = !props.isFirstTweet;
   let forwardToggle = !props.isLastTweet;
   let resetToggle = props.isLoaded;
@@ -83,6 +83,7 @@ BirdFeed.defaultProps = {
   prev: false,
   isNewTweet: true,
   isLoaded: false,
+  isSolved: false,
   isFirstTweet: true,
   isLastTweet: true,
 };
@@ -216,10 +217,6 @@ const StyledDiv = styled.div`
       width: 9rem;
 
       font-size: 0.6rem;
-
-      // hover styles
-      border-color: ${colors.secondary};
-      transform: scale(1.025);
     }
 
     &.animate:not(.eureka):not(.oops) {

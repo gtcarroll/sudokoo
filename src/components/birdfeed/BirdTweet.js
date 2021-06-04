@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../../params.js";
 import { tweetUnloaded } from "./";
-import playSymbol from "../../assets/play.png";
+import miniBird from "../../assets/mini_bird.png";
 
 export const axesNames = ["row", "column", "house"];
 
@@ -53,7 +53,7 @@ BirdTweet.defaultProps = {
 };
 
 const ScrollGap = styled.div`
-  height: 25%;
+  height: calc(60% - 3rem);
 `;
 
 const StyledDiv = styled.div`
@@ -61,8 +61,10 @@ const StyledDiv = styled.div`
   min-width: 18rem;
 
   overflow-y: scroll;
+  height: calc(100% - 4rem);
 
   @media (orientation: portrait) {
+    height: 100%;
     max-width: 100%;
     ::-webkit-scrollbar {
       display: none;
@@ -147,13 +149,13 @@ export const ReportNode = styled.div`
   padding-bottom: 0.5rem;
 
   color: ${colors.neutral5};
-  position: relative;
   z-index: 100;
+
+  position: relative;
+  overflow-y: scroll;
 
   @media (orientation: portrait) {
     max-width: max(calc(100% - 8rem), 20rem);
-    position: relative;
-    overflow-y: scroll;
   }
 
   &.connector {
@@ -283,8 +285,14 @@ export const MiniCell = styled.div`
     );
   }
 
-  &.play {
-    background-image: url(${playSymbol});
+  &.mini-bird {
+    margin: 0.3rem 0.6rem 0.3rem 0rem;
+    height: 2.4rem;
+    width: 2.4rem;
+    background-image: url(${miniBird});
     background-size: 100% 100%;
+
+    border: 2px solid ${colors.neutral3};
+    border-radius: 50%;
   }
 `;
