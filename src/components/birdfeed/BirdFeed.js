@@ -19,13 +19,6 @@ export const BirdFeed = (props) => {
   let forwardToggle = !props.isLastTweet;
   let resetToggle = props.isLoaded;
 
-  // useEffect(() => {
-  //   const images = [bird, birdEureka, birdSquish];
-  //   images.forEach((image) => {
-  //     new Image().src = image;
-  //   });
-  // }, []);
-
   return (
     <StyledDiv className={props.nextTweet ? "next" : ""}>
       {props.currTweet && (
