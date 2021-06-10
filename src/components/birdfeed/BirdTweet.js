@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { colors } from "../../params.js";
 import { tweetUnloaded } from "./";
 import miniBird from "../../assets/mini_bird.png";
-import { tweetLoaded } from "./tweets.js";
 
 export const axesNames = ["row", "column", "house"];
 

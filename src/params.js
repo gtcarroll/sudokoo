@@ -12,6 +12,7 @@ export const colors = {
   // #61DBE7
   primary: darkP + ", 1)",
   primary15f: "#152829",
+  primary25f: "#1E3D40",
   primary15: darkP + ", 0.15)",
   primary25: darkP + ", 0.25)",
   primary50: darkP + ", 0.5)",

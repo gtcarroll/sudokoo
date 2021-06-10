@@ -32,7 +32,7 @@ const HiddenPairReport = (props) => {
           <Pop className="pri">those same cells...</Pop>
         </div>
         <div className="text">
-          can rule out any of their <Pop className="ter">other</Pop> options.
+          can rule out any <Pop className="ter">other</Pop> options.
         </div>
       </ReportNode>
       {props.b.length > 0 && (

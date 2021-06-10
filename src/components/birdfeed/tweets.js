@@ -1,5 +1,4 @@
 import React from "react";
-import { colors } from "../../params";
 import { ReportNode, MiniCell, Pop, Hlt, axesNames } from "../birdfeed";
 
 export const tweetUnloaded = {

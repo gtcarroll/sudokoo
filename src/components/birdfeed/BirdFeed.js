@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { BirdTweet } from "./";
 import { colors, animation } from "../../params.js";
@@ -18,6 +18,14 @@ export const BirdFeed = (props) => {
   let backToggle = !props.isFirstTweet;
   let forwardToggle = !props.isLastTweet;
   let resetToggle = props.isLoaded;
+
+  useEffect(() => {
+    const images = [bird, birdEureka, birdSquish];
+    images.forEach((image) => {
+      new Image().src = image;
+    });
+  }, []);
+
   return (
     <StyledDiv className={props.nextTweet ? "next" : ""}>
       {props.currTweet && (
@@ -33,6 +41,7 @@ export const BirdFeed = (props) => {
         className={
           "bird " +
           (animate ? "animate " : "") +
+          (subMenuToggle ? "menu-active " : "") +
           (props.isNewTweet ? "chirp " : "") +
           (props.next ? "primary " : "") +
           (props.auto ? "secondary " : "") +
@@ -128,10 +137,10 @@ const StyledDiv = styled.div`
     &.skip {
       &:hover:not(.disabled) {
         border-color: ${colors.primary};
-        background-color: ${colors.primary15};
+        background-color: ${colors.primary15f};
       }
       &:active:not(.disabled) {
-        background-color: ${colors.primary25};
+        background-color: ${colors.primary25f};
       }
       &.show {
         bottom: calc(min(250px, 30vh) + 4.5rem);
@@ -170,10 +179,10 @@ const StyledDiv = styled.div`
       background-image: url(${resetSudoku});
       &:hover:not(.disabled) {
         border-color: ${colors.tertiary};
-        background-color: ${colors.tertiary15};
+        background-color: ${colors.tertiary15f};
       }
       &:active:not(.disabled) {
-        background-color: ${colors.tertiary25};
+        background-color: ${colors.tertiary25f};
       }
       &.show {
         right: calc(min(250px, 30vh) - 0.5rem);
@@ -245,7 +254,8 @@ const StyledDiv = styled.div`
       box-shadow: 0 0 0 0em ${colors.secondary50},
         0 0 0 0.2em ${colors.primary50}, 0 0 0 0.4em ${colors.tertiary50};
     }
-    &:hover {
+    &:hover,
+    &.menu-active {
       border-color: ${colors.secondary};
       transform: scale(1.025);
     }
